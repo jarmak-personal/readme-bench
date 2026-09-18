@@ -1,0 +1,128 @@
+diff --git a/README.md b/README.md
+new file mode 100644
+index 0000000..17f9711
+--- /dev/null
++++ b/README.md
+@@ -0,0 +1,122 @@
++# hvir
++
++hvir is a cross-platform desktop workbench that brings terminals, source
++navigation, git workflows, and lightweight document review together in a
++single Electron application. It pairs a native `node-pty` shell backend
++(and a `ghostty-web` renderer) with a React/CodeMirror UI so you can move
++between local and remote SSH sessions, inspect files, and review changes
++without leaving the workbench.
++
++## Features
++
++- **Integrated terminals** — local PTYs via `node-pty` and remote sessions
++  over SSH (`ssh2`), rendered by the embedded `ghostty-web` runtime with
++  theme, split, and lifecycle management.
++- **Workspace + project host** — project registry, folder picker, file
++  watching (`chokidar`), and coordinated workspace/session state across
++  multiple windows.
++- **Document review** — Markdown (`markdown-it`), Mermaid diagrams, and
++  Shiki-highlighted code, plus CodeMirror-based diff/merge views for
++  reviewing changes.
++- **Git workflows** — repository-aware actions and status wired into the
++  workbench for day-to-day review and navigation.
++- **Health & diagnostics** — built-in workbench health, smoke scenarios,
++  and architecture reporting to keep the app maintainable at scale.
++
++## Requirements
++
++- **Node.js ≥ 24** (see `engines.node` in `package.json`)
++- **npm** (uses `package-lock.json`)
++- Native toolchain for rebuilding `node-pty` and the bundled
++  `@hvir/rename-noreplace` native module:
++  - macOS: Xcode Command Line Tools
++  - Linux: `build-essential`, `python3`, and standard `node-gyp` prerequisites
++  - Windows: the Visual Studio "Desktop development with C++" workload
++
++The `postinstall` step runs `install-electron`, `node-gyp rebuild`, and
++`electron-rebuild` to prepare the Electron runtime and native modules.
++
++## Getting started
++
++```bash
++git clone <this-repo>
++cd hvir
++npm install
++npm run dev
++```
++
++`npm run dev` launches the app under `electron-vite` with hot reload for
++the main, preload, and renderer processes.
++
++### Optional: install git hooks
++
++```bash
++npm run hooks:install
++```
++
++## Building & packaging
++
++| Command | Description |
++| --- | --- |
++| `npm run build` | Type-check and produce a production build via `electron-vite`. |
++| `npm run build:dir` | Build and package an unpacked app directory (no installer). |
++| `npm run pack:mac:arm64` | Build a macOS `.pkg` for Apple Silicon (unsigned). |
++| `npm run pack:mac:arm64:signed` | Same as above, requiring code signing. |
++| `npm run pack:linux:x64` | Build a Debian package for x86_64 Linux. |
++| `npm run pack:linux:arm64` | Build a Debian package for ARM64 Linux. |
++| `npm run preview` | Preview the built app with `electron-vite preview`. |
++
++Packaging is driven by `electron-builder.yml` (app id `dev.hvir.app`,
++product name `hvir`).
++
++## Testing & quality
++
++| Command | Description |
++| --- | --- |
++| `npm test` | Run the unit test suite with Vitest. |
++| `npm run test:watch` | Vitest in watch mode. |
++| `npm run test:mutation` | Stryker mutation testing. |
++| `npm run lint` | ESLint over the repository. |
++| `npm run format` / `format:check` | Prettier write / check. |
++| `npm run typecheck` | TypeScript project references (node + web). |
++| `npm run check-seams` | Verify architectural seam boundaries. |
++| `npm run check-adrs` | Validate Architecture Decision Records. |
++| `npm run architecture:check` | Enforce architecture hotspot budgets. |
++| `npm run verify` | Aggregate gate: seams + ADRs + architecture + lint + typecheck + tests. |
++
++### Smoke scenarios
++
++Smoke tests exercise built binaries against realistic scenarios:
++
++- `npm run smoke` — full cross-platform scenario set.
++- `npm run smoke:macos` / `npm run smoke:macos:ci` — macOS-focused subsets.
++- `npm run smoke:scenario <name…>` — run a specific scenario.
++- `npm run smoke:capacity` / `performance:capacity` — capacity and
++  performance runs.
++- `npm run acceptance:ssh:macos` / `acceptance:ssh:real-host` —
++  SSH acceptance suites.
++- `npm run smoke:linux:installed` / `smoke:macos:installed` — validate
++  installed packages.
++
++## Repository layout
++
++```
++src/
++  main/       Electron main process: workbench runtime, PTY, SSH, IPC,
++              project host, git, document review, terminals, viewer.
++  preload/    Context-bridge preload scripts.
++  renderer/   React + CodeMirror UI.
++  shared/     Cross-process contracts and utilities.
++  workers/    Worker-thread hosts.
++packages/
++  rename-noreplace/  Optional native module (atomic no-replace renames).
++scripts/      Build, smoke, architecture, and project-management tooling.
++test/         Test fixtures and helpers.
++build/        Platform packaging assets.
++```
++
++## License
++
++Released under the [MIT License](LICENSE). Third-party components and
++their licenses are listed in
++[`THIRD_PARTY_NOTICES.md`](THIRD_PARTY_NOTICES.md).

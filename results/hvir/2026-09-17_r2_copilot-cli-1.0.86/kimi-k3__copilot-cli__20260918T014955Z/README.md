@@ -1,0 +1,135 @@
+# hvir
+
+A desktop workbench for working with projects and agentic CLI harnesses. hvir
+combines GPU-accelerated terminals, a rich file viewer, git workflows, and
+multi-workspace project management in a single Electron application, with
+support for remote workspaces over SSH.
+
+## Features
+
+- **Terminals** — Native PTY sessions (node-pty) rendered with the
+  GPU-accelerated ghostty-web terminal, with splits, themes, attention
+  tracking, clipboard image paste, and session lifecycle management.
+- **Harness profiles** — Configure and launch agentic CLI providers with
+  per-project or global profiles, custom executables, argument templates, and
+  environment bindings.
+- **File viewer** — Source viewing with Shiki syntax highlighting, rendered
+  Markdown (including task lists and Mermaid diagrams), CSV/JSON structured
+  data views, diffs, blame gutters, find/go-to-line, and large-file handling
+  via web workers.
+- **Workspaces & projects** — Register multiple projects, coordinate
+  workspaces per project, watch the filesystem for changes, and move terminals
+  between workspaces.
+- **Remote workspaces over SSH** — Work on remote hosts using ssh2 with
+  SSH config support.
+- **Git integration** — In-app git workflows with a mutation coordinator and
+  authorization policy.
+- **Sessions & document review** — Observe harness sessions and review
+  documents inside the workbench.
+- **Web panes & HTML preview** — Embedded web content and a custom
+  `hvir-preview:` protocol for rendered HTML.
+- **Diagnostics & health** — Runtime diagnostics, workbench health
+  monitoring, and diagnostic report generation.
+
+## Tech stack
+
+- [Electron](https://www.electronjs.org/) 43 with
+  [electron-vite](https://electron-vite.org/)
+- [React](https://react.dev/) 19 + TypeScript
+- [ghostty-web](https://github.com/ghostty-org/ghostty) terminal rendering +
+  node-pty
+- CodeMirror, Shiki, markdown-it, Mermaid
+- Vitest for tests, Stryker for mutation testing, ESLint + Prettier
+
+## Requirements
+
+- Node.js **>= 24**
+- A C/C++ toolchain for native modules (node-gyp rebuilds `node-pty` and
+  `@hvir/rename-noreplace` during install)
+- macOS (arm64) or Linux (x64/arm64) for packaged builds
+
+## Getting started
+
+```sh
+npm install
+npm run dev
+```
+
+`npm install` runs a postinstall step that rebuilds the native modules for
+Electron.
+
+## Scripts
+
+### Development
+
+| Script | Description |
+| --- | --- |
+| `npm run dev` | Start the app in development mode (electron-vite) |
+| `npm run build` | Typecheck and build the app |
+| `npm run preview` | Preview the production build |
+| `npm test` / `npm run test:watch` | Run the Vitest suite |
+| `npm run lint` | Lint with ESLint |
+| `npm run typecheck` | Typecheck Node and web tsconfigs |
+| `npm run format` / `npm run format:check` | Format with Prettier |
+| `npm run verify` | Full verification: seams, ADRs, architecture, lint, typecheck, tests |
+
+### Smoke & acceptance tests
+
+| Script | Description |
+| --- | --- |
+| `npm run smoke` | Run the full smoke scenario suite |
+| `npm run smoke:macos` | macOS smoke scenario subset |
+| `npm run smoke:scenario -- <name>` | Run a single smoke scenario |
+| `npm run smoke:isolation` | Smoke interruption/isolation tests |
+| `npm run performance:capacity` | Capacity performance gate |
+| `npm run acceptance:ssh:macos` | macOS SSH acceptance tests |
+
+### Packaging
+
+| Script | Description |
+| --- | --- |
+| `npm run build:dir` | Build an unpacked app directory |
+| `npm run pack:mac:arm64` | Package a macOS arm64 `.pkg` |
+| `npm run pack:mac:arm64:signed` | Package a signed macOS arm64 `.pkg` |
+| `npm run pack:linux:x64` | Package a Linux x64 `.deb` |
+| `npm run pack:linux:arm64` | Package a Linux arm64 `.deb` |
+
+### Repository hygiene
+
+| Script | Description |
+| --- | --- |
+| `npm run check-seams` | Enforce module seam boundaries |
+| `npm run check-adrs` | Validate architecture decision records |
+| `npm run architecture:check` | Enforce architecture hotspot budgets |
+| `npm run test:mutation` | Mutation testing with Stryker |
+| `npm run hooks:install` | Install git hooks |
+
+## Project structure
+
+```
+src/
+  main/       Electron main process (PTY supervisor, git, project hosts,
+              harness profiles, workspaces, diagnostics, IPC)
+  preload/    Preload scripts
+  renderer/   React UI (terminals, viewer, workspaces, sessions, settings)
+  shared/     Types and contracts shared across processes
+  workers/    Web workers (highlighting, markdown, CSV/JSON parsing)
+packages/
+  rename-noreplace/  Native helper package
+scripts/      Build, release, smoke, architecture, and project-management
+              tooling
+test/         Test fixtures and suites
+```
+
+## Development workflow
+
+- Install the git hooks with `npm run hooks:install`.
+- Run `npm run verify` before opening a pull request; CI runs linting,
+  typechecking, tests, and packaging smoke checks on pull requests.
+- Architecture rules (module seams, ADRs, hotspot budgets) are enforced by
+  `npm run verify`.
+
+## License
+
+[MIT](LICENSE). See [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md) for
+third-party attributions.

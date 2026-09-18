@@ -1,0 +1,65 @@
+# hvir
+
+An Electron desktop workbench for running AI coding-agent harnesses — Claude Code, Codex, Gemini CLI, and GitHub Copilot CLI — in fast native terminals, organized by project and workspace.
+
+## Features
+
+- **Harness sessions** — launch, resume, and fork agent sessions with provider-aware capabilities (session discovery, context-pressure telemetry, keybinding protocols).
+- **Native terminals** — GPU-rendered terminals powered by [ghostty-web](https://github.com/jarmak-personal/ghostty-web) and `node-pty`, with splits, moves, themes, and clipboard/file-paste support.
+- **Projects & workspaces** — manage multiple project checkouts and workspaces, including remote workspaces over SSH.
+- **Git integration** — built-in git workflow support and diff viewing (CodeMirror merge views).
+- **Document review** — review documents and insert or send feedback directly to a running harness.
+- **Viewers & previews** — Markdown (with Mermaid), syntax-highlighted code (Shiki), HTML previews, and embedded web panes.
+- **Diagnostics & health** — renderer recovery, workbench health checks, and development performance tooling.
+
+## Requirements
+
+- Node.js ≥ 24
+- A C/C++ toolchain for native modules (`node-gyp` rebuilds `node-pty` and `@hvir/rename-noreplace` during install)
+
+## Getting started
+
+```bash
+npm install        # also installs Electron and rebuilds native modules
+npm run dev        # start in development mode
+```
+
+## Building
+
+```bash
+npm run build              # typecheck + production build
+npm run pack:mac:arm64     # macOS arm64 .pkg
+npm run pack:linux:x64     # Linux x64 .deb
+npm run pack:linux:arm64   # Linux arm64 .deb
+```
+
+## Development
+
+| Command | Description |
+| --- | --- |
+| `npm test` | Run unit tests (Vitest) |
+| `npm run lint` | ESLint |
+| `npm run typecheck` | TypeScript project checks (node + web) |
+| `npm run format` | Prettier |
+| `npm run verify` | Full gate: seams, ADRs, architecture, lint, typecheck, tests |
+| `npm run smoke` | Build and run smoke scenarios |
+| `npm run test:mutation` | Mutation testing (Stryker) |
+| `npm run hooks:install` | Install git hooks |
+
+### Project layout
+
+```
+src/
+  main/       Electron main process (harness, terminal, pty, git, sessions, …)
+  preload/    Preload bridges
+  renderer/   React UI (workbench, terminals, viewers, settings, …)
+  shared/     Types and contracts shared across the main/renderer boundary
+  workers/    Worker processes
+packages/     Native helper packages (@hvir/rename-noreplace)
+scripts/      Build, smoke, acceptance, and project-management tooling
+test/         Test suites
+```
+
+## License
+
+MIT — see [LICENSE](LICENSE). Third-party attributions are listed in [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md).

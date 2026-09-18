@@ -1,0 +1,163 @@
+# hvir
+
+An Electron-based developer workbench that brings terminals, file browsing, Git, and remote workspaces into a single desktop application.
+
+## Features
+
+- **Terminal workspaces** — Multi-pane terminal sessions powered by [`node-pty`](https://github.com/microsoft/node-pty) and a bundled [ghostty-web](https://github.com/coder/ghostty-web) runtime, with theme support, splits, and session recovery.
+- **Project file tree & viewer** — Browse project files, open source files with syntax highlighting (Shiki), view rendered Markdown with Mermaid diagrams, and compare diffs.
+- **Git integration** — Stage and review changes, browse history, visualize branch graphs, switch branches, fetch, and pull.
+- **Remote workspaces** — Connect to remote hosts over SSH and work with files and terminals on the remote machine.
+- **Web panes** — Embed web dashboards alongside your terminal and editor panes.
+- **Document review** — Review and comment on documents within the workbench.
+- **Workbench layout** — Split, resize, and organize terminal and viewer panes to fit your workflow.
+- **Themes & settings** — Customizable terminal themes and application settings.
+
+## Tech stack
+
+- [Electron](https://www.electronjs.org/) with [electron-vite](https://electron-vite.org/)
+- [React](https://react.dev/) + [TypeScript](https://www.typescriptlang.org/)
+- [Vite](https://vitejs.dev/) for the renderer build
+- [node-pty](https://github.com/microsoft/node-pty) for pseudo-terminal support
+- [ghostty-web](https://github.com/coder/ghostty-web) for terminal rendering
+- [CodeMirror](https://codemirror.net/) for merge/diff and search
+- [Shiki](https://shiki.style/) for syntax highlighting
+- [Mermaid](https://mermaid.js.org/) for diagram rendering
+- [ssh2](https://github.com/mscdex/ssh2) for SSH transport
+- [Vitest](https://vitest.dev/) for testing
+
+## Prerequisites
+
+- [Node.js](https://nodejs.org/) >= 24
+- npm (ships with Node.js)
+- Python and a C++ toolchain for building native modules (node-pty, optional `@hvir/rename-noreplace`)
+  - macOS: Xcode Command Line Tools
+  - Linux: `build-essential` or equivalent
+
+## Installation
+
+```bash
+npm install
+```
+
+`postinstall` rebuilds native modules against Electron's ABI.
+
+## Development
+
+Start the application in development mode:
+
+```bash
+npm run dev
+```
+
+Run the type checker:
+
+```bash
+npm run typecheck
+```
+
+Run the linter:
+
+```bash
+npm run lint
+```
+
+Format code with Prettier:
+
+```bash
+npm run format
+```
+
+## Testing
+
+Run the unit and integration test suite:
+
+```bash
+npm test
+```
+
+Run tests in watch mode:
+
+```bash
+npm run test:watch
+```
+
+Run mutation tests:
+
+```bash
+npm run test:mutation
+```
+
+Run smoke tests (builds a smoke-enabled binary first):
+
+```bash
+npm run smoke
+```
+
+## Building
+
+Build the application for production:
+
+```bash
+npm run build
+```
+
+Build and package for the current platform:
+
+```bash
+npm run build:dir
+```
+
+### Platform packages
+
+macOS (Apple Silicon, unsigned `.pkg`):
+
+```bash
+npm run pack:mac:arm64
+```
+
+Linux (x64 `.deb`):
+
+```bash
+npm run pack:linux:x64
+```
+
+Linux (arm64 `.deb`):
+
+```bash
+npm run pack:linux:arm64
+```
+
+## Project structure
+
+```
+├── build/                  # Build resources, icons, entitlements, native helpers
+├── packages/               # Private workspace packages (e.g. rename-noreplace binding)
+├── scripts/                # Build, packaging, smoke, and project-management scripts
+├── src/
+│   ├── main/               # Electron main process
+│   ├── preload/            # Electron preload scripts
+│   ├── renderer/           # React renderer application
+│   ├── shared/             # Shared types and utilities
+│   └── workers/            # Utility-process workers
+├── test/                   # Vitest test suite
+├── electron-builder.yml    # Production packaging configuration
+├── electron.vite.config.ts # electron-vite build configuration
+└── vitest.config.ts        # Test configuration
+```
+
+## Verification
+
+Run the full verification pipeline:
+
+```bash
+npm run verify
+```
+
+This runs seam checks, ADR checks, architecture checks, linting, type checking, and tests.
+
+## License
+
+hvir is licensed under the [MIT License](LICENSE).
+
+See [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md) for third-party attribution.

@@ -1,0 +1,185 @@
+{
+  "id": "gemini-3.8-flash__copilot-cli__20260918T033632Z",
+  "batch": "2026-09-17_r4_copilot-cli-1.0.86_effort-max",
+  "target": {
+    "name": "hvir",
+    "url": "https://github.com/jarmak-personal/hvir",
+    "commit": "7acbf8883bc869a9987252833d90b0d250086122",
+    "snapshot_commit": "ca97b8a72d67da22d5da4705101f99fbc80bd9cf"
+  },
+  "model": {
+    "id": "gemini-3.8-flash",
+    "vendor": "Google",
+    "name": "Gemini Flash",
+    "version": "3.8",
+    "variant": null,
+    "display": "Gemini 3.8 Flash"
+  },
+  "harness": {
+    "name": "GitHub Copilot CLI",
+    "id": "copilot-cli",
+    "version": "1.0.86"
+  },
+  "prompt": "Please create a README.md for this project.",
+  "started_at": "2026-09-18T03:36:43Z",
+  "finished_at": "2026-09-18T03:42:34Z",
+  "wall_clock_seconds": 351,
+  "exit_code": 0,
+  "setup_exit_code": 0,
+  "readme_produced": true,
+  "readme_bytes": 12424,
+  "readme_lines": 229,
+  "usage": {
+    "totalPremiumRequestCost": 14,
+    "totalUserRequests": 1,
+    "totalNanoAiu": 63498585000,
+    "tokenDetails": {
+      "input": {
+        "tokenCount": 498455
+      },
+      "cache_read": {
+        "tokenCount": 3196878
+      },
+      "cache_write": {
+        "tokenCount": 0
+      },
+      "output": {
+        "tokenCount": 5701
+      }
+    },
+    "totalApiDurationMs": 234820,
+    "sessionStartTime": "2026-09-18T03:36:46.411Z",
+    "codeChanges": {
+      "linesAdded": 229,
+      "linesRemoved": 0,
+      "filesModifiedCount": 1,
+      "filesModified": [
+        "/private/var/tmp/ws/8d72eedc/hvir/README.md"
+      ]
+    },
+    "modelMetrics": {
+      "gemini-3.8-flash": {
+        "requests": {
+          "count": 65,
+          "cost": 14
+        },
+        "usage": {
+          "inputTokens": 3695333,
+          "outputTokens": 5701,
+          "cacheReadTokens": 3196878,
+          "cacheWriteTokens": 0,
+          "reasoningTokens": 7060
+        },
+        "totalNanoAiu": 63498585000,
+        "tokenDetails": {
+          "input": {
+            "tokenCount": 498455
+          },
+          "cache_read": {
+            "tokenCount": 3196878
+          },
+          "cache_write": {
+            "tokenCount": 0
+          },
+          "output": {
+            "tokenCount": 5701
+          }
+        }
+      }
+    },
+    "agentMetrics": {
+      "main": {
+        "totalApiDurationMs": 234820,
+        "totalNanoAiu": 63498585000,
+        "modelMetrics": {
+          "gemini-3.8-flash": {
+            "requests": {
+              "count": 65,
+              "cost": 14
+            },
+            "usage": {
+              "inputTokens": 3695333,
+              "outputTokens": 5701,
+              "cacheReadTokens": 3196878,
+              "cacheWriteTokens": 0,
+              "reasoningTokens": 7060
+            },
+            "totalNanoAiu": 63498585000,
+            "tokenDetails": {
+              "input": {
+                "tokenCount": 498455
+              },
+              "cache_read": {
+                "tokenCount": 3196878
+              },
+              "cache_write": {
+                "tokenCount": 0
+              },
+              "output": {
+                "tokenCount": 5701
+              }
+            }
+          }
+        }
+      }
+    },
+    "currentModel": "gemini-3.8-flash",
+    "lastCallInputTokens": 84272,
+    "lastCallOutputTokens": 157
+  },
+  "tool_calls": {
+    "glob": 10,
+    "bash": 16,
+    "view": 41,
+    "grep": 3,
+    "create": 1,
+    "read_bash": 1
+  },
+  "reasoning_effort_requested": "high",
+  "reasoning_level": "high",
+  "chat_calls": {
+    "gemini-3.8-flash": {
+      "high": 65
+    }
+  },
+  "files_viewed": [
+    ".github/workflows/ci.yml",
+    ".github/workflows/release.yml",
+    ".prettierignore",
+    ".prettierrc.json",
+    "LICENSE",
+    "THIRD_PARTY_NOTICES.md",
+    "build/native/hvir-command",
+    "electron-builder.yml",
+    "package.json",
+    "scripts/architecture-inventory.mts",
+    "scripts/check-adrs.mjs",
+    "scripts/check-seams.sh",
+    "scripts/native-installer.template.sh",
+    "scripts/phase8-gauntlet.sh",
+    "scripts/release-changelog.mjs",
+    "src/main/document-review/document-review-coordinator.ts",
+    "src/main/document-review/index.ts",
+    "src/main/harness/bundled-harness-providers.ts",
+    "src/main/index.ts",
+    "src/main/project-host/ssh-host.ts",
+    "src/renderer/index.html",
+    "src/renderer/src/App.tsx",
+    "src/renderer/src/dashboards/WebPane.tsx",
+    "src/renderer/src/document-review/DocumentReviewDeliveryPanel.tsx",
+    "src/renderer/src/git/GitPanel.tsx",
+    "src/renderer/src/sessions/SessionsOverview.tsx",
+    "src/renderer/src/settings/sections/AppearanceSettings.tsx",
+    "src/renderer/src/terminal/TerminalView.tsx",
+    "src/renderer/src/viewer/FileViewer.tsx",
+    "src/renderer/src/viewer/RenderedView.tsx",
+    "src/shared/viewer-types.ts",
+    "src/shared/web-pane.ts",
+    "test/adr-lifecycle.test.ts",
+    "test/ci-workflow.test.ts",
+    "test/release-pr-integrity.test.ts",
+    "test/terminal-file-link.test.ts"
+  ],
+  "compactions": [],
+  "truncations": 0
+}

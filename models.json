@@ -1,0 +1,35 @@
+{
+  "_comment": "Model IDs as passed to `copilot --model` → structured fields for grouping/sorting on the site. `vendor` and `display` mirror the Copilot models API; `name` and `version` are hand-split (the API's version field is just the id). Sort: name alpha, then version natural/semver ascending. Fill in as new models appear.",
+
+  "claude-haiku-4.5":     { "vendor": "Anthropic",   "name": "Claude Haiku",  "version": "4.5",  "display": "Claude Haiku 4.5" },
+  "claude-sonnet-5":      { "vendor": "Anthropic",   "name": "Claude Sonnet", "version": "5",    "display": "Claude Sonnet 5" },
+  "claude-opus-4.7":      { "vendor": "Anthropic",   "name": "Claude Opus",   "version": "4.7",  "display": "Claude Opus 4.7" },
+  "claude-opus-4.8":      { "vendor": "Anthropic",   "name": "Claude Opus",   "version": "4.8",  "display": "Claude Opus 4.8" },
+  "claude-opus-4.8-fast": { "vendor": "Anthropic",   "name": "Claude Opus",   "version": "4.8",  "display": "Claude Opus 4.8 (fast mode)", "variant": "fast" },
+  "claude-opus-5":        { "vendor": "Anthropic",   "name": "Claude Opus",   "version": "5",    "display": "Claude Opus 5" },
+  "claude-fable-5":       { "vendor": "Anthropic",   "name": "Claude Fable",  "version": "5",    "display": "Claude Fable 5" },
+  "claude-fable-5.1":     { "vendor": "Anthropic",   "name": "Claude Fable",  "version": "5.1",  "display": "Claude Fable 5.1" },
+
+  "gpt-5-mini":           { "vendor": "OpenAI",      "name": "GPT mini",      "version": "5",    "display": "GPT-5 mini" },
+  "gpt-5.4-mini":         { "vendor": "OpenAI",      "name": "GPT mini",      "version": "5.4",  "display": "GPT-5.4 mini" },
+  "gpt-5.3-codex":        { "vendor": "OpenAI",      "name": "GPT Codex",     "version": "5.3",  "display": "GPT-5.3-Codex" },
+  "gpt-5.4":              { "vendor": "OpenAI",      "name": "GPT",           "version": "5.4",  "display": "GPT-5.4" },
+  "gpt-5.5":              { "vendor": "OpenAI",      "name": "GPT",           "version": "5.5",  "display": "GPT-5.5" },
+  "gpt-5.6-luna":         { "vendor": "OpenAI",      "name": "GPT",           "version": "5.6",  "display": "GPT-5.6 Luna",  "variant": "luna" },
+  "gpt-5.6-sol":          { "vendor": "OpenAI",      "name": "GPT",           "version": "5.6",  "display": "GPT-5.6 Sol",   "variant": "sol" },
+  "gpt-5.6-terra":        { "vendor": "OpenAI",      "name": "GPT",           "version": "5.6",  "display": "GPT-5.6 Terra", "variant": "terra" },
+  "gpt-6-astra":          { "vendor": "OpenAI",      "name": "GPT",           "version": "6",    "display": "GPT-6 Astra",   "variant": "astra" },
+
+  "gemini-3.5-flash":     { "vendor": "Google",      "name": "Gemini Flash",  "version": "3.5",  "display": "Gemini 3.5 Flash" },
+  "gemini-3.6-flash":     { "vendor": "Google",      "name": "Gemini Flash",  "version": "3.6",  "display": "Gemini 3.6 Flash" },
+  "gemini-3.7-flash":     { "vendor": "Google",      "name": "Gemini Flash",  "version": "3.7",  "display": "Gemini 3.7 Flash" },
+  "gemini-3.8-flash":     { "vendor": "Google",      "name": "Gemini Flash",  "version": "3.8",  "display": "Gemini 3.8 Flash" },
+
+  "grok-4.5":             { "vendor": "xAI",         "name": "Grok",          "version": "4.5",  "display": "Grok 4.5" },
+  "grok-4.6":             { "vendor": "xAI",         "name": "Grok",          "version": "4.6",  "display": "Grok 4.6" },
+
+  "kimi-k2.7-code":       { "vendor": "Moonshot AI", "name": "Kimi Code",     "version": "2.7",  "display": "Kimi K2.7 Code" },
+  "kimi-k3":              { "vendor": "Moonshot AI", "name": "Kimi",          "version": "3",    "display": "Kimi K3" },
+
+  "mai-code-1.1-flash":   { "vendor": "Microsoft",   "name": "MAI-Code Flash","version": "1.1",  "display": "MAI-Code-1.1-Flash" }
+}

@@ -1,0 +1,162 @@
+diff --git a/README.md b/README.md
+new file mode 100644
+index 0000000..0c89b28
+--- /dev/null
++++ b/README.md
+@@ -0,0 +1,156 @@
++# hvir
++
++> **A lightweight, view-first workbench for agentic development.**
++
++`hvir` is a desktop workbench purpose-built for working alongside AI coding agents and CLI harnesses (such as Claude Code, OpenAI Codex, Gemini, Pi, GitHub Copilot, Cursor, and custom agent workflows). It pairs high-performance terminal multiplexing with rich visual document inspection, interactive Git graphs, side-by-side diff review, embedded web previews, and first-class remote development over SSH.
++
++---
++
++## ✨ Features
++
++### 🤖 Agent Harness Integration
++- **Bundled Providers**: Native integration with Claude Code, OpenAI Codex, Pi, Gemini, GitHub Copilot, Cursor, plain shells, and custom CLI commands.
++- **Harness Profiles & Telemetry**: Configurable provider profiles, usage demand controllers, session discovery, context telemetry hubs, and token usage tracking.
++- **Image & File Staging**: Remote and local clipboard image/file pasting for multimodal agent interaction.
++- **Composer Modes**: Configurable submission behaviors tailored for agent workflows.
++
++### 💻 Modern Terminal Experience
++- **Ghostty Web + Native PTY**: Fast terminal rendering powered by WebAssembly Ghostty (`ghostty-web`) backed by supervised native pseudo-terminals (`node-pty`).
++- **Flexible Layouts**: Split panes, horizon views, active terminal focus preservation, and workspace reordering.
++- **Terminal Polish**: Semantic navigation, font ligature support, customizable color themes with a built-in catalog, search, and middle-click closing.
++
++### 📄 View-First Document Editor & Renderers
++- **CodeMirror 6 Editor**: Fast text editing with syntax highlighting powered by Shiki.
++- **Rich Document Rendering**:
++  - Markdown preview with GitHub Flavored Markdown (GFM) task lists and KaTeX mathematical notation.
++  - Interactive Mermaid diagram rendering.
++  - Structured data viewing for CSV and JSON files.
++  - Sandboxed HTML preview.
++- **Workspace Navigation**: Primary/secondary pane splitting, tab pinning, file tree management, and live file-change reloading.
++
++### 🔀 Document Review & Git Workspace
++- **Document Review Workspace**: Dedicated diff review mode with side-by-side or unified inline diffs, diff-base switching, and direct review delivery into agent terminal sessions.
++- **Visual Git Panel & Graph**: Interactive branch switching, worktree management, commit history visualization, dirty-file tracking, and stage/unstage controls.
++- **Isolated Git Workers**: Heavy repository analysis and Git operations run inside dedicated background utility processes.
++
++### 🌐 Local & Remote (SSH) Workspaces
++- **Projects Bar**: Seamlessly switch between multiple local projects and remote workspaces.
++- **Full-Featured SSH Remotes**: Built-in SSH client connection pool (`ssh2`), automated `~/.ssh/config` parsing, host key verification, remote file watching, and secure file transfers.
++
++### 🌐 In-App Web Previews (Web Pane)
++- **Embedded Browser Pane**: Preview local development servers, web applications, and documentation directly within the workbench.
++- **Loopback Proxy**: Built-in loopback HTTP proxy and route registry for isolated, secure web previews.
++
++### 🩺 Observability, Diagnostics & Self-Healing
++- **Workbench Health Monitoring**: Real-time diagnostic logging and journal collection.
++- **Renderer Recovery**: Automatic detection and graceful recovery from renderer process interruptions.
++- **Cross-Session Projections**: Aggregate metrics and history across working sessions.
++
++---
++
++## 🏗 Architecture
++
++`hvir` is built on Electron, React 19, TypeScript, and Vite, adhering to strict security and architectural seams:
++
++```
++┌─────────────────────────────────────────────────────────┐
++│                     Renderer Process                    │
++│   React 19 • CodeMirror 6 • Ghostty Web • Git Graph UI  │
++└────────────────────────────┬────────────────────────────┘
++                             │ ContextBridge IPC (Safe Channels)
++┌────────────────────────────▼────────────────────────────┐
++│                    Preload & IPC Layer                  │
++│       Authority Router • IPC Contract Capabilities       │
++└────────────────────────────┬────────────────────────────┘
++                             │
++┌────────────────────────────▼────────────────────────────┐
++│                       Main Process                      │
++│  ┌───────────────────┐  ┌────────────────────────────┐  │
++│  │ LocalHost/SshHost │  │ PTY Supervisor & Registry  │  │
++│  ├───────────────────┤  ├────────────────────────────┤  │
++│  │ Harness Registry  │  │ Diagnostics & Health Hub   │  │
++│  └───────────────────┘  └────────────────────────────┘  │
++└────────────────────────────┬────────────────────────────┘
++                             │ Utility Process IPC
++┌────────────────────────────▼────────────────────────────┐
++│                     Worker Processes                    │
++│            Git Worker • Native Host Utilities           │
++└─────────────────────────────────────────────────────────┘
++```
++
++- **`src/main`**: Central host coordinator managing local and SSH environments, PTY lifecycles, harness providers, file operations, and IPC authority policies.
++- **`src/preload`**: Context-isolated bridge exposing strictly typed, capability-bounded APIs to the renderer.
++- **`src/renderer`**: UI layer composed of the workspace shell, split views, terminal canvases, file trees, and settings dialogs.
++- **`src/workers`**: Standalone Node utility processes that offload compute-heavy tasks like Git operations without blocking the main event loop.
++- **`src/shared`**: Shared TypeScript types, IPC contracts, and utility protocols.
++- **`packages/rename-noreplace`**: Native Node addon providing atomic rename operations.
++
++---
++
++## 🚀 Getting Started
++
++### Prerequisites
++
++- **Node.js**: `v24.0.0` or later
++- **npm**: `v10.0.0` or later
++- **C/C++ Build Toolchain**: Required for compiling native modules (`node-gyp`, `node-pty`, `@hvir/rename-noreplace`)
++  - **macOS**: Xcode Command Line Tools (`xcode-select --install`)
++  - **Linux**: `build-essential`, `python3`, and standard C++ libraries
++
++### Installation
++
++1. Clone the repository:
++   ```bash
++   git clone https://github.com/jarmak-personal/hvir.git
++   cd hvir
++   ```
++
++2. Install dependencies (this will automatically compile native modules and configure runtime dependencies):
++   ```bash
++   npm install
++   ```
++
++### Running in Development
++
++Start the development environment with hot reloading:
++
++```bash
++npm run dev
++```
++
++---
++
++## 🛠 Available Scripts
++
++| Command | Description |
++|---|---|
++| `npm run dev` | Starts the Electron and Vite development server with hot-reload |
++| `npm run build` | Runs typechecks and compiles production assets with `electron-vite` |
++| `npm test` | Executes the unit and integration test suite using Vitest |
++| `npm run test:watch` | Runs Vitest in interactive watch mode |
++| `npm run typecheck` | Runs TypeScript compiler checks across Node and Web targets |
++| `npm run lint` | Lints the codebase with ESLint |
++| `npm run format:check` | Verifies formatting rules with Prettier |
++| `npm run format` | Auto-formats code with Prettier |
++| `npm run check-seams` | Verifies architectural boundaries and module import rules |
++| `npm run architecture:report` | Analyzes module dependencies and architectural hotspots |
++| `npm run smoke` | Runs the automated Electron smoke test scenario suite |
++| `npm run pack:mac:arm64` | Packages a macOS Apple Silicon distributable (`.pkg`) |
++| `npm run pack:linux:x64` | Packages a Linux x64 distributable (`.deb`) |
++| `npm run pack:linux:arm64` | Packages a Linux ARM64 distributable (`.deb`) |
++
++---
++
++## 🔒 Security & Architecture Guardrails
++
++`hvir` enforces strict modularity and security boundaries:
++
++- **Isolated Host Primitives**: Direct file-system and process spawning primitives are constrained to host adapters (`LocalHost` and `SshHost`).
++- **Preload Isolation**: Renderer code cannot access raw Node.js or Electron internals; all communication passes through typed IPC interfaces.
++- **Strict Seam Enforcement**: Run `npm run check-seams` to validate that module separation rules are maintained.
++
++---
++
++## 📄 License
++
++This project is licensed under the [MIT License](LICENSE).

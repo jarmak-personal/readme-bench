@@ -1,0 +1,164 @@
+# hvir
+
+`hvir` is a modern, cross-platform developer workbench built with Electron, React, and TypeScript. Designed for agentic and terminal-first development workflows, it seamlessly unites local and remote workspaces, native terminal emulation, AI coding agent harnesses, Git operations, and interactive document and file viewers into a single high-performance desktop application.
+
+---
+
+## Highlights & Features
+
+- **Local & Remote Workspace Management**
+  - Transparent `ProjectHost` transport abstraction: local directories and remote hosts over SSH share identical filesystem, PTY, process execution, and watching semantics.
+  - Multi-project and Git worktree discovery, switching, pruning, and lifecycle coordination.
+  - Remote folder picker, host browsing, and SSH authentication/key management.
+
+- **High-Performance Terminal Emulation**
+  - Powered by Ghostty Web (`ghostty-web` WebAssembly terminal engine) and native `node-pty`.
+  - Rich terminal features: custom color theme catalog (bundled Ghostty themes), split panes, synchronized output, terminal search, cursor customization, clipboard OSC integration, and persistent sessions across workspace transfers.
+
+- **AI Agent Harness Integrations**
+  - Built-in provider profiles for leading developer AI agents and CLIs:
+    - **Claude Code** (session recovery, context pressure monitoring, exact fork/resume)
+    - **Codex** (context telemetry, thread discovery, review insert contracts)
+    - **GitHub Copilot CLI**
+    - **Gemini CLI**
+    - **Cursor Agent CLI**
+    - **Pi**
+    - Standard interactive login shells and custom commands.
+  - Harness profile store, launch arguments/environment configuration, and context pressure warnings.
+
+- **Interactive File Viewer & Diff Engine**
+  - Multi-tab file viewer supporting:
+    - **Source Code**: CodeMirror 6 with syntax highlighting (Shiki), search, and go-to-line.
+    - **Diff View**: CodeMirror merge diffing against Git HEAD or arbitrary revisions.
+    - **Rendered Previews**: Markdown (with task lists, Mermaid diagrams, KaTeX math), SVG, images, and HTML live preview with loopback security isolation.
+    - **Git Blame**: Inline blame attribution per line.
+    - **Large File Protection**: Automatic detection and safe viewer workload policies for massive text files.
+
+- **Git Tools & Visual Commit Graph**
+  - Integrated Git status tracking, staging, changes inspector, commit log, branch switching, fetching, and pulling.
+  - Interactive visual Git commit graph.
+
+- **Document Review & Delivery Workflow**
+  - Structured review draft creation directly from file viewers or diffs.
+  - Bounded delivery into agent harnesses via Insert or Send Now contracts.
+
+- **Cross-Platform Support**
+  - Native builds and packaging for **macOS** (Apple Silicon `arm64`) and **Linux** (`x64`, `arm64` via `.deb`).
+
+---
+
+## Tech Stack
+
+- **Desktop Framework**: [Electron](https://www.electronjs.org/) (with `electron-vite` and `electron-builder`)
+- **Frontend / UI**: [React 19](https://react.dev/), TypeScript, pure CSS layout with dark/light themes
+- **Terminal Engine**: [Ghostty Web](https://github.com/coder/ghostty-web) (WASM) + [node-pty](https://github.com/microsoft/node-pty)
+- **Editor & Syntax**: [CodeMirror 6](https://codemirror.net/), [Shiki](https://shiki.style/), [markdown-it](https://github.com/markdown-it/markdown-it), [Mermaid](https://mermaid.js.org/), [KaTeX](https://katex.org/)
+- **Remote & Native**: `ssh2`, `@hvir/rename-noreplace` (atomic rename syscalls)
+- **Testing & Quality**: [Vitest](https://vitest.dev/), [Stryker](https://stryker-mutator.io/) (mutation testing), [ESLint](https://eslint.org/), [Prettier](https://prettier.io/)
+
+---
+
+## Prerequisites
+
+- **Node.js**: `>= 24.0.0`
+- **npm**: `>= 10.0.0`
+- Native build prerequisites (for compiling `node-pty` and native addons):
+  - **macOS**: Xcode Command Line Tools (`xcode-select --install`)
+  - **Linux**: Standard C/C++ build tools (`build-essential`, Python 3)
+
+---
+
+## Getting Started
+
+### 1. Installation
+
+Clone the repository and install dependencies:
+
+```bash
+git clone https://github.com/jarmak-personal/hvir.git
+cd hvir
+npm install
+```
+
+> The `postinstall` script automatically executes `npm run install:runtime` to ensure Electron headers and native modules (`node-pty`, `@hvir/rename-noreplace`) are compiled for the local Electron version.
+
+### 2. Development Mode
+
+Launch the application in development mode with hot-reloading:
+
+```bash
+npm run dev
+```
+
+---
+
+## Key npm Scripts
+
+### Development & Build
+
+| Command | Description |
+|---|---|
+| `npm run dev` | Start Electron and Vite in development mode with HMR |
+| `npm run build` | Run type checking and build the production bundles |
+| `npm run preview` | Preview production build in Electron |
+| `npm run build:smoke` | Build bundles under smoke-test configuration |
+
+### Verification, Linting & Testing
+
+| Command | Description |
+|---|---|
+| `npm run verify` | Run full validation pipeline: seams, ADRs, architecture rules, lint, typecheck, and unit tests |
+| `npm test` | Run test suite with Vitest |
+| `npm run test:watch` | Run Vitest in interactive watch mode |
+| `npm run typecheck` | Run TypeScript type checks across Node (main/preload) and Web (renderer) targets |
+| `npm run lint` | Check code style with ESLint |
+| `npm run format` | Auto-format codebase using Prettier |
+| `npm run format:check` | Verify formatting consistency with Prettier |
+| `npm run smoke` | Run headless end-to-end Electron smoke tests (requires display or `xvfb-run` on Linux) |
+| `npm run test:mutation` | Run mutation tests with Stryker |
+
+### Packaging & Distribution
+
+| Command | Description |
+|---|---|
+| `npm run build:dir` | Package unpackaged desktop application directory |
+| `npm run pack:mac:arm64` | Package macOS Apple Silicon installer (`.pkg`) |
+| `npm run pack:linux:x64` | Package Linux x64 Debian package (`.deb`) |
+| `npm run pack:linux:arm64` | Package Linux arm64 Debian package (`.deb`) |
+
+---
+
+## Default Keyboard Shortcuts
+
+| Shortcut | Action | Context |
+|---|---|---|
+| `Mod + P` | Quick open / Find file | Workbench |
+| `Mod + F` | Find in file | Workbench |
+| `Mod + Shift + F` | Find in terminal | Terminal |
+| `Mod + Shift + M` | Cycle file view mode (Source / Rendered / Diff) | Workbench |
+| `Ctrl + G` | Go to line | Workbench |
+| `Mod + J` | Focus terminal | Global |
+| `Mod + Shift + J` | Toggle terminal focus | Global |
+| `Mod + 1` | Focus file viewer | Global |
+| `Mod + 0` | Focus file tree | Global |
+| `Mod + Alt + ]` | Switch to next workspace | Global |
+| `Mod + Alt + [` | Switch to previous workspace | Global |
+
+*(Note: `Mod` refers to `Cmd` on macOS and `Ctrl` on Linux/Windows.)*
+
+---
+
+## Architecture Overview
+
+`hvir` enforces strict architectural layering and boundaries:
+
+- **`src/main`**: Electron main process. Manages window lifecycles, PTY supervisor, SSH connections, native process execution, workspace file monitoring, harness profiles, and IPC message routing.
+- **`src/preload`**: Hardened context bridge exposing strictly typed IPC methods to the renderer without exposing Node.js primitives.
+- **`src/renderer`**: React UI application. Implements the workbench layout, Ghostty terminal canvas views, CodeMirror viewer, Git inspectors, settings, and sessions dashboard.
+- **`src/shared`**: Universal models, typed IPC contracts, file system abstraction interfaces, and protocol definitions shared cleanly across process boundaries.
+
+---
+
+## License
+
+This project is licensed under the [MIT License](LICENSE). Third-party license notices and redistribution details are available in [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md).

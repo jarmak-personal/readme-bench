@@ -1,0 +1,67 @@
+diff --git a/README.md b/README.md
+new file mode 100644
+index 0000000..cf06df4
+--- /dev/null
++++ b/README.md
+@@ -0,0 +1,61 @@
++HVIR
++=====
++
++HVIR is an Electron-based desktop application and terminal viewer built with TypeScript, React and Vite. It bundles a native pty backend and web-based components (ghostty-web) to provide a rich terminal experience inside a cross-platform desktop shell.
++
++Key features
++- Electron + Vite desktop app
++- Integrated native pty (node-pty)
++- Terminal themes and merge editor support
++- Packaging scripts for macOS and Linux
++
++Prerequisites
++- Node.js >= 24
++- npm (recommended)
++- A supported platform for Electron (macOS/Linux/Windows packaging supported via electron-builder)
++
++Quick start (development)
++1. Install dependencies:
++   npm install
++
++2. Start the dev environment (hot-reload):
++   npm run dev
++
++Build and package
++- Build for development preview:
++  npm run build
++
++- Build a distributable (examples):
++  npm run pack:mac:arm64          # macOS arm64 package
++  npm run pack:linux:x64         # Linux x64 .deb
++  npm run pack:linux:arm64       # Linux arm64 .deb
++
++Testing and quality
++- Run unit tests: npm test
++- Run linter: npm run lint
++- Typecheck: npm run typecheck
++- Format: npm run format
++- Full verification: npm run verify
++
++Packaging notes
++- The project uses electron-builder and includes platform-specific packaging scripts and configuration under build/ and electron-builder.yml. Some packaging scripts may require platform-specific tooling and code signing configured in the environment.
++
++Repository layout (high level)
++- src/           — TypeScript source for main and renderer
++- packages/      — small native optional packages (rename-noreplace)
++- scripts/       — developer and CI scripts used by build and release flows
++- build/         — packaging assets and icons
++- test/          — test suites and fixtures
++
++License
++- MIT (see LICENSE)
++- Third-party notices: THIRD_PARTY_NOTICES.md
++
++Contributing
++- Please open issues or PRs on the repository. Follow existing ESLint, TypeScript, and formatting rules (see scripts and config files). Run scripts/hooks: npm run hooks:install.
++
++Support
++- For questions or to report bugs, open a GitHub issue.
++
++Acknowledgements
++- Uses ghostty-web, node-pty, CodeMirror and other OSS dependencies (see package.json and THIRD_PARTY_NOTICES.md).

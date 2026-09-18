@@ -1,0 +1,173 @@
+{
+  "id": "grok-4.6__copilot-cli__20260918T015242Z",
+  "batch": "2026-09-17_r2_copilot-cli-1.0.86",
+  "target": {
+    "name": "hvir",
+    "url": "https://github.com/jarmak-personal/hvir",
+    "commit": "7acbf8883bc869a9987252833d90b0d250086122",
+    "snapshot_commit": "ca97b8a72d67da22d5da4705101f99fbc80bd9cf"
+  },
+  "model": {
+    "id": "grok-4.6",
+    "vendor": "xAI",
+    "name": "Grok",
+    "version": "4.6",
+    "variant": null,
+    "display": "Grok 4.6"
+  },
+  "harness": {
+    "name": "GitHub Copilot CLI",
+    "id": "copilot-cli",
+    "version": "1.0.86"
+  },
+  "prompt": "Please create a README.md for this project.",
+  "started_at": "2026-09-18T01:52:53Z",
+  "finished_at": "2026-09-18T01:54:06Z",
+  "wall_clock_seconds": 73,
+  "exit_code": 0,
+  "setup_exit_code": 0,
+  "readme_produced": true,
+  "readme_bytes": 3318,
+  "readme_lines": 78,
+  "usage": {
+    "totalPremiumRequestCost": 1,
+    "totalUserRequests": 1,
+    "totalNanoAiu": 40562400000,
+    "tokenDetails": {
+      "input": {
+        "tokenCount": 126368
+      },
+      "cache_read": {
+        "tokenCount": 260608
+      },
+      "output": {
+        "tokenCount": 3764
+      }
+    },
+    "totalApiDurationMs": 68565,
+    "sessionStartTime": "2026-09-18T01:52:56.369Z",
+    "codeChanges": {
+      "linesAdded": 78,
+      "linesRemoved": 0,
+      "filesModifiedCount": 1,
+      "filesModified": [
+        "/private/var/tmp/ws/91e40fcb/hvir/README.md"
+      ]
+    },
+    "modelMetrics": {
+      "grok-4.6": {
+        "requests": {
+          "count": 12,
+          "cost": 1
+        },
+        "usage": {
+          "inputTokens": 386976,
+          "outputTokens": 3764,
+          "cacheReadTokens": 260608,
+          "cacheWriteTokens": 0,
+          "reasoningTokens": 1036
+        },
+        "totalNanoAiu": 40562400000,
+        "tokenDetails": {
+          "input": {
+            "tokenCount": 126368
+          },
+          "cache_read": {
+            "tokenCount": 260608
+          },
+          "output": {
+            "tokenCount": 3764
+          }
+        }
+      }
+    },
+    "agentMetrics": {
+      "main": {
+        "totalApiDurationMs": 68565,
+        "totalNanoAiu": 40562400000,
+        "modelMetrics": {
+          "grok-4.6": {
+            "requests": {
+              "count": 12,
+              "cost": 1
+            },
+            "usage": {
+              "inputTokens": 386976,
+              "outputTokens": 3764,
+              "cacheReadTokens": 260608,
+              "cacheWriteTokens": 0,
+              "reasoningTokens": 1036
+            },
+            "totalNanoAiu": 40562400000,
+            "tokenDetails": {
+              "input": {
+                "tokenCount": 126368
+              },
+              "cache_read": {
+                "tokenCount": 260608
+              },
+              "output": {
+                "tokenCount": 3764
+              }
+            }
+          }
+        }
+      }
+    },
+    "currentModel": "grok-4.6",
+    "lastCallInputTokens": 44645,
+    "lastCallOutputTokens": 71
+  },
+  "tool_calls": {
+    "view": 36,
+    "glob": 5,
+    "grep": 4,
+    "bash": 1,
+    "create": 1
+  },
+  "reasoning_level": "medium",
+  "chat_calls": {
+    "grok-4.6": {
+      "medium": 12
+    }
+  },
+  "files_viewed": [
+    ".",
+    ".github",
+    ".github/workflows/ci.yml",
+    ".github/workflows/release.yml",
+    ".gitignore",
+    "LICENSE",
+    "THIRD_PARTY_NOTICES.md",
+    "electron-builder.yml",
+    "package.json",
+    "packages",
+    "packages/rename-noreplace",
+    "packages/rename-noreplace/package.json",
+    "scripts/check-adrs.mjs",
+    "scripts/check-terminal-runtime.mts",
+    "src",
+    "src/main",
+    "src/main/application-runtime.ts",
+    "src/main/document-review",
+    "src/main/harness/bundled-harness-providers.ts",
+    "src/main/harness/harness-provider.ts",
+    "src/main/harness/providers",
+    "src/main/index.ts",
+    "src/main/project-host/project-host.ts",
+    "src/renderer",
+    "src/renderer/index.html",
+    "src/renderer/src",
+    "src/renderer/src/App.tsx",
+    "src/renderer/src/git/git-capability.ts",
+    "src/renderer/src/settings/sections/AppearanceSettings.tsx",
+    "src/renderer/src/viewer/FileViewer.tsx",
+    "src/renderer/src/workspaces/SessionDialog.tsx",
+    "src/shared",
+    "src/shared/git-types.ts",
+    "src/shared/harness-provider.ts",
+    "src/shared/keybindings.ts"
+  ],
+  "compactions": [],
+  "truncations": 0
+}

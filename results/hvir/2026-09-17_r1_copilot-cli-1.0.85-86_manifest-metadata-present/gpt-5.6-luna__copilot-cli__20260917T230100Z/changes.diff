@@ -1,0 +1,118 @@
+diff --git a/README.md b/README.md
+new file mode 100644
+index 0000000..bca9851
+--- /dev/null
++++ b/README.md
+@@ -0,0 +1,112 @@
++# hvir
++
++**hvir** is a lightweight, view-first workbench for agentic development. It brings
++terminals, project files, Git, document review, web panes, and agent sessions into one
++Electron desktop application.
++
++## Features
++
++- Work with local projects or connect to projects over SSH.
++- Run multiple terminal workspaces with split panes, search, themes, and session
++  recovery.
++- Browse, edit, preview, diff, and review project files, including Markdown and
++  rendered documents.
++- Inspect Git status, history, branches, changes, and worktrees.
++- Monitor agent sessions and usage from supported harnesses, including Claude Code,
++  Codex, Cursor, Gemini, GitHub Copilot, Pi, and shell sessions.
++- Open project web panes and manage workspace-specific settings.
++- Package native macOS and Linux desktop applications with Electron Builder.
++
++## Requirements
++
++- Node.js 24 or newer
++- npm
++- Git
++- A supported desktop environment:
++  - macOS (Apple Silicon packaging is configured)
++  - Linux (x64 and arm64 Debian packaging is configured)
++
++SSH projects additionally require access to the target host through the local SSH
++configuration and credentials.
++
++## Getting started
++
++Clone the repository, install dependencies, and start the development application:
++
++```bash
++git clone https://github.com/jarmak-personal/hvir.git
++cd hvir
++npm ci
++npm run dev
++```
++
++The install step also installs Electron's runtime and rebuilds the native modules
++required by the terminal and file-operation features.
++
++## Common commands
++
++| Command | Description |
++| --- | --- |
++| `npm run dev` | Start the Electron application in development mode |
++| `npm run build` | Type-check and create a production application build |
++| `npm run preview` | Preview the built application |
++| `npm test` | Run the Vitest test suite |
++| `npm run lint` | Run ESLint |
++| `npm run format:check` | Check formatting with Prettier |
++| `npm run verify` | Run seam, ADR, architecture, lint, type-check, and unit-test checks |
++| `npm run smoke` | Build and run the production Electron smoke scenarios |
++| `npm run build:dir` | Build and assemble an unpacked Electron application |
++| `npm run pack:mac:arm64` | Build a macOS arm64 package |
++| `npm run pack:linux:x64` | Build a Linux x64 Debian package |
++| `npm run pack:linux:arm64` | Build a Linux arm64 Debian package |
++
++For a focused smoke test, use `npm run smoke:scenario -- <scenario-name>`. The
++repository also provides platform-specific smoke and SSH acceptance commands in
++`package.json`.
++
++## Project layout
++
++```text
++src/main/       Electron main-process services and native integrations
++src/preload/    Secure bridge between Electron and the renderer
++src/renderer/   React workbench UI
++src/shared/     Types and contracts shared across processes
++scripts/        Development, architecture, smoke, and release tooling
++test/           Unit, integration, and contract tests
++build/          Application icons, entitlements, and packaging resources
++```
++
++The main process owns filesystem, Git, SSH, terminal, and Electron operations. The
++renderer presents those capabilities through explicit IPC contracts.
++
++## Development notes
++
++Native dependencies are rebuilt during `npm ci`/`npm install`. If dependencies are
++installed with another package manager or the native runtime becomes out of sync,
++run:
++
++```bash
++npm run install:runtime
++```
++
++Before opening a change, the broad local quality gate is:
++
++```bash
++npm run verify
++```
++
++Electron smoke tests may require a graphical session. On Linux CI, the project runs
++them under `xvfb-run`.
++
++## Contributing
++
++Please keep changes focused, preserve the process-boundary and IPC contracts, and add
++tests for behavioral changes. Run the most targeted tests while developing, followed
++by `npm run verify` before submitting a pull request.
++
++## License and third-party software
++
++hvir is released under the [MIT License](LICENSE). The application includes and
++redistributes third-party software; see
++[THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md) for the relevant notices and
++attributions.

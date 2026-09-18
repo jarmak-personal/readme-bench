@@ -1,0 +1,100 @@
+diff --git a/README.md b/README.md
+new file mode 100644
+index 0000000..6334045
+--- /dev/null
++++ b/README.md
+@@ -0,0 +1,94 @@
++# hvir
++
++hvir is a desktop workspace for developers who want a single place to work across local repositories, remote hosts, terminal sessions, file browsing, Git workflows, and web-based tools.
++
++It combines a terminal-first workbench with project management features, file review, session recovery, and SSH-aware host handling in a polished Electron application.
++
++## Highlights
++
++- Multi-project workspace management
++- Integrated terminal workbench with pane layouts and session persistence
++- Remote host and SSH connection support
++- File tree, tabbed file viewer, and document review
++- Git status, branch switching, and workspace activity tracking
++- Web panes for browser-like content inside the app
++- Themeable developer experience built with React and Electron
++
++## Technology stack
++
++- Electron
++- React + TypeScript
++- Vite
++- Vitest
++- ESLint + Prettier
++- Native terminal runtime support via node-pty and Ghostty-based web runtime components
++
++## Requirements
++
++- Node.js 24 or newer
++- npm
++- A supported desktop environment for Electron
++
++## Getting started
++
++1. Install dependencies:
++
++   ```bash
++   npm install
++   ```
++
++2. Start the app in development mode:
++
++   ```bash
++   npm run dev
++   ```
++
++3. Build a production bundle:
++
++   ```bash
++   npm run build
++   ```
++
++## Common commands
++
++```bash
++npm run dev           # start Electron app in development mode
++npm run build         # typecheck and build the app
++npm run typecheck     # run TypeScript checks
++npm run lint          # run ESLint
++npm test              # run the Vitest suite
++npm run verify        # run the project verification pipeline
++```
++
++## Project structure
++
++```text
++.
++├── src/
++│   ├── main/          # Electron main-process runtime and workspace orchestration
++│   ├── preload/       # Secure preload APIs exposed to the renderer
++│   ├── renderer/      # React UI and workbench experience
++│   ├── shared/        # Shared contracts, types, and utilities
++│   └── workers/       # Worker processes for background tasks
++├── test/              # Integration and behavior tests
++├── scripts/           # Build, project, and maintenance scripts
++├── packages/          # Local packaged dependencies
++├── package.json       # App scripts and dependencies
++├── electron.vite.config.ts
++├── tsconfig*.json
++├── LICENSE
++├── THIRD_PARTY_NOTICES.md
++└── README.md
++```
++
++## Development notes
++
++This repository includes a substantial set of automation and smoke-test scripts for validating terminal behavior, rendering lifecycle, Git workflows, and cross-platform packaging. For a full verification pass, use:
++
++```bash
++npm run verify
++```
++
++## License
++
++This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.

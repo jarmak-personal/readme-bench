@@ -1,0 +1,80 @@
+diff --git a/README.md b/README.md
+new file mode 100644
+index 0000000..e0ff422
+--- /dev/null
++++ b/README.md
+@@ -0,0 +1,74 @@
++# hvir
++
++`hvir` is a desktop workbench for terminal-centric development. It combines a Ghostty-based terminal experience with file viewing, diffing, git tools, SSH workspaces, session recovery, document review, and configurable terminal profiles/themes.
++
++## Features
++
++- Terminal workspaces with split panes, search, recovery, and attention handling
++- File tree, source/markdown rendering, large-file viewing, and diff support
++- Git views for status, history, branches, and graph-based workflows
++- Local and SSH-backed project hosts
++- Sessions and workspace persistence
++- Document review and web-pane surfaces
++- Harness profiles, terminal themes, and app settings
++
++## Requirements
++
++- Node.js 24 or newer
++- npm
++- A supported desktop environment for Electron
++
++## Getting started
++
++```bash
++npm ci
++npm run dev
++```
++
++The app opens with a project/workspace picker on first launch. You can also pass a project root when starting the app if your workflow uses one.
++
++## Common scripts
++
++| Command | Purpose |
++| --- | --- |
++| `npm run dev` | Start the Electron app in development mode |
++| `npm run build` | Type-check and build the app |
++| `npm run preview` | Preview the built renderer |
++| `npm run test` | Run the Vitest suite |
++| `npm run lint` | Run ESLint |
++| `npm run typecheck` | Type-check main and renderer code |
++| `npm run verify` | Run policy, architecture, lint, type, and test checks |
++| `npm run smoke` | Run the Electron smoke scenarios |
++| `npm run smoke:macos` | Run the macOS-focused smoke scenarios |
++| `npm run smoke:linux:installed` | Validate the installed Linux package |
++| `npm run smoke:macos:installed` | Validate the installed macOS package |
++
++## Packaging
++
++The repository includes native packaging workflows for:
++
++- macOS arm64 package builds
++- Linux deb package builds for x64 and arm64
++- Signed and notarized macOS release assembly
++
++Useful commands:
++
++```bash
++npm run pack:mac:arm64
++npm run pack:linux:x64
++npm run pack:linux:arm64
++```
++
++## Repository layout
++
++- `src/main` — Electron main process, IPC, project/workspace coordination, PTY, SSH, and packaging support
++- `src/renderer` — React UI for the workbench, terminal, viewer, git, sessions, settings, and document review
++- `src/preload` — Preload bridge
++- `scripts` — Build, smoke, release, and maintenance scripts
++- `test` — Vitest unit/integration coverage and packaging checks
++
++## Notes
++
++- Runtime dependencies are verified during install to ensure the checked-out `ghostty-web` artifacts match the expected terminal capability profile.
++- The project uses Electron Vite and keeps native modules external so they load from `node_modules` at runtime.
++

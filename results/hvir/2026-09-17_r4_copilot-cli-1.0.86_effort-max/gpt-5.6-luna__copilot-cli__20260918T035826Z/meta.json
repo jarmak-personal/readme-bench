@@ -1,0 +1,167 @@
+{
+  "id": "gpt-5.6-luna__copilot-cli__20260918T035826Z",
+  "batch": "2026-09-17_r4_copilot-cli-1.0.86_effort-max",
+  "target": {
+    "name": "hvir",
+    "url": "https://github.com/jarmak-personal/hvir",
+    "commit": "7acbf8883bc869a9987252833d90b0d250086122",
+    "snapshot_commit": "ca97b8a72d67da22d5da4705101f99fbc80bd9cf"
+  },
+  "model": {
+    "id": "gpt-5.6-luna",
+    "vendor": "OpenAI",
+    "name": "GPT",
+    "version": "5.6",
+    "variant": "luna",
+    "display": "GPT-5.6 Luna"
+  },
+  "harness": {
+    "name": "GitHub Copilot CLI",
+    "id": "copilot-cli",
+    "version": "1.0.86"
+  },
+  "prompt": "Please create a README.md for this project.",
+  "started_at": "2026-09-18T03:58:38Z",
+  "finished_at": "2026-09-18T03:59:44Z",
+  "wall_clock_seconds": 66,
+  "exit_code": 0,
+  "setup_exit_code": 0,
+  "readme_produced": true,
+  "readme_bytes": 4581,
+  "readme_lines": 128,
+  "usage": {
+    "totalPremiumRequestCost": 1,
+    "totalUserRequests": 1,
+    "totalNanoAiu": 2396271000,
+    "tokenDetails": {
+      "input": {
+        "tokenCount": 27
+      },
+      "cache_read": {
+        "tokenCount": 240108
+      },
+      "cache_write": {
+        "tokenCount": 47643
+      },
+      "output": {
+        "tokenCount": 6037
+      }
+    },
+    "totalApiDurationMs": 61068,
+    "sessionStartTime": "2026-09-18T03:58:40.857Z",
+    "codeChanges": {
+      "linesAdded": 129,
+      "linesRemoved": 0,
+      "filesModifiedCount": 1,
+      "filesModified": [
+        "/private/var/tmp/ws/3a89020e/hvir/README.md"
+      ]
+    },
+    "modelMetrics": {
+      "gpt-5.6-luna": {
+        "requests": {
+          "count": 9,
+          "cost": 1
+        },
+        "usage": {
+          "inputTokens": 287778,
+          "outputTokens": 6037,
+          "cacheReadTokens": 240108,
+          "cacheWriteTokens": 47643,
+          "reasoningTokens": 3145
+        },
+        "cacheExpiresAt": "2026-09-18T04:29:41.065Z",
+        "totalNanoAiu": 2396271000,
+        "tokenDetails": {
+          "input": {
+            "tokenCount": 27
+          },
+          "cache_read": {
+            "tokenCount": 240108
+          },
+          "cache_write": {
+            "tokenCount": 47643
+          },
+          "output": {
+            "tokenCount": 6037
+          }
+        }
+      }
+    },
+    "agentMetrics": {
+      "main": {
+        "totalApiDurationMs": 61068,
+        "totalNanoAiu": 2396271000,
+        "modelMetrics": {
+          "gpt-5.6-luna": {
+            "requests": {
+              "count": 9,
+              "cost": 1
+            },
+            "usage": {
+              "inputTokens": 287778,
+              "outputTokens": 6037,
+              "cacheReadTokens": 240108,
+              "cacheWriteTokens": 47643,
+              "reasoningTokens": 3145
+            },
+            "totalNanoAiu": 2396271000,
+            "tokenDetails": {
+              "input": {
+                "tokenCount": 27
+              },
+              "cache_read": {
+                "tokenCount": 240108
+              },
+              "cache_write": {
+                "tokenCount": 47643
+              },
+              "output": {
+                "tokenCount": 6037
+              }
+            }
+          }
+        }
+      }
+    },
+    "currentModel": "gpt-5.6-luna",
+    "lastCallInputTokens": 47646,
+    "lastCallOutputTokens": 195
+  },
+  "tool_calls": {
+    "bash": 5,
+    "glob": 2,
+    "rg": 3,
+    "view": 20,
+    "apply_patch": 1
+  },
+  "reasoning_effort_requested": "max",
+  "reasoning_level": "max",
+  "chat_calls": {
+    "gpt-5.6-luna": {
+      "max": 9
+    }
+  },
+  "files_viewed": [
+    ".github/workflows/ci.yml",
+    ".gitignore",
+    "LICENSE",
+    "README.md",
+    "THIRD_PARTY_NOTICES.md",
+    "electron-builder.yml",
+    "electron.vite.config.ts",
+    "package.json",
+    "scripts/check-terminal-runtime.mts",
+    "src/main/harness/harness-provider.ts",
+    "src/main/harness/providers/claude-code.ts",
+    "src/main/harness/providers/codex.ts",
+    "src/main/index.ts",
+    "src/renderer/src/App.tsx",
+    "src/renderer/src/git/GitPanel.tsx",
+    "src/renderer/src/sessions/SessionsApplicationDestination.tsx",
+    "src/renderer/src/terminal/TerminalWorkspaceCollection.tsx",
+    "src/renderer/src/workspaces/ProjectsBar.tsx"
+  ],
+  "compactions": [],
+  "truncations": 0
+}

@@ -1,0 +1,90 @@
+# hvir
+
+hvir is a desktop workbench for software projects and terminal-based coding
+harnesses. It brings local and SSH-hosted project folders, integrated terminal
+workspaces, Git tooling, and file review into one Electron application.
+
+## Features
+
+- Open local project folders or folders on SSH hosts configured in
+  `~/.ssh/config`.
+- Launch and organize terminal sessions, including split layouts and session
+  recovery.
+- Configure per-project or global launch profiles for Shell, Claude Code,
+  Codex, Pi, Gemini CLI, GitHub Copilot CLI, Cursor CLI, and custom commands.
+- Browse, edit, and review project files with syntax highlighting, image
+  previews, rendered Markdown, Mermaid diagrams, and CSV tables.
+- Inspect Git changes, diffs, branches, worktrees, history, and commit details;
+  fetch, pull, and switch branches from the workbench.
+- Keep work visible through project, workspace, terminal, and supported harness
+  session views.
+
+## Prerequisites
+
+- Node.js 24 or later
+- npm
+- A native build toolchain for `node-gyp`, which rebuilds the app's native
+  modules during installation
+
+Git is needed for Git features. To use a coding harness, install and
+authenticate its CLI on the local or remote host where it will run. For remote
+projects, define an OpenSSH `Host` alias in `~/.ssh/config` and ensure its
+authentication method is available locally.
+
+## Getting started
+
+From a checkout of this repository:
+
+```sh
+npm ci
+npm run dev
+```
+
+`npm ci` installs Electron and rebuilds the native terminal dependencies for
+Electron's runtime. On first launch, choose a project folder. To work remotely,
+open the project picker, connect to an SSH host, and select a folder on that
+host. Add or customize coding-harness profiles in **Settings → Harnesses**.
+
+## Development commands
+
+| Command | Purpose |
+| --- | --- |
+| `npm run dev` | Start the Electron app in development mode. |
+| `npm run build` | Type-check and build production bundles. |
+| `npm run lint` | Run ESLint. |
+| `npm run typecheck` | Type-check the main/preload and renderer targets. |
+| `npm test` | Run the Vitest suite. |
+| `npm run verify` | Run architecture checks, linting, type-checking, and tests. |
+| `npm run smoke` | Build and exercise the production Electron workflow. |
+| `npm run hooks:install` | Install the repository's pre-push hook. |
+
+On Linux without a display server, `npm run smoke` requires `xvfb-run`; the
+pre-push hook handles this automatically when it is available.
+
+## Packaging
+
+Production artifacts are written to `dist/`.
+
+```sh
+# macOS Apple Silicon package
+npm run pack:mac:arm64
+
+# Linux Debian packages
+npm run pack:linux:x64
+npm run pack:linux:arm64
+```
+
+## Project structure
+
+```text
+src/main/       Electron main process, project hosts, Git, terminals, and IPC
+src/preload/    Typed renderer API exposed through Electron's preload bridge
+src/renderer/   React workbench UI
+src/shared/     Shared contracts and domain types
+test/           Unit, integration, and Electron-facing tests
+scripts/        Build, architecture, release, and smoke-test tooling
+```
+
+## License
+
+This project is licensed under the [MIT License](LICENSE).

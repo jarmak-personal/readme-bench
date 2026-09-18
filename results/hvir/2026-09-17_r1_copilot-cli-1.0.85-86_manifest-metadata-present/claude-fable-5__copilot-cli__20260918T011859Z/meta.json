@@ -1,0 +1,144 @@
+{
+  "id": "claude-fable-5__copilot-cli__20260918T011859Z",
+  "batch": "2026-09-17_r1_copilot-cli-1.0.85-86_manifest-metadata-present",
+  "target": {
+    "name": "hvir",
+    "url": "https://github.com/jarmak-personal/hvir",
+    "commit": "7acbf8883bc869a9987252833d90b0d250086122",
+    "snapshot_commit": "d0f14c79c0a66f2738ff427583d5561ce3ca52a3"
+  },
+  "model": {
+    "id": "claude-fable-5",
+    "vendor": "Anthropic",
+    "name": "Claude Fable",
+    "version": "5",
+    "variant": null,
+    "display": "Claude Fable 5"
+  },
+  "harness": {
+    "name": "GitHub Copilot CLI",
+    "id": "copilot-cli",
+    "version": "1.0.86"
+  },
+  "prompt": "Please create a README.md for this project.",
+  "started_at": "2026-09-18T01:19:10Z",
+  "finished_at": "2026-09-18T01:19:45Z",
+  "wall_clock_seconds": 35,
+  "exit_code": 0,
+  "setup_exit_code": 0,
+  "readme_produced": true,
+  "readme_bytes": 2479,
+  "readme_lines": 65,
+  "usage": {
+    "totalPremiumRequestCost": 15,
+    "totalUserRequests": 1,
+    "totalNanoAiu": 49465250000,
+    "tokenDetails": {
+      "input": {
+        "tokenCount": 10
+      },
+      "cache_read": {
+        "tokenCount": 90090
+      },
+      "cache_write": {
+        "tokenCount": 25577
+      },
+      "output": {
+        "tokenCount": 1695
+      }
+    },
+    "totalApiDurationMs": 31185,
+    "sessionStartTime": "2026-09-18T01:19:13.374Z",
+    "codeChanges": {
+      "linesAdded": 65,
+      "linesRemoved": 0,
+      "filesModifiedCount": 1,
+      "filesModified": [
+        "/private/var/tmp/ws/5a19258c/hvir/README.md"
+      ]
+    },
+    "modelMetrics": {
+      "claude-fable-5": {
+        "requests": {
+          "count": 5,
+          "cost": 15
+        },
+        "usage": {
+          "inputTokens": 115677,
+          "outputTokens": 1695,
+          "cacheReadTokens": 90090,
+          "cacheWriteTokens": 25577,
+          "reasoningTokens": 76
+        },
+        "cacheExpiresAt": "2026-09-18T01:24:40.137Z",
+        "totalNanoAiu": 49465250000,
+        "tokenDetails": {
+          "input": {
+            "tokenCount": 10
+          },
+          "cache_read": {
+            "tokenCount": 90090
+          },
+          "cache_write": {
+            "tokenCount": 25577
+          },
+          "output": {
+            "tokenCount": 1695
+          }
+        }
+      }
+    },
+    "agentMetrics": {
+      "main": {
+        "totalApiDurationMs": 31185,
+        "totalNanoAiu": 49465250000,
+        "modelMetrics": {
+          "claude-fable-5": {
+            "requests": {
+              "count": 5,
+              "cost": 15
+            },
+            "usage": {
+              "inputTokens": 115677,
+              "outputTokens": 1695,
+              "cacheReadTokens": 90090,
+              "cacheWriteTokens": 25577,
+              "reasoningTokens": 76
+            },
+            "totalNanoAiu": 49465250000,
+            "tokenDetails": {
+              "input": {
+                "tokenCount": 10
+              },
+              "cache_read": {
+                "tokenCount": 90090
+              },
+              "cache_write": {
+                "tokenCount": 25577
+              },
+              "output": {
+                "tokenCount": 1695
+              }
+            }
+          }
+        }
+      }
+    },
+    "currentModel": "claude-fable-5",
+    "lastCallInputTokens": 25579,
+    "lastCallOutputTokens": 218
+  },
+  "tool_calls": {
+    "bash": 3,
+    "create": 1
+  },
+  "reasoning_level": "medium",
+  "chat_calls": {
+    "claude-fable-5": {
+      "medium": 5
+    }
+  },
+  "files_viewed": [],
+  "compactions": [],
+  "truncations": 0
+}

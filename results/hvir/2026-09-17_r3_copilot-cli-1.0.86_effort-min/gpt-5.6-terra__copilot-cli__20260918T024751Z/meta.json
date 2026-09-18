@@ -1,0 +1,226 @@
+{
+  "id": "gpt-5.6-terra__copilot-cli__20260918T024751Z",
+  "batch": "2026-09-17_r3_copilot-cli-1.0.86_effort-min",
+  "target": {
+    "name": "hvir",
+    "url": "https://github.com/jarmak-personal/hvir",
+    "commit": "7acbf8883bc869a9987252833d90b0d250086122",
+    "snapshot_commit": "ca97b8a72d67da22d5da4705101f99fbc80bd9cf"
+  },
+  "model": {
+    "id": "gpt-5.6-terra",
+    "vendor": "OpenAI",
+    "name": "GPT",
+    "version": "5.6",
+    "variant": "terra",
+    "display": "GPT-5.6 Terra"
+  },
+  "harness": {
+    "name": "GitHub Copilot CLI",
+    "id": "copilot-cli",
+    "version": "1.0.86"
+  },
+  "prompt": "Please create a README.md for this project.",
+  "started_at": "2026-09-18T02:48:03Z",
+  "finished_at": "2026-09-18T02:48:37Z",
+  "wall_clock_seconds": 34,
+  "exit_code": 0,
+  "setup_exit_code": 0,
+  "readme_produced": true,
+  "readme_bytes": 2515,
+  "readme_lines": 103,
+  "usage": {
+    "totalPremiumRequestCost": 1,
+    "totalUserRequests": 1,
+    "totalNanoAiu": 12414750000,
+    "tokenDetails": {
+      "input": {
+        "tokenCount": 13646
+      },
+      "cache_read": {
+        "tokenCount": 126592
+      },
+      "cache_write": {
+        "tokenCount": 32087
+      },
+      "output": {
+        "tokenCount": 2650
+      }
+    },
+    "totalApiDurationMs": 23867,
+    "sessionStartTime": "2026-09-18T02:48:06.334Z",
+    "codeChanges": {
+      "linesAdded": 104,
+      "linesRemoved": 0,
+      "filesModifiedCount": 1,
+      "filesModified": [
+        "/private/var/tmp/ws/5e9effac/hvir/README.md"
+      ]
+    },
+    "modelMetrics": {
+      "gpt-5.6-terra": {
+        "requests": {
+          "count": 6,
+          "cost": 1
+        },
+        "usage": {
+          "inputTokens": 146635,
+          "outputTokens": 1749,
+          "cacheReadTokens": 114530,
+          "cacheWriteTokens": 32087,
+          "reasoningTokens": 0
+        },
+        "cacheExpiresAt": "2026-09-18T03:18:36.052Z",
+        "totalNanoAiu": 12414750000,
+        "tokenDetails": {
+          "input": {
+            "tokenCount": 18
+          },
+          "cache_read": {
+            "tokenCount": 114530
+          },
+          "cache_write": {
+            "tokenCount": 32087
+          },
+          "output": {
+            "tokenCount": 1749
+          }
+        }
+      },
+      "copilot-search-a": {
+        "requests": {
+          "count": 3,
+          "cost": 0
+        },
+        "usage": {
+          "inputTokens": 25690,
+          "outputTokens": 901,
+          "cacheReadTokens": 12062,
+          "cacheWriteTokens": 0,
+          "reasoningTokens": 0
+        },
+        "totalNanoAiu": 0,
+        "tokenDetails": {
+          "input": {
+            "tokenCount": 13628
+          },
+          "cache_read": {
+            "tokenCount": 12062
+          },
+          "cache_write": {
+            "tokenCount": 0
+          },
+          "output": {
+            "tokenCount": 901
+          }
+        }
+      }
+    },
+    "agentMetrics": {
+      "main": {
+        "totalApiDurationMs": 20573,
+        "totalNanoAiu": 12414750000,
+        "modelMetrics": {
+          "gpt-5.6-terra": {
+            "requests": {
+              "count": 6,
+              "cost": 1
+            },
+            "usage": {
+              "inputTokens": 146635,
+              "outputTokens": 1749,
+              "cacheReadTokens": 114530,
+              "cacheWriteTokens": 32087,
+              "reasoningTokens": 0
+            },
+            "totalNanoAiu": 12414750000,
+            "tokenDetails": {
+              "input": {
+                "tokenCount": 18
+              },
+              "cache_read": {
+                "tokenCount": 114530
+              },
+              "cache_write": {
+                "tokenCount": 32087
+              },
+              "output": {
+                "tokenCount": 1749
+              }
+            }
+          }
+        }
+      },
+      "call_qotWqmLQlfMEUKnJU2oxMb1l": {
+        "agentName": "search-subagent",
+        "agentDisplayName": "Search Subagent",
+        "totalApiDurationMs": 3294,
+        "totalNanoAiu": 0,
+        "modelMetrics": {
+          "copilot-search-a": {
+            "requests": {
+              "count": 3,
+              "cost": 0
+            },
+            "usage": {
+              "inputTokens": 25690,
+              "outputTokens": 901,
+              "cacheReadTokens": 12062,
+              "cacheWriteTokens": 0,
+              "reasoningTokens": 0
+            },
+            "totalNanoAiu": 0,
+            "tokenDetails": {
+              "input": {
+                "tokenCount": 13628
+              },
+              "cache_read": {
+                "tokenCount": 12062
+              },
+              "cache_write": {
+                "tokenCount": 0
+              },
+              "output": {
+                "tokenCount": 901
+              }
+            }
+          }
+        }
+      }
+    },
+    "currentModel": "gpt-5.6-terra",
+    "lastCallInputTokens": 32090,
+    "lastCallOutputTokens": 72
+  },
+  "tool_calls": {
+    "read_file": 9,
+    "file_search": 7,
+    "grep_search": 2,
+    "bash": 4,
+    "glob": 1,
+    "search_code_subagent": 1,
+    "view": 6,
+    "rg": 3,
+    "apply_patch": 1
+  },
+  "reasoning_effort_requested": "none",
+  "reasoning_level": null,
+  "chat_calls": {
+    "copilot-search-a": {
+      "none": 6
+    },
+    "gpt-5.6-terra": {
+      "none": 1
+    }
+  },
+  "files_viewed": [
+    ".githooks/pre-push",
+    ".github/workflows/ci.yml",
+    "LICENSE",
+    "electron-builder.yml",
+    "package.json",
+    "scripts/install-git-hooks.sh"
+  ],
+  "compactions": [],
+  "truncations": 0
+}

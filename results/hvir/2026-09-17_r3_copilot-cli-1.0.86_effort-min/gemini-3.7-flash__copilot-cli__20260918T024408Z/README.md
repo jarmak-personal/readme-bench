@@ -1,0 +1,132 @@
+# hvir
+
+hvir is a fast, keyboard-driven developer workbench and terminal multiplexer built on Electron, React, and [Ghostty](https://github.com/ghostty-org/ghostty) WebAssembly. It brings together terminal sessions, multi-workspace orchestration, Git management, AI harness integrations, document reviews, and rich file previews in a single native application.
+
+---
+
+## Features
+
+- **High-Performance Terminal & Workspaces**
+  - WebAssembly-powered terminal emulation using Ghostty (`ghostty-web`).
+  - Terminal multiplexing with split panes, workspace collections, session recovery, and persistence.
+  - Native PTY management with process supervision, session isolation, and attention badges.
+
+- **Local & Remote Project Management**
+  - Seamless support for local directory workspaces and remote projects over SSH.
+  - Multi-project bar for fast switching between active repositories and worktrees.
+  - Project file navigation, external file moves, file search, and clipboard interactions.
+
+- **Integrated Git Tooling**
+  - Interactive Git changes panel, commit history inspection, and visual commit graph.
+  - Worktree management, branch switching, fetching, pulling, and mutation coordination.
+  - Built-in diff view with CodeMirror merge integration.
+
+- **AI Harness & Agent Integration**
+  - First-class support and profile management for CLI-based AI harnesses and assistants:
+    - Claude Code
+    - OpenAI Codex
+    - GitHub Copilot CLI
+    - Google Gemini CLI
+    - Pi
+    - Cursor
+    - Custom commands & plain shells
+  - Context telemetry, usage metrics tracking, launch menus, and session recovery.
+
+- **Document Review & Rich Previews**
+  - Interactive document review flow for staging, inspecting, and commenting on workspace changes.
+  - Rich file previews: Markdown (with KaTeX math and Mermaid diagrams), HTML previews with isolated sandboxing, images, CSVs, and syntax-highlighted code via Shiki.
+  - Embedded Web Panes for viewing local web services and dashboards.
+
+---
+
+## Prerequisites
+
+- **Node.js**: `>= 24`
+- **npm**: Compatible with Node.js 24
+- **C/C++ Build Toolchain**: `node-gyp` requirements (Python 3, Xcode Command Line Tools on macOS, or build-essential on Linux) for native bindings (`node-pty`, `@hvir/rename-noreplace`, `cpu-features`).
+
+---
+
+## Getting Started
+
+### 1. Install Dependencies
+
+```bash
+npm install
+```
+
+> **Note:** The post-install script automatically prepares the Electron runtime environment and compiles the native modules.
+
+### 2. Development
+
+Run the application in development mode with live reloading:
+
+```bash
+npm run dev
+```
+
+### 3. Verification & Testing
+
+Run all quality gates (type checking, linting, architecture rules, ADR checks, seam validation, and unit tests):
+
+```bash
+# Run full verification suite
+npm run verify
+
+# Run unit tests only
+npm test
+
+# Run tests in watch mode
+npm run test:watch
+
+# Typecheck TypeScript files
+npm run typecheck
+
+# Lint codebase
+npm run lint
+```
+
+### 4. Smoke Testing
+
+Run the automated smoke test suites:
+
+```bash
+npm run smoke
+```
+
+---
+
+## Building & Packaging
+
+Build production bundles and platform packages:
+
+```bash
+# Typecheck and compile renderer, preload, and main bundles
+npm run build
+
+# Package for macOS (Apple Silicon pkg)
+npm run pack:mac:arm64
+
+# Package for Linux (deb package)
+npm run pack:linux:x64
+npm run pack:linux:arm64
+```
+
+---
+
+## Architecture
+
+The project follows Electron's multi-process architecture with strict process isolation and security boundaries:
+
+- `src/main/`: Electron main process controlling application lifecycle, PTY supervision, native SSH transport, file system operations, window management, and harness telemetry.
+- `src/preload/`: Context bridge scripts exposing typed, secure IPC channels to the renderer.
+- `src/renderer/`: React 19 UI built with Vite, Tailwind/CSS, CodeMirror, and Ghostty WASM terminal views.
+- `src/shared/`: Shared TypeScript types, IPC protocols, contracts, and utility functions.
+- `src/workers/`: Dedicated background worker threads for intensive operations such as Git interactions.
+- `packages/rename-noreplace/`: Fast, atomic file rename Node-API native add-on.
+
+---
+
+## License
+
+This project is licensed under the [MIT License](LICENSE). Third-party open-source notices and component acknowledgments are documented in [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md).

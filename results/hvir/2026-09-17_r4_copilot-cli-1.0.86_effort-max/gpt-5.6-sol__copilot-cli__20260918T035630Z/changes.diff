@@ -1,0 +1,139 @@
+diff --git a/README.md b/README.md
+new file mode 100644
+index 0000000..a6bc95a
+--- /dev/null
++++ b/README.md
+@@ -0,0 +1,133 @@
++# hvir
++
++hvir is a desktop workbench for software projects and terminal-based coding
++agents. It keeps local or SSH-hosted workspaces, terminals, source review, and
++Git context together in one Electron application.
++
++## Features
++
++- **Local and remote workspaces** — open folders on the local machine or connect
++  through aliases in `~/.ssh/config`. hvir remembers projects, discovers Git
++  worktrees, and restores workspace state.
++- **Terminal workbench** — run native PTYs in tabs and split layouts with search,
++  configurable themes, attention indicators, and session recovery.
++- **Coding-agent harnesses** — create launch profiles for Claude Code, Codex,
++  Cursor CLI, Gemini CLI, GitHub Copilot CLI, Pi, a plain shell, or a custom
++  command. Profiles can be global or project-specific.
++- **Repository browser and viewer** — manage files and inspect them in source,
++  rendered, or diff modes. Rendered previews support Markdown, Mermaid, HTML,
++  JSON, YAML, CSV, and common image formats.
++- **Review workflow** — edit files, inspect blame and diffs, and capture inline
++  document-review feedback without leaving the workbench.
++- **Integrated Git tools** — browse changes, history, and the commit graph;
++  switch branches; fetch and pull; and move between related worktrees.
++- **Session overview** — monitor live terminal sessions across workspaces and
++  return directly to an exact session.
++- **Embedded web panes** — open loopback development services alongside the
++  terminal and source viewer.
++
++## Requirements
++
++- macOS or Linux
++- [Node.js](https://nodejs.org/) 24 or newer
++- npm and Git
++- Python and a C/C++ build toolchain supported by
++  [`node-gyp`](https://github.com/nodejs/node-gyp)
++
++The selected local or remote host must also contain any shell, Git installation,
++or coding-agent CLI that you want to use there.
++
++CI currently exercises Ubuntu 24.04 and macOS 15 on Apple silicon. Packaging is
++configured for macOS arm64 (`.pkg`) and Linux x64/arm64 (`.deb`); the repository
++does not currently define a Windows package target.
++
++## Getting started
++
++Install dependencies and start the development build:
++
++```bash
++npm ci
++npm run dev
++```
++
++`npm ci` downloads Electron and rebuilds the native terminal dependencies for
++Electron's ABI. On first launch, hvir asks you to choose a project folder.
++
++To select a local project at startup:
++
++```bash
++HVIR_PROJECT_ROOT=/absolute/path/to/project npm run dev
++```
++
++For a remote project, add a concrete host alias to `~/.ssh/config`, restart hvir,
++and choose that host from **Connect to a host**. hvir uses configured identity
++files or `SSH_AUTH_SOCK` and prompts for authentication or host trust when
++needed.
++
++## Development
++
++| Command | Purpose |
++| --- | --- |
++| `npm run dev` | Start Electron with Vite hot reload |
++| `npm run build` | Type-check and create a production build |
++| `npm run build:dir` | Create an unpacked application in `dist/` |
++| `npm test` | Run the Vitest unit suite |
++| `npm run test:watch` | Run Vitest in watch mode |
++| `npm run lint` | Run ESLint |
++| `npm run format:check` | Check formatting with Prettier |
++| `npm run verify` | Run architecture checks, linting, type checks, and unit tests |
++| `npm run smoke` | Build and run the full Electron smoke suite |
++| `npm run smoke:macos` | Run the macOS-focused Electron smoke suite |
++
++Electron smoke tests need a graphical session. In a headless Linux environment,
++run them through Xvfb:
++
++```bash
++xvfb-run -a npm run smoke
++```
++
++Optional repository hooks run type checks and the platform-appropriate Electron
++smoke suite before each push:
++
++```bash
++npm run hooks:install
++```
++
++## Packaging
++
++Package artifacts are written to `dist/`:
++
++```bash
++# macOS arm64 installer
++npm run pack:mac:arm64
++
++# Debian packages
++npm run pack:linux:x64
++npm run pack:linux:arm64
++```
++
++The signed macOS workflow requires the release signing and notarization
++credentials used by the project maintainers.
++
++## Architecture
++
++hvir separates privileged host operations from its web UI:
++
++```text
++src/
++├── main/       Electron main process: projects, SSH, PTYs, Git, persistence
++├── preload/    Typed, constrained IPC bridge exposed to the renderer
++├── renderer/   React workbench, terminals, viewers, Git, and settings
++├── shared/     Cross-process contracts, types, and policies
++└── workers/    Utility-process workers for isolated background work
++```
++
++Renderer workers handle expensive presentation tasks such as syntax
++highlighting and structured-data parsing. Main-process utility workers keep Git
++and other host operations away from the UI thread. Tests live in `test/`, while
++release, architecture, and smoke-test automation lives in `scripts/`.
++
++## License
++
++hvir is available under the [MIT License](LICENSE). Third-party attributions are
++listed in [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md).

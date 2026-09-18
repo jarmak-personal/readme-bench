@@ -1,0 +1,98 @@
+diff --git a/README.md b/README.md
+new file mode 100644
+index 0000000..3a36d5f
+--- /dev/null
++++ b/README.md
+@@ -0,0 +1,92 @@
++# hvir
++
++A lightweight, view-first workbench for agentic development.
++
++hvir is an Electron desktop application that brings terminals, agent sessions, git, and
++document review into a single fast workspace. It is built around a view-first philosophy:
++the UI projects live state from authoritative main-process/worker services, so the
++renderer stays a thin, recoverable presentation layer.
++
++## Features
++
++- **Terminal workspaces** — GPU-accelerated terminal rendering via
++  [ghostty-web](https://github.com/jarmak-personal/ghostty-web) backed by `node-pty`,
++  with split panes, search, semantic navigation, themes, clipboard integration, and
++  session recovery.
++- **Agent session management** — launch and observe agent harnesses (e.g. Claude,
++  Codex) with profiles, telemetry, usage tracking, and a sessions overview.
++- **Git integration** — workspace status, graph layout, commit details, diffs, blame,
++  staging, and guarded mutations executed in dedicated worker hosts.
++- **Remote workspaces over SSH** — connect to remote hosts with SSH config parsing,
++  host trust/identity management, and transport pooling.
++- **Document viewing & review** — markdown rendering (with Mermaid diagrams and
++  syntax highlighting via Shiki), CodeMirror-based source and merge views, and a
++  document-review workflow.
++- **Multi-project workbench** — a project registry with drag organization, watchers,
++  per-project workspaces, and attention/activity indicators.
++- **Diagnostics & health** — built-in diagnostic reporting with evidence masking and
++  workbench health monitoring.
++
++## Tech stack
++
++- **Electron 43** with **electron-vite** (main / preload / renderer / workers)
++- **React 19** + TypeScript renderer
++- **ghostty-web**, **node-pty**, **ssh2**, **CodeMirror 6**, **markdown-it**,
++  **Mermaid**, **Shiki**
++- **Vitest** (+ Stryker mutation testing), **ESLint**, **Prettier**
++
++## Requirements
++
++- Node.js **>= 24**
++- macOS (arm64) and Linux (x64/arm64) packaging targets
++
++## Getting started
++
++```sh
++npm install        # also rebuilds native modules (node-pty) via postinstall
++npm run dev        # start in development mode
++```
++
++## Common scripts
++
++| Command | Description |
++| --- | --- |
++| `npm run dev` | Run the app in development mode |
++| `npm run build` | Typecheck and build with electron-vite |
++| `npm test` / `npm run test:watch` | Run the Vitest suite |
++| `npm run lint` / `npm run format` | Lint / format the codebase |
++| `npm run typecheck` | Typecheck node and web tsconfigs |
++| `npm run verify` | Full local gate: seams, ADRs, architecture, lint, typecheck, tests |
++| `npm run smoke` | Build in smoke mode and run smoke scenarios |
++| `npm run pack:mac:arm64` | Package a macOS (arm64) `.pkg` |
++| `npm run pack:linux:x64` / `:arm64` | Package a Linux `.deb` |
++
++See `package.json` for the full list, including SSH acceptance tests, release
++assembly, and project-management tooling.
++
++## Project structure
++
++```
++src/
++  main/       Electron main process: PTY, git, SSH, sessions, IPC authority
++  preload/    Preload bridges
++  renderer/   React UI (terminal, viewer, git, sessions, settings, workbench)
++  shared/     Types and contracts shared across processes
++  workers/    Worker hosts (e.g. git engine)
++packages/
++  rename-noreplace/  Native helper for no-replace renames
++scripts/      Build, release, smoke, architecture, and project-management tooling
++test/         Vitest unit/integration tests
++```
++
++## Contributing
++
++- Run `npm run hooks:install` to install the git hooks in `.githooks/`.
++- Before opening a PR, run `npm run verify` — it enforces architecture seams,
++  ADR checks, lint, typecheck, and the test suite.
++- Architectural decisions are recorded as ADRs and checked with `npm run check-adrs`.
++
++## License
++
++[MIT](LICENSE). See [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md) for bundled
++third-party licenses.

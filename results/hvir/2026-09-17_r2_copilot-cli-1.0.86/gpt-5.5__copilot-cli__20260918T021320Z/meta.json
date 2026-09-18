@@ -1,0 +1,159 @@
+{
+  "id": "gpt-5.5__copilot-cli__20260918T021320Z",
+  "batch": "2026-09-17_r2_copilot-cli-1.0.86",
+  "target": {
+    "name": "hvir",
+    "url": "https://github.com/jarmak-personal/hvir",
+    "commit": "7acbf8883bc869a9987252833d90b0d250086122",
+    "snapshot_commit": "ca97b8a72d67da22d5da4705101f99fbc80bd9cf"
+  },
+  "model": {
+    "id": "gpt-5.5",
+    "vendor": "OpenAI",
+    "name": "GPT",
+    "version": "5.5",
+    "variant": null,
+    "display": "GPT-5.5"
+  },
+  "harness": {
+    "name": "GitHub Copilot CLI",
+    "id": "copilot-cli",
+    "version": "1.0.86"
+  },
+  "prompt": "Please create a README.md for this project.",
+  "started_at": "2026-09-18T02:13:31Z",
+  "finished_at": "2026-09-18T02:14:06Z",
+  "wall_clock_seconds": 35,
+  "exit_code": 0,
+  "setup_exit_code": 0,
+  "readme_produced": true,
+  "readme_bytes": 4600,
+  "readme_lines": 122,
+  "usage": {
+    "totalPremiumRequestCost": 7.5,
+    "totalUserRequests": 1,
+    "totalNanoAiu": 39488900000,
+    "tokenDetails": {
+      "input": {
+        "tokenCount": 40761
+      },
+      "cache_read": {
+        "tokenCount": 222208
+      },
+      "cache_write": {
+        "tokenCount": 0
+      },
+      "output": {
+        "tokenCount": 2666
+      }
+    },
+    "totalApiDurationMs": 29375,
+    "sessionStartTime": "2026-09-18T02:13:34.373Z",
+    "codeChanges": {
+      "linesAdded": 123,
+      "linesRemoved": 0,
+      "filesModifiedCount": 1,
+      "filesModified": [
+        "/private/var/tmp/ws/7887edc0/hvir/README.md"
+      ]
+    },
+    "modelMetrics": {
+      "gpt-5.5": {
+        "requests": {
+          "count": 9,
+          "cost": 7.5
+        },
+        "usage": {
+          "inputTokens": 262969,
+          "outputTokens": 2666,
+          "cacheReadTokens": 222208,
+          "cacheWriteTokens": 0,
+          "reasoningTokens": 262
+        },
+        "cacheExpiresAt": "2026-09-18T02:44:04.548Z",
+        "totalNanoAiu": 39488900000,
+        "tokenDetails": {
+          "input": {
+            "tokenCount": 40761
+          },
+          "cache_read": {
+            "tokenCount": 222208
+          },
+          "cache_write": {
+            "tokenCount": 0
+          },
+          "output": {
+            "tokenCount": 2666
+          }
+        }
+      }
+    },
+    "agentMetrics": {
+      "main": {
+        "totalApiDurationMs": 29375,
+        "totalNanoAiu": 39488900000,
+        "modelMetrics": {
+          "gpt-5.5": {
+            "requests": {
+              "count": 9,
+              "cost": 7.5
+            },
+            "usage": {
+              "inputTokens": 262969,
+              "outputTokens": 2666,
+              "cacheReadTokens": 222208,
+              "cacheWriteTokens": 0,
+              "reasoningTokens": 262
+            },
+            "totalNanoAiu": 39488900000,
+            "tokenDetails": {
+              "input": {
+                "tokenCount": 40761
+              },
+              "cache_read": {
+                "tokenCount": 222208
+              },
+              "cache_write": {
+                "tokenCount": 0
+              },
+              "output": {
+                "tokenCount": 2666
+              }
+            }
+          }
+        }
+      }
+    },
+    "currentModel": "gpt-5.5",
+    "lastCallInputTokens": 36454,
+    "lastCallOutputTokens": 78
+  },
+  "tool_calls": {
+    "rg": 1,
+    "glob": 5,
+    "view": 11,
+    "bash": 4,
+    "apply_patch": 1
+  },
+  "reasoning_level": "medium",
+  "chat_calls": {
+    "gpt-5.5": {
+      "medium": 9
+    }
+  },
+  "files_viewed": [
+    ".github/workflows/ci.yml",
+    ".prettierrc.json",
+    "electron-builder.json",
+    "electron-builder.yml",
+    "electron.vite.config.ts",
+    "package.json",
+    "packages/rename-noreplace/package.json",
+    "src/main/index.ts",
+    "src/renderer/src/App.tsx",
+    "src/shared/index.ts",
+    "vite.config.ts"
+  ],
+  "compactions": [],
+  "truncations": 0
+}

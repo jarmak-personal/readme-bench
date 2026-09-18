@@ -1,0 +1,163 @@
+{
+  "totalPremiumRequestCost": 1,
+  "totalUserRequests": 1,
+  "totalNanoAiu": 12921720000,
+  "tokenDetails": {
+    "input": {
+      "tokenCount": 19353
+    },
+    "cache_read": {
+      "tokenCount": 140762
+    },
+    "cache_write": {
+      "tokenCount": 32348
+    },
+    "output": {
+      "tokenCount": 3429
+    }
+  },
+  "totalApiDurationMs": 31025,
+  "sessionStartTime": "2026-09-17T23:00:22.687Z",
+  "codeChanges": {
+    "linesAdded": 105,
+    "linesRemoved": 0,
+    "filesModifiedCount": 1,
+    "filesModified": [
+      "/private/var/tmp/ws/6e07c127/hvir/README.md"
+    ]
+  },
+  "modelMetrics": {
+    "gpt-5.6-terra": {
+      "requests": {
+        "count": 6,
+        "cost": 1
+      },
+      "usage": {
+        "inputTokens": 145522,
+        "outputTokens": 2140,
+        "cacheReadTokens": 113156,
+        "cacheWriteTokens": 32348,
+        "reasoningTokens": 198
+      },
+      "cacheExpiresAt": "2026-09-17T23:30:54.186Z",
+      "totalNanoAiu": 12921720000,
+      "tokenDetails": {
+        "input": {
+          "tokenCount": 18
+        },
+        "cache_read": {
+          "tokenCount": 113156
+        },
+        "cache_write": {
+          "tokenCount": 32348
+        },
+        "output": {
+          "tokenCount": 2140
+        }
+      }
+    },
+    "copilot-search-a": {
+      "requests": {
+        "count": 4,
+        "cost": 0
+      },
+      "usage": {
+        "inputTokens": 46941,
+        "outputTokens": 1289,
+        "cacheReadTokens": 27606,
+        "cacheWriteTokens": 0,
+        "reasoningTokens": 0
+      },
+      "totalNanoAiu": 0,
+      "tokenDetails": {
+        "input": {
+          "tokenCount": 19335
+        },
+        "cache_read": {
+          "tokenCount": 27606
+        },
+        "cache_write": {
+          "tokenCount": 0
+        },
+        "output": {
+          "tokenCount": 1289
+        }
+      }
+    }
+  },
+  "agentMetrics": {
+    "main": {
+      "totalApiDurationMs": 26121,
+      "totalNanoAiu": 12921720000,
+      "modelMetrics": {
+        "gpt-5.6-terra": {
+          "requests": {
+            "count": 6,
+            "cost": 1
+          },
+          "usage": {
+            "inputTokens": 145522,
+            "outputTokens": 2140,
+            "cacheReadTokens": 113156,
+            "cacheWriteTokens": 32348,
+            "reasoningTokens": 198
+          },
+          "totalNanoAiu": 12921720000,
+          "tokenDetails": {
+            "input": {
+              "tokenCount": 18
+            },
+            "cache_read": {
+              "tokenCount": 113156
+            },
+            "cache_write": {
+              "tokenCount": 32348
+            },
+            "output": {
+              "tokenCount": 2140
+            }
+          }
+        }
+      }
+    },
+    "call_bC0eY81e7eL9F9Vx1XDXKS4d": {
+      "agentName": "search-subagent",
+      "agentDisplayName": "Search Subagent",
+      "totalApiDurationMs": 4904,
+      "totalNanoAiu": 0,
+      "modelMetrics": {
+        "copilot-search-a": {
+          "requests": {
+            "count": 4,
+            "cost": 0
+          },
+          "usage": {
+            "inputTokens": 46941,
+            "outputTokens": 1289,
+            "cacheReadTokens": 27606,
+            "cacheWriteTokens": 0,
+            "reasoningTokens": 0
+          },
+          "totalNanoAiu": 0,
+          "tokenDetails": {
+            "input": {
+              "tokenCount": 19335
+            },
+            "cache_read": {
+              "tokenCount": 27606
+            },
+            "cache_write": {
+              "tokenCount": 0
+            },
+            "output": {
+              "tokenCount": 1289
+            }
+          }
+        }
+      }
+    }
+  },
+  "currentModel": "gpt-5.6-terra",
+  "lastCallInputTokens": 32351,
+  "lastCallOutputTokens": 52
+}

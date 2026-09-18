@@ -1,0 +1,89 @@
+{
+  "totalPremiumRequestCost": 1,
+  "totalUserRequests": 1,
+  "totalNanoAiu": 36772800000,
+  "tokenDetails": {
+    "input": {
+      "tokenCount": 90351
+    },
+    "cache_read": {
+      "tokenCount": 324096
+    },
+    "output": {
+      "tokenCount": 4163
+    }
+  },
+  "totalApiDurationMs": 81120,
+  "sessionStartTime": "2026-09-17T22:45:23.822Z",
+  "codeChanges": {
+    "linesAdded": 87,
+    "linesRemoved": 0,
+    "filesModifiedCount": 1,
+    "filesModified": [
+      "/private/var/tmp/ws/34099a0b/hvir/README.md"
+    ]
+  },
+  "modelMetrics": {
+    "grok-4.6": {
+      "requests": {
+        "count": 13,
+        "cost": 1
+      },
+      "usage": {
+        "inputTokens": 414447,
+        "outputTokens": 4163,
+        "cacheReadTokens": 324096,
+        "cacheWriteTokens": 0,
+        "reasoningTokens": 1116
+      },
+      "totalNanoAiu": 36772800000,
+      "tokenDetails": {
+        "input": {
+          "tokenCount": 90351
+        },
+        "cache_read": {
+          "tokenCount": 324096
+        },
+        "output": {
+          "tokenCount": 4163
+        }
+      }
+    }
+  },
+  "agentMetrics": {
+    "main": {
+      "totalApiDurationMs": 81120,
+      "totalNanoAiu": 36772800000,
+      "modelMetrics": {
+        "grok-4.6": {
+          "requests": {
+            "count": 13,
+            "cost": 1
+          },
+          "usage": {
+            "inputTokens": 414447,
+            "outputTokens": 4163,
+            "cacheReadTokens": 324096,
+            "cacheWriteTokens": 0,
+            "reasoningTokens": 1116
+          },
+          "totalNanoAiu": 36772800000,
+          "tokenDetails": {
+            "input": {
+              "tokenCount": 90351
+            },
+            "cache_read": {
+              "tokenCount": 324096
+            },
+            "output": {
+              "tokenCount": 4163
+            }
+          }
+        }
+      }
+    }
+  },
+  "currentModel": "grok-4.6",
+  "lastCallInputTokens": 42717,
+  "lastCallOutputTokens": 54
+}

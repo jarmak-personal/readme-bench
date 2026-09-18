@@ -1,0 +1,78 @@
+# hvir
+
+hvir is a desktop developer workbench built with Electron, React, and TypeScript. It combines a GPU-accelerated terminal (powered by [ghostty-web](https://github.com/jarmak-personal/ghostty-web) and `node-pty`) with workspace/project management, document viewing and review, Git integration, SSH remote hosts, and web panes in a single application.
+
+## Features
+
+- **Terminals** — native PTY-backed terminals with splitting, theming, and lifecycle management
+- **Workspaces & projects** — organize folders into projects, with file watching, file operations, and filename search
+- **Document viewer & review** — Markdown rendering (markdown-it, Mermaid), syntax highlighting (Shiki), and CodeMirror-based merge/diff review
+- **Git integration** — in-app Git workflow support
+- **Remote hosts over SSH** — connect to and work on remote machines (`ssh2`, SSH config parsing)
+- **Web panes & HTML preview** — embedded browsing alongside your work
+- **Sessions** — persistent session state and projections across restarts
+
+## Requirements
+
+- Node.js >= 24
+- npm
+- A C/C++ toolchain for native modules (`node-gyp` rebuilds `node-pty` and `@hvir/rename-noreplace` during install)
+
+## Getting started
+
+```sh
+npm install   # also rebuilds native modules against Electron's ABI
+npm run dev   # start in development mode (electron-vite dev)
+```
+
+To build a production bundle:
+
+```sh
+npm run build        # typecheck + electron-vite build
+npm run preview      # preview the production build
+```
+
+## Packaging
+
+Packages are produced with electron-builder:
+
+```sh
+npm run pack:mac:arm64          # macOS .pkg (Apple Silicon)
+npm run pack:mac:arm64:signed   # macOS .pkg with code signing
+npm run pack:linux:x64          # Linux .deb (x64)
+npm run pack:linux:arm64        # Linux .deb (ARM64)
+npm run build:dir               # unpacked directory build
+```
+
+## Testing and quality
+
+```sh
+npm test                # unit tests (vitest)
+npm run test:mutation   # mutation testing (Stryker)
+npm run lint            # ESLint
+npm run typecheck       # TypeScript (node + web configs)
+npm run smoke           # smoke scenario suite against a smoke build
+npm run verify          # seams + ADR + architecture checks, lint, typecheck, tests
+```
+
+Additional harnesses: SSH acceptance tests (`npm run acceptance:ssh:macos`), installed-package smoke tests (`smoke:macos:installed`, `smoke:linux:installed`), and capacity/performance gates (`smoke:capacity`, `performance:capacity`).
+
+## Project structure
+
+```
+src/main/       Electron main process (runtime, IPC, pty, sessions, git, viewer, ...)
+src/preload/    Preload scripts bridging main and renderer
+src/renderer/   React renderer UI
+packages/       Local packages (e.g. @hvir/rename-noreplace native module)
+scripts/        Build, release, smoke-test, and project-management tooling
+test/           Vitest unit tests
+build/          electron-builder resources (icons, native command helper)
+```
+
+## Contributing
+
+Install the git hooks with `npm run hooks:install`, and run `npm run verify` before submitting changes. Architecture decision records and seam/architecture policies are enforced by `check-adrs`, `check-seams`, and `architecture:check`.
+
+## License
+
+[MIT](LICENSE) — see also [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md).

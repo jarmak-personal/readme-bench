@@ -1,0 +1,180 @@
+{
+  "id": "grok-4.6__copilot-cli__20260917T224507Z",
+  "batch": "2026-09-17_r1_copilot-cli-1.0.85-86_manifest-metadata-present",
+  "target": {
+    "name": "hvir",
+    "url": "https://github.com/jarmak-personal/hvir",
+    "commit": "7acbf8883bc869a9987252833d90b0d250086122",
+    "snapshot_commit": "d0f14c79c0a66f2738ff427583d5561ce3ca52a3"
+  },
+  "model": {
+    "id": "grok-4.6",
+    "vendor": "xAI",
+    "name": "Grok",
+    "version": "4.6",
+    "variant": null,
+    "display": "Grok 4.6"
+  },
+  "harness": {
+    "name": "GitHub Copilot CLI",
+    "id": "copilot-cli",
+    "version": "1.0.85"
+  },
+  "prompt": "Please create a README.md for this project.",
+  "started_at": "2026-09-17T22:45:20Z",
+  "finished_at": "2026-09-17T22:46:46Z",
+  "wall_clock_seconds": 86,
+  "exit_code": 0,
+  "setup_exit_code": 0,
+  "readme_produced": true,
+  "readme_bytes": 3341,
+  "readme_lines": 87,
+  "usage": {
+    "totalPremiumRequestCost": 1,
+    "totalUserRequests": 1,
+    "totalNanoAiu": 36772800000,
+    "tokenDetails": {
+      "input": {
+        "tokenCount": 90351
+      },
+      "cache_read": {
+        "tokenCount": 324096
+      },
+      "output": {
+        "tokenCount": 4163
+      }
+    },
+    "totalApiDurationMs": 81120,
+    "sessionStartTime": "2026-09-17T22:45:23.822Z",
+    "codeChanges": {
+      "linesAdded": 87,
+      "linesRemoved": 0,
+      "filesModifiedCount": 1,
+      "filesModified": [
+        "/private/var/tmp/ws/34099a0b/hvir/README.md"
+      ]
+    },
+    "modelMetrics": {
+      "grok-4.6": {
+        "requests": {
+          "count": 13,
+          "cost": 1
+        },
+        "usage": {
+          "inputTokens": 414447,
+          "outputTokens": 4163,
+          "cacheReadTokens": 324096,
+          "cacheWriteTokens": 0,
+          "reasoningTokens": 1116
+        },
+        "totalNanoAiu": 36772800000,
+        "tokenDetails": {
+          "input": {
+            "tokenCount": 90351
+          },
+          "cache_read": {
+            "tokenCount": 324096
+          },
+          "output": {
+            "tokenCount": 4163
+          }
+        }
+      }
+    },
+    "agentMetrics": {
+      "main": {
+        "totalApiDurationMs": 81120,
+        "totalNanoAiu": 36772800000,
+        "modelMetrics": {
+          "grok-4.6": {
+            "requests": {
+              "count": 13,
+              "cost": 1
+            },
+            "usage": {
+              "inputTokens": 414447,
+              "outputTokens": 4163,
+              "cacheReadTokens": 324096,
+              "cacheWriteTokens": 0,
+              "reasoningTokens": 1116
+            },
+            "totalNanoAiu": 36772800000,
+            "tokenDetails": {
+              "input": {
+                "tokenCount": 90351
+              },
+              "cache_read": {
+                "tokenCount": 324096
+              },
+              "output": {
+                "tokenCount": 4163
+              }
+            }
+          }
+        }
+      }
+    },
+    "currentModel": "grok-4.6",
+    "lastCallInputTokens": 42717,
+    "lastCallOutputTokens": 54
+  },
+  "tool_calls": {
+    "view": 43,
+    "glob": 7,
+    "grep": 4,
+    "create": 1
+  },
+  "reasoning_level": "medium",
+  "chat_calls": {
+    "grok-4.6": {
+      "medium": 13
+    }
+  },
+  "files_viewed": [
+    ".",
+    ".githooks",
+    ".github",
+    ".github/ISSUE_TEMPLATE",
+    ".github/ISSUE_TEMPLATE/config.yml",
+    ".github/workflows",
+    ".gitignore",
+    "LICENSE",
+    "THIRD_PARTY_NOTICES.md",
+    "docs",
+    "electron-builder.yml",
+    "electron.vite.config.ts",
+    "eslint.config.mjs",
+    "package.json",
+    "packages",
+    "packages/rename-noreplace",
+    "scripts/check-adrs.mjs",
+    "scripts/check-seams.sh",
+    "scripts/install-git-hooks.sh",
+    "src",
+    "src/main",
+    "src/main/document-review/document-review-application.ts",
+    "src/main/git",
+    "src/main/harness/bundled-harness-providers.ts",
+    "src/main/harness/harness-provider.ts",
+    "src/main/harness/providers/claude-code.ts",
+    "src/main/index.ts",
+    "src/main/sessions/sessions-observation-application.ts",
+    "src/main/window/window-policy.ts",
+    "src/renderer",
+    "src/renderer/src/App.tsx",
+    "src/renderer/src/git/GitPanel.tsx",
+    "src/renderer/src/settings/SettingsDialog.tsx",
+    "src/renderer/src/settings/settings-navigation.ts",
+    "src/renderer/src/viewer",
+    "src/renderer/src/workspaces/SessionDialog.tsx",
+    "src/shared/harness-provider.ts",
+    "src/shared/index.ts",
+    "src/shared/keybindings.ts",
+    "src/shared/viewer-types.ts",
+    "src/shared/workspace-types.ts",
+    "src/workers",
+    "tsconfig.json"
+  ],
+  "compactions": [],
+  "truncations": 0
+}

@@ -1,0 +1,111 @@
+diff --git a/README.md b/README.md
+new file mode 100644
+index 0000000..944b67d
+--- /dev/null
++++ b/README.md
+@@ -0,0 +1,105 @@
++# hvir
++
++**hvir** is a lightweight, view-first workbench for agentic development. It is an Electron desktop app built with TypeScript and React that brings together project navigation, terminals, Git context, SSH-backed workspaces, and provider-aware agent harnesses in a single interface.
++
++## What it does
++
++hvir is organized around working on code without constantly switching tools:
++
++- **Workspace catalog** for local folders and SSH-backed projects, including Git worktree-aware project state.
++- **Terminal workspaces** with recovery, layout controls, search, theming, attention tracking, and session persistence.
++- **File browsing and viewing** with tree navigation, tabs, split views, source/rendered/diff modes, search, and large-file handling.
++- **Git surfaces** for status, history, commit details, branch switching, fetch/pull, and graph views.
++- **Web panes and previews** for embedded browser workflows and HTML preview routes.
++- **Document review flows** that coordinate review drafting and delivery inside the workbench.
++- **Sessions and usage views** for observing harness/session activity.
++- **Harness profiles** for tools such as Claude Code, Codex, Gemini CLI, GitHub Copilot CLI, Cursor CLI, Pi, Shell, and custom commands.
++- **Diagnostics and reporting** for runtime health and packaged-app troubleshooting.
++
++## Stack
++
++- **Electron** for the desktop shell
++- **React** for the renderer UI
++- **TypeScript** across main, preload, renderer, scripts, and tests
++- **Vite / electron-vite** for development and bundling
++- **Vitest** for unit and integration-style tests
++
++## Requirements
++
++- **Node.js 24+**
++- **npm**
++- A local toolchain capable of building native Node modules during install (`node-gyp`, `node-pty`, and the local `@hvir/rename-noreplace` package are rebuilt as part of setup)
++
++## Getting started
++
++Install dependencies and rebuild the Electron-native pieces:
++
++```bash
++npm install
++```
++
++Start the app in development mode:
++
++```bash
++npm run dev
++```
++
++Build the app:
++
++```bash
++npm run build
++```
++
++You can also point hvir at a specific project root when launching through Electron/package entrypoints:
++
++```bash
++--project-root=/path/to/project
++```
++
++or by setting:
++
++```bash
++HVIR_PROJECT_ROOT=/path/to/project
++```
++
++## Useful scripts
++
++| Command | Purpose |
++|---|---|
++| `npm run dev` | Start the Electron app in development mode |
++| `npm run build` | Run type-checking and create a production build |
++| `npm run typecheck` | Run TypeScript checks for main/preload and renderer |
++| `npm run lint` | Run ESLint |
++| `npm test` | Run the Vitest suite |
++| `npm run verify` | Run seams, ADR checks, architecture checks, lint, typecheck, and tests |
++| `npm run smoke` | Run the main smoke scenario suite against a smoke build |
++| `npm run build:dir` | Build and assemble an unpacked app directory |
++| `npm run pack:mac:arm64` | Build and package a macOS installer |
++| `npm run pack:linux:x64` | Build and package a Linux `.deb` |
++
++There are also focused maintenance and release scripts under `scripts/`, including architecture checks, project-management helpers, native release assembly, and platform-specific smoke/acceptance flows.
++
++## Project layout
++
++| Path | Responsibility |
++|---|---|
++| `src/main` | Electron main-process runtime, IPC, Git, PTY, SSH, diagnostics, sessions, document review |
++| `src/preload` | Preload bridge exposed to the renderer |
++| `src/renderer` | React UI, styles, workbench surfaces, settings, Git views, sessions, terminals |
++| `src/shared` | Shared contracts, types, and cross-process protocol definitions |
++| `scripts` | Build, release, smoke, architecture, and repository automation |
++| `test` | Vitest coverage for runtime, UI behavior, workflows, and smoke helpers |
++| `build` | Packaging assets and platform-specific installer resources |
++
++## Packaging notes
++
++The repository is configured to produce:
++
++- **macOS pkg** builds
++- **Linux deb** builds
++
++Electron Builder configuration lives in `electron-builder.yml`, and Electron/Vite build wiring lives in `electron.vite.config.ts`.
++
++## License
++
++[MIT](./LICENSE)

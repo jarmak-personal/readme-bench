@@ -1,0 +1,120 @@
+# hvir
+
+hvir is a desktop workbench for running AI coding harnesses (Claude Code, Codex,
+GitHub Copilot, Gemini, Cursor, Pi, or any custom command) alongside the files,
+diffs, and git history they touch. It is built on Electron, React, and a
+Ghostty-powered terminal, and runs projects on the local machine or over SSH.
+
+## Features
+
+- **Harness-aware terminals** – Launch bundled or custom harness profiles in
+  split and tabbed terminal workspaces. Session discovery, context/usage
+  telemetry, keybinding integration, and session recovery are provided for
+  supported harnesses.
+- **Ghostty terminal engine** – Terminals render through `ghostty-web` with
+  synchronized output, retained scrollback, semantic regions, file-link
+  detection, search, theme gallery, and a host-owned context menu.
+- **Project workbench** – File tree with git status, tabbed file viewer with
+  syntax highlighting (Shiki/CodeMirror), Markdown/Mermaid rendering, CSV and
+  JSON viewers, large-file mode, and side-by-side diffs.
+- **Git panel** – Working-tree changes, commit history, branch graph, commit
+  details, and branch/sync controls.
+- **Document review** – Review documents and deliver feedback directly into a
+  harness terminal.
+- **Remote projects over SSH** – Open a project on a remote host using your
+  `~/.ssh/config`; file access, watching, transfers, and terminals are
+  transparently proxied with host-trust prompts.
+- **Web panes** – Embed browser dashboards next to your terminals.
+- **Diagnostics** – Built-in diagnostic reports, health checks, and process
+  metrics.
+
+## Requirements
+
+- Node.js >= 24
+- A C/C++ toolchain for native modules (`node-pty`, `@hvir/rename-noreplace`)
+  – Xcode Command Line Tools on macOS, `build-essential` on Linux
+- Linux only: `xvfb-run` is needed to run the Electron smoke suite headlessly
+
+## Getting started
+
+```bash
+npm ci          # installs dependencies and rebuilds native modules for Electron
+npm run dev     # start hvir with hot reload
+```
+
+`npm ci` runs `install:runtime`, which downloads Electron and rebuilds
+`node-pty` and `@hvir/rename-noreplace` against Electron's ABI. `dev` and
+`build` first verify the installed `ghostty-web` runtime exposes the required
+terminal capabilities; if that check fails, re-run `npm ci`.
+
+## Scripts
+
+| Command | Purpose |
+| --- | --- |
+| `npm run dev` | Run the app in development mode |
+| `npm run build` | Type-check and build production bundles |
+| `npm run typecheck` | Type-check main/preload (`tsconfig.node.json`) and renderer (`tsconfig.web.json`) |
+| `npm run lint` | ESLint (includes architectural seam rules) |
+| `npm run format` / `format:check` | Prettier |
+| `npm test` / `npm run test:watch` | Vitest unit tests (`test/`) |
+| `npm run test:mutation` | Stryker mutation testing |
+| `npm run check-seams` | Grep-level enforcement of process/module boundaries |
+| `npm run check-adrs` | Validate architecture decision records |
+| `npm run architecture:check` | Enforce module-graph hotspot budgets |
+| `npm run verify` | Everything CI runs: seams, ADRs, architecture, lint, typecheck, tests |
+| `npm run smoke` | Build in smoke mode and run the end-to-end Electron scenarios |
+| `npm run smoke:scenario -- <name>` | Run a single smoke scenario |
+| `npm run hooks:install` | Install the pre-push hook (typecheck + local smoke) |
+
+## Packaging
+
+| Command | Output |
+| --- | --- |
+| `npm run pack:mac:arm64` | macOS `.pkg` (arm64), installs to `/Applications` |
+| `npm run pack:mac:arm64:signed` | Same, with code signing enforced |
+| `npm run pack:linux:x64` / `pack:linux:arm64` | Debian `.deb` with AppArmor profile |
+| `npm run build:dir` | Unpacked directory build for inspection |
+
+Packages install an `hvir` command-line launcher (`build/native/hvir-command`)
+and ship `THIRD_PARTY_NOTICES.md`. Installed packages can be exercised with
+`npm run smoke:linux:installed` / `smoke:macos:installed`.
+
+## Project layout
+
+```
+src/
+  main/       Electron main process: project hosts (local + SSH), PTY supervisor,
+              harness providers, git, sessions, document review, IPC, windows
+  preload/    The only place ipcRenderer is used; exposes the bridge to the renderer
+  renderer/   React UI: terminal workspaces, file tree, viewer, git panel, settings
+  shared/     Types and pure contracts shared across processes
+  workers/    Worker-host entry points
+packages/
+  rename-noreplace/   Native addon for atomic exclusive file creation
+scripts/      Build, release, smoke, architecture, and project-management tooling
+test/         Vitest suites
+build/        Icons, entitlements, Linux/macOS installer scripts, native launcher
+```
+
+### Architectural seams
+
+The codebase enforces a few hard boundaries (via ESLint rules and
+`scripts/check-seams.sh`):
+
+- `ipcRenderer` is used only in `src/preload/`.
+- Host primitives (`fs`, `child_process`, `chokidar`, `node-pty`) live behind
+  the `ProjectHost` abstraction so local and SSH projects share one contract.
+- Harness providers are assembled explicitly in
+  `src/main/harness/bundled-harness-providers.ts`; providers contribute data,
+  never UI.
+
+## Contributing
+
+Run `npm run verify` before opening a pull request; CI runs the same checks
+plus the Electron smoke suite on Ubuntu 24.04. `npm run hooks:install` sets up
+a pre-push hook that mirrors this locally.
+
+## License
+
+MIT – see [LICENSE](LICENSE). Third-party license notices are in
+[THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md).

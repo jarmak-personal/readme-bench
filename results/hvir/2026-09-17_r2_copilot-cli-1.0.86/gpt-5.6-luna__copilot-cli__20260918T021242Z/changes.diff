@@ -1,0 +1,115 @@
+diff --git a/README.md b/README.md
+new file mode 100644
+index 0000000..35560a5
+--- /dev/null
++++ b/README.md
+@@ -0,0 +1,109 @@
++# hvir
++
++hvir is a desktop developer workbench for working across local and remote
++projects. It brings terminals, Git workspaces, file browsing, document
++rendering, and development-harness sessions into one Electron application.
++
++## Features
++
++- Local terminal sessions powered by `node-pty` and Ghostty Web
++- Persistent terminal layouts, splits, themes, search, recovery, and session
++  activity
++- Projects backed by local folders, Git worktrees, or SSH hosts
++- Git status, branches, fetch/pull, history, graph, diffs, blame, and commit
++  details
++- File tree operations, filename search, source viewing, syntax highlighting,
++  Markdown, CSV, JSON, images, and rendered previews
++- Web panes for project-related browser content
++- Configurable harness profiles for tools such as Claude Code, Codex, Cursor,
++  Gemini, GitHub Copilot, Pi, and shell sessions
++- Workspace-aware document review and diagnostic/recovery surfaces
++
++## Requirements
++
++- Node.js 24 or newer
++- npm
++- Git
++- A supported desktop environment:
++  - macOS (the packaged build currently targets arm64)
++  - Linux x64 or arm64
++
++Remote projects additionally require SSH access to the target host. Native
++dependencies are rebuilt for Electron during installation.
++
++## Getting started
++
++Clone the repository, install its dependencies, and start the development
++application:
++
++```sh
++git clone <repository-url>
++cd hvir
++npm install
++npm run dev
++```
++
++The application opens in Electron. Use the project and workspace controls to
++add a local folder or connect to a remote SSH project.
++
++## Common commands
++
++| Command | Description |
++| --- | --- |
++| `npm run dev` | Start the Electron development application |
++| `npm run build` | Type-check and build the Electron application |
++| `npm run build:dir` | Build and create an unpacked application directory |
++| `npm run lint` | Run ESLint |
++| `npm run typecheck` | Type-check the Node and renderer projects |
++| `npm test` | Run the Vitest test suite |
++| `npm run verify` | Run seam, ADR, architecture, lint, type, and unit-test checks |
++| `npm run smoke` | Build and run the Linux Electron smoke scenarios |
++| `npm run smoke:macos` | Build and run the macOS smoke scenarios |
++| `npm run pack:mac:arm64` | Build a macOS arm64 package |
++| `npm run pack:linux:x64` | Build a Linux x64 Debian package |
++| `npm run pack:linux:arm64` | Build a Linux arm64 Debian package |
++
++Run `npm run` to see the complete list of development, packaging, acceptance,
++and project-maintenance commands.
++
++## Project structure
++
++```text
++src/
++  main/       Electron main-process services and host integrations
++  preload/    Typed, restricted renderer bridge
++  renderer/   React workbench UI
++  shared/     Contracts and types shared across process boundaries
++scripts/      Build, release, architecture, acceptance, and smoke tooling
++test/         Unit, integration, renderer, and smoke-support tests
++build/        Application icons, native resources, and packaging files
++```
++
++The application follows Electron’s process boundaries: privileged filesystem,
++Git, SSH, and process operations live in the main process, while the renderer
++accesses them through the typed preload API.
++
++## Development notes
++
++Native modules are rebuilt by the `postinstall` hook. If dependencies are
++installed with a command that skips lifecycle scripts, run the runtime setup
++explicitly:
++
++```sh
++npm run install:runtime
++```
++
++For a focused development loop, use `npm run lint`, `npm run typecheck`, and
++`npm test`. Before submitting a larger change, run `npm run verify` and the
++relevant Electron smoke or acceptance command.
++
++## Contributing
++
++Contributions should preserve the existing process-boundary contracts,
++workspace authorization rules, and test coverage. Keep changes focused, run
++the checks relevant to the affected surface, and include tests for behavioral
++changes.
++
++## License
++
++hvir is available under the [MIT License](LICENSE).

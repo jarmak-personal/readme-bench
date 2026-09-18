@@ -1,0 +1,156 @@
+{
+  "id": "kimi-k3__copilot-cli__20260918T033001Z",
+  "batch": "2026-09-17_r4_copilot-cli-1.0.86_effort-max",
+  "target": {
+    "name": "hvir",
+    "url": "https://github.com/jarmak-personal/hvir",
+    "commit": "7acbf8883bc869a9987252833d90b0d250086122",
+    "snapshot_commit": "ca97b8a72d67da22d5da4705101f99fbc80bd9cf"
+  },
+  "model": {
+    "id": "kimi-k3",
+    "vendor": "Moonshot AI",
+    "name": "Kimi",
+    "version": "3",
+    "variant": null,
+    "display": "Kimi K3"
+  },
+  "harness": {
+    "name": "GitHub Copilot CLI",
+    "id": "copilot-cli",
+    "version": "1.0.86"
+  },
+  "prompt": "Please create a README.md for this project.",
+  "started_at": "2026-09-18T03:30:13Z",
+  "finished_at": "2026-09-18T03:32:00Z",
+  "wall_clock_seconds": 107,
+  "exit_code": 0,
+  "setup_exit_code": 0,
+  "readme_produced": true,
+  "readme_bytes": 4969,
+  "readme_lines": 91,
+  "usage": {
+    "totalPremiumRequestCost": 1,
+    "totalUserRequests": 1,
+    "totalNanoAiu": 18829080000,
+    "tokenDetails": {
+      "input": {
+        "tokenCount": 24278
+      },
+      "cache_read": {
+        "tokenCount": 178656
+      },
+      "cache_write": {
+        "tokenCount": 0
+      },
+      "output": {
+        "tokenCount": 4124
+      }
+    },
+    "totalApiDurationMs": 103370,
+    "sessionStartTime": "2026-09-18T03:30:15.986Z",
+    "codeChanges": {
+      "linesAdded": 91,
+      "linesRemoved": 0,
+      "filesModifiedCount": 1,
+      "filesModified": [
+        "/private/var/tmp/ws/bf25df67/hvir/README.md"
+      ]
+    },
+    "modelMetrics": {
+      "kimi-k3": {
+        "requests": {
+          "count": 11,
+          "cost": 1
+        },
+        "usage": {
+          "inputTokens": 202934,
+          "outputTokens": 4124,
+          "cacheReadTokens": 178656,
+          "cacheWriteTokens": 0,
+          "reasoningTokens": 1329
+        },
+        "totalNanoAiu": 18829080000,
+        "tokenDetails": {
+          "input": {
+            "tokenCount": 24278
+          },
+          "cache_read": {
+            "tokenCount": 178656
+          },
+          "cache_write": {
+            "tokenCount": 0
+          },
+          "output": {
+            "tokenCount": 4124
+          }
+        }
+      }
+    },
+    "agentMetrics": {
+      "main": {
+        "totalApiDurationMs": 103370,
+        "totalNanoAiu": 18829080000,
+        "modelMetrics": {
+          "kimi-k3": {
+            "requests": {
+              "count": 11,
+              "cost": 1
+            },
+            "usage": {
+              "inputTokens": 202934,
+              "outputTokens": 4124,
+              "cacheReadTokens": 178656,
+              "cacheWriteTokens": 0,
+              "reasoningTokens": 1329
+            },
+            "totalNanoAiu": 18829080000,
+            "tokenDetails": {
+              "input": {
+                "tokenCount": 24278
+              },
+              "cache_read": {
+                "tokenCount": 178656
+              },
+              "cache_write": {
+                "tokenCount": 0
+              },
+              "output": {
+                "tokenCount": 4124
+              }
+            }
+          }
+        }
+      }
+    },
+    "currentModel": "kimi-k3",
+    "lastCallInputTokens": 24268,
+    "lastCallOutputTokens": 219
+  },
+  "tool_calls": {
+    "view": 9,
+    "bash": 6,
+    "grep": 1,
+    "create": 1
+  },
+  "reasoning_effort_requested": "max",
+  "reasoning_level": "max",
+  "chat_calls": {
+    "kimi-k3": {
+      "max": 11
+    }
+  },
+  "files_viewed": [
+    ".",
+    ".github",
+    ".prettierignore",
+    ".prettierrc.json",
+    "electron-builder.yml",
+    "package.json",
+    "packages",
+    "src",
+    "src/renderer/src/App.tsx"
+  ],
+  "compactions": [],
+  "truncations": 0
+}

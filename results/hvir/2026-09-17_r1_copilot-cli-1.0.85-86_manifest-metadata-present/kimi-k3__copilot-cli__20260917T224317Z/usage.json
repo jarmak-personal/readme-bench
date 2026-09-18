@@ -1,0 +1,98 @@
+{
+  "totalPremiumRequestCost": 1,
+  "totalUserRequests": 1,
+  "totalNanoAiu": 10891650000,
+  "tokenDetails": {
+    "input": {
+      "tokenCount": 19340
+    },
+    "cache_read": {
+      "tokenCount": 75155
+    },
+    "cache_write": {
+      "tokenCount": 0
+    },
+    "output": {
+      "tokenCount": 1890
+    }
+  },
+  "totalApiDurationMs": 52059,
+  "sessionStartTime": "2026-09-17T22:43:31.720Z",
+  "codeChanges": {
+    "linesAdded": 92,
+    "linesRemoved": 0,
+    "filesModifiedCount": 1,
+    "filesModified": [
+      "/private/var/tmp/ws/39906b70/hvir/README.md"
+    ]
+  },
+  "modelMetrics": {
+    "kimi-k3": {
+      "requests": {
+        "count": 6,
+        "cost": 1
+      },
+      "usage": {
+        "inputTokens": 94495,
+        "outputTokens": 1890,
+        "cacheReadTokens": 75155,
+        "cacheWriteTokens": 0,
+        "reasoningTokens": 205
+      },
+      "totalNanoAiu": 10891650000,
+      "tokenDetails": {
+        "input": {
+          "tokenCount": 19340
+        },
+        "cache_read": {
+          "tokenCount": 75155
+        },
+        "cache_write": {
+          "tokenCount": 0
+        },
+        "output": {
+          "tokenCount": 1890
+        }
+      }
+    }
+  },
+  "agentMetrics": {
+    "main": {
+      "totalApiDurationMs": 52059,
+      "totalNanoAiu": 10891650000,
+      "modelMetrics": {
+        "kimi-k3": {
+          "requests": {
+            "count": 6,
+            "cost": 1
+          },
+          "usage": {
+            "inputTokens": 94495,
+            "outputTokens": 1890,
+            "cacheReadTokens": 75155,
+            "cacheWriteTokens": 0,
+            "reasoningTokens": 205
+          },
+          "totalNanoAiu": 10891650000,
+          "tokenDetails": {
+            "input": {
+              "tokenCount": 19340
+            },
+            "cache_read": {
+              "tokenCount": 75155
+            },
+            "cache_write": {
+              "tokenCount": 0
+            },
+            "output": {
+              "tokenCount": 1890
+            }
+          }
+        }
+      }
+    }
+  },
+  "currentModel": "kimi-k3",
+  "lastCallInputTokens": 19335,
+  "lastCallOutputTokens": 156
+}

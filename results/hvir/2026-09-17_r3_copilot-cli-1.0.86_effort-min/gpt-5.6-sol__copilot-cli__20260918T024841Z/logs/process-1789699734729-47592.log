@@ -1,0 +1,70 @@
+2026-09-18T02:48:54.754Z [WARNING] [userSettings] Ignoring unknown top-level key(s) in user settings file "/private/var/tmp/ws/805ebca4/home/.copilot/settings.json": "_comment". They are not recognized user settings and have no effect.
+2026-09-18T02:48:54.754Z [INFO] Shell completions: no writable completion directory found for zsh, skipping
+2026-09-18T02:48:54.755Z [INFO] [rust:copilot_runtime::storage::managed_settings] [managedSettings] device MDM: no policy present on this device
+2026-09-18T02:48:54.755Z [INFO] [rust:copilot_runtime::storage::managed_settings] [managedSettings] server policy fetch skipped: no authenticated GitHub host available
+2026-09-18T02:48:54.755Z [INFO] [rust:copilot_runtime::storage::managed_settings] [managedSettings] effective policy resolved: source=none, bypassDisabled=false, serverFetchFailed=false, policyHelperFailed=false, policyHelperFailClosed=false
+2026-09-18T02:48:55.144Z [INFO] [rust:otel] OpenTelemetry enabled: exporter=file, source=github.copilot {"capture_identity":false,"capture_prompts":******,"capture_responses":******,"capture_tool_arguments":******,"capture_tool_output":******,"capture_policy_detail":******}
+2026-09-18T02:48:55.145Z [INFO] Session indexing debug: SESSION_INDEXING=******, repository=undefined
+2026-09-18T02:48:55.145Z [INFO] [rust:otel] OpenTelemetry configured from managed settings: exporter=file, source=github.copilot {"capture_identity":false,"capture_prompts":******,"capture_responses":******,"capture_tool_arguments":******,"capture_tool_output":******,"capture_policy_detail":******}
+2026-09-18T02:48:55.253Z [INFO] [rust:copilot_runtime::storage::managed_settings] [managedSettings] device MDM: no policy present on this device
+2026-09-18T02:48:55.253Z [INFO] [rust:copilot_runtime::storage::managed_settings] [managedSettings] server policy: none for this account (404: no configured policy) from https://github.com
+2026-09-18T02:48:55.253Z [INFO] [rust:copilot_runtime::storage::managed_settings] [managedSettings] effective policy resolved: source=none, bypassDisabled=false, serverFetchFailed=false, policyHelperFailed=false, policyHelperFailClosed=false
+2026-09-18T02:48:55.253Z [INFO] [rust:otel] OpenTelemetry configured from managed settings: exporter=file, source=github.copilot {"capture_identity":false,"capture_prompts":******,"capture_responses":******,"capture_tool_arguments":******,"capture_tool_output":******,"capture_policy_detail":******}
+2026-09-18T02:48:55.291Z [INFO] [rust:copilot_runtime::storage::managed_settings] [managedSettings] device MDM: no policy present on this device
+2026-09-18T02:48:55.291Z [INFO] [rust:copilot_runtime::storage::managed_settings] [managedSettings] server policy fetch skipped: no authenticated GitHub host available
+2026-09-18T02:48:55.291Z [INFO] [rust:copilot_runtime::storage::managed_settings] [managedSettings] effective policy resolved: source=none, bypassDisabled=false, serverFetchFailed=false, policyHelperFailed=false, policyHelperFailClosed=false
+2026-09-18T02:48:55.297Z [INFO] [rust:copilot_runtime::shared_api::permissions] [managedSettings] applied: no bypass restriction in force (managed policy absent)
+2026-09-18T02:48:55.297Z [INFO] [rust:copilot_runtime::shared_api::permissions] [managedSettings] applied: bypass-permissions mode DISABLED by enterprise policy (fail-closed: policy could not be determined) — /allow-all and permission escalation are now blocked
+2026-09-18T02:48:55.297Z [INFO] [rust:copilot_runtime::managed_settings::api_session] [managedSettings] self-fetch starting for account (device)
+2026-09-18T02:48:55.298Z [INFO] [rust:copilot_runtime::storage::managed_settings] [managedSettings] device MDM: no policy present on this device
+2026-09-18T02:48:55.298Z [INFO] [rust:copilot_runtime::storage::managed_settings] [managedSettings] server policy fetch skipped: no authenticated GitHub host available
+2026-09-18T02:48:55.298Z [INFO] [rust:copilot_runtime::storage::managed_settings] [managedSettings] effective policy resolved: source=none, bypassDisabled=false, serverFetchFailed=false, policyHelperFailed=false, policyHelperFailClosed=false
+2026-09-18T02:48:55.298Z [INFO] [rust:copilot_runtime::shared_api::permissions] [managedSettings] applied: no bypass restriction in force (managed policy absent)
+2026-09-18T02:48:55.298Z [INFO] [rust:copilot_runtime::managed_settings::api_session] [managedSettings] self-fetch complete for (device): bypassDisabled=false, serverFetchFailed=false, serverResolution=Live, serverRetryableFailure=false, deviceLoadFailed=false
+2026-09-18T02:48:55.298Z [WARNING] [rust:copilot_runtime::session::pending_request_flow] event was not delivered to its registered session host {"error":"GenericFailure, no session host is registered for session ec4a9b57-6b29-4861-b5a5-f6637fd9d387"}
+2026-09-18T02:48:55.303Z [INFO] [rust:otel] OpenTelemetry SDK initialized successfully
+2026-09-18T02:48:55.303Z [INFO] [rust:otel] OpenTelemetry tracker created for session ec4a9b57-6b29-4861-b5a5-f6637fd9d387
+2026-09-18T02:48:55.305Z [INFO] Workspace initialized: ec4a9b57-6b29-4861-b5a5-f6637fd9d387 (checkpoints: 0)
+2026-09-18T02:48:55.313Z [INFO] Starting Copilot CLI: 1.0.86
+2026-09-18T02:48:55.313Z [INFO] Node.js version: v24.20.0
+2026-09-18T02:48:55.314Z [INFO] [rust:managed_policy] managed permission policy now caps bypass-permissions escalation (approve-all, unrestricted paths/URLs) {"bypass_blocked":******}
+2026-09-18T02:48:55.314Z [INFO] [rust:copilot_runtime::shared_api::permissions] [managedSettings] applied: bypass-permissions mode DISABLED by enterprise policy (fail-closed: policy could not be determined) — /allow-all and permission escalation are now blocked
+2026-09-18T02:48:55.314Z [INFO] [rust:copilot_runtime::managed_settings::api_session] [managedSettings] self-fetch starting for account https://github.com/jarmak-personal
+2026-09-18T02:48:55.314Z [INFO] [rust:copilot_runtime::storage::managed_settings] [managedSettings] device MDM: no policy present on this device
+2026-09-18T02:48:55.314Z [INFO] [rust:copilot_runtime::storage::managed_settings] [managedSettings] confirmed no policy served from fresh cache (age 62ms) from https://github.com
+2026-09-18T02:48:55.314Z [INFO] [rust:copilot_runtime::storage::managed_settings] [managedSettings] effective policy resolved: source=none, bypassDisabled=false, serverFetchFailed=false, policyHelperFailed=false, policyHelperFailClosed=false
+2026-09-18T02:48:55.314Z [INFO] [rust:managed_policy] managed permission policy no longer caps bypass-permissions escalation (approve-all, unrestricted paths/URLs) {"bypass_blocked":false}
+2026-09-18T02:48:55.314Z [INFO] [rust:copilot_runtime::shared_api::permissions] [managedSettings] applied: no bypass restriction in force (managed policy absent)
+2026-09-18T02:48:55.314Z [INFO] [rust:copilot_runtime::managed_settings::api_session] [managedSettings] self-fetch complete for https://github.com/jarmak-personal: bypassDisabled=false, serverFetchFailed=false, serverResolution=FreshCache, serverRetryableFailure=false, deviceLoadFailed=false
+2026-09-18T02:48:55.329Z [WARNING] [rust:copilot_runtime::session::mcp::agent_host] MCP server 'github-mcp-server': Sandbox policy denies outbound network access, so remote MCP servers cannot be reached. Allow outbound access in the sandbox policy (network.allowOutbound); a sandbox proxy does not override it. {"server":"github-mcp-server"}
+2026-09-18T02:48:55.534Z [INFO] Registering foreground session: ec4a9b57-6b29-4861-b5a5-f6637fd9d387
+2026-09-18T02:48:55.538Z [INFO] Installed 0 native extension(s) for session ec4a9b57-6b29-4861-b5a5-f6637fd9d387
+2026-09-18T02:48:55.538Z [INFO] Prompt mode: loaded 0 extension(s) (mode=load_and_augment)
+2026-09-18T02:48:58.889Z [INFO] [rust:sandbox_spawn] sandbox launch directory: "/private/var/tmp/ws/805ebca4/hvir" (cwd "/private/var/tmp/ws/805ebca4/hvir")
+2026-09-18T02:48:58.889Z [INFO] [rust:sandbox_spawn] sandbox launch directory: "/private/var/tmp/ws/805ebca4/hvir" (cwd "/private/var/tmp/ws/805ebca4/hvir")
+2026-09-18T02:48:58.890Z [INFO] [rust:sandbox_spawn] sandbox: allowDevToolAccess is false, so the tool directories (PATH entries and toolchain env locations such as CARGO_HOME/GOROOT/VIRTUAL_ENV) and the user-profile tool directories were not granted; add the ones a command needs to sandbox.userPolicy.filesystem
+2026-09-18T02:48:58.890Z [INFO] [rust:sandbox_spawn] sandbox: allowDevToolAccess is false, so the tool directories (PATH entries and toolchain env locations such as CARGO_HOME/GOROOT/VIRTUAL_ENV) and the user-profile tool directories were not granted; add the ones a command needs to sandbox.userPolicy.filesystem
+2026-09-18T02:48:58.901Z [INFO] [rust:copilot_runtime::tools::login_shell_env] login_shell_env_outcome {"outcome":"captured","shell":"/bin/bash","elapsed_ms":36,"names_added":0,"names_changed":0,"path_entries_before":8,"path_entries_after":13,"path_entries_added":5,"path_front_changed":false,"path_front_before":"~/.local/bin","path_front_after":"~/.local/bin"}
+2026-09-18T02:48:58.904Z [INFO] [rust:sandbox_spawn] sandbox launch directory: "/private/var/tmp/ws/805ebca4/hvir" (cwd "/private/var/tmp/ws/805ebca4/hvir")
+2026-09-18T02:48:58.904Z [INFO] [rust:sandbox_spawn] sandbox: allowDevToolAccess is false, so the tool directories (PATH entries and toolchain env locations such as CARGO_HOME/GOROOT/VIRTUAL_ENV) and the user-profile tool directories were not granted; add the ones a command needs to sandbox.userPolicy.filesystem
+2026-09-18T02:48:59.599Z [WARNING] [rust:github_telemetry::queue_worker] [telemetry-queue] POST was not accepted; events dropped {"error":"error sending request for url (https://telemetry.individual.githubcopilot.com/telemetry)","status":"None","event_count":50}
+2026-09-18T02:49:02.660Z [INFO] [rust:sandbox_spawn] sandbox launch directory: "/private/var/tmp/ws/805ebca4/hvir" (cwd "/private/var/tmp/ws/805ebca4/hvir")
+2026-09-18T02:49:02.660Z [INFO] [rust:sandbox_spawn] sandbox launch directory: "/private/var/tmp/ws/805ebca4/hvir" (cwd "/private/var/tmp/ws/805ebca4/hvir")
+2026-09-18T02:49:02.660Z [INFO] [rust:sandbox_spawn] sandbox launch directory: "/private/var/tmp/ws/805ebca4/hvir" (cwd "/private/var/tmp/ws/805ebca4/hvir")
+2026-09-18T02:49:02.660Z [INFO] [rust:sandbox_spawn] sandbox launch directory: "/private/var/tmp/ws/805ebca4/hvir" (cwd "/private/var/tmp/ws/805ebca4/hvir")
+2026-09-18T02:49:02.660Z [INFO] [rust:sandbox_spawn] sandbox: allowDevToolAccess is false, so the tool directories (PATH entries and toolchain env locations such as CARGO_HOME/GOROOT/VIRTUAL_ENV) and the user-profile tool directories were not granted; add the ones a command needs to sandbox.userPolicy.filesystem
+2026-09-18T02:49:02.660Z [INFO] [rust:sandbox_spawn] sandbox: allowDevToolAccess is false, so the tool directories (PATH entries and toolchain env locations such as CARGO_HOME/GOROOT/VIRTUAL_ENV) and the user-profile tool directories were not granted; add the ones a command needs to sandbox.userPolicy.filesystem
+2026-09-18T02:49:02.660Z [INFO] [rust:sandbox_spawn] sandbox: allowDevToolAccess is false, so the tool directories (PATH entries and toolchain env locations such as CARGO_HOME/GOROOT/VIRTUAL_ENV) and the user-profile tool directories were not granted; add the ones a command needs to sandbox.userPolicy.filesystem
+2026-09-18T02:49:02.687Z [INFO] [rust:sandbox_spawn] sandbox: allowDevToolAccess is false, so the tool directories (PATH entries and toolchain env locations such as CARGO_HOME/GOROOT/VIRTUAL_ENV) and the user-profile tool directories were not granted; add the ones a command needs to sandbox.userPolicy.filesystem
+2026-09-18T02:49:10.719Z [INFO] [rust:sandbox_spawn] sandbox launch directory: "/private/var/tmp/ws/805ebca4/hvir" (cwd "/private/var/tmp/ws/805ebca4/hvir")
+2026-09-18T02:49:10.719Z [INFO] [rust:sandbox_spawn] sandbox: allowDevToolAccess is false, so the tool directories (PATH entries and toolchain env locations such as CARGO_HOME/GOROOT/VIRTUAL_ENV) and the user-profile tool directories were not granted; add the ones a command needs to sandbox.userPolicy.filesystem
+2026-09-18T02:49:10.719Z [INFO] [rust:sandbox_spawn] sandbox launch directory: "/private/var/tmp/ws/805ebca4/hvir" (cwd "/private/var/tmp/ws/805ebca4/hvir")
+2026-09-18T02:49:10.733Z [INFO] [rust:sandbox_spawn] sandbox: allowDevToolAccess is false, so the tool directories (PATH entries and toolchain env locations such as CARGO_HOME/GOROOT/VIRTUAL_ENV) and the user-profile tool directories were not granted; add the ones a command needs to sandbox.userPolicy.filesystem
+2026-09-18T02:49:10.743Z [WARNING] [rust:github_telemetry::queue_worker] [telemetry-queue] POST was not accepted; events dropped {"error":"error sending request for url (https://telemetry.individual.githubcopilot.com/telemetry)","status":"None","event_count":50}
+2026-09-18T02:49:13.603Z [INFO] Starting graceful shutdown of CLI server
+2026-09-18T02:49:13.603Z [INFO] Destroying 0 active sessions
+2026-09-18T02:49:13.603Z [INFO] Rust JSON-RPC engine stopped successfully
+2026-09-18T02:49:13.603Z [INFO] CLI server stopped successfully
+2026-09-18T02:49:13.605Z [WARNING] [rust:github_telemetry::queue_worker] [telemetry-queue] POST was not accepted; events dropped {"error":"error sending request for url (https://telemetry.individual.githubcopilot.com/telemetry)","status":"None","event_count":19}
+2026-09-18T02:49:13.622Z [INFO] [rust:copilot_runtime::session::registry] Closed interrupted sub-agent records on resume {"closed":0,"dangling":0}
+2026-09-18T02:49:13.627Z [WARNING] [rust:github_telemetry::queue_worker] [telemetry-queue] POST was not accepted; events dropped {"error":"error sending request for url (https://telemetry.individual.githubcopilot.com/telemetry)","status":"None","event_count":3}

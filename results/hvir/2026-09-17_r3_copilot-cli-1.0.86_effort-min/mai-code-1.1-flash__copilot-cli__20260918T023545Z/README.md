@@ -1,0 +1,82 @@
+# hvir
+
+hvir is a desktop workspace for local and remote development. It combines terminal sessions, file browsing, Git workflows, and browser-like web panes into a single Electron-based workbench so you can move between code, tooling, and documentation without context switching.
+
+## Features
+
+- Multi-project workspaces with saved local and remote roots
+- Terminal-first workflow with split panes and session management
+- SSH host support and project connection handling
+- Git-aware file and change views
+- File viewer with rendered content and document review
+- Web-pane workspace for linked documentation and tooling
+- Electron + React + TypeScript architecture with native runtime integrations
+
+## Tech Stack
+
+- Electron
+- React
+- TypeScript
+- Vite
+- Vitest
+- node-pty
+- Ghostty web integration
+
+## Requirements
+
+- Node.js >= 24
+- npm
+- macOS, Linux, or other supported Electron targets
+
+## Getting Started
+
+1. Install dependencies:
+
+   ```bash
+   npm install
+   ```
+
+2. Start the app in development mode:
+
+   ```bash
+   npm run dev
+   ```
+
+3. Build the app:
+
+   ```bash
+   npm run build
+   ```
+
+## Useful Commands
+
+```bash
+npm run typecheck
+npm run lint
+npm test
+npm run smoke
+```
+
+## Project Structure
+
+```text
+.
+├── src/               # Electron main, preload, renderer, and shared code
+├── test/              # Vitest and integration tests
+├── scripts/           # Build, release, and project-management utilities
+├── packages/          # Local package dependencies
+├── build/             # Generated build assets
+├── package.json       # Project scripts and dependencies
+├── electron.vite.config.ts
+├── electron-builder.yml
+├── LICENSE
+└── THIRD_PARTY_NOTICES.md
+```
+
+## Contributing
+
+Contributions are welcome. Before submitting changes, run the project checks and keep the code aligned with the existing architecture and testing patterns.
+
+## License
+
+This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.

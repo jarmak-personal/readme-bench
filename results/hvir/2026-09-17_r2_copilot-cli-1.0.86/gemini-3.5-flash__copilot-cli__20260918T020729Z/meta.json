@@ -1,0 +1,158 @@
+{
+  "id": "gemini-3.5-flash__copilot-cli__20260918T020729Z",
+  "batch": "2026-09-17_r2_copilot-cli-1.0.86",
+  "target": {
+    "name": "hvir",
+    "url": "https://github.com/jarmak-personal/hvir",
+    "commit": "7acbf8883bc869a9987252833d90b0d250086122",
+    "snapshot_commit": "ca97b8a72d67da22d5da4705101f99fbc80bd9cf"
+  },
+  "model": {
+    "id": "gemini-3.5-flash",
+    "vendor": "Google",
+    "name": "Gemini Flash",
+    "version": "3.5",
+    "variant": null,
+    "display": "Gemini 3.5 Flash"
+  },
+  "harness": {
+    "name": "GitHub Copilot CLI",
+    "id": "copilot-cli",
+    "version": "1.0.86"
+  },
+  "prompt": "Please create a README.md for this project.",
+  "started_at": "2026-09-18T02:07:40Z",
+  "finished_at": "2026-09-18T02:09:26Z",
+  "wall_clock_seconds": 106,
+  "exit_code": 0,
+  "setup_exit_code": 0,
+  "readme_produced": true,
+  "readme_bytes": 6312,
+  "readme_lines": 169,
+  "usage": {
+    "totalPremiumRequestCost": 14,
+    "totalUserRequests": 1,
+    "totalNanoAiu": 54232155000,
+    "tokenDetails": {
+      "input": {
+        "tokenCount": 224075
+      },
+      "cache_read": {
+        "tokenCount": 1202587
+      },
+      "cache_write": {
+        "tokenCount": 0
+      },
+      "output": {
+        "tokenCount": 2869
+      }
+    },
+    "totalApiDurationMs": 92974,
+    "sessionStartTime": "2026-09-18T02:07:43.448Z",
+    "codeChanges": {
+      "linesAdded": 169,
+      "linesRemoved": 0,
+      "filesModifiedCount": 1,
+      "filesModified": [
+        "/private/var/tmp/ws/43148c37/hvir/README.md"
+      ]
+    },
+    "modelMetrics": {
+      "gemini-3.5-flash": {
+        "requests": {
+          "count": 38,
+          "cost": 14
+        },
+        "usage": {
+          "inputTokens": 1426662,
+          "outputTokens": 2869,
+          "cacheReadTokens": 1202587,
+          "cacheWriteTokens": 0,
+          "reasoningTokens": 6817
+        },
+        "totalNanoAiu": 54232155000,
+        "tokenDetails": {
+          "input": {
+            "tokenCount": 224075
+          },
+          "cache_read": {
+            "tokenCount": 1202587
+          },
+          "cache_write": {
+            "tokenCount": 0
+          },
+          "output": {
+            "tokenCount": 2869
+          }
+        }
+      }
+    },
+    "agentMetrics": {
+      "main": {
+        "totalApiDurationMs": 92974,
+        "totalNanoAiu": 54232155000,
+        "modelMetrics": {
+          "gemini-3.5-flash": {
+            "requests": {
+              "count": 38,
+              "cost": 14
+            },
+            "usage": {
+              "inputTokens": 1426662,
+              "outputTokens": 2869,
+              "cacheReadTokens": 1202587,
+              "cacheWriteTokens": 0,
+              "reasoningTokens": 6817
+            },
+            "totalNanoAiu": 54232155000,
+            "tokenDetails": {
+              "input": {
+                "tokenCount": 224075
+              },
+              "cache_read": {
+                "tokenCount": 1202587
+              },
+              "cache_write": {
+                "tokenCount": 0
+              },
+              "output": {
+                "tokenCount": 2869
+              }
+            }
+          }
+        }
+      }
+    },
+    "currentModel": "gemini-3.5-flash",
+    "lastCallInputTokens": 51359,
+    "lastCallOutputTokens": 138
+  },
+  "tool_calls": {
+    "glob": 8,
+    "view": 12,
+    "bash": 15,
+    "grep": 1,
+    "create": 1
+  },
+  "reasoning_level": "medium",
+  "chat_calls": {
+    "gemini-3.5-flash": {
+      "medium": 38
+    }
+  },
+  "files_viewed": [
+    ".gitignore",
+    "package.json",
+    "scripts/check-adrs.mjs",
+    "scripts/check-terminal-runtime.mts",
+    "src/main/application-runtime-policy.ts",
+    "src/main/application-runtime.ts",
+    "src/main/harness/bundled-harness-providers.ts",
+    "src/main/harness/harness-provider.ts",
+    "src/main/index.ts",
+    "src/main/workbench-runtime.ts",
+    "src/shared/index.ts"
+  ],
+  "compactions": [],
+  "truncations": 0
+}

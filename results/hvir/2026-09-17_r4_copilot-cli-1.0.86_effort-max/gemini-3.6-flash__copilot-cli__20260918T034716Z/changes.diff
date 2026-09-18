@@ -1,0 +1,155 @@
+diff --git a/README.md b/README.md
+new file mode 100644
+index 0000000..b0f0bf6
+--- /dev/null
++++ b/README.md
+@@ -0,0 +1,149 @@
++# hvir
++
++`hvir` is a modern developer workbench and terminal desktop application built with Electron, React, TypeScript, and Vite. It combines a high-performance terminal runtime with integrated document viewing, code reviewing, Git tracking, and remote workspace management.
++
++---
++
++## Key Features
++
++- 🖥️ **GPU-Accelerated Terminal**: Powered by [Ghostty Web](https://github.com/ghostty-org/ghostty) rendering and `node-pty`, featuring split panes, tab management, custom terminal theme catalogs, and clipboard integrations.
++- 📄 **Rich Document Review & Editing**: CodeMirror editor with split diff view (`@codemirror/merge`), syntax highlighting via Shiki, rendered Markdown with Mermaid diagrams & KaTeX math formulas, CSV viewer, and HTML preview protocol.
++- 🌿 **Integrated Git Operations**: Background worker-hosted Git repository status monitoring, diff inspection, and version control workflows.
++- 🌐 **Remote Workspace & SSH Support**: Connect seamlessly to local workspaces or remote development servers over SSH (`ssh2`).
++- 🛠️ **Developer Harness & Diagnostics**: Workbench health monitoring, diagnostic report generation, sessions projection, and configurable harness profiles.
++- ⚡ **Cross-Platform**: Built for macOS (`.pkg`) and Linux (`.deb`).
++
++---
++
++## Tech Stack
++
++- **Desktop Framework**: Electron 43+, Node.js (>= 24)
++- **Frontend / Renderer**: React 19, TypeScript, Vite (`electron-vite`), CSS
++- **Terminal Engine**: Ghostty Web (`ghostty-web`), `node-pty`
++- **Editor / Review Engine**: CodeMirror 6, Shiki, Markdown-It, Mermaid, KaTeX
++- **Native Modules**: C++ native extensions (`@hvir/rename-noreplace`), `node-pty`
++- **Testing**: Vitest, Stryker (mutation testing), Smoke scenario runner
++
++---
++
++## Directory Structure
++
++```
++hvir/
++├── build/                # Application packaging resources and icons
++├── packages/             # Internal packages (e.g., @hvir/rename-noreplace)
++├── scripts/              # Build, architecture verification, and smoke test scripts
++├── src/
++│   ├── main/             # Electron main process (runtime policies, IPC, workspace & PTY managers)
++│   ├── preload/          # Preload scripts and IPC bridges
++│   ├── renderer/         # React UI (workbench layout, terminals, viewers, settings)
++│   ├── shared/           # Shared types, IPC contracts, and utility functions
++│   └── workers/          # Background worker threads (e.g., Git worker)
++└── test/                 # Vitest test suite and smoke test scenarios
++```
++
++---
++
++## Getting Started
++
++### Prerequisites
++
++- **Node.js**: `>= 24.0.0`
++- **npm**: `>= 10.0.0`
++- **Native Build Tools**: C++ build toolchain (Python 3, `make`, `gcc`/`clang`, or Visual Studio Build Tools) required for compiling native node modules (`node-gyp`).
++
++### Installation
++
++1. Clone the repository:
++   ```bash
++   git clone https://github.com/your-org/hvir.git
++   cd hvir
++   ```
++
++2. Install dependencies:
++   ```bash
++   npm install
++   ```
++   > *Note:* The `postinstall` script automatically compiles native runtimes including `@hvir/rename-noreplace` and rebuilds `node-pty`.
++
++3. Install Git hooks (optional, recommended for contributors):
++   ```bash
++   npm run hooks:install
++   ```
++
++---
++
++## Development
++
++Start the app in development mode with live reload:
++
++```bash
++npm run dev
++```
++
++### Type Checking & Linting
++
++```bash
++# Type check main and renderer processes
++npm run typecheck
++
++# Run ESLint checks
++npm run lint
++
++# Check code formatting with Prettier
++npm run format:check
++
++# Format code
++npm run format
++```
++
++### Testing & Verification
++
++```bash
++# Run unit & integration tests with Vitest
++npm test
++
++# Run Vitest in watch mode
++npm run test:watch
++
++# Run smoke test scenarios
++npm run smoke
++
++# Run full project verification suite
++npm run verify
++```
++
++---
++
++## Building and Packaging
++
++### Production Build
++
++Compile and bundle the main, preload, and renderer processes:
++
++```bash
++npm run build
++```
++
++### Package Installers
++
++Generate OS-specific distribution packages using `electron-builder`:
++
++- **macOS (ARM64 / Apple Silicon)**:
++  ```bash
++  npm run pack:mac:arm64
++  ```
++
++- **Linux (x64 / ARM64)**:
++  ```bash
++  npm run pack:linux:x64
++  npm run pack:linux:arm64
++  ```
++
++Bundled installers will be generated in the `dist/` directory.
++
++---
++
++## License
++
++This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details. Third-party dependency notices are documented in [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md).

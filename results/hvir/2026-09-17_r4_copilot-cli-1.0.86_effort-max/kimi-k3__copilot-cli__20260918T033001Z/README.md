@@ -1,0 +1,91 @@
+# hvir
+
+hvir is a desktop workbench for software development, built with Electron and React. It
+combines a fast terminal, Git tooling, file viewing and editing, and AI agent session
+monitoring in a single window — for both local projects and remote hosts over SSH.
+
+## Features
+
+- **Terminal** — a GPU-accelerated terminal emulator powered by
+  [ghostty-web](https://github.com/jarmak-personal/ghostty-web) (Ghostty's VT engine
+  compiled to WebAssembly) backed by `node-pty`. Supports splits, movable panes,
+  searchable scrollback, semantic navigation, clickable file links, a theme catalog,
+  and attention tracking for background sessions.
+- **Projects and workspaces** — organize work into projects backed by local folders or
+  remote hosts over SSH (via `ssh2`, with `~/.ssh/config` support). File trees, file
+  operations, and watchers work the same on both.
+- **File viewer** — tabbed and split-pane viewing with Markdown preview (including task
+  lists and Mermaid diagrams), syntax highlighting via Shiki, CodeMirror-powered diff
+  and merge views, image rendering, and sandboxed HTML preview.
+- **Git integration** — working-tree status, commit graph, diffs, blame, worktree
+  management, and guarded mutations, executed in isolated worker hosts.
+- **AI agent sessions** — discover, monitor, and recover Claude and Codex sessions; launch
+  agents through configurable harness profiles; inspect context and usage telemetry.
+- **Document review** — collect and deliver review comments on project documents.
+- **Web panes** — embed dashboards and web tools alongside your workspaces.
+- **Diagnostics** — in-app health monitoring and privacy-masked diagnostic reports.
+
+## Requirements
+
+- Node.js **24 or newer** and npm
+- A C/C++ build toolchain and Python (for `node-gyp`; needed to build the native
+  `node-pty` and `@hvir/rename-noreplace` modules)
+- Supported platforms: macOS (Apple Silicon) and Linux (x64, arm64)
+
+## Getting started
+
+```sh
+npm ci
+npm run dev
+```
+
+`npm ci` runs a postinstall step that rebuilds `node-pty` against Electron's ABI and
+compiles the bundled native packages, so a full install is required before the first
+run. `npm run dev` starts the app in development mode with hot reload; `predev` verifies
+that the installed terminal runtime matches the expected capability profile.
+
+## Common tasks
+
+| Command                           | Description                                             |
+| --------------------------------- | ------------------------------------------------------- |
+| `npm run dev`                     | Start the app in development mode                       |
+| `npm run build`                   | Typecheck and produce a production build in `out/`      |
+| `npm run preview`                 | Preview the production build                            |
+| `npm test` / `npm run test:watch` | Run the Vitest unit test suite (once / watch mode)      |
+| `npm run lint`                    | Run ESLint                                              |
+| `npm run typecheck`               | Type-check the Node and web TypeScript projects         |
+| `npm run format:check`            | Check formatting with Prettier                          |
+| `npm run verify`                  | Full local verification: seams, ADRs, architecture, lint, typecheck, tests |
+| `npm run smoke`                   | Build and run the Electron smoke-test scenarios         |
+| `npm run test:mutation`           | Run Stryker mutation testing                            |
+
+## Packaging
+
+Installers are built with electron-builder:
+
+| Command                    | Output                                  |
+| -------------------------- | --------------------------------------- |
+| `npm run pack:mac:arm64`   | Unsigned macOS `.pkg` (arm64)           |
+| `npm run pack:mac:arm64:signed` | Signed macOS `.pkg` (arm64)        |
+| `npm run pack:linux:x64`   | Debian package (x64)                    |
+| `npm run pack:linux:arm64` | Debian package (arm64)                  |
+| `npm run build:dir`        | Unpacked application directory          |
+
+Installers place the app in the standard system location and ship a `hvir-command`
+launcher so hvir can be started from a shell.
+
+## Development
+
+- Run `npm run hooks:install` to install the Git pre-push hook (`.githooks/`), which
+  type-checks and smoke-tests before pushes. Bypass with `git push --no-verify`.
+- `npm run architecture:check` and `npm run check-adrs` enforce the module
+  architecture rules and architecture-decision-record lifecycle; both run as part of
+  `npm run verify`.
+- The repository is laid out as an Electron app (`src/main`, `src/preload`,
+  `src/renderer`, `src/shared`, `src/workers`), a bundled native package
+  (`packages/rename-noreplace`), unit tests (`test/`), and tooling (`scripts/`).
+
+## License
+
+hvir is released under the [MIT License](LICENSE). Third-party attributions are listed
+in [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md).

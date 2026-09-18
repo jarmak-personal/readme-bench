@@ -1,0 +1,163 @@
+{
+  "totalPremiumRequestCost": 15,
+  "totalUserRequests": 1,
+  "totalNanoAiu": 56436960000,
+  "tokenDetails": {
+    "input": {
+      "tokenCount": 88793
+    },
+    "cache_read": {
+      "tokenCount": 570429
+    },
+    "cache_write": {
+      "tokenCount": 35595
+    },
+    "output": {
+      "tokenCount": 10644
+    }
+  },
+  "totalApiDurationMs": 105890,
+  "sessionStartTime": "2026-09-18T01:20:02.799Z",
+  "codeChanges": {
+    "linesAdded": 117,
+    "linesRemoved": 0,
+    "filesModifiedCount": 1,
+    "filesModified": [
+      "/private/var/tmp/ws/c975e8e8/hvir/README.md"
+    ]
+  },
+  "modelMetrics": {
+    "claude-opus-5": {
+      "requests": {
+        "count": 8,
+        "cost": 15
+      },
+      "usage": {
+        "inputTokens": 230232,
+        "outputTokens": 4968,
+        "cacheReadTokens": 194621,
+        "cacheWriteTokens": 35595,
+        "reasoningTokens": 284
+      },
+      "cacheExpiresAt": "2026-09-18T01:26:47.520Z",
+      "totalNanoAiu": 44405925000,
+      "tokenDetails": {
+        "input": {
+          "tokenCount": 16
+        },
+        "cache_read": {
+          "tokenCount": 194621
+        },
+        "cache_write": {
+          "tokenCount": 35595
+        },
+        "output": {
+          "tokenCount": 4968
+        }
+      }
+    },
+    "gpt-5.4-mini": {
+      "requests": {
+        "count": 9,
+        "cost": 0
+      },
+      "usage": {
+        "inputTokens": 464585,
+        "outputTokens": 5676,
+        "cacheReadTokens": 375808,
+        "cacheWriteTokens": 0,
+        "reasoningTokens": 547
+      },
+      "totalNanoAiu": 12031035000,
+      "tokenDetails": {
+        "input": {
+          "tokenCount": 88777
+        },
+        "cache_read": {
+          "tokenCount": 375808
+        },
+        "cache_write": {
+          "tokenCount": 0
+        },
+        "output": {
+          "tokenCount": 5676
+        }
+      }
+    }
+  },
+  "agentMetrics": {
+    "main": {
+      "totalApiDurationMs": 65436,
+      "totalNanoAiu": 44405925000,
+      "modelMetrics": {
+        "claude-opus-5": {
+          "requests": {
+            "count": 8,
+            "cost": 15
+          },
+          "usage": {
+            "inputTokens": 230232,
+            "outputTokens": 4968,
+            "cacheReadTokens": 194621,
+            "cacheWriteTokens": 35595,
+            "reasoningTokens": 284
+          },
+          "totalNanoAiu": 44405925000,
+          "tokenDetails": {
+            "input": {
+              "tokenCount": 16
+            },
+            "cache_read": {
+              "tokenCount": 194621
+            },
+            "cache_write": {
+              "tokenCount": 35595
+            },
+            "output": {
+              "tokenCount": 4968
+            }
+          }
+        }
+      }
+    },
+    "99b52d30-c716-4aa0-b7ec-4ff4e65a3be2": {
+      "agentName": "explore",
+      "agentDisplayName": "explore-hvir",
+      "totalApiDurationMs": 40454,
+      "totalNanoAiu": 12031035000,
+      "modelMetrics": {
+        "gpt-5.4-mini": {
+          "requests": {
+            "count": 9,
+            "cost": 0
+          },
+          "usage": {
+            "inputTokens": 464585,
+            "outputTokens": 5676,
+            "cacheReadTokens": 375808,
+            "cacheWriteTokens": 0,
+            "reasoningTokens": 547
+          },
+          "totalNanoAiu": 12031035000,
+          "tokenDetails": {
+            "input": {
+              "tokenCount": 88777
+            },
+            "cache_read": {
+              "tokenCount": 375808
+            },
+            "cache_write": {
+              "tokenCount": 0
+            },
+            "output": {
+              "tokenCount": 5676
+            }
+          }
+        }
+      }
+    }
+  },
+  "currentModel": "claude-opus-5",
+  "lastCallInputTokens": 35597,
+  "lastCallOutputTokens": 187
+}

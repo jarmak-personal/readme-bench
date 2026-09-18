@@ -1,0 +1,65 @@
+# hvir
+
+hvir is a desktop terminal application built on Electron, TypeScript, React, and Ghostty's terminal core. It packages native terminal integration, document review workflows, Git-aware smoke scenarios, and release tooling into a cross-platform app for macOS and Linux.
+
+## Highlights
+
+- Electron app with a TypeScript/Vite-based main and renderer build
+- Ghostty-powered terminal runtime with preflight checks for the installed WASM artifact
+- Git and document review workflows with deterministic smoke-fixture generation
+- Native packaging for macOS `.pkg` and Linux `.deb`
+- Extensive verification gates: lint, typecheck, architecture checks, tests, and smoke scenarios
+
+## Requirements
+
+- Node.js 24 or newer
+- npm
+- Platform dependencies for Electron builds and native modules
+
+## Getting started
+
+Install dependencies:
+
+```bash
+npm ci
+```
+
+Run the app in development:
+
+```bash
+npm run dev
+```
+
+## Common scripts
+
+| Command | Purpose |
+| --- | --- |
+| `npm run build` | Typecheck and build the app |
+| `npm run preview` | Preview the production build |
+| `npm run lint` | Run ESLint |
+| `npm run typecheck` | Type-check main and renderer code |
+| `npm test` | Run the Vitest suite |
+| `npm run verify` | Run the full verification gate |
+| `npm run smoke` | Build the smoke bundle and execute smoke scenarios |
+| `npm run architecture:check` | Enforce architecture wiring rules |
+| `npm run check-terminal-runtime.mts` | Verify the installed Ghostty runtime contract |
+
+## Packaging
+
+- `npm run pack:mac:arm64`
+- `npm run pack:linux:x64`
+- `npm run pack:linux:arm64`
+
+The package metadata and release workflows produce signed or distributable artifacts for their respective targets.
+
+## Project structure
+
+- `src/` — application source
+- `scripts/` — build, packaging, release, and smoke helpers
+- `test/` — Vitest coverage and fixtures
+- `build/` — packaging resources and installer assets
+- `packages/rename-noreplace/` — private native module used during runtime installation
+
+## Notes
+
+This repository redistributes third-party components and includes their notices in `THIRD_PARTY_NOTICES.md`.

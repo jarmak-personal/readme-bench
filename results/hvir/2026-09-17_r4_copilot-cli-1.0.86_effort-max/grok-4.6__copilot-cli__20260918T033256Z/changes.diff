@@ -1,0 +1,166 @@
+diff --git a/README.md b/README.md
+new file mode 100644
+index 0000000..5892325
+--- /dev/null
++++ b/README.md
+@@ -0,0 +1,160 @@
++# hvir
++
++hvir is a desktop workbench for local and remote software projects. It keeps
++file browsing, viewing, Git, terminals, and coding-agent sessions in one
++Electron app so you can work a repository without switching tools for each
++surface.
++
++Version `0.2.3`. Requires Node.js 24 or later.
++
++## Features
++
++- **Projects and workspaces.** Open multiple projects. Git worktrees become
++  workspaces you can switch, close, and prune.
++- **Local and SSH hosts.** The same workbench talks to a local filesystem or a
++  remote host over SSH. Paths stay host-qualified.
++- **File tree.** Create, rename, move, copy, delete, and reveal files. Search
++  by filename. Git status decorates the tree.
++- **Viewer.** Source (CodeMirror), rendered (Markdown, Mermaid, HTML, JSON,
++  YAML, CSV, images), and Git diffs. Find, go-to-line, blame, and split tabs.
++- **Git rail.** Working-tree changes, history, commit graph, branch switch,
++  fetch, and pull. Mutations run through an authorized coordinator.
++- **Terminals.** Ghostty-based panes with splits, themes, search, clipboard,
++  and attention badges. PTY lifetime is owned by main, not the renderer.
++- **Harnesses.** Launch a login shell or a coding agent (Claude Code, Codex,
++  Gemini CLI, GitHub Copilot CLI, Cursor CLI, Pi) with per-provider profiles,
++  probes, and session recovery where the provider supports it.
++- **Document review.** Comment on source or rendered documents and insert or
++  send the review into a trusted harness composer.
++- **Sessions.** Overview of live terminals across workspaces, with detail and
++  foreground focus.
++- **Web panes and HTML preview.** Embed trusted web surfaces; untrusted HTML
++  runs in a sandboxed custom-protocol origin.
++- **Diagnostics.** Workbench health, diagnostic reports, and renderer recovery.
++
++Packaged installers currently target **macOS arm64** (`.pkg`) and **Linux**
++x64/arm64 (`.deb`, glibc ≥ 2.35).
++
++## Requirements
++
++- Node.js ≥ 24
++- npm (this repository uses `package-lock.json`)
++- A native toolchain so `postinstall` can rebuild `node-pty` and
++  `@hvir/rename-noreplace` against Electron
++  - macOS: Xcode Command Line Tools
++  - Linux: a C/C++ toolchain (`build-essential` or equivalent) and Python for
++    `node-gyp`
++
++## Getting started
++
++```bash
++git clone <repository-url>
++cd hvir
++npm ci
++npm run dev
++```
++
++`npm ci` installs dependencies and rebuilds native modules for Electron.
++`npm run dev` starts electron-vite with hot reload.
++
++Optional: install the repository Git hooks so pushes run typecheck plus the
++local-platform Electron smoke suite.
++
++```bash
++npm run hooks:install
++```
++
++Bypass with `git push --no-verify` when you intentionally skip that gate.
++
++## Common scripts
++
++| Script | Purpose |
++| --- | --- |
++| `npm run dev` | Development Electron app |
++| `npm run build` | Typecheck and production electron-vite build |
++| `npm run preview` | Preview the production renderer |
++| `npm run typecheck` | `tsc --noEmit` for Node and web projects |
++| `npm run lint` | ESLint, including architectural import bans |
++| `npm run format` / `npm run format:check` | Prettier |
++| `npm test` | Vitest unit tests (Node, not Electron) |
++| `npm run test:watch` | Vitest watch mode |
++| `npm run verify` | Seams, ADRs, architecture budgets, lint, typecheck, tests |
++| `npm run smoke` | Packaged-path Electron smoke scenarios (Linux default) |
++| `npm run smoke:macos` | macOS smoke subset |
++| `npm run smoke:scenario -- <name>` | One smoke scenario |
++| `npm run pack:mac:arm64` | macOS `.pkg` |
++| `npm run pack:linux:x64` / `pack:linux:arm64` | Linux `.deb` |
++
++`npm run verify` is the contributor gate CI runs on Linux. Electron smoke is a
++separate job (`xvfb-run` on Linux).
++
++## Layout
++
++```
++src/main/        Electron main process (hosts, PTY, Git, IPC, windows)
++src/preload/     Typed `window.hvir` bridge — the only ipcRenderer user
++src/renderer/    React workbench UI
++src/shared/      Cross-process types and IPC contracts
++src/workers/     Isolated Git and echo workers
++packages/        Native addons (`@hvir/rename-noreplace`)
++scripts/         Seams, architecture, smoke, packaging, release
++test/            Vitest coverage for seams and UI logic
++build/           Icons, entitlements, package scripts
++```
++
++Important seams, enforced by ESLint and `npm run check-seams`:
++
++- Host primitives (`fs`, `child_process`, `chokidar`, `node-pty`) live only in
++  `src/main/project-host/local-host.ts`. Everything else goes through
++  `ProjectHost`.
++- Only the PTY supervisor may call `host.spawnPty()`.
++- The renderer never imports `ipcRenderer`; it uses `window.hvir`.
++- Bundled harness identities stay inside `src/main/harness/`.
++
++Git work and other CPU-heavy host work can run in `src/workers/` so the main
++process stays responsive.
++
++## Testing
++
++Unit tests do not start Electron. They cover HostPath, LocalHost, Git, harness
++policy, renderer hooks, and similar seams:
++
++```bash
++npm test
++```
++
++Smoke tests build a smoke-channel Electron app and drive real workbench
++scenarios (PTY, viewer, Git, SSH workspace, web pane, sessions, terminals):
++
++```bash
++npm run smoke
++```
++
++On Linux without a display, use Xvfb (`xvfb-run -a npm run smoke`). Mutation
++testing is available as `npm run test:mutation` (Stryker).
++
++## Packaging
++
++Production artifacts are written to `dist/` by electron-builder.
++
++```bash
++npm run pack:mac:arm64
++npm run pack:linux:x64
++npm run pack:linux:arm64
++```
++
++Installed packages expose a `hvir` command that can open a project directory:
++
++```bash
++hvir .
++```
++
++Linux packages install under `/opt/hvir` with an AppArmor profile. macOS
++packages install to `/Applications/hvir.app` with Hardened Runtime
++entitlements.
++
++## License
++
++MIT. See [LICENSE](LICENSE). Bundled third-party notices, including the
++ghostty-web terminal runtime and the rename-noreplace binding, are in
++[THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md).

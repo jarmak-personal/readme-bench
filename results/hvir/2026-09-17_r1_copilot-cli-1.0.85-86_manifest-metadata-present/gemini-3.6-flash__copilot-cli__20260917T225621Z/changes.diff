@@ -1,0 +1,123 @@
+diff --git a/README.md b/README.md
+new file mode 100644
+index 0000000..2370a4d
+--- /dev/null
++++ b/README.md
+@@ -0,0 +1,117 @@
++# hvir
++
++A lightweight, view-first workbench for agentic development.
++
++`hvir` is a modern desktop environment built for developer workflows where AI agents, terminals, code viewers, diffs, and live previews work together seamlessly.
++
++---
++
++## Key Features
++
++- **View-First Workbench**: Optimized for reviewing agent-generated code changes, side-by-side file diffs, markdown rendering, and live output without context switching.
++- **Terminal Workspaces & Agent Harness**: Multi-pane terminal environment powered by Ghostty and `node-pty`, with built-in support for agent harnesses (including Claude Code, Gemini, Codex, and custom AI tools).
++- **Remote Workspaces via SSH**: Access local or remote developer environments transparently over SSH with secure host identity management and remote file and terminal transport.
++- **Integrated Git Workflows**: Built-in Git status, visual graph view, diff inspections via CodeMirror, branch/worktree management, and commit operations.
++- **Rich Document & Live Previews**: Markdown rendering with GFM task lists, Mermaid diagrams, KaTeX math typesetting, and web-pane live previews via loopback HTTP proxy.
++- **Sessions Projection & Health Diagnostics**: Real-time tracking of agent session states, token usage, telemetry, self-monitoring runtime health checks, and automated renderer recovery.
++
++---
++
++## Tech Stack
++
++- **Framework**: [Electron](https://www.electronjs.org/), [React 19](https://react.dev/), [TypeScript](https://www.typescriptlang.org/)
++- **Build Tool**: [electron-vite](https://electron-vite.org/), [Vite](https://vitejs.dev/)
++- **Terminal**: `ghostty-web`, [`node-pty`](https://github.com/microsoft/node-pty)
++- **Code & Diff Viewing**: [CodeMirror](https://codemirror.net/), [Shiki](https://shiki.style/)
++- **Testing**: [Vitest](https://vitest.dev/), [Stryker Mutator](https://stryker-mutator.io/)
++
++---
++
++## Prerequisites
++
++- **Node.js**: Version `24.0.0` or higher
++- **npm**: Version `10.0.0` or higher
++
++---
++
++## Quick Start
++
++### Installation
++
++Clone the repository and install dependencies:
++
++```bash
++git clone https://github.com/jarmak-personal/hvir.git
++cd hvir
++npm install
++```
++
++> Note: The `postinstall` script automatically compiles native dependencies (`node-pty` and `@hvir/rename-noreplace`).
++
++### Development
++
++Run `hvir` in development mode with hot-module replacement:
++
++```bash
++npm run dev
++```
++
++### Production Build
++
++Typecheck and build the production bundle:
++
++```bash
++npm run build
++```
++
++Package for your operating system:
++
++```bash
++# macOS (ARM64)
++npm run pack:mac:arm64
++
++# Linux (x64)
++npm run pack:linux:x64
++
++# Linux (ARM64)
++npm run pack:linux:arm64
++```
++
++---
++
++## Development Scripts
++
++| Command | Description |
++| --- | --- |
++| `npm run dev` | Start Electron application in development mode |
++| `npm run build` | Run type checking and build production bundle |
++| `npm test` | Run unit and integration tests with Vitest |
++| `npm run typecheck` | Run TypeScript type checks across main and web contexts |
++| `npm run lint` | Lint codebase with ESLint |
++| `npm run format` | Format codebase using Prettier |
++| `npm run verify` | Run complete verification suite (seams, ADRs, architecture, lint, typecheck, test) |
++| `npm run smoke` | Run smoke test scenarios for core subsystems |
++
++---
++
++## Directory Structure
++
++```text
++hvir/
++├── build/                # Icon assets and build configurations
++├── packages/             # Native support packages (@hvir/rename-noreplace)
++├── scripts/              # Build, release, smoke testing, and maintenance scripts
++├── src/
++│   ├── main/             # Electron main process (lifecycle, IPC, SSH, PTY supervisor, harness)
++│   ├── preload/          # Context isolation bridge scripts
++│   ├── renderer/         # React front-end UI (workbench, views, terminals, settings)
++│   ├── shared/           # Cross-process types, IPC contracts, and utilities
++│   └── workers/          # Background worker host processes (Git, echo)
++└── test/                 # Test suites, fixtures, and scenario tests
++```
++
++---
++
++## License
++
++This project is licensed under the [MIT License](LICENSE).

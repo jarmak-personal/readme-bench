@@ -1,0 +1,160 @@
+{
+  "id": "gpt-5.4-mini__copilot-cli__20260918T021612Z",
+  "batch": "2026-09-17_r2_copilot-cli-1.0.86",
+  "target": {
+    "name": "hvir",
+    "url": "https://github.com/jarmak-personal/hvir",
+    "commit": "7acbf8883bc869a9987252833d90b0d250086122",
+    "snapshot_commit": "ca97b8a72d67da22d5da4705101f99fbc80bd9cf"
+  },
+  "model": {
+    "id": "gpt-5.4-mini",
+    "vendor": "OpenAI",
+    "name": "GPT mini",
+    "version": "5.4",
+    "variant": null,
+    "display": "GPT-5.4 mini"
+  },
+  "harness": {
+    "name": "GitHub Copilot CLI",
+    "id": "copilot-cli",
+    "version": "1.0.86"
+  },
+  "prompt": "Please create a README.md for this project.",
+  "started_at": "2026-09-18T02:16:24Z",
+  "finished_at": "2026-09-18T02:16:52Z",
+  "wall_clock_seconds": 28,
+  "exit_code": 0,
+  "setup_exit_code": 0,
+  "readme_produced": true,
+  "readme_bytes": 2632,
+  "readme_lines": 74,
+  "usage": {
+    "totalPremiumRequestCost": 0.33,
+    "totalUserRequests": 1,
+    "totalNanoAiu": 7397940000,
+    "tokenDetails": {
+      "input": {
+        "tokenCount": 48966
+      },
+      "cache_read": {
+        "tokenCount": 274432
+      },
+      "cache_write": {
+        "tokenCount": 0
+      },
+      "output": {
+        "tokenCount": 3705
+      }
+    },
+    "totalApiDurationMs": 23365,
+    "sessionStartTime": "2026-09-18T02:16:27.258Z",
+    "codeChanges": {
+      "linesAdded": 75,
+      "linesRemoved": 0,
+      "filesModifiedCount": 1,
+      "filesModified": [
+        "/private/var/tmp/ws/8e789a9e/hvir/README.md"
+      ]
+    },
+    "modelMetrics": {
+      "gpt-5.4-mini": {
+        "requests": {
+          "count": 9,
+          "cost": 0.33
+        },
+        "usage": {
+          "inputTokens": 323398,
+          "outputTokens": 3705,
+          "cacheReadTokens": 274432,
+          "cacheWriteTokens": 0,
+          "reasoningTokens": 1525
+        },
+        "cacheExpiresAt": "2026-09-18T02:46:50.441Z",
+        "totalNanoAiu": 7397940000,
+        "tokenDetails": {
+          "input": {
+            "tokenCount": 48966
+          },
+          "cache_read": {
+            "tokenCount": 274432
+          },
+          "cache_write": {
+            "tokenCount": 0
+          },
+          "output": {
+            "tokenCount": 3705
+          }
+        }
+      }
+    },
+    "agentMetrics": {
+      "main": {
+        "totalApiDurationMs": 23365,
+        "totalNanoAiu": 7397940000,
+        "modelMetrics": {
+          "gpt-5.4-mini": {
+            "requests": {
+              "count": 9,
+              "cost": 0.33
+            },
+            "usage": {
+              "inputTokens": 323398,
+              "outputTokens": 3705,
+              "cacheReadTokens": 274432,
+              "cacheWriteTokens": 0,
+              "reasoningTokens": 1525
+            },
+            "totalNanoAiu": 7397940000,
+            "tokenDetails": {
+              "input": {
+                "tokenCount": 48966
+              },
+              "cache_read": {
+                "tokenCount": 274432
+              },
+              "cache_write": {
+                "tokenCount": 0
+              },
+              "output": {
+                "tokenCount": 3705
+              }
+            }
+          }
+        }
+      }
+    },
+    "currentModel": "gpt-5.4-mini",
+    "lastCallInputTokens": 49937,
+    "lastCallOutputTokens": 164
+  },
+  "tool_calls": {
+    "rg": 7,
+    "glob": 1,
+    "view": 12,
+    "bash": 1,
+    "apply_patch": 1
+  },
+  "reasoning_level": "medium",
+  "chat_calls": {
+    "gpt-5.4-mini": {
+      "medium": 9
+    }
+  },
+  "files_viewed": [
+    ".github/workflows",
+    ".github/workflows/ci.yml",
+    ".github/workflows/macos-package-release.yml",
+    ".github/workflows/release.yml",
+    "README.md",
+    "electron.vite.config.ts",
+    "package.json",
+    "scripts/check-terminal-runtime.mts",
+    "src/main/index.ts",
+    "src/renderer/index.html",
+    "src/renderer/src/App.tsx",
+    "test/smoke-selection.test.ts"
+  ],
+  "compactions": [],
+  "truncations": 0
+}

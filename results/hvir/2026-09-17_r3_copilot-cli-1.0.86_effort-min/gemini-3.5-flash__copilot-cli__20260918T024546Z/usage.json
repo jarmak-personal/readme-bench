@@ -1,0 +1,98 @@
+{
+  "totalPremiumRequestCost": 14,
+  "totalUserRequests": 1,
+  "totalNanoAiu": 31821780000,
+  "tokenDetails": {
+    "input": {
+      "tokenCount": 139490
+    },
+    "cache_read": {
+      "tokenCount": 627012
+    },
+    "cache_write": {
+      "tokenCount": 0
+    },
+    "output": {
+      "tokenCount": 1659
+    }
+  },
+  "totalApiDurationMs": 43550,
+  "sessionStartTime": "2026-09-18T02:46:01.177Z",
+  "codeChanges": {
+    "linesAdded": 71,
+    "linesRemoved": 0,
+    "filesModifiedCount": 1,
+    "filesModified": [
+      "/private/var/tmp/ws/d0fb02f3/hvir/README.md"
+    ]
+  },
+  "modelMetrics": {
+    "gemini-3.5-flash": {
+      "requests": {
+        "count": 22,
+        "cost": 14
+      },
+      "usage": {
+        "inputTokens": 766502,
+        "outputTokens": 1659,
+        "cacheReadTokens": 627012,
+        "cacheWriteTokens": 0,
+        "reasoningTokens": 0
+      },
+      "totalNanoAiu": 31821780000,
+      "tokenDetails": {
+        "input": {
+          "tokenCount": 139490
+        },
+        "cache_read": {
+          "tokenCount": 627012
+        },
+        "cache_write": {
+          "tokenCount": 0
+        },
+        "output": {
+          "tokenCount": 1659
+        }
+      }
+    }
+  },
+  "agentMetrics": {
+    "main": {
+      "totalApiDurationMs": 43550,
+      "totalNanoAiu": 31821780000,
+      "modelMetrics": {
+        "gemini-3.5-flash": {
+          "requests": {
+            "count": 22,
+            "cost": 14
+          },
+          "usage": {
+            "inputTokens": 766502,
+            "outputTokens": 1659,
+            "cacheReadTokens": 627012,
+            "cacheWriteTokens": 0,
+            "reasoningTokens": 0
+          },
+          "totalNanoAiu": 31821780000,
+          "tokenDetails": {
+            "input": {
+              "tokenCount": 139490
+            },
+            "cache_read": {
+              "tokenCount": 627012
+            },
+            "cache_write": {
+              "tokenCount": 0
+            },
+            "output": {
+              "tokenCount": 1659
+            }
+          }
+        }
+      }
+    }
+  },
+  "currentModel": "gemini-3.5-flash",
+  "lastCallInputTokens": 51387,
+  "lastCallOutputTokens": 121
+}

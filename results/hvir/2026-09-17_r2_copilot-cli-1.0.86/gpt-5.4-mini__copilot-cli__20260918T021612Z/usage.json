@@ -1,0 +1,99 @@
+{
+  "totalPremiumRequestCost": 0.33,
+  "totalUserRequests": 1,
+  "totalNanoAiu": 7397940000,
+  "tokenDetails": {
+    "input": {
+      "tokenCount": 48966
+    },
+    "cache_read": {
+      "tokenCount": 274432
+    },
+    "cache_write": {
+      "tokenCount": 0
+    },
+    "output": {
+      "tokenCount": 3705
+    }
+  },
+  "totalApiDurationMs": 23365,
+  "sessionStartTime": "2026-09-18T02:16:27.258Z",
+  "codeChanges": {
+    "linesAdded": 75,
+    "linesRemoved": 0,
+    "filesModifiedCount": 1,
+    "filesModified": [
+      "/private/var/tmp/ws/8e789a9e/hvir/README.md"
+    ]
+  },
+  "modelMetrics": {
+    "gpt-5.4-mini": {
+      "requests": {
+        "count": 9,
+        "cost": 0.33
+      },
+      "usage": {
+        "inputTokens": 323398,
+        "outputTokens": 3705,
+        "cacheReadTokens": 274432,
+        "cacheWriteTokens": 0,
+        "reasoningTokens": 1525
+      },
+      "cacheExpiresAt": "2026-09-18T02:46:50.441Z",
+      "totalNanoAiu": 7397940000,
+      "tokenDetails": {
+        "input": {
+          "tokenCount": 48966
+        },
+        "cache_read": {
+          "tokenCount": 274432
+        },
+        "cache_write": {
+          "tokenCount": 0
+        },
+        "output": {
+          "tokenCount": 3705
+        }
+      }
+    }
+  },
+  "agentMetrics": {
+    "main": {
+      "totalApiDurationMs": 23365,
+      "totalNanoAiu": 7397940000,
+      "modelMetrics": {
+        "gpt-5.4-mini": {
+          "requests": {
+            "count": 9,
+            "cost": 0.33
+          },
+          "usage": {
+            "inputTokens": 323398,
+            "outputTokens": 3705,
+            "cacheReadTokens": 274432,
+            "cacheWriteTokens": 0,
+            "reasoningTokens": 1525
+          },
+          "totalNanoAiu": 7397940000,
+          "tokenDetails": {
+            "input": {
+              "tokenCount": 48966
+            },
+            "cache_read": {
+              "tokenCount": 274432
+            },
+            "cache_write": {
+              "tokenCount": 0
+            },
+            "output": {
+              "tokenCount": 3705
+            }
+          }
+        }
+      }
+    }
+  },
+  "currentModel": "gpt-5.4-mini",
+  "lastCallInputTokens": 49937,
+  "lastCallOutputTokens": 164
+}

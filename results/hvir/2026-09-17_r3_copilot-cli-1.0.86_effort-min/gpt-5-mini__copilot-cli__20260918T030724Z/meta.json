@@ -1,0 +1,149 @@
+{
+  "id": "gpt-5-mini__copilot-cli__20260918T030724Z",
+  "batch": "2026-09-17_r3_copilot-cli-1.0.86_effort-min",
+  "target": {
+    "name": "hvir",
+    "url": "https://github.com/jarmak-personal/hvir",
+    "commit": "7acbf8883bc869a9987252833d90b0d250086122",
+    "snapshot_commit": "ca97b8a72d67da22d5da4705101f99fbc80bd9cf"
+  },
+  "model": {
+    "id": "gpt-5-mini",
+    "vendor": "OpenAI",
+    "name": "GPT mini",
+    "version": "5",
+    "variant": null,
+    "display": "GPT-5 mini"
+  },
+  "harness": {
+    "name": "GitHub Copilot CLI",
+    "id": "copilot-cli",
+    "version": "1.0.86"
+  },
+  "prompt": "Please create a README.md for this project.",
+  "started_at": "2026-09-18T03:07:36Z",
+  "finished_at": "2026-09-18T03:08:00Z",
+  "wall_clock_seconds": 24,
+  "exit_code": 0,
+  "setup_exit_code": 0,
+  "readme_produced": true,
+  "readme_bytes": 991,
+  "readme_lines": 35,
+  "usage": {
+    "totalPremiumRequestCost": 0,
+    "totalUserRequests": 1,
+    "totalNanoAiu": 797030000,
+    "tokenDetails": {
+      "input": {
+        "tokenCount": 19462
+      },
+      "cache_read": {
+        "tokenCount": 55552
+      },
+      "cache_write": {
+        "tokenCount": 0
+      },
+      "output": {
+        "tokenCount": 858
+      }
+    },
+    "totalApiDurationMs": 19630,
+    "sessionStartTime": "2026-09-18T03:07:39.526Z",
+    "codeChanges": {
+      "linesAdded": 35,
+      "linesRemoved": 0,
+      "filesModifiedCount": 1,
+      "filesModified": [
+        "/private/var/tmp/ws/397c6232/hvir/README.md"
+      ]
+    },
+    "modelMetrics": {
+      "gpt-5-mini": {
+        "requests": {
+          "count": 5,
+          "cost": 0
+        },
+        "usage": {
+          "inputTokens": 75014,
+          "outputTokens": 858,
+          "cacheReadTokens": 55552,
+          "cacheWriteTokens": 0,
+          "reasoningTokens": 192
+        },
+        "cacheExpiresAt": "2026-09-18T03:37:56.635Z",
+        "totalNanoAiu": 797030000,
+        "tokenDetails": {
+          "input": {
+            "tokenCount": 19462
+          },
+          "cache_read": {
+            "tokenCount": 55552
+          },
+          "cache_write": {
+            "tokenCount": 0
+          },
+          "output": {
+            "tokenCount": 858
+          }
+        }
+      }
+    },
+    "agentMetrics": {
+      "main": {
+        "totalApiDurationMs": 19630,
+        "totalNanoAiu": 797030000,
+        "modelMetrics": {
+          "gpt-5-mini": {
+            "requests": {
+              "count": 5,
+              "cost": 0
+            },
+            "usage": {
+              "inputTokens": 75014,
+              "outputTokens": 858,
+              "cacheReadTokens": 55552,
+              "cacheWriteTokens": 0,
+              "reasoningTokens": 192
+            },
+            "totalNanoAiu": 797030000,
+            "tokenDetails": {
+              "input": {
+                "tokenCount": 19462
+              },
+              "cache_read": {
+                "tokenCount": 55552
+              },
+              "cache_write": {
+                "tokenCount": 0
+              },
+              "output": {
+                "tokenCount": 858
+              }
+            }
+          }
+        }
+      }
+    },
+    "currentModel": "gpt-5-mini",
+    "lastCallInputTokens": 19642,
+    "lastCallOutputTokens": 8
+  },
+  "tool_calls": {
+    "bash": 1,
+    "view": 1,
+    "grep": 1,
+    "create": 1
+  },
+  "reasoning_effort_requested": "low",
+  "reasoning_level": "low",
+  "chat_calls": {
+    "gpt-5-mini": {
+      "low": 5
+    }
+  },
+  "files_viewed": [
+    "package.json"
+  ],
+  "compactions": [],
+  "truncations": 0
+}

@@ -1,0 +1,89 @@
+{
+  "totalPremiumRequestCost": 1,
+  "totalUserRequests": 1,
+  "totalNanoAiu": 40562400000,
+  "tokenDetails": {
+    "input": {
+      "tokenCount": 126368
+    },
+    "cache_read": {
+      "tokenCount": 260608
+    },
+    "output": {
+      "tokenCount": 3764
+    }
+  },
+  "totalApiDurationMs": 68565,
+  "sessionStartTime": "2026-09-18T01:52:56.369Z",
+  "codeChanges": {
+    "linesAdded": 78,
+    "linesRemoved": 0,
+    "filesModifiedCount": 1,
+    "filesModified": [
+      "/private/var/tmp/ws/91e40fcb/hvir/README.md"
+    ]
+  },
+  "modelMetrics": {
+    "grok-4.6": {
+      "requests": {
+        "count": 12,
+        "cost": 1
+      },
+      "usage": {
+        "inputTokens": 386976,
+        "outputTokens": 3764,
+        "cacheReadTokens": 260608,
+        "cacheWriteTokens": 0,
+        "reasoningTokens": 1036
+      },
+      "totalNanoAiu": 40562400000,
+      "tokenDetails": {
+        "input": {
+          "tokenCount": 126368
+        },
+        "cache_read": {
+          "tokenCount": 260608
+        },
+        "output": {
+          "tokenCount": 3764
+        }
+      }
+    }
+  },
+  "agentMetrics": {
+    "main": {
+      "totalApiDurationMs": 68565,
+      "totalNanoAiu": 40562400000,
+      "modelMetrics": {
+        "grok-4.6": {
+          "requests": {
+            "count": 12,
+            "cost": 1
+          },
+          "usage": {
+            "inputTokens": 386976,
+            "outputTokens": 3764,
+            "cacheReadTokens": 260608,
+            "cacheWriteTokens": 0,
+            "reasoningTokens": 1036
+          },
+          "totalNanoAiu": 40562400000,
+          "tokenDetails": {
+            "input": {
+              "tokenCount": 126368
+            },
+            "cache_read": {
+              "tokenCount": 260608
+            },
+            "output": {
+              "tokenCount": 3764
+            }
+          }
+        }
+      }
+    }
+  },
+  "currentModel": "grok-4.6",
+  "lastCallInputTokens": 44645,
+  "lastCallOutputTokens": 71
+}

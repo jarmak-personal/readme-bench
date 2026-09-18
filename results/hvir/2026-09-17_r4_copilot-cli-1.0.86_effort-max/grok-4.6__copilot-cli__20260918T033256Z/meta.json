@@ -1,0 +1,223 @@
+{
+  "id": "grok-4.6__copilot-cli__20260918T033256Z",
+  "batch": "2026-09-17_r4_copilot-cli-1.0.86_effort-max",
+  "target": {
+    "name": "hvir",
+    "url": "https://github.com/jarmak-personal/hvir",
+    "commit": "7acbf8883bc869a9987252833d90b0d250086122",
+    "snapshot_commit": "ca97b8a72d67da22d5da4705101f99fbc80bd9cf"
+  },
+  "model": {
+    "id": "grok-4.6",
+    "vendor": "xAI",
+    "name": "Grok",
+    "version": "4.6",
+    "variant": null,
+    "display": "Grok 4.6"
+  },
+  "harness": {
+    "name": "GitHub Copilot CLI",
+    "id": "copilot-cli",
+    "version": "1.0.86"
+  },
+  "prompt": "Please create a README.md for this project.",
+  "started_at": "2026-09-18T03:33:08Z",
+  "finished_at": "2026-09-18T03:35:23Z",
+  "wall_clock_seconds": 135,
+  "exit_code": 0,
+  "setup_exit_code": 0,
+  "readme_produced": true,
+  "readme_bytes": 5797,
+  "readme_lines": 160,
+  "usage": {
+    "totalPremiumRequestCost": 1,
+    "totalUserRequests": 1,
+    "totalNanoAiu": 61226800000,
+    "tokenDetails": {
+      "input": {
+        "tokenCount": 113457
+      },
+      "cache_read": {
+        "tokenCount": 674816
+      },
+      "output": {
+        "tokenCount": 7991
+      }
+    },
+    "totalApiDurationMs": 129866,
+    "sessionStartTime": "2026-09-18T03:33:11.041Z",
+    "codeChanges": {
+      "linesAdded": 160,
+      "linesRemoved": 0,
+      "filesModifiedCount": 1,
+      "filesModified": [
+        "/private/var/tmp/ws/0d79d7fe/hvir/README.md"
+      ]
+    },
+    "modelMetrics": {
+      "grok-4.6": {
+        "requests": {
+          "count": 18,
+          "cost": 1
+        },
+        "usage": {
+          "inputTokens": 788273,
+          "outputTokens": 7991,
+          "cacheReadTokens": 674816,
+          "cacheWriteTokens": 0,
+          "reasoningTokens": 2170
+        },
+        "totalNanoAiu": 61226800000,
+        "tokenDetails": {
+          "input": {
+            "tokenCount": 113457
+          },
+          "cache_read": {
+            "tokenCount": 674816
+          },
+          "output": {
+            "tokenCount": 7991
+          }
+        }
+      }
+    },
+    "agentMetrics": {
+      "main": {
+        "totalApiDurationMs": 129866,
+        "totalNanoAiu": 61226800000,
+        "modelMetrics": {
+          "grok-4.6": {
+            "requests": {
+              "count": 18,
+              "cost": 1
+            },
+            "usage": {
+              "inputTokens": 788273,
+              "outputTokens": 7991,
+              "cacheReadTokens": 674816,
+              "cacheWriteTokens": 0,
+              "reasoningTokens": 2170
+            },
+            "totalNanoAiu": 61226800000,
+            "tokenDetails": {
+              "input": {
+                "tokenCount": 113457
+              },
+              "cache_read": {
+                "tokenCount": 674816
+              },
+              "output": {
+                "tokenCount": 7991
+              }
+            }
+          }
+        }
+      }
+    },
+    "currentModel": "grok-4.6",
+    "lastCallInputTokens": 66132,
+    "lastCallOutputTokens": 152
+  },
+  "tool_calls": {
+    "view": 85,
+    "glob": 6,
+    "grep": 4,
+    "bash": 1,
+    "create": 1
+  },
+  "reasoning_effort_requested": "xhigh",
+  "reasoning_level": "xhigh",
+  "chat_calls": {
+    "grok-4.6": {
+      "xhigh": 18
+    }
+  },
+  "files_viewed": [
+    ".",
+    ".agents",
+    ".claude",
+    ".githooks",
+    ".githooks/pre-push",
+    ".github",
+    ".github/workflows",
+    ".github/workflows/ci.yml",
+    ".github/workflows/release.yml",
+    ".gitignore",
+    "LICENSE",
+    "THIRD_PARTY_NOTICES.md",
+    "build/linux/after-install.sh",
+    "docs",
+    "electron-builder.yml",
+    "electron.vite.config.ts",
+    "eslint.config.mjs",
+    "package.json",
+    "packages",
+    "packages/rename-noreplace",
+    "scripts",
+    "scripts/architecture-hotspots.json",
+    "scripts/architecture-policy.mts",
+    "scripts/check-adrs.mjs",
+    "scripts/check-seams.sh",
+    "scripts/check-terminal-runtime.mts",
+    "scripts/install-git-hooks.sh",
+    "scripts/native-installer.template.sh",
+    "src",
+    "src/main",
+    "src/main/application-runtime-policy.ts",
+    "src/main/application-runtime.ts",
+    "src/main/git",
+    "src/main/harness/bundled-harness-providers.ts",
+    "src/main/harness/harness-provider.ts",
+    "src/main/harness/providers",
+    "src/main/harness/providers/claude-code.ts",
+    "src/main/harness/providers/codex.ts",
+    "src/main/harness/providers/cursor.ts",
+    "src/main/harness/providers/gemini.ts",
+    "src/main/harness/providers/github-copilot.ts",
+    "src/main/harness/providers/pi.ts",
+    "src/main/harness/providers/shell.ts",
+    "src/main/html-preview-protocol.ts",
+    "src/main/index.ts",
+    "src/main/project-host/project-host.ts",
+    "src/main/pty/pty-supervisor.ts",
+    "src/main/web-pane",
+    "src/main/window",
+    "src/preload/index.ts",
+    "src/renderer",
+    "src/renderer/src",
+    "src/renderer/src/App.tsx",
+    "src/renderer/src/dashboards",
+    "src/renderer/src/document-review",
+    "src/renderer/src/document-review/DocumentReviewControls.tsx",
+    "src/renderer/src/git/GitPanel.tsx",
+    "src/renderer/src/sessions",
+    "src/renderer/src/sessions/SessionsOverview.tsx",
+    "src/renderer/src/settings/SettingsDialog.tsx",
+    "src/renderer/src/settings/settings-navigation.ts",
+    "src/renderer/src/settings/settings.ts",
+    "src/renderer/src/terminal/ghostty-terminal-pane.ts",
+    "src/renderer/src/tree",
+    "src/renderer/src/viewer/FileViewer.tsx",
+    "src/renderer/src/workbench",
+    "src/renderer/src/workbench/use-workbench-commands.ts",
+    "src/renderer/src/workspaces/ProjectsBar.tsx",
+    "src/renderer/src/workspaces/SessionDialog.tsx",
+    "src/shared",
+    "src/shared/document-review.ts",
+    "src/shared/harness-profile.ts",
+    "src/shared/harness-provider.ts",
+    "src/shared/html-preview.ts",
+    "src/shared/index.ts",
+    "src/shared/ipc-contract.ts",
+    "src/shared/keybindings.ts",
+    "src/shared/viewer-types.ts",
+    "src/shared/workspace-types.ts",
+    "src/workers",
+    "test",
+    "test/native-command.test.ts",
+    "tsconfig.json",
+    "vitest.config.ts"
+  ],
+  "compactions": [],
+  "truncations": 0
+}

@@ -1,0 +1,181 @@
+# hvir
+
+A modern terminal application built with Electron that combines terminal emulation, Git integration, and workspace management.
+
+## Features
+
+- **Terminal Emulation**: Full-featured terminal with PTY support powered by Ghostty Web
+- **Git Integration**: Native Git workflow integration with workspace support
+- **SSH Support**: Built-in SSH client for remote connections
+- **Workspaces**: Manage multiple projects and terminal sessions
+- **Code Preview**: Integrated markdown and code preview capabilities
+- **Document Review**: Built-in document review and annotation tools
+- **Multi-Session**: Handle multiple terminal sessions with state persistence
+- **Cross-Platform**: Supports macOS and Linux
+
+## Requirements
+
+- **Node.js**: 24.0 or higher
+- **macOS**: 10.14+ or **Linux**: Ubuntu 20.04+
+- **npm**: 9.0 or higher
+
+## Quick Start
+
+### Installation
+
+```bash
+npm install
+```
+
+This will automatically install dependencies and download the Electron runtime.
+
+### Development
+
+Start the development server with hot reload:
+
+```bash
+npm run dev
+```
+
+### Build
+
+Build the application for your platform:
+
+```bash
+npm run build
+```
+
+### Packaging
+
+Create a platform-specific installer:
+
+```bash
+# macOS (Apple Silicon)
+npm run pack:mac:arm64
+
+# Linux (x64)
+npm run pack:linux:x64
+
+# Linux (ARM64)
+npm run pack:linux:arm64
+```
+
+## Project Structure
+
+```
+├── src/
+│   ├── main/           # Electron main process
+│   ├── preload/        # Preload scripts for IPC
+│   ├── renderer/       # React-based UI
+│   ├── shared/         # Shared types and utilities
+│   └── workers/        # Background workers (git, echo)
+├── packages/
+│   └── rename-noreplace/  # Native module for safe file operations
+├── scripts/            # Build and utility scripts
+└── test/              # Test files
+```
+
+## Available Scripts
+
+### Development & Build
+
+- `npm run dev` - Start development server with hot reload
+- `npm run build` - Build for production
+- `npm run build:smoke` - Build with smoke testing enabled
+- `npm run preview` - Preview production build
+
+### Testing & Verification
+
+- `npm test` - Run unit tests
+- `npm run test:watch` - Run tests in watch mode
+- `npm run test:mutation` - Run mutation testing with Stryker
+- `npm run verify` - Run full verification suite (linting, type checking, tests)
+
+### Code Quality
+
+- `npm run lint` - Run ESLint
+- `npm run format` - Format code with Prettier
+- `npm run format:check` - Check code formatting
+- `npm run typecheck` - Run TypeScript type checking
+- `npm run architecture:check` - Verify architecture constraints
+
+### Smoke Testing
+
+- `npm run smoke` - Run comprehensive smoke tests
+- `npm run smoke:macos` - Run macOS-specific smoke tests
+- `npm run smoke:scenario` - Run specific smoke scenario
+- `npm run smoke:capacity` - Performance capacity test
+
+### Platform-Specific Testing
+
+- `npm run smoke:macos:installed` - Test macOS installation
+- `npm run smoke:linux:installed` - Test Linux installation
+
+## Contributing
+
+Contributions are welcome! Please follow these guidelines:
+
+1. Install git hooks: `npm run hooks:install`
+2. Make sure code passes verification: `npm run verify`
+3. Follow the project's architecture constraints: `npm run architecture:check`
+4. Submit pull requests to the `main` or `epic/*` branches
+
+## Architecture
+
+The application follows a modular architecture with clear separation between:
+
+- **Main Process**: Handles application lifecycle, file system, and native operations
+- **Preload Scripts**: Secure IPC bridge between main and renderer processes
+- **Renderer Process**: React-based UI with component composition
+- **Workers**: Background processing for Git operations and other async tasks
+- **Shared Types**: Centralized type definitions for type safety across processes
+
+## License
+
+MIT License - See [LICENSE](LICENSE) file for details
+
+## Additional Resources
+
+- [Architecture Documentation](scripts/architecture-hotspots.json) - View project architecture hotspots
+- [Third-party Licenses](THIRD_PARTY_NOTICES.md) - Third-party software notices
+
+## Troubleshooting
+
+### Installation Issues
+
+If you encounter issues during installation, try:
+
+```bash
+npm run install:runtime
+```
+
+This will rebuild native modules and install the Electron runtime.
+
+### Build Issues
+
+For TypeScript issues, run:
+
+```bash
+npm run typecheck
+```
+
+For linting issues:
+
+```bash
+npm run lint -- --fix
+```
+
+### Testing the Application
+
+Run the smoke tests to verify the build:
+
+```bash
+npm run smoke
+```
+
+## Development Tips
+
+- Use `npm run dev` for active development with hot reload
+- Check `npm run architecture:check` before committing to ensure architecture compliance
+- Run `npm run test:watch` to continuously validate changes
+- Use `npm run format` to automatically fix code formatting issues

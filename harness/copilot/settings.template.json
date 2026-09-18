@@ -1,0 +1,41 @@
+{
+  "experimental": true,
+  "autoUpdate": false,
+  "banner": "never",
+  "renderMarkdown": false,
+  "sandbox": {
+    "enabled": true,
+    "addCurrentWorkingDirectory": true,
+    "allowDevToolAccess": false,
+    "allowBypass": false,
+    "auth": {
+      "git": false,
+      "gh": false
+    },
+    "sandboxMcpServers": true,
+    "sandboxLspServers": true,
+    "userPolicy": {
+      "filesystem": {
+        "readwritePaths": [
+          "${FAKE_HOME}",
+          "${CACHE_ROOT}"
+        ],
+        "readonlyPaths": [
+          "${REAL_HOME}/.local/bin"
+        ],
+        "deniedPaths": [
+          "${REAL_HOME}"
+        ],
+        "clearPolicyOnExit": false
+      },
+      "network": {
+        "allowOutbound": false,
+        "allowLocalNetwork": false
+      },
+      "seatbelt": {
+        "keychainAccess": false
+      }
+    }
+  },
+  "_comment": "Template. scripts/run-copilot.sh substitutes ${REAL_HOME} (the invoking user's home, denied), ${FAKE_HOME} (the per-run scratch HOME, writable) and ${CACHE_ROOT} (shared tool caches) and writes the result to $FAKE_HOME/.copilot/settings.json before each run."
+}

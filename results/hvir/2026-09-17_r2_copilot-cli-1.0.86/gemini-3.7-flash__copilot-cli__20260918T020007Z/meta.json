@@ -1,0 +1,177 @@
+{
+  "id": "gemini-3.7-flash__copilot-cli__20260918T020007Z",
+  "batch": "2026-09-17_r2_copilot-cli-1.0.86",
+  "target": {
+    "name": "hvir",
+    "url": "https://github.com/jarmak-personal/hvir",
+    "commit": "7acbf8883bc869a9987252833d90b0d250086122",
+    "snapshot_commit": "ca97b8a72d67da22d5da4705101f99fbc80bd9cf"
+  },
+  "model": {
+    "id": "gemini-3.7-flash",
+    "vendor": "Google",
+    "name": "Gemini Flash",
+    "version": "3.7",
+    "variant": null,
+    "display": "Gemini 3.7 Flash"
+  },
+  "harness": {
+    "name": "GitHub Copilot CLI",
+    "id": "copilot-cli",
+    "version": "1.0.86"
+  },
+  "prompt": "Please create a README.md for this project.",
+  "started_at": "2026-09-18T02:00:19Z",
+  "finished_at": "2026-09-18T02:04:10Z",
+  "wall_clock_seconds": 231,
+  "exit_code": 0,
+  "setup_exit_code": 0,
+  "readme_produced": true,
+  "readme_bytes": 5918,
+  "readme_lines": 136,
+  "usage": {
+    "totalPremiumRequestCost": 14,
+    "totalUserRequests": 1,
+    "totalNanoAiu": 26226172500,
+    "tokenDetails": {
+      "input": {
+        "tokenCount": 223787
+      },
+      "cache_read": {
+        "tokenCount": 1087353
+      },
+      "cache_write": {
+        "tokenCount": 0
+      },
+      "output": {
+        "tokenCount": 3432
+      }
+    },
+    "totalApiDurationMs": 114045,
+    "sessionStartTime": "2026-09-18T02:00:22.091Z",
+    "codeChanges": {
+      "linesAdded": 136,
+      "linesRemoved": 0,
+      "filesModifiedCount": 1,
+      "filesModified": [
+        "/private/var/tmp/ws/dcb2caaa/hvir/README.md"
+      ]
+    },
+    "modelMetrics": {
+      "gemini-3.7-flash": {
+        "requests": {
+          "count": 33,
+          "cost": 14
+        },
+        "usage": {
+          "inputTokens": 1311140,
+          "outputTokens": 3432,
+          "cacheReadTokens": 1087353,
+          "cacheWriteTokens": 0,
+          "reasoningTokens": 4243
+        },
+        "totalNanoAiu": 26226172500,
+        "tokenDetails": {
+          "input": {
+            "tokenCount": 223787
+          },
+          "cache_read": {
+            "tokenCount": 1087353
+          },
+          "cache_write": {
+            "tokenCount": 0
+          },
+          "output": {
+            "tokenCount": 3432
+          }
+        }
+      }
+    },
+    "agentMetrics": {
+      "main": {
+        "totalApiDurationMs": 114045,
+        "totalNanoAiu": 26226172500,
+        "modelMetrics": {
+          "gemini-3.7-flash": {
+            "requests": {
+              "count": 33,
+              "cost": 14
+            },
+            "usage": {
+              "inputTokens": 1311140,
+              "outputTokens": 3432,
+              "cacheReadTokens": 1087353,
+              "cacheWriteTokens": 0,
+              "reasoningTokens": 4243
+            },
+            "totalNanoAiu": 26226172500,
+            "tokenDetails": {
+              "input": {
+                "tokenCount": 223787
+              },
+              "cache_read": {
+                "tokenCount": 1087353
+              },
+              "cache_write": {
+                "tokenCount": 0
+              },
+              "output": {
+                "tokenCount": 3432
+              }
+            }
+          }
+        }
+      }
+    },
+    "currentModel": "gemini-3.7-flash",
+    "lastCallInputTokens": 61747,
+    "lastCallOutputTokens": 196
+  },
+  "tool_calls": {
+    "glob": 4,
+    "view": 31,
+    "bash": 7,
+    "read_bash": 2,
+    "create": 1
+  },
+  "reasoning_level": "medium",
+  "chat_calls": {
+    "gemini-3.7-flash": {
+      "medium": 33
+    }
+  },
+  "files_viewed": [
+    ".",
+    ".github/workflows/ci.yml",
+    ".github/workflows/release.yml",
+    ".prettierignore",
+    ".prettierrc.json",
+    "/private/var/tmp/ws/dcb2caaa/home/tmp/1789696861088-copilot-tool-output-34700-e12c67f0-32a4-4f0f-afd6-fda89ff35426.txt",
+    "LICENSE",
+    "README.md",
+    "THIRD_PARTY_NOTICES.md",
+    "docs",
+    "electron-builder.yml",
+    "package.json",
+    "packages",
+    "scripts/architecture-policy.mts",
+    "scripts/check-adrs.mjs",
+    "scripts/check-seams.sh",
+    "src",
+    "src/main",
+    "src/main/harness/harness-provider.ts",
+    "src/main/index.ts",
+    "src/preload",
+    "src/renderer",
+    "src/renderer/src",
+    "src/renderer/src/App.tsx",
+    "src/renderer/src/settings/settings.ts",
+    "src/shared",
+    "src/shared/harness-profile.ts",
+    "src/shared/harness-provider.ts",
+    "src/shared/workspace-types.ts",
+    "test"
+  ],
+  "compactions": [],
+  "truncations": 0
+}

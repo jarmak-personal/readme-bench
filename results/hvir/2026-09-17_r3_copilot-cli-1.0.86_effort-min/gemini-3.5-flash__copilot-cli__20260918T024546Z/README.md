@@ -1,0 +1,71 @@
+# hvir
+
+An advanced, modern **Electron-based Terminal Workbench** designed for seamless local and remote (SSH) workspace coordination, featuring robust integration with terminal-based AI agents (such as Claude Code and GitHub Copilot CLI), native PTY terminal handling, Git workflow operations, diagnostics journaling, document review, and dynamic tabbed workspaces.
+
+---
+
+## Key Features
+
+- **AI-Agent Terminal Harnesses**: Integration with tools like Claude Code, Gemini, and GitHub Copilot CLI. Dynamic monitoring of agent-session telemetry, recovery states, and pressure/context warnings.
+- **Multitasking Workbench Layout**: Split viewer panes (supporting Source, Diff, Markdown Render, and Image viewers), terminal split-decks, and sidebar navigation controls.
+- **Remote SSH Workspaces**: Built-in SSH client lifecycle pool with file operations, identity sources, SSH watches, and directory search over remote configurations.
+- **Integrated Git Panel**: Advanced Git history graphs, untracked line-counts, branch management, and secure mutation coordination.
+- **Diagnostic Intake & Reports**: Journaling of application metrics, renderer lifecycle events, and automated health checks to verify workbench operations.
+- **Document Review Workflows**: In-app document review delivery, retention controls, and metadata validation pipelines.
+
+---
+
+## Project Structure
+
+- `src/main/`: Core Electron main-process runtime. Coordinates OS PTY terminals, worker hosts, secure IPC authority, project file confinement, SSH tunnels, and Git background workers.
+- `src/renderer/`: React + TypeScript frontend utilizing CodeMirror, Xterm.js (via Ghostty Web / webvt components), and custom flex layouts.
+- `src/preload/`: High-performance Electron preloads for isolated file pasting and diagnostic intakes.
+- `src/shared/`: Shared TypeScript contracts, interfaces, and protocol definitions used across main, renderer, and background workers.
+- `packages/rename-noreplace/`: A custom high-performance native binding package to optimize staging and moving file boundaries safely.
+- `scripts/`: Custom testing, automated smoke scenarios (`npm run smoke`), project management tools, ADR compliance checks, and builder setups.
+
+---
+
+## Getting Started
+
+### Prerequisites
+
+- **Node.js**: `v24` or higher.
+- Native build tools (such as `make`, `g++`, or Visual Studio build tools) to rebuild Native Addons.
+
+### Installation
+
+Clone the repository and install the dependencies:
+
+```bash
+npm install
+```
+
+This will automatically trigger postinstall hooks to compile the Electron native runtime bindings (including `node-pty` and `@hvir/rename-noreplace`).
+
+### Development Commands
+
+| Command | Description |
+|---|---|
+| `npm run dev` | Launch the app in Electron development mode. |
+| `npm run build` | Perform TypeScript typechecks and build production-ready files. |
+| `npm run lint` | Run ESLint across the codebase. |
+| `npm run format` | Auto-format codebase styles using Prettier. |
+| `npm run test` | Execute unit tests via Vitest. |
+| `npm run verify` | Run ADR checks, architecture validation, linting, and tests. |
+| `npm run smoke` | Execute the end-to-end integration and smoke scenario suite. |
+
+---
+
+## Testing & Architecture Gates
+
+`hvir` enforces strict modularity boundaries:
+- **Architectural Check**: `npm run architecture:check` enforces layer hotspots and directory structure limits.
+- **ADR Gate**: `npm run check-adrs` verifies that all Architectural Decision Records in the repository are properly formatted and listed in design logs.
+- **Smoke Gauntlet**: `npm run gauntlet` runs full pipeline checks to guarantee reliability under heavy capacity and isolation tests.
+
+---
+
+## License
+
+This project is licensed under the MIT License. See `LICENSE` for details.

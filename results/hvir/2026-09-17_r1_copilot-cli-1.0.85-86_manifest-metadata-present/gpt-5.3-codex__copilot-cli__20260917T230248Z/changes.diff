@@ -1,0 +1,60 @@
+diff --git a/README.md b/README.md
+new file mode 100644
+index 0000000..b51e570
+--- /dev/null
++++ b/README.md
+@@ -0,0 +1,54 @@
++# hvir
++
++**hvir** is a lightweight, view-first workbench for agentic development, built with Electron, React, and TypeScript. It combines terminal sessions, file viewing, Git workflows, document review, session tracking, and web panes in a single desktop application.
++
++## Requirements
++
++- Node.js **24+**
++- npm
++- macOS or Linux for packaging/smoke workflows in this repository
++
++## Getting started
++
++```bash
++npm ci
++npm run dev
++```
++
++The app uses `electron-vite` for local development and builds native runtime dependencies during install.
++
++## Common commands
++
++| Command | Purpose |
++|---|---|
++| `npm run dev` | Start the Electron app in development mode |
++| `npm run build` | Type-check and create a production build |
++| `npm run test` | Run the Vitest suite |
++| `npm run lint` | Run ESLint |
++| `npm run typecheck` | Run TypeScript checks for node/web targets |
++| `npm run verify` | Full policy/lint/type/test verification gate |
++| `npm run smoke` | Run production Electron smoke scenarios |
++| `npm run smoke:scenario -- <scenario...>` | Run selected smoke scenario(s) |
++
++## Architecture at a glance
++
++- `src/main` — Electron main-process runtime, IPC handler wiring, project/workspace orchestration, PTY/Git/document-review coordination.
++- `src/preload` — secure bridge exposing the typed `window.hvir` API and enforcing IPC contract boundaries.
++- `src/renderer` — React UI for workspaces, terminals, file viewer/diff, Git panels/graph, sessions, document review, settings, and web panes.
++- `src/workers` — utility-process workers (including Git worker isolation paths).
++- `src/shared` — shared contracts and types (IPC, workspace, diagnostics, Git, viewer, sessions, terminal behaviors).
++- `test` — Vitest unit/integration coverage and smoke/acceptance policy fixtures.
++
++## Packaging and platform-specific workflows
++
++Examples of repository-provided packaging commands:
++
++- `npm run pack:mac:arm64`
++- `npm run pack:linux:x64`
++- `npm run pack:linux:arm64`
++
++Additional SSH acceptance and installed-package smoke commands are available under `scripts/` and exposed via `package.json` scripts.
++
++## License
++
++[MIT](./LICENSE)

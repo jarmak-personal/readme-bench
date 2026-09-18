@@ -1,0 +1,107 @@
+diff --git a/README.md b/README.md
+new file mode 100644
+index 0000000..8ecc79c
+--- /dev/null
++++ b/README.md
+@@ -0,0 +1,101 @@
++# hvir
++
++A lightweight, view-first workbench for agentic development.
++
++hvir is an Electron desktop application that brings together a terminal, Git-aware views, SSH, and a document/code viewer into a single workbench tuned for working alongside coding agents.
++
++## Features
++
++- **View-first workbench** — a document and code viewer built on CodeMirror with Shiki syntax highlighting, Markdown, task lists, and Mermaid diagrams.
++- **Integrated terminals** — native PTYs via `node-pty`, plus a web-based terminal backed by `ghostty-web`, with themeable presentation and split/move support.
++- **Git-aware workflows** — first-class Git workflow, diff/merge views (`@codemirror/merge`), and workspace-remote awareness.
++- **SSH support** — remote workspaces via `ssh2`, with acceptance tooling for real hosts.
++- **Cross-platform** — packaged for macOS (pkg) and Linux (deb) on x64 and arm64.
++
++## Requirements
++
++- **Node.js** ≥ 24
++- **npm** (matching the bundled `package-lock.json`)
++- Platform toolchains for native module rebuilds (Xcode Command Line Tools on macOS; `build-essential` and `python3` on Linux).
++
++## Getting started
++
++```bash
++# Install dependencies (also installs Electron runtime and rebuilds native modules)
++npm install
++
++# Run the app in development
++npm run dev
++```
++
++## Building
++
++```bash
++# Type-check and build renderer + main bundles
++npm run build
++
++# Produce a directory build (no installer)
++npm run build:dir
++
++# Platform installers
++npm run pack:mac:arm64
++npm run pack:linux:x64
++npm run pack:linux:arm64
++```
++
++## Quality gates
++
++```bash
++npm run lint             # ESLint
++npm run typecheck        # tsc for node and web projects
++npm test                 # Vitest
++npm run format:check     # Prettier
++npm run verify           # Seams + ADRs + architecture + lint + typecheck + tests
++```
++
++Additional targeted checks include `npm run check-seams`, `npm run check-adrs`, and `npm run architecture:check`.
++
++### Smoke and acceptance
++
++```bash
++npm run smoke                 # Full smoke suite (built once, then all scenarios)
++npm run smoke:macos           # macOS-focused subset
++npm run smoke:scenario -- <scenario-name>
++npm run acceptance:ssh:macos  # macOS SSH acceptance
++```
++
++Mutation testing is available via `npm run test:mutation` (Stryker).
++
++## Project layout
++
++```
++src/
++  main/       Electron main process
++  preload/    Preload scripts
++  renderer/   React 19 renderer (CodeMirror, Shiki, Mermaid, ghostty-web)
++  shared/    Cross-process contracts and utilities
++  workers/    Background workers
++packages/     Local workspace packages (e.g. @hvir/rename-noreplace)
++scripts/      Build, smoke, and project-management scripts
++test/         Test suites
++build/        Build assets
++```
++
++Configuration lives at the repo root: `electron.vite.config.ts`, `electron-builder.yml`, `vitest.config.ts`, `stryker.config.json`, `eslint.config.mjs`, and the `tsconfig.*.json` family.
++
++## Git hooks
++
++Install the repository's Git hooks with:
++
++```bash
++npm run hooks:install
++```
++
++## License
++
++Released under the [MIT License](./LICENSE). Third-party notices are collected in [`THIRD_PARTY_NOTICES.md`](./THIRD_PARTY_NOTICES.md).
++
++## Links
++
++- Homepage: <https://github.com/jarmak-personal/hvir>
++- Issues: <https://github.com/jarmak-personal/hvir/issues>

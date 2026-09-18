@@ -1,0 +1,99 @@
+{
+  "totalPremiumRequestCost": 15,
+  "totalUserRequests": 1,
+  "totalNanoAiu": 59566150000,
+  "tokenDetails": {
+    "input": {
+      "tokenCount": 14
+    },
+    "cache_read": {
+      "tokenCount": 137859
+    },
+    "cache_write": {
+      "tokenCount": 27261
+    },
+    "output": {
+      "tokenCount": 2338
+    }
+  },
+  "totalApiDurationMs": 40927,
+  "sessionStartTime": "2026-09-18T02:19:39.624Z",
+  "codeChanges": {
+    "linesAdded": 65,
+    "linesRemoved": 0,
+    "filesModifiedCount": 1,
+    "filesModified": [
+      "/private/var/tmp/ws/68b96e9b/hvir/README.md"
+    ]
+  },
+  "modelMetrics": {
+    "claude-fable-5": {
+      "requests": {
+        "count": 7,
+        "cost": 15
+      },
+      "usage": {
+        "inputTokens": 165134,
+        "outputTokens": 2338,
+        "cacheReadTokens": 137859,
+        "cacheWriteTokens": 27261,
+        "reasoningTokens": 257
+      },
+      "cacheExpiresAt": "2026-09-18T02:25:16.656Z",
+      "totalNanoAiu": 59566150000,
+      "tokenDetails": {
+        "input": {
+          "tokenCount": 14
+        },
+        "cache_read": {
+          "tokenCount": 137859
+        },
+        "cache_write": {
+          "tokenCount": 27261
+        },
+        "output": {
+          "tokenCount": 2338
+        }
+      }
+    }
+  },
+  "agentMetrics": {
+    "main": {
+      "totalApiDurationMs": 40927,
+      "totalNanoAiu": 59566150000,
+      "modelMetrics": {
+        "claude-fable-5": {
+          "requests": {
+            "count": 7,
+            "cost": 15
+          },
+          "usage": {
+            "inputTokens": 165134,
+            "outputTokens": 2338,
+            "cacheReadTokens": 137859,
+            "cacheWriteTokens": 27261,
+            "reasoningTokens": 257
+          },
+          "totalNanoAiu": 59566150000,
+          "tokenDetails": {
+            "input": {
+              "tokenCount": 14
+            },
+            "cache_read": {
+              "tokenCount": 137859
+            },
+            "cache_write": {
+              "tokenCount": 27261
+            },
+            "output": {
+              "tokenCount": 2338
+            }
+          }
+        }
+      }
+    }
+  },
+  "currentModel": "claude-fable-5",
+  "lastCallInputTokens": 27263,
+  "lastCallOutputTokens": 228
+}

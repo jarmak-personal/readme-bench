@@ -1,0 +1,174 @@
+diff --git a/README.md b/README.md
+new file mode 100644
+index 0000000..f66ab42
+--- /dev/null
++++ b/README.md
+@@ -0,0 +1,168 @@
++# hvir
++
++A desktop developer workbench that stitches together terminals, a file viewer, Git, and
++remote (SSH) workspaces into a single Electron application.
++
++hvir is designed for people who spend their day switching between a terminal, a file
++tree, a diff, and a Git graph. It runs the same UI against local folders and remote SSH
++hosts, so working "on the other machine" feels the same as working locally.
++
++## Features
++
++- **Fast, native terminals** — powered by [`node-pty`](https://github.com/microsoft/node-pty)
++  in the main process and a customized [ghostty-web](https://github.com/jarmak-personal/ghostty-web)
++  renderer, with theming, splits, and multi-workspace attention badges.
++- **Code viewer** — a [CodeMirror 6](https://codemirror.net/) viewer with tabs, split
++  panes, diff view, [Shiki](https://shiki.style/) syntax highlighting, Markdown preview
++  (`markdown-it` + task lists), and [Mermaid](https://mermaid.js.org/) diagrams.
++- **Git-native workflow** — status, staging, diff, branch switching, worktrees, fetch,
++  pull, and a Git graph view coordinated through a dedicated worker.
++- **Remote workspaces over SSH** — open a project on a remote host with the same file
++  tree, viewer, and terminals; SSH prompts are handled by the app.
++- **Document review mode** — a workspace mode purpose-built for reading a set of
++  changes side-by-side with the terminal.
++- **HTML preview** — a sandboxed `hvir-preview:` protocol for previewing rendered
++  Markdown, Mermaid, and other HTML content.
++- **Workspaces & sessions** — projects, session dialogs, and per-workspace layout are
++  persisted so a restart puts everything back where it was.
++
++## Platforms
++
++hvir targets desktop platforms with signed installers:
++
++- **macOS** — Apple Silicon (`arm64`) `.pkg` installers, hardened runtime, installed
++  under `/Applications`.
++- **Linux** — Debian packages (`.deb`) for `x64` and `arm64`, with an AppArmor profile
++  and post-install hooks.
++
++Windows is not a supported packaging target today.
++
++## Requirements
++
++- **Node.js** — `>= 24` (enforced by `engines` in `package.json`).
++- **npm** — bundled with your Node.js install.
++- **Native toolchain** — required for `node-gyp` to build the private
++  `@hvir/rename-noreplace` Node-API addon and to rebuild `node-pty` against the
++  Electron ABI.
++  - macOS: Xcode Command Line Tools (`xcode-select --install`).
++  - Linux: `build-essential`, `python3`, and standard headers.
++- **Electron** — installed automatically by the `postinstall` hook.
++
++## Getting started
++
++Clone the repository and install dependencies. The `postinstall` script fetches the
++Electron runtime, rebuilds the native addons, and prepares `node-pty` for Electron's
++Node ABI:
++
++```bash
++npm install
++```
++
++Run the app in development against the current source tree:
++
++```bash
++npm run dev
++```
++
++`electron-vite` will start the main, preload, and renderer bundles and open a hvir
++window.
++
++## Building
++
++Produce a production build (typecheck, then bundle main + preload + renderer):
++
++```bash
++npm run build
++```
++
++Package installers with `electron-builder`:
++
++```bash
++# macOS (Apple Silicon .pkg)
++npm run pack:mac:arm64
++
++# Signed macOS build (requires code-signing environment)
++npm run pack:mac:arm64:signed
++
++# Linux .deb
++npm run pack:linux:x64
++npm run pack:linux:arm64
++```
++
++Signed macOS builds require the usual Apple Developer signing environment
++(`CSC_LINK`, `CSC_KEY_PASSWORD`, notarization credentials, etc.) — see
++`electron-builder.yml` for the exact entitlements and installer configuration.
++
++## Quality gates
++
++hvir ships with a full verification pipeline. The `verify` script runs the same checks
++CI runs and is the recommended pre-push command:
++
++```bash
++npm run verify
++```
++
++Individual checks are also exposed:
++
++```bash
++npm run lint              # ESLint
++npm run typecheck         # tsc for node + web projects
++npm test                  # Vitest
++npm run test:watch        # Vitest in watch mode
++npm run test:mutation     # Stryker mutation tests
++npm run check-seams       # Architectural seam enforcement
++npm run check-adrs        # ADR consistency check
++npm run architecture:check # Architecture hotspot budget
++npm run format            # Prettier (write)
++npm run format:check      # Prettier (check only)
++```
++
++### Smoke and acceptance tests
++
++The end-to-end scenarios drive a real Electron build against synthetic workspaces:
++
++```bash
++npm run smoke              # Full scenario suite
++npm run smoke:macos        # macOS-focused subset
++npm run smoke:linux:installed  # From an installed .deb package
++npm run smoke:macos:installed  # From an installed .pkg
++npm run smoke:isolation    # Interruption/isolation coverage
++```
++
++Real-host SSH acceptance runs against a live SSH server:
++
++```bash
++npm run acceptance:ssh:macos
++npm run acceptance:ssh:real-host
++```
++
++## Repository layout
++
++```
++src/
++  main/       Electron main process — window, IPC, PTY, Git, SSH, workspaces
++  preload/    Preload scripts bridging main and renderer
++  renderer/   React 19 UI — terminal, viewer, Git panel, workspaces, settings
++  shared/     Types and IPC contracts shared across processes
++  workers/    Worker entry points (echo, Git worker host, etc.)
++packages/
++  rename-noreplace/  Private Node-API addon for atomic cross-directory rename
++scripts/    Build, release, smoke, and project-management scripts
++build/      Icons, entitlements, Linux packaging helpers, native binaries
++test/       Test helpers and fixtures
++```
++
++## Git hooks
++
++Install the repository's Git hooks (formatting and lint gates) into your local clone:
++
++```bash
++npm run hooks:install
++```
++
++## License
++
++hvir is released under the [MIT License](./LICENSE).
++
++Third-party components redistributed with hvir are documented in
++[`THIRD_PARTY_NOTICES.md`](./THIRD_PARTY_NOTICES.md).

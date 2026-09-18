@@ -1,0 +1,140 @@
+# hvir
+
+hvir is a desktop development workbench that brings terminals, files, Git, and
+local or SSH workspaces into one application. It is built with Electron, React,
+and TypeScript, with terminal rendering provided by `ghostty-web` and local
+pseudo-terminals powered by `node-pty`.
+
+## Features
+
+- **Projects and workspaces:** switch between projects and Git worktrees, or open
+  folders on a remote host over SSH.
+- **Integrated terminals:** organize terminal sessions with split layouts, search
+  terminal output, and open file paths from the terminal.
+- **File viewing and editing:** browse and search files, edit source, compare
+  changes, and preview rendered content, including Markdown and Mermaid diagrams.
+- **Git tools:** inspect changes, history, and commit graphs, switch branches, and
+  fetch or pull without leaving the workbench.
+- **Web panes:** keep web content alongside files and terminals.
+- **Customization and diagnostics:** configure appearance, terminal themes,
+  keybindings, and harness profiles; inspect workbench health and diagnostic reports.
+
+## Platforms
+
+The repository provides native packaging targets for:
+
+| Platform | Architecture | Package |
+| --- | --- | --- |
+| macOS | Apple silicon (`arm64`) | `.pkg` |
+| Linux | `x64`, `arm64` | `.deb` |
+
+Linux packages require glibc 2.35 or newer and the desktop libraries declared in
+[`electron-builder.yml`](electron-builder.yml). The installer targets systems
+with APT/dpkg and checks Chromium sandbox support. Windows and Intel macOS are
+not current native release targets.
+
+## Run from source
+
+### Prerequisites
+
+- **Node.js 24 or newer** and npm.
+- **Git** for repository and worktree operations.
+- A native build toolchain for the Node.js addons: Python and a C/C++ compiler
+  with build tools. On macOS, use Xcode Command Line Tools; on Linux, use your
+  distribution's development toolchain.
+- A graphical desktop environment to run Electron.
+
+From the repository root:
+
+```sh
+npm ci
+npm run dev
+```
+
+Installation downloads the Electron runtime, builds the local
+`@hvir/rename-noreplace` addon, and rebuilds `node-pty` for Electron. Do not skip
+install scripts or omit optional dependencies: the local native addon is included
+in the runtime installation step.
+
+The development and production build commands check that the installed
+`ghostty-web` runtime matches this checkout. If that check reports a mismatch,
+run `npm ci` in the affected worktree and retry. To rebuild native runtime
+dependencies after a toolchain or Electron change, use `npm run install:runtime`.
+
+### Using the workbench
+
+Open the project picker to choose a local folder or an SSH host and remote
+folder. SSH host choices are read from `~/.ssh/config`; authentication and host-key
+prompts are handled in the application.
+
+Use the project and workspace bars to move between checkouts, the file tree to
+open files, and the terminal area to run commands. The viewer supports file,
+diff, and rendered-content workflows, while Git views provide repository history
+and change inspection.
+
+## Development commands
+
+| Command | Purpose |
+| --- | --- |
+| `npm run dev` | Start the Electron development application. |
+| `npm run build` | Type-check and build the production application into `out/`. |
+| `npm run preview` | Launch the previously built application. |
+| `npm test` | Run the Vitest suite once. |
+| `npm run test:watch` | Run Vitest in watch mode. |
+| `npm run typecheck` | Check main/preload and renderer TypeScript. |
+| `npm run lint` | Run ESLint. |
+| `npm run format:check` | Check formatting with Prettier. |
+| `npm run verify` | Run seam, ADR, and architecture checks, lint, type checks, and tests. |
+| `npm run smoke` | Build and run the Electron smoke scenarios. |
+| `npm run hooks:install` | Install the repository's Git hooks. |
+
+Smoke scenarios launch Electron and require a display. Linux CI runs them with
+`xvfb-run -a npm run smoke`. To run a single scenario:
+
+```sh
+npm run smoke:scenario -- viewer-content
+```
+
+See [`package.json`](package.json) for additional platform acceptance, performance,
+and mutation-testing commands, and [the CI workflow](.github/workflows/ci.yml)
+for the automated verification setup.
+
+## Packaging
+
+Run the appropriate command on the target platform with its native build tools:
+
+```sh
+# Unpacked application for the current platform
+npm run build:dir
+
+# macOS, Apple silicon
+npm run pack:mac:arm64
+
+# Linux, select the target architecture
+npm run pack:linux:x64
+npm run pack:linux:arm64
+```
+
+Packaging outputs go to `dist/`. macOS release signing requires separately
+configured signing credentials; `npm run pack:mac:arm64:signed` requires code
+signing rather than allowing an unsigned build. Release automation is defined in
+[`.github/workflows/release.yml`](.github/workflows/release.yml).
+
+## Project layout
+
+| Path | Contents |
+| --- | --- |
+| `src/main/` | Electron application lifecycle, project hosts, terminals, Git, and workspace services. |
+| `src/preload/` | The bridge between Electron and the renderer. |
+| `src/renderer/` | React workbench UI, file viewers, terminals, and settings. |
+| `src/shared/` | Shared types, IPC contracts, and cross-process utilities. |
+| `src/workers/` | Utility-process worker entry points. |
+| `packages/rename-noreplace/` | Local native filesystem addon. |
+| `test/` | Automated tests and fixtures. |
+| `scripts/` | Verification, smoke testing, release, and maintenance tooling. |
+| `build/` | Native packaging resources and platform integration. |
+
+## License
+
+hvir is licensed under the [MIT License](LICENSE). See
+[`THIRD_PARTY_NOTICES.md`](THIRD_PARTY_NOTICES.md) for third-party notices.

@@ -1,0 +1,97 @@
+# hvir
+
+A lightweight, view-first workbench for agentic development.
+
+hvir is an Electron desktop app that keeps terminals, files, git, and remote workspaces close together so you can run agent harnesses and review their output without leaving one surface.
+
+## Features
+
+- **Terminal workbench** — multi-pane terminals (ghostty-web), splits, themes, search, recovery, and session attention
+- **Projects & workspaces** — local folders plus SSH remote hosts with trusted host handling
+- **File viewer** — syntax-highlighted viewing, diffs, markdown/mermaid, and document review delivery
+- **Git rail** — status, history, graph, and branch controls
+- **Harness profiles** — configure and launch agent harness sessions from the workbench
+- **Web panes** — embed dashboard-style browser surfaces beside terminals
+- **Diagnostics & health** — workbench health signals and diagnostic report capture
+
+## Requirements
+
+- **Node.js** `>= 24`
+- macOS or Linux (packaging targets: macOS `pkg`, Linux `deb`)
+- Build tools for native modules (`node-pty`, `@hvir/rename-noreplace`)
+
+## Quick start
+
+```bash
+npm install
+npm run dev
+```
+
+`postinstall` installs the Electron runtime and rebuilds native modules. Development uses [electron-vite](https://electron-vite.org/).
+
+## Scripts
+
+| Command | Purpose |
+| --- | --- |
+| `npm run dev` | Run the app in development |
+| `npm run build` | Typecheck and production build |
+| `npm run preview` | Preview the production build |
+| `npm test` | Unit/integration tests (Vitest) |
+| `npm run lint` | ESLint |
+| `npm run typecheck` | TypeScript (`node` + `web`) |
+| `npm run format` / `format:check` | Prettier write / check |
+| `npm run verify` | Seams, ADRs, architecture, lint, typecheck, tests |
+| `npm run smoke` | Full smoke scenario suite |
+| `npm run pack:mac:arm64` | Build macOS arm64 `.pkg` |
+| `npm run pack:linux:x64` / `pack:linux:arm64` | Build Linux `.deb` packages |
+
+Useful extras:
+
+```bash
+npm run hooks:install          # install repo git hooks
+npm run test:watch             # Vitest watch mode
+npm run test:mutation          # Stryker mutation testing
+npm run smoke:scenario -- <name>   # run selected smoke scenarios
+```
+
+## Project layout
+
+```
+src/
+  main/       Electron main process (PTY, git, IPC, projects, SSH)
+  preload/    Preload bridge
+  renderer/   React UI (workbench, terminal, viewer, git, settings)
+  shared/     Cross-process types and contracts
+  workers/    Background workers (e.g. git)
+packages/     Optional native helpers (rename-noreplace)
+scripts/      Build, smoke, release, and project-management tooling
+test/         Vitest suite
+```
+
+## Packaging
+
+Production artifacts are produced with electron-builder (`electron-builder.yml`):
+
+- **macOS:** `hvir-<version>-macos-<arch>.pkg`
+- **Linux:** `.deb` under `dist/`
+
+Native installer helpers live under `scripts/` (`assemble-native-release`, `render-native-installer`, platform smoke scripts).
+
+## Contributing
+
+1. Install hooks: `npm run hooks:install`
+2. Prefer `npm run verify` before opening a PR
+3. Keep changes focused; architecture and seam checks are enforced in CI
+
+Issue templates and workflows live under `.github/`.
+
+## License
+
+MIT © hvir contributors
+
+Third-party notices (including terminal runtime and native bindings) are in [`THIRD_PARTY_NOTICES.md`](./THIRD_PARTY_NOTICES.md).
+
+## Links
+
+- Repository: https://github.com/jarmak-personal/hvir
+- Issues: https://github.com/jarmak-personal/hvir/issues

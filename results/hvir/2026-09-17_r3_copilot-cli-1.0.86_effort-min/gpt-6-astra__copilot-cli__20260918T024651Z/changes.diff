@@ -1,0 +1,122 @@
+diff --git a/README.md b/README.md
+new file mode 100644
+index 0000000..051b976
+--- /dev/null
++++ b/README.md
+@@ -0,0 +1,116 @@
++# hvir
++
++hvir is a desktop development workbench that brings terminals, project files, Git workflows, and web panes into one workspace. Built with Electron, React, and TypeScript, it supports local projects and remote projects over SSH.
++
++## Features
++
++- **Project and worktree management:** switch between projects and Git worktrees, with workspace-specific layouts.
++- **Integrated terminals:** native PTY sessions rendered with Ghostty Web, split layouts, search, themes, and configurable harness launch profiles.
++- **File browsing and review:** a file tree, syntax-highlighted source, diffs, rendered Markdown, images, and structured-data views.
++- **Git tools:** inspect changes, branches, commit history, and the commit graph.
++- **Remote workspaces:** connect to SSH hosts and browse their project folders.
++- **Web panes and session overview:** keep web content alongside your work and inspect terminal sessions across workspaces.
++
++## Platforms
++
++The repository includes native packaging for:
++
++| Platform | Architecture | Package |
++| --- | --- | --- |
++| macOS | Apple Silicon (arm64) | `.pkg` |
++| Linux | x64 and arm64 | `.deb` |
++
++Linux packages require glibc 2.35 or newer and the desktop libraries listed in [electron-builder.yml](electron-builder.yml). Windows packaging is not configured.
++
++The native packages install an `hvir` command. To open a local project after installation:
++
++```sh
++hvir .
++# Or specify a project directory:
++hvir /path/to/project
++```
++
++Within the app, use the project controls to select a host and open a folder, then switch between its workspaces, terminals, files, and Git views.
++
++## Development
++
++### Prerequisites
++
++- Node.js **24 or newer** and npm.
++- Git.
++- Python and a native C/C++ build toolchain for the Node native modules:
++  - macOS: Xcode Command Line Tools.
++  - Linux: a compiler, `make`, and the libraries needed to run Electron.
++- A graphical desktop session to run the application. Headless Linux smoke tests use Xvfb.
++
++### Run locally
++
++From the repository root:
++
++```sh
++npm ci
++npm run dev
++```
++
++Installation downloads Electron, builds the local `@hvir/rename-noreplace` addon, and rebuilds `node-pty` for Electron. Do not skip install scripts for a working desktop environment.
++
++If the terminal runtime check reports missing or incompatible native modules, rebuild them:
++
++```sh
++npm run install:runtime
++```
++
++### Common commands
++
++| Command | Purpose |
++| --- | --- |
++| `npm run dev` | Start the development application |
++| `npm run build` | Type-check and build into `out/` |
++| `npm run preview` | Preview the built application |
++| `npm run typecheck` | Check main-process and renderer TypeScript |
++| `npm run lint` | Run ESLint |
++| `npm run format:check` | Check formatting with Prettier |
++| `npm test` | Run the Vitest suite |
++| `npm run test:watch` | Run tests in watch mode |
++| `npm run verify` | Run architecture and policy checks, lint, type checks, and tests |
++| `npm run smoke` | Build and run Electron smoke scenarios |
++
++For headless Linux smoke testing, use `xvfb-run -a npm run smoke`. The full `verify` command also includes repository-policy checks; CI runs it with Git history and a repository token.
++
++### Build native packages
++
++Run the appropriate command on the target platform with a compatible native build environment:
++
++```sh
++# Unpacked application
++npm run build:dir
++
++# macOS Apple Silicon installer
++npm run pack:mac:arm64
++
++# Linux Debian packages
++npm run pack:linux:x64
++npm run pack:linux:arm64
++```
++
++Packaging writes artifacts to `dist/`. A separate `pack:mac:arm64:signed` script requires macOS code-signing credentials.
++
++## Project layout
++
++```text
++src/main/       Electron main process and host integrations
++src/preload/    Bridge between Electron and the renderer
++src/renderer/   React interface, terminals, viewers, and workspace controls
++src/shared/     Shared types and contracts
++src/workers/    Background workers
++packages/       Local native addon
++scripts/        Development, verification, smoke, and release tooling
++test/           Automated tests
++build/          Packaging resources and native launcher
++```
++
++See [package.json](package.json) for the complete command list and [.github/workflows](.github/workflows) for CI and release workflows.
++
++## License
++
++hvir is licensed under the [MIT License](LICENSE). Third-party attribution is documented in [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md).

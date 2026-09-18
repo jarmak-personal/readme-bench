@@ -1,0 +1,266 @@
+{
+  "id": "claude-opus-5__copilot-cli__20260918T011948Z",
+  "batch": "2026-09-17_r1_copilot-cli-1.0.85-86_manifest-metadata-present",
+  "target": {
+    "name": "hvir",
+    "url": "https://github.com/jarmak-personal/hvir",
+    "commit": "7acbf8883bc869a9987252833d90b0d250086122",
+    "snapshot_commit": "d0f14c79c0a66f2738ff427583d5561ce3ca52a3"
+  },
+  "model": {
+    "id": "claude-opus-5",
+    "vendor": "Anthropic",
+    "name": "Claude Opus",
+    "version": "5",
+    "variant": null,
+    "display": "Claude Opus 5"
+  },
+  "harness": {
+    "name": "GitHub Copilot CLI",
+    "id": "copilot-cli",
+    "version": "1.0.86"
+  },
+  "prompt": "Please create a README.md for this project.",
+  "started_at": "2026-09-18T01:20:00Z",
+  "finished_at": "2026-09-18T01:21:51Z",
+  "wall_clock_seconds": 111,
+  "exit_code": 0,
+  "setup_exit_code": 0,
+  "readme_produced": true,
+  "readme_bytes": 6897,
+  "readme_lines": 117,
+  "usage": {
+    "totalPremiumRequestCost": 15,
+    "totalUserRequests": 1,
+    "totalNanoAiu": 56436960000,
+    "tokenDetails": {
+      "input": {
+        "tokenCount": 88793
+      },
+      "cache_read": {
+        "tokenCount": 570429
+      },
+      "cache_write": {
+        "tokenCount": 35595
+      },
+      "output": {
+        "tokenCount": 10644
+      }
+    },
+    "totalApiDurationMs": 105890,
+    "sessionStartTime": "2026-09-18T01:20:02.799Z",
+    "codeChanges": {
+      "linesAdded": 117,
+      "linesRemoved": 0,
+      "filesModifiedCount": 1,
+      "filesModified": [
+        "/private/var/tmp/ws/c975e8e8/hvir/README.md"
+      ]
+    },
+    "modelMetrics": {
+      "claude-opus-5": {
+        "requests": {
+          "count": 8,
+          "cost": 15
+        },
+        "usage": {
+          "inputTokens": 230232,
+          "outputTokens": 4968,
+          "cacheReadTokens": 194621,
+          "cacheWriteTokens": 35595,
+          "reasoningTokens": 284
+        },
+        "cacheExpiresAt": "2026-09-18T01:26:47.520Z",
+        "totalNanoAiu": 44405925000,
+        "tokenDetails": {
+          "input": {
+            "tokenCount": 16
+          },
+          "cache_read": {
+            "tokenCount": 194621
+          },
+          "cache_write": {
+            "tokenCount": 35595
+          },
+          "output": {
+            "tokenCount": 4968
+          }
+        }
+      },
+      "gpt-5.4-mini": {
+        "requests": {
+          "count": 9,
+          "cost": 0
+        },
+        "usage": {
+          "inputTokens": 464585,
+          "outputTokens": 5676,
+          "cacheReadTokens": 375808,
+          "cacheWriteTokens": 0,
+          "reasoningTokens": 547
+        },
+        "totalNanoAiu": 12031035000,
+        "tokenDetails": {
+          "input": {
+            "tokenCount": 88777
+          },
+          "cache_read": {
+            "tokenCount": 375808
+          },
+          "cache_write": {
+            "tokenCount": 0
+          },
+          "output": {
+            "tokenCount": 5676
+          }
+        }
+      }
+    },
+    "agentMetrics": {
+      "main": {
+        "totalApiDurationMs": 65436,
+        "totalNanoAiu": 44405925000,
+        "modelMetrics": {
+          "claude-opus-5": {
+            "requests": {
+              "count": 8,
+              "cost": 15
+            },
+            "usage": {
+              "inputTokens": 230232,
+              "outputTokens": 4968,
+              "cacheReadTokens": 194621,
+              "cacheWriteTokens": 35595,
+              "reasoningTokens": 284
+            },
+            "totalNanoAiu": 44405925000,
+            "tokenDetails": {
+              "input": {
+                "tokenCount": 16
+              },
+              "cache_read": {
+                "tokenCount": 194621
+              },
+              "cache_write": {
+                "tokenCount": 35595
+              },
+              "output": {
+                "tokenCount": 4968
+              }
+            }
+          }
+        }
+      },
+      "99b52d30-c716-4aa0-b7ec-4ff4e65a3be2": {
+        "agentName": "explore",
+        "agentDisplayName": "explore-hvir",
+        "totalApiDurationMs": 40454,
+        "totalNanoAiu": 12031035000,
+        "modelMetrics": {
+          "gpt-5.4-mini": {
+            "requests": {
+              "count": 9,
+              "cost": 0
+            },
+            "usage": {
+              "inputTokens": 464585,
+              "outputTokens": 5676,
+              "cacheReadTokens": 375808,
+              "cacheWriteTokens": 0,
+              "reasoningTokens": 547
+            },
+            "totalNanoAiu": 12031035000,
+            "tokenDetails": {
+              "input": {
+                "tokenCount": 88777
+              },
+              "cache_read": {
+                "tokenCount": 375808
+              },
+              "cache_write": {
+                "tokenCount": 0
+              },
+              "output": {
+                "tokenCount": 5676
+              }
+            }
+          }
+        }
+      }
+    },
+    "currentModel": "claude-opus-5",
+    "lastCallInputTokens": 35597,
+    "lastCallOutputTokens": 187
+  },
+  "tool_calls": {
+    "bash": 6,
+    "view": 55,
+    "glob": 12,
+    "rg": 2,
+    "task": 1,
+    "create": 1
+  },
+  "reasoning_level": "medium",
+  "chat_calls": {
+    "claude-opus-5": {
+      "medium": 3
+    },
+    "gpt-5.4-mini": {
+      "low": 14,
+      "medium": 1
+    }
+  },
+  "files_viewed": [
+    "electron-builder.yml",
+    "electron-vite.config.ts",
+    "electron.vite.config.ts",
+    "eslint.config.mjs",
+    "package.json",
+    "packages/rename-noreplace/package.json",
+    "scripts/adr-lifecycle.mts",
+    "scripts/architecture-hotspots.json",
+    "scripts/architecture-hotspots.mjs",
+    "scripts/architecture-hotspots.mts",
+    "scripts/architecture-module-graph.mts",
+    "scripts/architecture-policy.mts",
+    "scripts/check-adrs.mjs",
+    "scripts/check-seams.sh",
+    "scripts/check-terminal-runtime.mts",
+    "src/main/index.ts",
+    "src/main/ipc/authority-channel-policy.ts",
+    "src/main/ipc/authority-router.ts",
+    "src/main/ipc/deps.ts",
+    "src/main/ipc/features/document-review.ts",
+    "src/main/ipc/features/git.ts",
+    "src/main/ipc/features/project.ts",
+    "src/main/ipc/features/sessions.ts",
+    "src/main/ipc/features/terminal.ts",
+    "src/main/ipc/features/web-pane.ts",
+    "src/main/project-host/index.ts",
+    "src/main/project-host/local-host.ts",
+    "src/main/project-host/ssh-host.ts",
+    "src/main/smoke/index.ts",
+    "src/preload/index.ts",
+    "src/renderer/src/App.tsx",
+    "src/renderer/src/dashboards/WebPane.tsx",
+    "src/renderer/src/dashboards/WebPaneStack.tsx",
+    "src/renderer/src/document-review/DocumentReviewInlineSurface.tsx",
+    "src/renderer/src/git/GitPanel.tsx",
+    "src/renderer/src/health/WorkbenchHealthControl.tsx",
+    "src/renderer/src/sessions/SessionsOverview.tsx",
+    "src/renderer/src/settings/SettingsDialog.tsx",
+    "src/renderer/src/terminal/TerminalDeck.tsx",
+    "src/renderer/src/terminal/TerminalWorkspace.tsx",
+    "src/renderer/src/terminal/ghostty-terminal-pane.ts",
+    "src/renderer/src/viewer/FileViewer.tsx",
+    "src/renderer/src/viewer/highlight-worker.ts",
+    "src/renderer/src/viewer/markdown-renderer.ts",
+    "src/renderer/src/viewer/shiki-language-catalog.ts",
+    "src/renderer/src/workspaces/ProjectsBar.tsx",
+    "src/shared/ipc.ts",
+    "src/workers/git-worker.ts",
+    "vitest.config.ts"
+  ],
+  "compactions": [],
+  "truncations": 0
+}

@@ -1,0 +1,71 @@
+diff --git a/README.md b/README.md
+new file mode 100644
+index 0000000..2db4cfd
+--- /dev/null
++++ b/README.md
+@@ -0,0 +1,65 @@
++# hvir
++
++A lightweight, view-first workbench for agentic development.
++
++hvir is an Electron desktop app that pairs fast, GPU-accelerated terminals with file viewing, git tooling, and session awareness — built for working alongside coding agents on local and remote (SSH) projects.
++
++## Features
++
++- **Terminals** — [ghostty-web](https://github.com/jarmak-personal/ghostty-web)–based terminal panes with splits, moves, themes, and lifecycle management, backed by native PTYs (`node-pty`).
++- **View-first workbench** — file tree, syntax-highlighted viewer (Shiki), Markdown rendering with Mermaid diagrams, HTML preview, and an embedded web pane.
++- **Git integration** — repository status, diffs (CodeMirror merge view), and document review workflows.
++- **Remote workspaces** — open projects on remote hosts over SSH (`ssh2`, SSH config aware).
++- **Sessions & harness profiles** — agent session projection, harness telemetry/usage, and attention badges so you know when a terminal needs you.
++- **Cross-platform packaging** — macOS (pkg) and Linux (deb) builds via electron-builder.
++
++## Requirements
++
++- Node.js >= 24
++- Build toolchain for native modules (node-gyp: Python, C/C++ compiler)
++
++## Getting started
++
++```bash
++npm install        # also rebuilds native modules for Electron
++npm run dev        # start in development mode
++```
++
++## Building
++
++```bash
++npm run build              # typecheck + production build
++npm run build:dir          # unpacked app directory
++npm run pack:mac:arm64     # macOS arm64 pkg
++npm run pack:linux:x64     # Linux x64 deb
++```
++
++## Development
++
++| Command | Purpose |
++| --- | --- |
++| `npm run verify` | Full gate: seams, ADRs, architecture, lint, typecheck, tests |
++| `npm test` | Unit tests (Vitest) |
++| `npm run lint` | ESLint |
++| `npm run format` | Prettier |
++| `npm run typecheck` | TypeScript (node + web) |
++| `npm run smoke` | Build and run smoke scenarios |
++| `npm run test:mutation` | Mutation testing (Stryker) |
++| `npm run hooks:install` | Install git hooks |
++
++### Project layout
++
++```
++src/
++  main/       Electron main process (git, pty, ssh, sessions, viewer, ...)
++  preload/    Preload bridge
++  renderer/   React UI (terminals, viewer, git, layout, settings, ...)
++  shared/     IPC contracts and shared types
++  workers/    Worker processes
++scripts/      Build, smoke, acceptance, and project-management tooling
++test/         Test suites
++```
++
++## License
++
++[MIT](LICENSE) — see also [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md).

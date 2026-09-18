@@ -1,0 +1,119 @@
+# hvir
+
+An Electron-based desktop workbench for code, terminals, and Git.
+
+hvir brings together terminal sessions, a file viewer/editor, Git tooling, and web dashboards in a single native application. It is built with React and TypeScript, powered by Electron, and uses [Ghostty](https://github.com/jarmak-personal/ghostty-web) for terminal rendering.
+
+## Features
+
+- **Terminal workspaces** — Multiple terminals per project, splits, tabs, and workspace-aware session management via `node-pty`.
+- **File viewer & editor** — Tabbed and split-pane file viewing with syntax highlighting, diffing, and document review.
+- **Git integration** — Visualize history, inspect changes, switch branches, and manage worktrees.
+- **Web panes** — Embed web dashboards alongside your code and terminals.
+- **Project-centric workspaces** — Open local folders as projects with file watching, search, and SSH remote support.
+- **Themes & settings** — Customizable terminal themes and application settings.
+
+## Tech Stack
+
+- **Desktop:** Electron + Vite (via [electron-vite](https://electron-vite.org/))
+- **UI:** React 19 + TypeScript
+- **Terminal:** `node-pty` + `ghostty-web`
+- **Editor/Viewer:** CodeMirror, Shiki, Markdown-it, Mermaid
+- **Testing:** Vitest + Stryker (mutation testing)
+- **Linting/Formatting:** ESLint + Prettier
+
+## Requirements
+
+- [Node.js](https://nodejs.org/) >= 24
+- npm
+
+## Getting Started
+
+Install dependencies and build native modules:
+
+```bash
+npm install
+```
+
+Start the application in development mode:
+
+```bash
+npm run dev
+```
+
+## Scripts
+
+| Script | Description |
+|--------|-------------|
+| `npm run dev` | Start the app in development mode |
+| `npm run build` | Type-check and build for production |
+| `npm run build:smoke` | Build a smoke-testable version |
+| `npm run pack:mac:arm64` | Build and package a macOS arm64 `.pkg` |
+| `npm run pack:linux:x64` | Build and package a Linux x64 `.deb` |
+| `npm run pack:linux:arm64` | Build and package a Linux arm64 `.deb` |
+| `npm run typecheck` | Run TypeScript checks for node and web targets |
+| `npm run lint` | Run ESLint |
+| `npm run format` | Format code with Prettier |
+| `npm run test` | Run the Vitest suite |
+| `npm run test:mutation` | Run mutation tests with Stryker |
+| `npm run smoke` | Run the full smoke-test suite |
+| `npm run verify` | Run seams, ADRs, architecture, lint, typecheck, and tests |
+
+## Project Layout
+
+```
+src/
+  main/         # Electron main process (windowing, IPC, native integrations)
+  preload/      # Electron preload scripts
+  renderer/     # React UI and renderer-side logic
+  shared/       # Types and utilities shared between main and renderer
+  workers/      # Web workers
+packages/
+  rename-noreplace/  # Optional native helper package
+test/           # Test fixtures and support files
+scripts/        # Build, packaging, and project-management scripts
+```
+
+## Testing
+
+Run unit tests:
+
+```bash
+npm test
+```
+
+Run smoke tests (builds first):
+
+```bash
+npm run smoke
+```
+
+Run the full verification pipeline:
+
+```bash
+npm run verify
+```
+
+## Packaging
+
+macOS (arm64):
+
+```bash
+npm run pack:mac:arm64
+```
+
+Linux:
+
+```bash
+npm run pack:linux:x64
+# or
+npm run pack:linux:arm64
+```
+
+## Contributing
+
+Contributions are welcome. Please run `npm run verify` before opening a pull request to ensure seams, architecture rules, linting, type-checking, and tests all pass.
+
+## License
+
+[MIT](LICENSE)

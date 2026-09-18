@@ -1,0 +1,74 @@
+npm warn deprecated inflight@1.0.6: This module is not supported, and leaks memory. Do not use it. Check out lru-cache if you want a good and tested way to coalesce async requests by a key value, which is much more comprehensive and powerful.
+npm warn deprecated rimraf@2.6.3: Rimraf versions prior to v4 are no longer supported
+npm warn deprecated glob@7.2.3: Old versions of glob are not supported, and contain widely publicized security vulnerabilities, which have been fixed in the current version. Please update. Support for old versions may be purchased (at exorbitant rates) by contacting i@izs.me
+npm warn deprecated boolean@3.2.0: Package no longer supported. Contact Support at https://www.npmjs.com/support for more info.
+
+> hvir@0.2.3 postinstall
+> npm run install:runtime
+
+
+> hvir@0.2.3 install:runtime
+> install-electron --no && node-gyp rebuild --directory node_modules/@hvir/rename-noreplace && electron-rebuild -f -o node-pty
+
+gyp info it worked if it ends with ok
+gyp info using node-gyp@13.0.1
+gyp info using node@26.5.0 | darwin | arm64
+gyp info chdir node_modules/@hvir/rename-noreplace
+gyp info find Python using Python version 3.12.7 found at "/Library/Frameworks/Python.framework/Versions/3.12/bin/python3"
+
+gyp info spawn /Library/Frameworks/Python.framework/Versions/3.12/bin/python3
+gyp info spawn args [
+gyp info spawn args '/private/var/tmp/ws/7bb52f67/hvir/node_modules/node-gyp/gyp/gyp_main.py',
+gyp info spawn args 'binding.gyp',
+gyp info spawn args '-f',
+gyp info spawn args 'make',
+gyp info spawn args '-I',
+gyp info spawn args '/private/var/tmp/ws/7bb52f67/hvir/packages/rename-noreplace/build/config.gypi',
+gyp info spawn args '-I',
+gyp info spawn args '/private/var/tmp/ws/7bb52f67/hvir/node_modules/node-gyp/addon.gypi',
+gyp info spawn args '-I',
+gyp info spawn args '~/Library/Caches/node-gyp/26.5.0/include/node/common.gypi',
+gyp info spawn args '-Dlibrary=shared_library',
+gyp info spawn args '-Dvisibility=default',
+gyp info spawn args '-Dnode_root_dir=~/Library/Caches/node-gyp/26.5.0',
+gyp info spawn args '-Dnode_gyp_dir=/private/var/tmp/ws/7bb52f67/hvir/node_modules/node-gyp',
+gyp info spawn args '-Dnode_lib_file=~/Library/Caches/node-gyp/26.5.0/<(target_arch)/node.lib',
+gyp info spawn args '-Dmodule_root_dir=/private/var/tmp/ws/7bb52f67/hvir/packages/rename-noreplace',
+gyp info spawn args '-Dnode_engine=v8',
+gyp info spawn args '--depth=.',
+gyp info spawn args '--no-parallel',
+gyp info spawn args '--generator-output',
+gyp info spawn args 'build',
+gyp info spawn args '-Goutput_dir=.'
+gyp info spawn args ]
+gyp info spawn make
+gyp info spawn args [ 'BUILDTYPE=Release', '-C', 'build' ]
+  CC(target) Release/obj.target/rename_noreplace/rename_noreplace.o
+  SOLINK_MODULE(target) Release/rename_noreplace.node
+gyp info ok 
+Searching dependency tree
+Building modules: node-pty
+✔ Rebuild Complete
+
+added 824 packages, and audited 826 packages in 11s
+
+149 packages are looking for funding
+  run `npm fund` for details
+
+5 vulnerabilities (2 moderate, 3 high)
+
+To address all issues, run:
+  npm audit fix
+
+Run `npm audit` for details.
+npm warn allow-scripts 8 packages have install scripts not yet covered by allowScripts:
+npm warn allow-scripts   cpu-features@0.0.10 (install: node buildcheck.js > buildcheck.gypi && node-gyp rebuild)
+npm warn allow-scripts   electron-winstaller@5.4.0 (install: node ./script/select-7z-arch.js)
+npm warn allow-scripts   esbuild@0.25.12 (postinstall: node install.js)
+npm warn allow-scripts   fsevents@2.3.3 (install: (install scripts present))
+npm warn allow-scripts   node-pty@1.1.0 (install: node scripts/prebuild.js || node-gyp rebuild; postinstall: node scripts/post-install.js)
+npm warn allow-scripts   ssh2@1.17.0 (install: node install.js)
+npm warn allow-scripts   esbuild@0.28.1 (postinstall: node install.js)
+npm warn allow-scripts   rename-noreplace@0.1.0 (install: node-gyp rebuild)
+npm warn allow-scripts
+npm warn allow-scripts Run `npm approve-scripts --allow-scripts-pending` to review, or `npm approve-scripts <pkg>` to allow.

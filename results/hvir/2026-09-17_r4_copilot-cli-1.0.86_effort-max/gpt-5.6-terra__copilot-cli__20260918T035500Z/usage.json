@@ -1,0 +1,99 @@
+{
+  "totalPremiumRequestCost": 1,
+  "totalUserRequests": 1,
+  "totalNanoAiu": 24539470000,
+  "tokenDetails": {
+    "input": {
+      "tokenCount": 24
+    },
+    "cache_read": {
+      "tokenCount": 208061
+    },
+    "cache_write": {
+      "tokenCount": 51969
+    },
+    "output": {
+      "tokenCount": 6151
+    }
+  },
+  "totalApiDurationMs": 69984,
+  "sessionStartTime": "2026-09-18T03:55:14.725Z",
+  "codeChanges": {
+    "linesAdded": 91,
+    "linesRemoved": 0,
+    "filesModifiedCount": 1,
+    "filesModified": [
+      "/private/var/tmp/ws/881e1d1f/hvir/README.md"
+    ]
+  },
+  "modelMetrics": {
+    "gpt-5.6-terra": {
+      "requests": {
+        "count": 8,
+        "cost": 1
+      },
+      "usage": {
+        "inputTokens": 260054,
+        "outputTokens": 6151,
+        "cacheReadTokens": 208061,
+        "cacheWriteTokens": 51969,
+        "reasoningTokens": 3593
+      },
+      "cacheExpiresAt": "2026-09-18T04:26:24.191Z",
+      "totalNanoAiu": 24539470000,
+      "tokenDetails": {
+        "input": {
+          "tokenCount": 24
+        },
+        "cache_read": {
+          "tokenCount": 208061
+        },
+        "cache_write": {
+          "tokenCount": 51969
+        },
+        "output": {
+          "tokenCount": 6151
+        }
+      }
+    }
+  },
+  "agentMetrics": {
+    "main": {
+      "totalApiDurationMs": 69984,
+      "totalNanoAiu": 24539470000,
+      "modelMetrics": {
+        "gpt-5.6-terra": {
+          "requests": {
+            "count": 8,
+            "cost": 1
+          },
+          "usage": {
+            "inputTokens": 260054,
+            "outputTokens": 6151,
+            "cacheReadTokens": 208061,
+            "cacheWriteTokens": 51969,
+            "reasoningTokens": 3593
+          },
+          "totalNanoAiu": 24539470000,
+          "tokenDetails": {
+            "input": {
+              "tokenCount": 24
+            },
+            "cache_read": {
+              "tokenCount": 208061
+            },
+            "cache_write": {
+              "tokenCount": 51969
+            },
+            "output": {
+              "tokenCount": 6151
+            }
+          }
+        }
+      }
+    }
+  },
+  "currentModel": "gpt-5.6-terra",
+  "lastCallInputTokens": 51972,
+  "lastCallOutputTokens": 126
+}

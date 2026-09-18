@@ -1,0 +1,267 @@
+{
+  "id": "gpt-5.4__copilot-cli__20260918T040238Z",
+  "batch": "2026-09-17_r4_copilot-cli-1.0.86_effort-max",
+  "target": {
+    "name": "hvir",
+    "url": "https://github.com/jarmak-personal/hvir",
+    "commit": "7acbf8883bc869a9987252833d90b0d250086122",
+    "snapshot_commit": "ca97b8a72d67da22d5da4705101f99fbc80bd9cf"
+  },
+  "model": {
+    "id": "gpt-5.4",
+    "vendor": "OpenAI",
+    "name": "GPT",
+    "version": "5.4",
+    "variant": null,
+    "display": "GPT-5.4"
+  },
+  "harness": {
+    "name": "GitHub Copilot CLI",
+    "id": "copilot-cli",
+    "version": "1.0.86"
+  },
+  "prompt": "Please create a README.md for this project.",
+  "started_at": "2026-09-18T04:02:50Z",
+  "finished_at": "2026-09-18T04:04:49Z",
+  "wall_clock_seconds": 119,
+  "exit_code": 0,
+  "setup_exit_code": 0,
+  "readme_produced": true,
+  "readme_bytes": 3831,
+  "readme_lines": 86,
+  "usage": {
+    "totalPremiumRequestCost": 1,
+    "totalUserRequests": 1,
+    "totalNanoAiu": 91929450000,
+    "tokenDetails": {
+      "input": {
+        "tokenCount": 206352
+      },
+      "cache_read": {
+        "tokenCount": 1173735
+      },
+      "cache_write": {
+        "tokenCount": 0
+      },
+      "output": {
+        "tokenCount": 11515
+      }
+    },
+    "totalApiDurationMs": 113370,
+    "sessionStartTime": "2026-09-18T04:02:52.830Z",
+    "codeChanges": {
+      "linesAdded": 87,
+      "linesRemoved": 0,
+      "filesModifiedCount": 1,
+      "filesModified": [
+        "/private/var/tmp/ws/ba3842de/hvir/README.md"
+      ]
+    },
+    "modelMetrics": {
+      "gpt-5.4": {
+        "requests": {
+          "count": 22,
+          "cost": 1
+        },
+        "usage": {
+          "inputTokens": 1340667,
+          "outputTokens": 10181,
+          "cacheReadTokens": 1148928,
+          "cacheWriteTokens": 0,
+          "reasoningTokens": 5617
+        },
+        "cacheExpiresAt": "2026-09-18T04:34:44.172Z",
+        "totalNanoAiu": 91929450000,
+        "tokenDetails": {
+          "input": {
+            "tokenCount": 191739
+          },
+          "cache_read": {
+            "tokenCount": 1148928
+          },
+          "cache_write": {
+            "tokenCount": 0
+          },
+          "output": {
+            "tokenCount": 10181
+          }
+        }
+      },
+      "copilot-search-a": {
+        "requests": {
+          "count": 4,
+          "cost": 0
+        },
+        "usage": {
+          "inputTokens": 39420,
+          "outputTokens": 1334,
+          "cacheReadTokens": 24807,
+          "cacheWriteTokens": 0,
+          "reasoningTokens": 0
+        },
+        "totalNanoAiu": 0,
+        "tokenDetails": {
+          "input": {
+            "tokenCount": 14613
+          },
+          "cache_read": {
+            "tokenCount": 24807
+          },
+          "cache_write": {
+            "tokenCount": 0
+          },
+          "output": {
+            "tokenCount": 1334
+          }
+        }
+      }
+    },
+    "agentMetrics": {
+      "main": {
+        "totalApiDurationMs": 108458,
+        "totalNanoAiu": 91929450000,
+        "modelMetrics": {
+          "gpt-5.4": {
+            "requests": {
+              "count": 22,
+              "cost": 1
+            },
+            "usage": {
+              "inputTokens": 1340667,
+              "outputTokens": 10181,
+              "cacheReadTokens": 1148928,
+              "cacheWriteTokens": 0,
+              "reasoningTokens": 5617
+            },
+            "totalNanoAiu": 91929450000,
+            "tokenDetails": {
+              "input": {
+                "tokenCount": 191739
+              },
+              "cache_read": {
+                "tokenCount": 1148928
+              },
+              "cache_write": {
+                "tokenCount": 0
+              },
+              "output": {
+                "tokenCount": 10181
+              }
+            }
+          }
+        }
+      },
+      "call_RwAecPUuEIzpK6S1TfndrEqS": {
+        "agentName": "search-subagent",
+        "agentDisplayName": "Search Subagent",
+        "totalApiDurationMs": 4912,
+        "totalNanoAiu": 0,
+        "modelMetrics": {
+          "copilot-search-a": {
+            "requests": {
+              "count": 4,
+              "cost": 0
+            },
+            "usage": {
+              "inputTokens": 39420,
+              "outputTokens": 1334,
+              "cacheReadTokens": 24807,
+              "cacheWriteTokens": 0,
+              "reasoningTokens": 0
+            },
+            "totalNanoAiu": 0,
+            "tokenDetails": {
+              "input": {
+                "tokenCount": 14613
+              },
+              "cache_read": {
+                "tokenCount": 24807
+              },
+              "cache_write": {
+                "tokenCount": 0
+              },
+              "output": {
+                "tokenCount": 1334
+              }
+            }
+          }
+        }
+      }
+    },
+    "currentModel": "gpt-5.4",
+    "lastCallInputTokens": 97299,
+    "lastCallOutputTokens": 325
+  },
+  "tool_calls": {
+    "glob": 4,
+    "view": 47,
+    "rg": 6,
+    "bash": 7,
+    "read_file": 10,
+    "file_search": 14,
+    "grep_search": 4,
+    "search_code_subagent": 1,
+    "apply_patch": 1
+  },
+  "reasoning_effort_requested": "xhigh",
+  "reasoning_level": "xhigh",
+  "chat_calls": {
+    "gpt-5.4": {
+      "xhigh": 4
+    },
+    "copilot-search-a": {
+      "xhigh": 1,
+      "none": 18
+    }
+  },
+  "files_viewed": [
+    "README.md",
+    "electron-builder.yml",
+    "electron.vite.config.ts",
+    "package.json",
+    "scripts/check-seams.sh",
+    "src/main/harness/bundled-harness-providers.ts",
+    "src/main/harness/providers/claude-code.ts",
+    "src/main/harness/providers/codex.ts",
+    "src/main/harness/providers/cursor.ts",
+    "src/main/harness/providers/gemini.ts",
+    "src/main/harness/providers/github-copilot.ts",
+    "src/main/harness/providers/pi.ts",
+    "src/main/harness/providers/shell.ts",
+    "src/main/index.ts",
+    "src/preload/index.ts",
+    "src/renderer/src/App.tsx",
+    "src/renderer/src/dashboards/WebPane.tsx",
+    "src/renderer/src/dashboards/WebPaneStack.tsx",
+    "src/renderer/src/document-review/DocumentReviewDeliveryPanel.tsx",
+    "src/renderer/src/document-review/use-document-review-workspace.ts",
+    "src/renderer/src/git/GitGraphView.tsx",
+    "src/renderer/src/git/GitPanel.tsx",
+    "src/renderer/src/sessions/SessionsApplicationDestination.tsx",
+    "src/renderer/src/sessions/SessionsOverview.tsx",
+    "src/renderer/src/settings/HarnessProfilesSettings.tsx",
+    "src/renderer/src/settings/SettingsActiveSection.tsx",
+    "src/renderer/src/settings/SettingsDialog.tsx",
+    "src/renderer/src/settings/SettingsSection.tsx",
+    "src/renderer/src/settings/sections/GitSettings.tsx",
+    "src/renderer/src/settings/sections/SettingsSection.tsx",
+    "src/renderer/src/settings/sections/TerminalSettings.tsx",
+    "src/renderer/src/settings/settings-navigation.ts",
+    "src/renderer/src/terminal/TerminalWorkspace.tsx",
+    "src/renderer/src/terminal/TerminalWorkspaceCollection.tsx",
+    "src/renderer/src/terminal/TerminalWorkspaceControls.tsx",
+    "src/renderer/src/viewer/FileViewer.tsx",
+    "src/renderer/src/viewer/RenderedView.tsx",
+    "src/renderer/src/viewer/markdown-extensions.ts",
+    "src/renderer/src/workbench/TerminalLayoutControls.tsx",
+    "src/renderer/src/workbench/Workbench.tsx",
+    "src/renderer/src/workspaces/ProjectsBar.tsx",
+    "src/renderer/src/workspaces/SessionDialog.tsx",
+    "src/renderer/src/workspaces/project-session.ts",
+    "src/shared/harness-provider.ts",
+    "src/shared/index.ts",
+    "src/shared/sessions-projection.ts"
+  ],
+  "compactions": [],
+  "truncations": 0
+}

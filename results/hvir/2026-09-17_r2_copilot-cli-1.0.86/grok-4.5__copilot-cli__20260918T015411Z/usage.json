@@ -1,0 +1,89 @@
+{
+  "totalPremiumRequestCost": 1,
+  "totalUserRequests": 1,
+  "totalNanoAiu": 12180800000,
+  "tokenDetails": {
+    "input": {
+      "tokenCount": 29571
+    },
+    "cache_read": {
+      "tokenCount": 102400
+    },
+    "output": {
+      "tokenCount": 1911
+    }
+  },
+  "totalApiDurationMs": 34191,
+  "sessionStartTime": "2026-09-18T01:54:26.140Z",
+  "codeChanges": {
+    "linesAdded": 81,
+    "linesRemoved": 0,
+    "filesModifiedCount": 1,
+    "filesModified": [
+      "/private/var/tmp/ws/db743e3d/hvir/README.md"
+    ]
+  },
+  "modelMetrics": {
+    "grok-4.5": {
+      "requests": {
+        "count": 6,
+        "cost": 1
+      },
+      "usage": {
+        "inputTokens": 131971,
+        "outputTokens": 1911,
+        "cacheReadTokens": 102400,
+        "cacheWriteTokens": 0,
+        "reasoningTokens": 265
+      },
+      "totalNanoAiu": 12180800000,
+      "tokenDetails": {
+        "input": {
+          "tokenCount": 29571
+        },
+        "cache_read": {
+          "tokenCount": 102400
+        },
+        "output": {
+          "tokenCount": 1911
+        }
+      }
+    }
+  },
+  "agentMetrics": {
+    "main": {
+      "totalApiDurationMs": 34191,
+      "totalNanoAiu": 12180800000,
+      "modelMetrics": {
+        "grok-4.5": {
+          "requests": {
+            "count": 6,
+            "cost": 1
+          },
+          "usage": {
+            "inputTokens": 131971,
+            "outputTokens": 1911,
+            "cacheReadTokens": 102400,
+            "cacheWriteTokens": 0,
+            "reasoningTokens": 265
+          },
+          "totalNanoAiu": 12180800000,
+          "tokenDetails": {
+            "input": {
+              "tokenCount": 29571
+            },
+            "cache_read": {
+              "tokenCount": 102400
+            },
+            "output": {
+              "tokenCount": 1911
+            }
+          }
+        }
+      }
+    }
+  },
+  "currentModel": "grok-4.5",
+  "lastCallInputTokens": 29209,
+  "lastCallOutputTokens": 88
+}

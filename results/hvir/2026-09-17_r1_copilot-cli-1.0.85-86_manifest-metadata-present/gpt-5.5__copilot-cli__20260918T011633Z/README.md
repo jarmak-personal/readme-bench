@@ -1,0 +1,102 @@
+# hvir
+
+hvir is a lightweight, view-first workbench for agentic development. It combines
+project navigation, terminal sessions, source and rendered file viewing, Git tools,
+SSH-backed workspaces, and configurable AI/tooling harnesses in an Electron desktop
+application.
+
+## Features
+
+- Multi-project workspace browser with local and SSH-backed project hosts.
+- Persistent terminal workspaces powered by `node-pty` and a pinned `ghostty-web`
+  terminal runtime.
+- Source, diff, rendered Markdown, image, and large-file viewing surfaces.
+- Git status, history, graph, branch switching, fetch, pull, and worktree-oriented
+  workspace management.
+- Configurable harness profiles for Shell, Claude Code, Codex, Pi, Gemini CLI,
+  GitHub Copilot CLI, Cursor CLI, and custom commands.
+- Sessions, diagnostics, document-review workflows, terminal themes, keybindings,
+  and smoke-test coverage for desktop behavior.
+
+## Requirements
+
+- Node.js 24 or newer.
+- npm.
+- Platform tooling required by Electron native modules:
+  - macOS: Xcode Command Line Tools.
+  - Linux: a C/C++ build toolchain plus the runtime libraries listed in
+    `electron-builder.yml` for packaged builds.
+
+## Getting started
+
+```sh
+npm ci
+npm run dev
+```
+
+`npm ci` runs the project postinstall step, which verifies the terminal runtime and
+rebuilds native modules for Electron. If terminal runtime checks fail after changing
+branches or dependencies, run `npm ci` again.
+
+To open a specific project folder at startup, set `HVIR_PROJECT_ROOT`:
+
+```sh
+HVIR_PROJECT_ROOT=/path/to/project npm run dev
+```
+
+If no project root is provided, hvir prompts for a folder.
+
+## Development commands
+
+| Command | Description |
+| --- | --- |
+| `npm run dev` | Start the Electron/Vite development app. |
+| `npm run build` | Type-check and build production main, preload, and renderer bundles. |
+| `npm run preview` | Preview the built Electron app. |
+| `npm test` | Run the Vitest suite. |
+| `npm run lint` | Run ESLint. |
+| `npm run format:check` | Check Prettier formatting. |
+| `npm run verify` | Run seams, ADR, architecture, lint, type-check, and unit tests. |
+| `npm run smoke` | Build the smoke bundle and run the main smoke scenario set. |
+
+## Packaging
+
+Packaged builds are produced with Electron Builder:
+
+```sh
+npm run build:dir
+npm run pack:mac:arm64
+npm run pack:linux:x64
+npm run pack:linux:arm64
+```
+
+macOS packages are emitted as `.pkg` installers. Linux packages are emitted as Debian
+packages and include the AppArmor and desktop integration resources under `build/`.
+
+## Project layout
+
+```text
+src/main/       Electron main process, project hosts, Git, PTY, diagnostics, smoke runtime
+src/preload/    Typed preload bridge exposed as window.hvir
+src/renderer/   React renderer application and UI surfaces
+src/shared/     Contracts shared across main, preload, renderer, workers, and tests
+src/workers/    Utility-process workers
+scripts/        Build checks, smoke runners, release helpers, and project automation
+test/           Vitest renderer/main behavior tests and fixtures
+packages/       Private native/helper packages used by the app
+build/          Icons, entitlements, Linux packaging resources, and native release assets
+```
+
+## Notes for contributors
+
+- Keep dependencies installed with `npm ci` so the pinned `ghostty-web` artifact and
+  native module rebuilds match the checkout.
+- Prefer `npm run verify` before larger changes; use targeted commands such as
+  `npm test -- <pattern>` or `npm run typecheck` while iterating.
+- Generated terminal theme catalogs, architecture reports, smoke fixtures, and
+  project-management automation live under `scripts/`.
+- Third-party runtime notices are maintained in `THIRD_PARTY_NOTICES.md`.
+
+## License
+
+hvir is licensed under the MIT License. See [`LICENSE`](LICENSE).

@@ -1,0 +1,89 @@
+{
+  "totalPremiumRequestCost": 1,
+  "totalUserRequests": 1,
+  "totalNanoAiu": 17462400000,
+  "tokenDetails": {
+    "input": {
+      "tokenCount": 47063
+    },
+    "cache_read": {
+      "tokenCount": 128512
+    },
+    "output": {
+      "tokenCount": 2707
+    }
+  },
+  "totalApiDurationMs": 44905,
+  "sessionStartTime": "2026-09-18T03:35:42.164Z",
+  "codeChanges": {
+    "linesAdded": 128,
+    "linesRemoved": 0,
+    "filesModifiedCount": 1,
+    "filesModified": [
+      "/private/var/tmp/ws/bed89dac/hvir/README.md"
+    ]
+  },
+  "modelMetrics": {
+    "grok-4.5": {
+      "requests": {
+        "count": 7,
+        "cost": 1
+      },
+      "usage": {
+        "inputTokens": 175575,
+        "outputTokens": 2707,
+        "cacheReadTokens": 128512,
+        "cacheWriteTokens": 0,
+        "reasoningTokens": 415
+      },
+      "totalNanoAiu": 17462400000,
+      "tokenDetails": {
+        "input": {
+          "tokenCount": 47063
+        },
+        "cache_read": {
+          "tokenCount": 128512
+        },
+        "output": {
+          "tokenCount": 2707
+        }
+      }
+    }
+  },
+  "agentMetrics": {
+    "main": {
+      "totalApiDurationMs": 44905,
+      "totalNanoAiu": 17462400000,
+      "modelMetrics": {
+        "grok-4.5": {
+          "requests": {
+            "count": 7,
+            "cost": 1
+          },
+          "usage": {
+            "inputTokens": 175575,
+            "outputTokens": 2707,
+            "cacheReadTokens": 128512,
+            "cacheWriteTokens": 0,
+            "reasoningTokens": 415
+          },
+          "totalNanoAiu": 17462400000,
+          "tokenDetails": {
+            "input": {
+              "tokenCount": 47063
+            },
+            "cache_read": {
+              "tokenCount": 128512
+            },
+            "output": {
+              "tokenCount": 2707
+            }
+          }
+        }
+      }
+    }
+  },
+  "currentModel": "grok-4.5",
+  "lastCallInputTokens": 34662,
+  "lastCallOutputTokens": 96
+}

@@ -1,0 +1,84 @@
+# hvir
+
+hvir is a desktop workbench for running and supervising coding-agent terminal
+sessions (Claude, Codex, and other harness providers) alongside project git
+workflows. It is built as an Electron application with a PTY-backed terminal
+runtime, live git status/diff views, and remote (SSH) project support.
+
+## Features
+
+- **Terminal sessions** powered by `node-pty` and `ghostty-web`, with support
+  for splitting, forking, and recovering sessions across restarts.
+- **Harness providers** for coding agents such as Claude and Codex, including
+  session discovery, usage/telemetry tracking, and profile management.
+- **Git workspace integration** — status, diffs, graph/log views, and
+  workspace-aware file operations.
+- **Project management** for local and SSH-backed remote projects, including
+  host trust, folder picking, and file access.
+- **Document review and diagnostics** tooling for inspecting sessions and
+  reporting issues.
+
+## Requirements
+
+- Node.js `>=24`
+- macOS or Linux (see `electron-builder.yml` for supported packaging targets)
+
+## Getting started
+
+Install dependencies:
+
+```bash
+npm install
+```
+
+This also runs `install:runtime`, which rebuilds native modules
+(`@hvir/rename-noreplace`, `node-pty`) for Electron.
+
+Start the app in development mode:
+
+```bash
+npm run dev
+```
+
+## Building
+
+```bash
+npm run build          # type-check and build with electron-vite
+npm run build:dir       # build and package (unpacked) with electron-builder
+npm run pack:mac:arm64   # build a macOS arm64 package
+npm run pack:linux:x64   # build a Linux x64 .deb package
+npm run pack:linux:arm64 # build a Linux arm64 .deb package
+```
+
+## Testing and verification
+
+```bash
+npm test               # run the vitest suite
+npm run test:watch     # run tests in watch mode
+npm run test:mutation   # run mutation testing with Stryker
+npm run lint            # run ESLint
+npm run typecheck       # type-check main and web sources
+npm run verify           # seams, ADRs, architecture, lint, typecheck, and tests
+```
+
+Smoke and acceptance scripts for the packaged Electron app are available via
+`npm run smoke`, `npm run smoke:macos`, `npm run acceptance:ssh:macos`, and
+related scripts in `scripts/`.
+
+## Project structure
+
+```
+src/
+  main/       Electron main process (PTY, git, harness providers, projects, IPC)
+  preload/    Preload scripts bridging main and renderer
+  renderer/   UI (terminal workspace, project views, document review, etc.)
+  shared/     Types and utilities shared across processes
+  workers/    Background worker processes
+scripts/      Build, release, smoke, and project-management tooling
+test/         Vitest test suites
+```
+
+## License
+
+MIT — see [LICENSE](LICENSE). Third-party notices are listed in
+[THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md).

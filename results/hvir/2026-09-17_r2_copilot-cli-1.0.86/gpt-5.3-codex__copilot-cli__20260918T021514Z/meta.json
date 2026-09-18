@@ -1,0 +1,165 @@
+{
+  "id": "gpt-5.3-codex__copilot-cli__20260918T021514Z",
+  "batch": "2026-09-17_r2_copilot-cli-1.0.86",
+  "target": {
+    "name": "hvir",
+    "url": "https://github.com/jarmak-personal/hvir",
+    "commit": "7acbf8883bc869a9987252833d90b0d250086122",
+    "snapshot_commit": "ca97b8a72d67da22d5da4705101f99fbc80bd9cf"
+  },
+  "model": {
+    "id": "gpt-5.3-codex",
+    "vendor": "OpenAI",
+    "name": "GPT Codex",
+    "version": "5.3",
+    "variant": null,
+    "display": "GPT-5.3-Codex"
+  },
+  "harness": {
+    "name": "GitHub Copilot CLI",
+    "id": "copilot-cli",
+    "version": "1.0.86"
+  },
+  "prompt": "Please create a README.md for this project.",
+  "started_at": "2026-09-18T02:15:25Z",
+  "finished_at": "2026-09-18T02:16:08Z",
+  "wall_clock_seconds": 43,
+  "exit_code": 0,
+  "setup_exit_code": 0,
+  "readme_produced": true,
+  "readme_bytes": 2685,
+  "readme_lines": 73,
+  "usage": {
+    "totalPremiumRequestCost": 1,
+    "totalUserRequests": 1,
+    "totalNanoAiu": 17714410000,
+    "tokenDetails": {
+      "input": {
+        "tokenCount": 47222
+      },
+      "cache_read": {
+        "tokenCount": 274432
+      },
+      "cache_write": {
+        "tokenCount": 0
+      },
+      "output": {
+        "tokenCount": 3320
+      }
+    },
+    "totalApiDurationMs": 39052,
+    "sessionStartTime": "2026-09-18T02:15:28.161Z",
+    "codeChanges": {
+      "linesAdded": 74,
+      "linesRemoved": 0,
+      "filesModifiedCount": 1,
+      "filesModified": [
+        "/private/var/tmp/ws/73a19682/hvir/README.md"
+      ]
+    },
+    "modelMetrics": {
+      "gpt-5.3-codex": {
+        "requests": {
+          "count": 11,
+          "cost": 1
+        },
+        "usage": {
+          "inputTokens": 321654,
+          "outputTokens": 3320,
+          "cacheReadTokens": 274432,
+          "cacheWriteTokens": 0,
+          "reasoningTokens": 1195
+        },
+        "cacheExpiresAt": "2026-09-18T02:46:06.436Z",
+        "totalNanoAiu": 17714410000,
+        "tokenDetails": {
+          "input": {
+            "tokenCount": 47222
+          },
+          "cache_read": {
+            "tokenCount": 274432
+          },
+          "cache_write": {
+            "tokenCount": 0
+          },
+          "output": {
+            "tokenCount": 3320
+          }
+        }
+      }
+    },
+    "agentMetrics": {
+      "main": {
+        "totalApiDurationMs": 39052,
+        "totalNanoAiu": 17714410000,
+        "modelMetrics": {
+          "gpt-5.3-codex": {
+            "requests": {
+              "count": 11,
+              "cost": 1
+            },
+            "usage": {
+              "inputTokens": 321654,
+              "outputTokens": 3320,
+              "cacheReadTokens": 274432,
+              "cacheWriteTokens": 0,
+              "reasoningTokens": 1195
+            },
+            "totalNanoAiu": 17714410000,
+            "tokenDetails": {
+              "input": {
+                "tokenCount": 47222
+              },
+              "cache_read": {
+                "tokenCount": 274432
+              },
+              "cache_write": {
+                "tokenCount": 0
+              },
+              "output": {
+                "tokenCount": 3320
+              }
+            }
+          }
+        }
+      }
+    },
+    "currentModel": "gpt-5.3-codex",
+    "lastCallInputTokens": 40896,
+    "lastCallOutputTokens": 126
+  },
+  "tool_calls": {
+    "rg": 2,
+    "glob": 1,
+    "bash": 8,
+    "view": 17,
+    "apply_patch": 1
+  },
+  "reasoning_level": "medium",
+  "chat_calls": {
+    "gpt-5.3-codex": {
+      "medium": 11
+    }
+  },
+  "files_viewed": [
+    ".github/workflows/ci.yml",
+    ".gitignore",
+    "README.md",
+    "electron-builder.yml",
+    "electron.vite.config.ts",
+    "package.json",
+    "scripts/check-terminal-runtime.mts",
+    "scripts/install-git-hooks.sh",
+    "src/main/application-runtime.ts",
+    "src/main/index.ts",
+    "src/main/project-host/index.ts",
+    "src/preload/index.ts",
+    "src/renderer/index.html",
+    "src/renderer/src/App.tsx",
+    "src/renderer/src/main.tsx",
+    "src/shared/ipc.ts",
+    "vitest.config.ts"
+  ],
+  "compactions": [],
+  "truncations": 0
+}

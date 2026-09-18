@@ -1,0 +1,176 @@
+# hvir
+
+hvir is a desktop workbench for terminal-based development and AI coding agents.
+It brings projects, Git worktrees, terminals, files, diffs, and web panes into one
+Electron application, whether your code lives locally or on an SSH host.
+
+## Features
+
+- **Project and worktree navigation:** switch between projects and Git worktrees
+  with workspace-specific terminals and file views.
+- **Integrated terminals:** native PTY sessions rendered with `ghostty-web`, with
+  split layouts, terminal search, and configurable presentation.
+- **Coding-agent profiles:** launch Claude Code, Codex, Pi, Gemini CLI, GitHub
+  Copilot CLI, Cursor CLI, a plain shell, or a custom command.
+- **Files and Git in context:** browse and edit files, inspect rendered previews
+  and diffs, review Git changes and commit history, switch branches, fetch, and pull.
+- **Session overview:** observe sessions across workspaces and return to their
+  terminals from the Sessions view.
+- **Local and remote work:** use local folders or connect to SSH hosts, with
+  embedded web panes, themes, and configurable keyboard shortcuts.
+
+## Install
+
+Download a native package from
+[GitHub Releases](https://github.com/jarmak-personal/hvir/releases).
+
+| Platform | Architecture | Package |
+| --- | --- | --- |
+| macOS | Apple silicon / arm64 | `.pkg` |
+| Debian/Ubuntu-compatible Linux | x64 or arm64 | `.deb` |
+
+Install the package with your operating system's package installer. Linux packages
+require glibc 2.35 or newer and `libstdc++6` version 12 or newer; desktop-library
+dependencies are declared in [electron-builder.yml](electron-builder.yml).
+Windows and Intel macOS are not current native release targets.
+
+Releases also include an `install.sh` helper. Download and inspect it before
+running `bash install.sh`. It selects the platform package, verifies its pinned
+SHA-256 digest, and invokes the native installer. Installation may require
+administrator privileges. Node.js is not required to use the packaged app.
+
+Launch hvir from your desktop, or open a local project with the installed command:
+
+```sh
+hvir .
+```
+
+You can also pass another directory, such as `hvir /path/to/project`.
+
+## Getting started
+
+1. Open a project folder. Use the project picker to add another local project or
+   connect to an SSH host.
+2. Open a **New terminal** and choose a shell or coding-agent profile.
+3. Use the file and Git views alongside the terminal to inspect your work.
+4. Switch projects or worktrees from the workspace navigation, or use **Sessions**
+   to find a running session.
+5. Open **Settings** to adjust appearance, terminal preferences, Git preferences,
+   keybindings, and **Harnesses** (agent launch profiles).
+
+hvir launches agent CLIs; it does not bundle those tools or their accounts.
+Install and authenticate the agents you want to use on the host where your project
+runs. Session discovery and recovery capabilities are provider-specific; several
+integrations are launch-only.
+
+### SSH projects
+
+hvir discovers concrete host aliases from `~/.ssh/config`. For example:
+
+```sshconfig
+Host devbox
+    HostName dev.example.com
+    User developer
+    IdentityFile ~/.ssh/id_ed25519
+```
+
+Choose the host in the project picker, complete any trust or authentication prompts,
+and select a remote folder. Check the host-key fingerprint before trusting a new
+host. Remote terminals and Git commands run on that host, so Git and any desired
+agent CLIs must be available there.
+
+## Develop from source
+
+### Prerequisites
+
+- Node.js **24 or newer** and npm. CI uses Node.js 24.
+- Git.
+- Python 3 and a native C/C++ build toolchain for the native modules. On macOS,
+  use the Xcode Command Line Tools; on Linux, provide `make` and a C/C++ compiler.
+- A graphical desktop session for running Electron.
+
+```sh
+git clone https://github.com/jarmak-personal/hvir.git
+cd hvir
+npm ci
+npm run dev
+```
+
+Do not skip npm's lifecycle scripts. The postinstall step installs Electron,
+builds the private `@hvir/rename-noreplace` addon, and rebuilds `node-pty` against
+Electron's ABI.
+
+To open a particular local project during development:
+
+```sh
+HVIR_PROJECT_ROOT=/absolute/path/to/project npm run dev
+```
+
+The development and production-build commands check that the installed
+`ghostty-web` runtime matches this checkout. If that check reports a mismatch,
+run `npm ci` again before retrying. The project uses a pinned compatibility-fork
+artifact; see [Third-party notices](THIRD_PARTY_NOTICES.md).
+
+### Common commands
+
+| Command | Purpose |
+| --- | --- |
+| `npm run dev` | Start the Electron/Vite development app. |
+| `npm run build` | Type-check and build the app into `out/`. |
+| `npm run preview` | Run the previously built app. |
+| `npm run lint` | Run ESLint. |
+| `npm run typecheck` | Check the Node and renderer TypeScript projects. |
+| `npm test` | Run the Vitest suite once. |
+| `npm run test:watch` | Run Vitest in watch mode. |
+| `npm run smoke` | Build the smoke runtime and run Electron workflow scenarios. |
+| `npm run build:dir` | Build an unpacked application under `dist/`. |
+
+Smoke tests launch Electron and require a display. On headless Linux, CI runs:
+
+```sh
+xvfb-run -a npm run smoke
+```
+
+`npm run smoke:macos` runs a focused macOS scenario set. Additional commands for
+mutation testing, SSH acceptance, architecture checks, and release tooling are
+listed in [package.json](package.json).
+
+### Native packages
+
+Build on the matching operating system and architecture so the native modules
+match the package target:
+
+| Target | Command |
+| --- | --- |
+| macOS arm64 | `npm run pack:mac:arm64` |
+| Linux x64 | `npm run pack:linux:x64` |
+| Linux arm64 | `npm run pack:linux:arm64` |
+
+Artifacts are written to `dist/`. Signed macOS releases also require signing and
+notarization credentials; the
+[macOS package workflow](.github/workflows/macos-package-release.yml) implements
+that release process.
+
+## Project layout
+
+```text
+src/main/                 Electron lifecycle, IPC, projects, PTYs, SSH, and sessions
+src/preload/              Renderer-to-main bridge
+src/renderer/             React workbench UI
+src/shared/               Shared types and protocol contracts
+src/workers/              Utility-process workers, including Git operations
+packages/rename-noreplace/ Native no-overwrite rename addon
+test/                     Vitest tests
+scripts/                  Repository checks, smoke tests, and release tooling
+build/                    Icons, platform integration, and installer resources
+```
+
+The app is built with Electron, React, TypeScript, and electron-vite. Native host
+operations live outside the renderer, which accesses them through the preload
+bridge and typed IPC contracts.
+
+## License
+
+hvir is licensed under the [MIT License](LICENSE). Bundled dependencies retain
+their own licenses; additional attribution is in
+[Third-party notices](THIRD_PARTY_NOTICES.md).

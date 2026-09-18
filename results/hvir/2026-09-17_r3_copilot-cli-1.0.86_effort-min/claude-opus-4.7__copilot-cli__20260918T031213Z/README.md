@@ -1,0 +1,73 @@
+# hvir
+
+An Electron-based desktop workbench that combines an integrated terminal, document viewer, and Git/SSH workflow tooling in a single application. Built with Electron, Vite, React, and TypeScript.
+
+## Features
+
+- **Integrated terminal** powered by `node-pty` and `ghostty-web`, with theming, splits, and lifecycle management.
+- **Document review** with CodeMirror-based editing, Markdown/Mermaid rendering, and Shiki syntax highlighting.
+- **Workspace + remote support**, including SSH sessions via `ssh2` and `ssh-config`.
+- **Git workflow tooling** and project-management scripts wired into the app.
+- Cross-platform packaging for macOS (pkg) and Linux (deb) via `electron-builder`.
+
+## Requirements
+
+- Node.js **>= 24**
+- npm (bundled with Node)
+- Platform toolchain for native modules (Xcode Command Line Tools on macOS; `build-essential` + Python on Linux)
+
+## Getting started
+
+```bash
+npm install        # installs deps and rebuilds native modules (node-pty, rename-noreplace)
+npm run dev        # launches the app in Electron with hot reload
+```
+
+## Common scripts
+
+| Script | Description |
+| --- | --- |
+| `npm run dev` | Run the app in development with electron-vite. |
+| `npm run build` | Typecheck and build the production bundles. |
+| `npm run typecheck` | Run TypeScript checks for node and web targets. |
+| `npm run lint` | Run ESLint over the repo. |
+| `npm run format` / `format:check` | Apply / verify Prettier formatting. |
+| `npm test` | Run the Vitest suite once. |
+| `npm run test:watch` | Vitest in watch mode. |
+| `npm run test:mutation` | Run Stryker mutation testing. |
+| `npm run verify` | Aggregate: seams, ADRs, architecture, lint, typecheck, tests. |
+| `npm run smoke` | Build and run the full smoke-scenario matrix. |
+
+### Packaging
+
+- `npm run pack:mac:arm64` — macOS arm64 `.pkg` (unsigned).
+- `npm run pack:mac:arm64:signed` — macOS arm64 `.pkg` with forced code signing.
+- `npm run pack:linux:x64` / `pack:linux:arm64` — Linux `.deb` builds.
+
+## Project layout
+
+```
+src/
+  main/       # Electron main process
+  preload/    # Preload bridge
+  renderer/   # React UI
+  shared/     # Shared code between processes
+  workers/    # Worker threads
+packages/
+  rename-noreplace/   # Local native module
+scripts/     # Build, smoke, project-management, and tooling scripts
+test/        # Test suites
+build/       # Packaging assets
+```
+
+## Git hooks
+
+Install the repo's hooks with:
+
+```bash
+npm run hooks:install
+```
+
+## License
+
+Released under the [MIT License](./LICENSE). See [THIRD_PARTY_NOTICES.md](./THIRD_PARTY_NOTICES.md) for third-party attributions.

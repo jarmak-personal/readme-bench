@@ -1,0 +1,151 @@
+{
+  "id": "claude-sonnet-5__copilot-cli__20260917T230456Z",
+  "batch": "2026-09-17_r1_copilot-cli-1.0.85-86_manifest-metadata-present",
+  "target": {
+    "name": "hvir",
+    "url": "https://github.com/jarmak-personal/hvir",
+    "commit": "7acbf8883bc869a9987252833d90b0d250086122",
+    "snapshot_commit": "d0f14c79c0a66f2738ff427583d5561ce3ca52a3"
+  },
+  "model": {
+    "id": "claude-sonnet-5",
+    "vendor": "Anthropic",
+    "name": "Claude Sonnet",
+    "version": "5",
+    "variant": null,
+    "display": "Claude Sonnet 5"
+  },
+  "harness": {
+    "name": "GitHub Copilot CLI",
+    "id": "copilot-cli",
+    "version": "1.0.85"
+  },
+  "prompt": "Please create a README.md for this project.",
+  "started_at": "2026-09-17T23:05:08Z",
+  "finished_at": "2026-09-17T23:05:35Z",
+  "wall_clock_seconds": 27,
+  "exit_code": 0,
+  "setup_exit_code": 0,
+  "readme_produced": true,
+  "readme_bytes": 3095,
+  "readme_lines": 83,
+  "usage": {
+    "totalPremiumRequestCost": 1,
+    "totalUserRequests": 1,
+    "totalNanoAiu": 10615030000,
+    "tokenDetails": {
+      "input": {
+        "tokenCount": 12
+      },
+      "cache_read": {
+        "tokenCount": 105844
+      },
+      "cache_write": {
+        "tokenCount": 25123
+      },
+      "output": {
+        "tokenCount": 2215
+      }
+    },
+    "totalApiDurationMs": 23591,
+    "sessionStartTime": "2026-09-17T23:05:10.980Z",
+    "codeChanges": {
+      "linesAdded": 83,
+      "linesRemoved": 0,
+      "filesModifiedCount": 1,
+      "filesModified": [
+        "/private/var/tmp/ws/6922585b/hvir/README.md"
+      ]
+    },
+    "modelMetrics": {
+      "claude-sonnet-5": {
+        "requests": {
+          "count": 6,
+          "cost": 1
+        },
+        "usage": {
+          "inputTokens": 130979,
+          "outputTokens": 2215,
+          "cacheReadTokens": 105844,
+          "cacheWriteTokens": 25123,
+          "reasoningTokens": 71
+        },
+        "cacheExpiresAt": "2026-09-17T23:10:33.961Z",
+        "totalNanoAiu": 10615030000,
+        "tokenDetails": {
+          "input": {
+            "tokenCount": 12
+          },
+          "cache_read": {
+            "tokenCount": 105844
+          },
+          "cache_write": {
+            "tokenCount": 25123
+          },
+          "output": {
+            "tokenCount": 2215
+          }
+        }
+      }
+    },
+    "agentMetrics": {
+      "main": {
+        "totalApiDurationMs": 23591,
+        "totalNanoAiu": 10615030000,
+        "modelMetrics": {
+          "claude-sonnet-5": {
+            "requests": {
+              "count": 6,
+              "cost": 1
+            },
+            "usage": {
+              "inputTokens": 130979,
+              "outputTokens": 2215,
+              "cacheReadTokens": 105844,
+              "cacheWriteTokens": 25123,
+              "reasoningTokens": 71
+            },
+            "totalNanoAiu": 10615030000,
+            "tokenDetails": {
+              "input": {
+                "tokenCount": 12
+              },
+              "cache_read": {
+                "tokenCount": 105844
+              },
+              "cache_write": {
+                "tokenCount": 25123
+              },
+              "output": {
+                "tokenCount": 2215
+              }
+            }
+          }
+        }
+      }
+    },
+    "currentModel": "claude-sonnet-5",
+    "lastCallInputTokens": 25125,
+    "lastCallOutputTokens": 61
+  },
+  "tool_calls": {
+    "view": 5,
+    "bash": 3,
+    "create": 1
+  },
+  "reasoning_level": "medium",
+  "chat_calls": {
+    "claude-sonnet-5": {
+      "medium": 6
+    }
+  },
+  "files_viewed": [
+    ".",
+    "packages",
+    "src",
+    "src/main",
+    "src/renderer"
+  ],
+  "compactions": [],
+  "truncations": 0
+}

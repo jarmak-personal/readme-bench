@@ -1,0 +1,61 @@
+# hvir
+
+An Electron-based desktop workbench that combines a native terminal, git tooling, and document viewing in a single project-oriented workspace.
+
+## Features
+
+- **Native terminals** powered by [ghostty-web](https://github.com/jarmak-personal/ghostty-web) and `node-pty`, with theming, splits, and layout management
+- **Project workspaces** — open local folders or remote hosts over SSH
+- **Git integration** with diff/merge views (CodeMirror merge)
+- **Document review & viewers** — Markdown (with task lists and Mermaid diagrams), syntax highlighting via Shiki, and HTML preview
+- **Embedded web panes** alongside terminals and viewers
+
+## Requirements
+
+- Node.js >= 24
+- Build toolchain for native modules (`node-gyp`; Xcode CLT on macOS, `build-essential` on Linux)
+
+## Getting started
+
+```bash
+npm install        # also rebuilds native modules for Electron
+npm run dev        # start in development mode
+```
+
+## Building & packaging
+
+```bash
+npm run build              # typecheck + production build
+npm run pack:mac:arm64     # macOS .pkg (arm64)
+npm run pack:linux:x64     # Linux .deb (x64)
+npm run pack:linux:arm64   # Linux .deb (arm64)
+```
+
+## Development
+
+| Command | Description |
+|---|---|
+| `npm test` | Run unit tests (Vitest) |
+| `npm run lint` | Lint with ESLint |
+| `npm run typecheck` | TypeScript checks (node + web) |
+| `npm run format` | Format with Prettier |
+| `npm run verify` | Full gate: seams, ADRs, architecture, lint, typecheck, tests |
+| `npm run smoke` | Build and run smoke scenarios |
+| `npm run test:mutation` | Mutation testing (Stryker) |
+
+Install git hooks with `npm run hooks:install`.
+
+### Project layout
+
+- `src/main` — Electron main process (project host, terminal/PTY, git, sessions, viewers)
+- `src/preload` — preload bridges
+- `src/renderer` — UI (React)
+- `src/shared` — shared contracts
+- `src/workers` — worker processes
+- `packages/rename-noreplace` — native module for atomic renames
+- `scripts` — build, smoke, release, and project-management tooling
+- `test` — test suites
+
+## License
+
+MIT — see [LICENSE](LICENSE). Third-party notices are in [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md).

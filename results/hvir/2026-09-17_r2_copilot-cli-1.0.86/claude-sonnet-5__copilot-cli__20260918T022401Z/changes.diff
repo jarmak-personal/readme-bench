@@ -1,0 +1,103 @@
+diff --git a/README.md b/README.md
+new file mode 100644
+index 0000000..8d58fc6
+--- /dev/null
++++ b/README.md
+@@ -0,0 +1,97 @@
++# hvir
++
++hvir is an Electron-based developer workbench that combines a native
++terminal, SSH remote workspaces, Git tooling, and document/markdown review
++in a single desktop application.
++
++## Features
++
++- **Terminal** — a native pseudo-terminal (via `node-pty`) rendered with
++  [`ghostty-web`](https://github.com/jarmak-personal/ghostty-web), with
++  support for splitting, moving, and theming terminals.
++- **Remote workspaces over SSH** — connect to remote hosts (`ssh2`,
++  `ssh-config`) and work against them as first-class project hosts.
++- **Git workflow** — inspect and act on repository state from within the
++  workbench.
++- **Document review** — render and review Markdown (`markdown-it`,
++  `markdown-it-task-lists`) and diagrams (`mermaid`) alongside your code.
++- **Web pane** — an embedded browser pane for previews and documentation.
++- **Harness profiles & workbench health** — configurable runtime harnesses
++  with built-in diagnostics and health reporting.
++
++## Requirements
++
++- Node.js >= 24
++- npm
++- A C/C++ toolchain capable of building native modules (`node-gyp`),
++  required to rebuild `node-pty` and the bundled `rename-noreplace` native
++  addon against Electron's ABI.
++
++## Getting started
++
++Install dependencies (this also rebuilds native modules for Electron via
++the `postinstall` script):
++
++```bash
++npm install
++```
++
++Run the app in development mode:
++
++```bash
++npm run dev
++```
++
++## Building
++
++```bash
++# Type-check and build the app bundle
++npm run build
++
++# Build and package a distributable for the current platform
++npm run build:dir
++
++# Platform-specific packaging (see package.json for the full list)
++npm run pack:mac:arm64
++npm run pack:linux:x64
++npm run pack:linux:arm64
++```
++
++## Testing & quality checks
++
++```bash
++npm test               # run the unit test suite (vitest)
++npm run test:watch     # run tests in watch mode
++npm run test:mutation  # run mutation testing (stryker)
++npm run lint           # lint the codebase (eslint)
++npm run format         # format the codebase (prettier)
++npm run typecheck      # type-check main and renderer processes
++npm run verify         # run seam/ADR/architecture checks, lint, typecheck, and tests
++```
++
++Smoke tests exercise built artifacts end-to-end:
++
++```bash
++npm run smoke          # run the full smoke scenario suite
++npm run smoke:scenario -- <scenario-name>   # run a single scenario
++```
++
++## Project structure
++
++```
++src/
++  main/       Electron main process: application runtime, IPC, terminal/pty,
++              project hosting, git, workbench windows, diagnostics, etc.
++  preload/    Preload scripts bridging main and renderer contexts.
++  renderer/   The React-based UI.
++  shared/     Types and utilities shared between main and renderer.
++  workers/    Background worker processes.
++packages/     Local workspace packages (e.g. rename-noreplace native addon).
++scripts/      Build, release, project-management, and smoke-test tooling.
++test/         Test suites and fixtures.
++```
++
++## License
++
++MIT — see [LICENSE](LICENSE). Third-party notices are listed in
++[THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md).

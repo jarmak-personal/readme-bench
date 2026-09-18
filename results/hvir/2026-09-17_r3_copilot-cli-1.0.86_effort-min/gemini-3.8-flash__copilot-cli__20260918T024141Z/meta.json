@@ -1,0 +1,176 @@
+{
+  "id": "gemini-3.8-flash__copilot-cli__20260918T024141Z",
+  "batch": "2026-09-17_r3_copilot-cli-1.0.86_effort-min",
+  "target": {
+    "name": "hvir",
+    "url": "https://github.com/jarmak-personal/hvir",
+    "commit": "7acbf8883bc869a9987252833d90b0d250086122",
+    "snapshot_commit": "ca97b8a72d67da22d5da4705101f99fbc80bd9cf"
+  },
+  "model": {
+    "id": "gemini-3.8-flash",
+    "vendor": "Google",
+    "name": "Gemini Flash",
+    "version": "3.8",
+    "variant": null,
+    "display": "Gemini 3.8 Flash"
+  },
+  "harness": {
+    "name": "GitHub Copilot CLI",
+    "id": "copilot-cli",
+    "version": "1.0.86"
+  },
+  "prompt": "Please create a README.md for this project.",
+  "started_at": "2026-09-18T02:41:53Z",
+  "finished_at": "2026-09-18T02:44:03Z",
+  "wall_clock_seconds": 130,
+  "exit_code": 0,
+  "setup_exit_code": 0,
+  "readme_produced": true,
+  "readme_bytes": 7642,
+  "readme_lines": 164,
+  "usage": {
+    "totalPremiumRequestCost": 14,
+    "totalUserRequests": 1,
+    "totalNanoAiu": 33673995000,
+    "tokenDetails": {
+      "input": {
+        "tokenCount": 279257
+      },
+      "cache_read": {
+        "tokenCount": 1479146
+      },
+      "cache_write": {
+        "tokenCount": 0
+      },
+      "output": {
+        "tokenCount": 4363
+      }
+    },
+    "totalApiDurationMs": 122810,
+    "sessionStartTime": "2026-09-18T02:41:56.066Z",
+    "codeChanges": {
+      "linesAdded": 164,
+      "linesRemoved": 0,
+      "filesModifiedCount": 1,
+      "filesModified": [
+        "/private/var/tmp/ws/b93a14d5/hvir/README.md"
+      ]
+    },
+    "modelMetrics": {
+      "gemini-3.8-flash": {
+        "requests": {
+          "count": 52,
+          "cost": 14
+        },
+        "usage": {
+          "inputTokens": 1758403,
+          "outputTokens": 4363,
+          "cacheReadTokens": 1479146,
+          "cacheWriteTokens": 0,
+          "reasoningTokens": 0
+        },
+        "totalNanoAiu": 33673995000,
+        "tokenDetails": {
+          "input": {
+            "tokenCount": 279257
+          },
+          "cache_read": {
+            "tokenCount": 1479146
+          },
+          "cache_write": {
+            "tokenCount": 0
+          },
+          "output": {
+            "tokenCount": 4363
+          }
+        }
+      }
+    },
+    "agentMetrics": {
+      "main": {
+        "totalApiDurationMs": 122810,
+        "totalNanoAiu": 33673995000,
+        "modelMetrics": {
+          "gemini-3.8-flash": {
+            "requests": {
+              "count": 52,
+              "cost": 14
+            },
+            "usage": {
+              "inputTokens": 1758403,
+              "outputTokens": 4363,
+              "cacheReadTokens": 1479146,
+              "cacheWriteTokens": 0,
+              "reasoningTokens": 0
+            },
+            "totalNanoAiu": 33673995000,
+            "tokenDetails": {
+              "input": {
+                "tokenCount": 279257
+              },
+              "cache_read": {
+                "tokenCount": 1479146
+              },
+              "cache_write": {
+                "tokenCount": 0
+              },
+              "output": {
+                "tokenCount": 4363
+              }
+            }
+          }
+        }
+      }
+    },
+    "currentModel": "gemini-3.8-flash",
+    "lastCallInputTokens": 47624,
+    "lastCallOutputTokens": 200
+  },
+  "tool_calls": {
+    "glob": 3,
+    "bash": 18,
+    "view": 29,
+    "grep": 1,
+    "create": 1
+  },
+  "reasoning_effort_requested": "low",
+  "reasoning_level": "low",
+  "chat_calls": {
+    "gemini-3.8-flash": {
+      "low": 52
+    }
+  },
+  "files_viewed": [
+    ".github/workflows/ci.yml",
+    "LICENSE",
+    "THIRD_PARTY_NOTICES.md",
+    "package.json",
+    "scripts/check-adrs.mjs",
+    "src/main/document-review/document-review-application.ts",
+    "src/main/harness/providers/claude-code.ts",
+    "src/main/harness/providers/codex.ts",
+    "src/main/harness/providers/cursor.ts",
+    "src/main/harness/providers/gemini.ts",
+    "src/main/harness/providers/github-copilot.ts",
+    "src/main/harness/providers/pi.ts",
+    "src/main/harness/providers/shell.ts",
+    "src/main/index.ts",
+    "src/main/project-host/project-host.ts",
+    "src/main/web-pane/loopback-http-proxy.ts",
+    "src/main/workbench-runtime.ts",
+    "src/renderer/src/App.tsx",
+    "src/renderer/src/git/GitPanel.tsx",
+    "src/renderer/src/sessions/SessionsOverview.tsx",
+    "src/renderer/src/settings/TerminalThemeGallery.tsx",
+    "src/renderer/src/viewer/FileViewer.tsx",
+    "src/shared/harness-provider.ts",
+    "src/shared/ipc-contract.ts",
+    "src/shared/ipc.ts",
+    "src/shared/ipc/preview.ts",
+    "src/shared/keybindings.ts",
+    "src/shared/workspace-types.ts"
+  ],
+  "compactions": [],
+  "truncations": 0
+}

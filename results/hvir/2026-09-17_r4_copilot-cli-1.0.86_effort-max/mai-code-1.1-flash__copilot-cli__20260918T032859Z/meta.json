@@ -1,0 +1,153 @@
+{
+  "id": "mai-code-1.1-flash__copilot-cli__20260918T032859Z",
+  "batch": "2026-09-17_r4_copilot-cli-1.0.86_effort-max",
+  "target": {
+    "name": "hvir",
+    "url": "https://github.com/jarmak-personal/hvir",
+    "commit": "7acbf8883bc869a9987252833d90b0d250086122",
+    "snapshot_commit": "ca97b8a72d67da22d5da4705101f99fbc80bd9cf"
+  },
+  "model": {
+    "id": "mai-code-1.1-flash",
+    "vendor": "Microsoft",
+    "name": "MAI-Code Flash",
+    "version": "1.1",
+    "variant": null,
+    "display": "MAI-Code-1.1-Flash"
+  },
+  "harness": {
+    "name": "GitHub Copilot CLI",
+    "id": "copilot-cli",
+    "version": "1.0.86"
+  },
+  "prompt": "Please create a README.md for this project.",
+  "started_at": "2026-09-18T03:29:11Z",
+  "finished_at": "2026-09-18T03:29:57Z",
+  "wall_clock_seconds": 46,
+  "exit_code": 0,
+  "setup_exit_code": 0,
+  "readme_produced": true,
+  "readme_bytes": 2705,
+  "readme_lines": 87,
+  "usage": {
+    "totalPremiumRequestCost": 1,
+    "totalUserRequests": 1,
+    "totalNanoAiu": 1179644000,
+    "tokenDetails": {
+      "input": {
+        "tokenCount": 32229
+      },
+      "cache_read": {
+        "tokenCount": 80512
+      },
+      "cache_write": {
+        "tokenCount": 0
+      },
+      "output": {
+        "tokenCount": 3117
+      }
+    },
+    "totalApiDurationMs": 42238,
+    "sessionStartTime": "2026-09-18T03:29:14.286Z",
+    "codeChanges": {
+      "linesAdded": 87,
+      "linesRemoved": 0,
+      "filesModifiedCount": 1,
+      "filesModified": [
+        "/private/var/tmp/ws/ebb56ea0/hvir/README.md"
+      ]
+    },
+    "modelMetrics": {
+      "mai-code-1.1-flash": {
+        "requests": {
+          "count": 7,
+          "cost": 1
+        },
+        "usage": {
+          "inputTokens": 112741,
+          "outputTokens": 3117,
+          "cacheReadTokens": 80512,
+          "cacheWriteTokens": 0,
+          "reasoningTokens": 1664
+        },
+        "cacheExpiresAt": "2026-09-18T03:59:50.584Z",
+        "totalNanoAiu": 1179644000,
+        "tokenDetails": {
+          "input": {
+            "tokenCount": 32229
+          },
+          "cache_read": {
+            "tokenCount": 80512
+          },
+          "cache_write": {
+            "tokenCount": 0
+          },
+          "output": {
+            "tokenCount": 3117
+          }
+        }
+      }
+    },
+    "agentMetrics": {
+      "main": {
+        "totalApiDurationMs": 42238,
+        "totalNanoAiu": 1179644000,
+        "modelMetrics": {
+          "mai-code-1.1-flash": {
+            "requests": {
+              "count": 7,
+              "cost": 1
+            },
+            "usage": {
+              "inputTokens": 112741,
+              "outputTokens": 3117,
+              "cacheReadTokens": 80512,
+              "cacheWriteTokens": 0,
+              "reasoningTokens": 1664
+            },
+            "totalNanoAiu": 1179644000,
+            "tokenDetails": {
+              "input": {
+                "tokenCount": 32229
+              },
+              "cache_read": {
+                "tokenCount": 80512
+              },
+              "cache_write": {
+                "tokenCount": 0
+              },
+              "output": {
+                "tokenCount": 3117
+              }
+            }
+          }
+        }
+      }
+    },
+    "currentModel": "mai-code-1.1-flash",
+    "lastCallInputTokens": 22782,
+    "lastCallOutputTokens": 365
+  },
+  "tool_calls": {
+    "view": 5,
+    "glob": 2,
+    "grep": 1,
+    "create": 1
+  },
+  "reasoning_effort_requested": "high",
+  "reasoning_level": "high",
+  "chat_calls": {
+    "mai-code-1.1-flash": {
+      "high": 7
+    }
+  },
+  "files_viewed": [
+    ".",
+    "package.json",
+    "src",
+    "src/main/index.ts",
+    "src/renderer/src/App.tsx"
+  ],
+  "compactions": [],
+  "truncations": 0
+}

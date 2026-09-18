@@ -1,0 +1,99 @@
+{
+  "totalPremiumRequestCost": 15,
+  "totalUserRequests": 1,
+  "totalNanoAiu": 53610750000,
+  "tokenDetails": {
+    "input": {
+      "tokenCount": 24
+    },
+    "cache_read": {
+      "tokenCount": 341925
+    },
+    "cache_write": {
+      "tokenCount": 39560
+    },
+    "output": {
+      "tokenCount": 4711
+    }
+  },
+  "totalApiDurationMs": 58504,
+  "sessionStartTime": "2026-09-18T02:20:38.841Z",
+  "codeChanges": {
+    "linesAdded": 98,
+    "linesRemoved": 2,
+    "filesModifiedCount": 1,
+    "filesModified": [
+      "/private/var/tmp/ws/2a7af456/hvir/README.md"
+    ]
+  },
+  "modelMetrics": {
+    "claude-opus-5": {
+      "requests": {
+        "count": 12,
+        "cost": 15
+      },
+      "usage": {
+        "inputTokens": 381509,
+        "outputTokens": 4711,
+        "cacheReadTokens": 341925,
+        "cacheWriteTokens": 39560,
+        "reasoningTokens": 768
+      },
+      "cacheExpiresAt": "2026-09-18T02:26:35.748Z",
+      "totalNanoAiu": 53610750000,
+      "tokenDetails": {
+        "input": {
+          "tokenCount": 24
+        },
+        "cache_read": {
+          "tokenCount": 341925
+        },
+        "cache_write": {
+          "tokenCount": 39560
+        },
+        "output": {
+          "tokenCount": 4711
+        }
+      }
+    }
+  },
+  "agentMetrics": {
+    "main": {
+      "totalApiDurationMs": 58504,
+      "totalNanoAiu": 53610750000,
+      "modelMetrics": {
+        "claude-opus-5": {
+          "requests": {
+            "count": 12,
+            "cost": 15
+          },
+          "usage": {
+            "inputTokens": 381509,
+            "outputTokens": 4711,
+            "cacheReadTokens": 341925,
+            "cacheWriteTokens": 39560,
+            "reasoningTokens": 768
+          },
+          "totalNanoAiu": 53610750000,
+          "tokenDetails": {
+            "input": {
+              "tokenCount": 24
+            },
+            "cache_read": {
+              "tokenCount": 341925
+            },
+            "cache_write": {
+              "tokenCount": 39560
+            },
+            "output": {
+              "tokenCount": 4711
+            }
+          }
+        }
+      }
+    }
+  },
+  "currentModel": "claude-opus-5",
+  "lastCallInputTokens": 39562,
+  "lastCallOutputTokens": 265
+}

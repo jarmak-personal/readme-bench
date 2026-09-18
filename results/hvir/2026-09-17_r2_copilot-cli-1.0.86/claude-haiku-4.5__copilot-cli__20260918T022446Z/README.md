@@ -1,0 +1,191 @@
+# hvir
+
+A powerful, modern terminal and IDE application built with Electron, TypeScript, and React.
+
+## Overview
+
+hvir is a desktop application that provides an integrated development environment with terminal capabilities, code editing, Git workflows, SSH support, and remote workspace management. It combines the speed and flexibility of a native terminal with the convenience of a graphical interface.
+
+## Features
+
+- **Modern Terminal Emulation** - Fast, responsive terminal with Ghostty integration
+- **Code Editing** - Syntax highlighting with Shiki, CodeMirror-based editor
+- **Git Integration** - Built-in Git workflow support
+- **SSH Support** - Secure remote connections with SSH2
+- **Workspace Management** - Multi-project and remote workspace support
+- **Web Pane** - Integrated web browser for previews and documentation
+- **Document Review** - Code review and document viewing capabilities
+- **Markdown Support** - Full markdown rendering with task lists and Mermaid diagrams
+- **Theme Support** - Terminal theme catalog and customizable interface
+- **Electron-based** - Cross-platform desktop application
+
+## Requirements
+
+- **Node.js** >= 24
+- **npm** (included with Node.js)
+- Supported platforms: macOS, Linux, Windows
+
+## Installation
+
+```bash
+# Install dependencies
+npm install
+
+# Install runtime components
+npm run install:runtime
+```
+
+## Development
+
+```bash
+# Start development server with hot reload
+npm run dev
+
+# Build for production
+npm run build
+
+# Run tests
+npm test
+
+# Watch mode for tests
+npm test:watch
+
+# Lint code
+npm lint
+
+# Format code
+npm format
+
+# Run type checking
+npm typecheck
+```
+
+## Building & Packaging
+
+### macOS
+```bash
+# ARM64 (Apple Silicon)
+npm run pack:mac:arm64
+
+# ARM64 with code signing
+npm run pack:mac:arm64:signed
+```
+
+### Linux
+```bash
+# x64
+npm run pack:linux:x64
+
+# ARM64
+npm run pack:linux:arm64
+```
+
+## Testing
+
+```bash
+# Run unit tests
+npm test
+
+# Watch mode
+npm test:watch
+
+# Mutation testing
+npm test:mutation
+
+# Smoke tests
+npm run smoke
+
+# Platform-specific smoke tests
+npm run smoke:macos
+npm run smoke:linux:installed
+```
+
+## Project Structure
+
+```
+src/
+├── main/              # Main process (Electron)
+├── preload/           # Preload scripts
+├── renderer/          # Renderer process (UI)
+├── shared/            # Shared utilities
+└── workers/           # Web workers
+
+packages/
+└── rename-noreplace/  # Native module
+```
+
+## Scripts & Commands
+
+### Development
+- `npm run dev` - Start development server
+- `npm run preview` - Preview production build
+- `npm run build` - Build for production
+
+### Validation
+- `npm run lint` - Run ESLint
+- `npm run format` - Format with Prettier
+- `npm run typecheck` - Run TypeScript type checking
+- `npm run verify` - Run all checks (seams, ADRs, architecture, lint, typecheck, tests)
+
+### Architecture & Quality
+- `npm run architecture:check` - Enforce architecture constraints
+- `npm run check-seams` - Validate seams configuration
+- `npm run check-adrs` - Validate Architecture Decision Records
+
+### Code Generation
+- `npm run generate:terminal-themes` - Generate terminal theme catalog
+- `npm run update:ghostty-web` - Update Ghostty web component
+
+### Project Management
+- `npm run project:kind` - Sync project kind
+- `npm run project:audit` - Audit canonical project
+- `npm run issue:start` - Start working on an issue
+
+## Dependencies
+
+### Key Runtime Dependencies
+- **Electron** - Desktop framework
+- **React** - UI library
+- **CodeMirror** - Code editor
+- **Shiki** - Syntax highlighting
+- **ssh2** - SSH client
+- **node-pty** - Terminal emulation
+- **ghostty-web** - Terminal component
+- **Mermaid** - Diagram rendering
+- **Markdown-it** - Markdown parsing
+
+### Build Tools
+- **Vite** - Build and dev server
+- **TypeScript** - Type safety
+- **ESLint** - Code linting
+- **Prettier** - Code formatting
+- **Vitest** - Unit testing
+- **Electron Builder** - Package and build
+
+## Configuration Files
+
+- `electron.vite.config.ts` - Electron Vite configuration
+- `eslint.config.mjs` - ESLint rules
+- `.prettierrc.json` - Prettier formatting rules
+- `tsconfig.json` - TypeScript configuration
+- `vitest.config.ts` - Vitest configuration
+- `stryker.config.json` - Mutation testing configuration
+
+## License
+
+MIT License - See [LICENSE](LICENSE) file for details
+
+## Contributing
+
+Contributions are welcome! Please ensure:
+- Code passes linting: `npm run lint`
+- Code is formatted: `npm run format`
+- Tests pass: `npm test`
+- TypeScript checks pass: `npm run typecheck`
+
+Run `npm run verify` to run all validation checks before submitting changes.
+
+## Documentation
+
+- [Architecture Decision Records](./docs) - Design decisions
+- [Third Party Notices](./THIRD_PARTY_NOTICES.md) - License information for dependencies

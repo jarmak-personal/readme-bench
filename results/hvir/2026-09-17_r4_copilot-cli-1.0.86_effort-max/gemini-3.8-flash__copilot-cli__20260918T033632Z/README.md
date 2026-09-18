@@ -1,0 +1,229 @@
+# hvir
+
+[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
+[![Node.js: >=24](https://img.shields.io/badge/Node.js-%3E%3D24-brightgreen.svg)](https://nodejs.org/)
+
+**hvir** is a local-first, developer-centric engineering workbench desktop application. Built on Electron, React 19, TypeScript, Vite, and Ghostty-web, hvir provides a unified workspace combining high-performance terminal emulation, local and remote SSH workspaces, Git visualizers, rich document and diff viewing, embedded web previews, and first-class integrations for AI coding assistant harnesses.
+
+---
+
+## Features
+
+### 🖥️ High-Performance Terminal Workspaces
+* **Ghostty Engine:** Terminal rendering powered by the WebAssembly-backed `ghostty-web` engine paired with native `node-pty`.
+* **Flexible Layouts:** Primary and secondary split panes, multi-tab terminal collections, and quick layout toggling (normal, maximized, collapsed).
+* **Smart Navigation:** Terminal hyperlinks and automatic detection of file coordinates (`path:line:col`) for instant jump-to-editor navigation.
+* **Themes & Typography:** Comprehensive terminal theme gallery with dark, light, and system-following options, font ligatures, custom line-height, and cursor styling.
+* **Session Resilience:** Terminal session supervision, state recovery across application restarts, and process lifecycle management.
+
+### 🤖 AI Coding Assistant & Harness Integration
+* **Bundled Harness Providers:** Built-in profiles and runtime telemetry for popular AI coding tools and shells:
+  * Claude Code
+  * OpenAI Codex
+  * GitHub Copilot CLI
+  * Gemini
+  * Cursor
+  * Pi
+  * Plain Shell & Custom Command profiles
+* **Live Telemetry & Context:** Real-time token usage tracking, context window meters, and session discovery.
+* **Remote Image Paste:** Automatic staging and path interpolation when pasting images from the clipboard directly into AI terminal sessions.
+* **Composer Submit Modes:** Configurable enter/submit keybinding semantics tailored to diverse interactive CLI interfaces.
+
+### 🌐 Local & Remote Workspace Management
+* **Remote Development via SSH:** Seamless remote connections with support for SSH configurations, private keys, SSH agents, and password authentication.
+* **Transparent Operations:** File tree browsing, real-time file watching, PTY execution, and remote loopback port tunneling behave identically across local and remote hosts.
+* **Multi-Project Navigation:** Switch rapidly between registered projects, repositories, and Git worktrees.
+* **Project File Operations:** Integrated file explorer with filename fuzzy search, creation, deletion, atomic renames, and safe external transfers.
+
+### 📝 Rich Document & Diff Viewer
+* **Multi-Mode Viewing:** Switch seamlessly between **Rendered**, **Source** (interactive CodeMirror editor), and **Diff** views.
+* **Rich Formats Supported:**
+  * **Markdown:** Rendered with GitHub Flavored Markdown, syntax highlighting via Shiki, and task lists.
+  * **Mermaid:** Interactive diagram rendering (`.mmd`, `.mermaid`).
+  * **Structured Data:** Interactive tree view for JSON, structured YAML, and parsed CSV tables.
+  * **HTML Previews:** Sandboxed HTML rendering with custom protocol isolation.
+  * **Images:** Built-in repository image viewer for `.svg`, `.png`, `.jpg`, `.webp`, and `.gif`.
+* **Diff Inspections:** Side-by-side and unified diff views comparing against `working-tree`, `head`, or `branch-point`.
+* **Split Panes:** Primary and secondary editor panes with independent tab management and reordering.
+
+### 🐙 Git Integration & Graph
+* **Visual Git Panel:** Stage, unstage, and inspect working tree changes with live untracked line counts.
+* **Interactive Commit Graph:** Multi-lane commit graph visualizing branch histories, merges, and commit relationships.
+* **Commit History & Blame:** Examine commit metadata, commit-level file trees, and file blame annotations.
+* **Branch Controls:** Rapid branch switching, background fetching, auto-fetch interval configuration, and pulling.
+
+### 🔍 Document Review & Agent Handoff
+* **Review Workflows:** Capture inline and file-level review comments, annotations, and structured feedback.
+* **Direct Agent Handoff:** Dispatch review notes and instructions directly into active terminal harness sessions (Send Now, Insert into prompt, or Copy to clipboard).
+
+### 🌐 Embedded Web Pane
+* **Local & Remote Previews:** Embedded browser preview surface for web servers running on localhost or remote loopback endpoints.
+* **Loopback HTTP Proxy:** Main-process-owned proxy that securely bridges local and SSH remote ports.
+* **Diagnostic Journal:** Route diagnostics, console monitoring, and navigation protections.
+
+### 📊 Sessions Overview Dashboard
+* **Unified Sessions View:** A centralized dashboard indexing all active and recent terminal sessions, AI harness conversations, and resource telemetry across workspaces.
+
+---
+
+## Architecture
+
+hvir is built with a layered, modular architecture enforcing strict boundaries and unidirectional dependencies:
+
+```
+┌────────────────────────────────────────────────────────┐
+│                   Renderer (React 19)                  │
+│  Workbench UI • File Tree • Viewers • Terminal • Git   │
+└───────────────────────────▲────────────────────────────┘
+                            │ (Context Bridge / Preload)
+┌───────────────────────────▼────────────────────────────┐
+│                    Main (Electron)                     │
+│  ┌──────────────────────────────────────────────────┐  │
+│  │           IPC Router & Authority Layer           │  │
+│  └────────────────────────┬─────────────────────────┘  │
+│                           │                            │
+│  ┌────────────────────────▼─────────────────────────┐  │
+│  │             ProjectHost Abstraction              │  │
+│  │      ┌─────────────────────┬──────────────────┐  │  │
+│  │      │      LocalHost      │     SshHost      │  │  │
+│  │      │ (node-pty, fs, etc) │ (ssh2 pool, PTY) │  │  │
+│  │      └─────────────────────┴──────────────────┘  │  │
+│  └──────────────────────────────────────────────────┘  │
+│                           │                            │
+│  ┌────────────────────────▼─────────────────────────┐  │
+│  │    PTY Supervisor • Harness Hub • Git Router     │  │
+│  │   Document Review • Diagnostics • Web Proxy      │  │
+│  └──────────────────────────────────────────────────┘  │
+└────────────────────────────────────────────────────────┘
+```
+
+* **Main Process (`src/main/`):** Manages window lifecycles, project registries, PTY supervision, native OS interactions, and SSH connection pools.
+* **Renderer (`src/renderer/`):** React 19 single-page application orchestrating the workbench UI, terminal layouts, file viewer, and settings.
+* **Preload (`src/preload/`):** Hardened IPC bridge exposing the strictly typed `window.hvir` API to the renderer.
+* **Shared (`src/shared/`):** Shared type definitions, IPC contract definitions, and invariant validations across processes.
+* **Architectural Seams (`scripts/check-seams.sh`):** Automated static enforcement ensuring IPC handlers, host primitives, SSH adapters, and PTY processes remain confined to their designated subsystem boundaries.
+
+---
+
+## Prerequisites
+
+* **Node.js:** `>= 24.0.0`
+* **Package Manager:** `npm` (included with Node.js)
+* **Build Tools:**
+  * C/C++ compiler toolchain (`clang` / `gcc`, `make`) for building native addons
+  * Python 3 (required by `node-gyp`)
+* **Supported Platforms:**
+  * **macOS:** Apple Silicon (`arm64`, macOS 12+)
+  * **Linux:** Debian/Ubuntu-based distributions (`x64` and `arm64`, glibc 2.35+)
+
+---
+
+## Getting Started
+
+### 1. Clone the Repository
+```bash
+git clone https://github.com/jarmak-personal/hvir.git
+cd hvir
+```
+
+### 2. Install Dependencies
+```bash
+npm install
+```
+> *Note:* The `postinstall` hook automatically rebuilds the required native modules (`@hvir/rename-noreplace` and `node-pty`) against the bundled Electron ABI.
+
+### 3. Run in Development Mode
+Start the Vite development servers and launch Electron with hot-module replacement (HMR):
+```bash
+npm run dev
+```
+
+---
+
+## Available Scripts
+
+| Script | Description |
+|---|---|
+| `npm run dev` | Launch the app in development mode with hot reload. |
+| `npm run build` | Type-check and build production bundles for main, preload, and renderer. |
+| `npm run preview` | Preview the production build with Electron. |
+| `npm test` | Run the test suite with Vitest. |
+| `npm run test:watch` | Run Vitest in interactive watch mode. |
+| `npm run typecheck` | Run TypeScript type checks across Node and Web targets. |
+| `npm run lint` | Run ESLint checks across the repository. |
+| `npm run format` | Format code using Prettier. |
+| `npm run format:check` | Verify formatting consistency with Prettier. |
+| `npm run check-seams` | Validate architectural boundary invariants. |
+| `npm run verify` | Run all validation checks (seams, lint, typecheck, tests). |
+| `npm run smoke` | Run end-to-end Electron smoke scenario tests. |
+
+---
+
+## Packaging & Distribution
+
+hvir packages native releases for macOS and Linux using `electron-builder`:
+
+### macOS (Apple Silicon arm64)
+```bash
+npm run pack:mac:arm64
+```
+Generates an installer package (`.pkg`) in the `dist/` directory.
+
+### Linux (Debian `.deb`)
+```bash
+# For x64
+npm run pack:linux:x64
+
+# For arm64
+npm run pack:linux:arm64
+```
+Generates a `.deb` package with an AppArmor profile under `dist/`.
+
+### Command Line Launcher
+When installed, the `hvir` command-line launcher opens workspaces directly from the terminal:
+```bash
+# Open current directory
+hvir .
+
+# Open specific directory
+hvir /path/to/project
+```
+
+---
+
+## Project Structure
+
+```
+hvir/
+├── .github/              # CI/CD workflows, Dependabot, and release automation
+├── build/                # Application icons, AppArmor profiles, and package resources
+├── packages/             # Internal packages (e.g., @hvir/rename-noreplace)
+├── scripts/              # Build, verification, smoke testing, and release scripts
+├── src/
+│   ├── main/             # Electron main process (PTY, SSH, Git, IPC, Host)
+│   ├── preload/          # Electron preload scripts (secure IPC bridge)
+│   ├── renderer/         # React application (UI, terminal, viewer, git, themes)
+│   └── shared/           # Shared IPC protocols, interfaces, and utilities
+└── test/                 # Test suites and fixtures
+```
+
+---
+
+## Contributing
+
+1. Ensure your local environment meets the [Prerequisites](#prerequisites).
+2. Install dependencies: `npm install`.
+3. Create a feature branch: `git checkout -b feature/my-feature`.
+4. Verify your changes against the quality gates before submitting:
+   ```bash
+   npm run verify
+   ```
+5. Submit a pull request describing the changes and motivation.
+
+---
+
+## License
+
+This project is licensed under the [MIT License](LICENSE).
+
+For details on included third-party libraries and licenses, see [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md).

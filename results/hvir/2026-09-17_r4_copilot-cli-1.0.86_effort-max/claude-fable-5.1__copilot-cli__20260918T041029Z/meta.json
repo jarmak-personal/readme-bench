@@ -1,0 +1,237 @@
+{
+  "id": "claude-fable-5.1__copilot-cli__20260918T041029Z",
+  "batch": "2026-09-17_r4_copilot-cli-1.0.86_effort-max",
+  "target": {
+    "name": "hvir",
+    "url": "https://github.com/jarmak-personal/hvir",
+    "commit": "7acbf8883bc869a9987252833d90b0d250086122",
+    "snapshot_commit": "ca97b8a72d67da22d5da4705101f99fbc80bd9cf"
+  },
+  "model": {
+    "id": "claude-fable-5.1",
+    "vendor": "Anthropic",
+    "name": "Claude Fable",
+    "version": "5.1",
+    "variant": null,
+    "display": "Claude Fable 5.1"
+  },
+  "harness": {
+    "name": "GitHub Copilot CLI",
+    "id": "copilot-cli",
+    "version": "1.0.86"
+  },
+  "prompt": "Please create a README.md for this project.",
+  "started_at": "2026-09-18T04:10:42Z",
+  "finished_at": "2026-09-18T04:16:50Z",
+  "wall_clock_seconds": 368,
+  "exit_code": 0,
+  "setup_exit_code": 0,
+  "readme_produced": true,
+  "readme_bytes": 9166,
+  "readme_lines": 206,
+  "usage": {
+    "totalPremiumRequestCost": 15,
+    "totalUserRequests": 1,
+    "totalNanoAiu": 253088000000,
+    "tokenDetails": {
+      "input": {
+        "tokenCount": 29385
+      },
+      "cache_read": {
+        "tokenCount": 1838848
+      },
+      "cache_write": {
+        "tokenCount": 89937
+      },
+      "output": {
+        "tokenCount": 20706
+      }
+    },
+    "totalApiDurationMs": 339385,
+    "sessionStartTime": "2026-09-18T04:10:44.861Z",
+    "codeChanges": {
+      "linesAdded": 216,
+      "linesRemoved": 10,
+      "filesModifiedCount": 1,
+      "filesModified": [
+        "/private/var/tmp/ws/30b59304/hvir/README.md"
+      ]
+    },
+    "modelMetrics": {
+      "claude-fable-5.1": {
+        "requests": {
+          "count": 31,
+          "cost": 15
+        },
+        "usage": {
+          "inputTokens": 1900111,
+          "outputTokens": 19070,
+          "cacheReadTokens": 1810110,
+          "cacheWriteTokens": 89937,
+          "reasoningTokens": 6035
+        },
+        "cacheExpiresAt": "2026-09-18T04:21:42.943Z",
+        "totalNanoAiu": 253088000000,
+        "tokenDetails": {
+          "input": {
+            "tokenCount": 64
+          },
+          "cache_read": {
+            "tokenCount": 1810110
+          },
+          "cache_write": {
+            "tokenCount": 89937
+          },
+          "output": {
+            "tokenCount": 19070
+          }
+        }
+      },
+      "copilot-search-a": {
+        "requests": {
+          "count": 4,
+          "cost": 0
+        },
+        "usage": {
+          "inputTokens": 58059,
+          "outputTokens": 1636,
+          "cacheReadTokens": 28738,
+          "cacheWriteTokens": 0,
+          "reasoningTokens": 0
+        },
+        "totalNanoAiu": 0,
+        "tokenDetails": {
+          "input": {
+            "tokenCount": 29321
+          },
+          "cache_read": {
+            "tokenCount": 28738
+          },
+          "cache_write": {
+            "tokenCount": 0
+          },
+          "output": {
+            "tokenCount": 1636
+          }
+        }
+      }
+    },
+    "agentMetrics": {
+      "main": {
+        "totalApiDurationMs": 333154,
+        "totalNanoAiu": 253088000000,
+        "modelMetrics": {
+          "claude-fable-5.1": {
+            "requests": {
+              "count": 31,
+              "cost": 15
+            },
+            "usage": {
+              "inputTokens": 1900111,
+              "outputTokens": 19070,
+              "cacheReadTokens": 1810110,
+              "cacheWriteTokens": 89937,
+              "reasoningTokens": 6035
+            },
+            "totalNanoAiu": 253088000000,
+            "tokenDetails": {
+              "input": {
+                "tokenCount": 64
+              },
+              "cache_read": {
+                "tokenCount": 1810110
+              },
+              "cache_write": {
+                "tokenCount": 89937
+              },
+              "output": {
+                "tokenCount": 19070
+              }
+            }
+          }
+        }
+      },
+      "toolu_01HYfDK3H9BfP3cBgrtbN8vo": {
+        "agentName": "search-subagent",
+        "agentDisplayName": "Search Subagent",
+        "totalApiDurationMs": 6231,
+        "totalNanoAiu": 0,
+        "modelMetrics": {
+          "copilot-search-a": {
+            "requests": {
+              "count": 4,
+              "cost": 0
+            },
+            "usage": {
+              "inputTokens": 58059,
+              "outputTokens": 1636,
+              "cacheReadTokens": 28738,
+              "cacheWriteTokens": 0,
+              "reasoningTokens": 0
+            },
+            "totalNanoAiu": 0,
+            "tokenDetails": {
+              "input": {
+                "tokenCount": 29321
+              },
+              "cache_read": {
+                "tokenCount": 28738
+              },
+              "cache_write": {
+                "tokenCount": 0
+              },
+              "output": {
+                "tokenCount": 1636
+              }
+            }
+          }
+        }
+      }
+    },
+    "currentModel": "claude-fable-5.1",
+    "lastCallInputTokens": 89939,
+    "lastCallOutputTokens": 379
+  },
+  "tool_calls": {
+    "view": 16,
+    "bash": 16,
+    "file_search": 23,
+    "grep_search": 3,
+    "read_file": 10,
+    "search_code_subagent": 1,
+    "create": 1,
+    "edit": 5,
+    "grep": 1
+  },
+  "reasoning_effort_requested": "max",
+  "reasoning_level": "max",
+  "chat_calls": {
+    "claude-fable-5.1": {
+      "max": 5
+    },
+    "copilot-search-a": {
+      "max": 1,
+      "none": 26
+    }
+  },
+  "files_viewed": [
+    ".",
+    ".github/workflows/ci.yml",
+    "LICENSE",
+    "README.md",
+    "electron-builder.yml",
+    "package.json",
+    "scripts/check-terminal-runtime.mts",
+    "src/main/harness/providers/claude-code.ts",
+    "src/main/harness/providers/codex.ts",
+    "src/main/harness/providers/shell.ts",
+    "src/main/index.ts",
+    "src/renderer/src/App.tsx",
+    "src/renderer/src/settings/settings.ts",
+    "src/shared/document-review.ts",
+    "src/shared/harness-provider.ts",
+    "src/shared/workspace-types.ts"
+  ],
+  "compactions": [],
+  "truncations": 0
+}

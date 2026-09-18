@@ -1,0 +1,35 @@
+hvir
+=====
+
+hvir is an Electron-based developer workbench focused on terminal-first workflows and project/git/session management. It bundles a renderer (React + Vite), native pty support, and integrations for SSH, document review, and workspace management.
+
+Requirements
+- Node.js >= 24
+- npm
+
+Quick start (development)
+1. npm install
+2. npm run dev
+
+Build
+- npm run build          # typecheck + production build
+- npm run build:dir      # build and produce unpacked dir
+- npm run pack:mac:arm64 # macOS package (arm64)
+
+Testing & linting
+- npm test               # run vitest
+- npm run lint           # eslint
+- npm run typecheck      # TypeScript checks
+
+Project structure
+- src/         – main, preload and renderer source
+- packages/    – local native/optional packages
+- scripts/     – helper and release scripts
+- test/        – unit and integration tests
+
+Contributing
+- Run hooks: npm run hooks:install
+- Follow code style: npm run format:check and npm run lint
+
+License
+MIT

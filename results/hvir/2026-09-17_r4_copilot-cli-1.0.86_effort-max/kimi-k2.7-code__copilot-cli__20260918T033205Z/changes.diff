@@ -1,0 +1,134 @@
+diff --git a/README.md b/README.md
+new file mode 100644
+index 0000000..fd5abea
+--- /dev/null
++++ b/README.md
+@@ -0,0 +1,128 @@
++# hvir
++
++An Electron-based desktop workbench for terminal-centric development.
++
++hvir brings together persistent terminal sessions, Git workflows, file browsing, and document viewing in a single React-driven interface. It is built with TypeScript, bundled with [electron-vite](https://electron-vite.org/), and targets macOS and Linux.
++
++## Features
++
++- **Integrated terminals** — PTY-backed terminal tabs via `node-pty` and a bundled [Ghostty](https://ghostty.org/) web runtime.
++- **SSH remote workspaces** — Connect to remote hosts over SSH and work with files and shells through the same UI.
++- **Git workflow support** — Branch switching, fetching, pulling, worktrees, and mutation authorization.
++- **File viewer & document review** — Browse project files and review documents with Markdown, Mermaid diagrams, and syntax highlighting via Shiki.
++- **Workbench layout** — Split panes, viewer positioning, and session restoration.
++- **Smoke & acceptance testing** — Built-in scenario harness for end-to-end validation.
++
++## Tech stack
++
++- **Desktop shell:** Electron 43 + Node.js 24+
++- **Renderer UI:** React 19 + TypeScript
++- **Build tool:** Vite / electron-vite
++- **Testing:** Vitest, Stryker (mutation testing), custom smoke harness
++- **Terminal:** `node-pty`, `ghostty-web`
++- **SSH:** `ssh2`, `ssh-config`
++- **Editing & preview:** CodeMirror, markdown-it, Mermaid, Shiki
++
++## Prerequisites
++
++- [Node.js](https://nodejs.org/) >= 24
++- npm (ships with Node.js)
++- Python and a C++ toolchain for native module compilation (`node-pty`, optional `@hvir/rename-noreplace`)
++  - macOS: Xcode Command Line Tools
++  - Linux: `build-essential` (or equivalent) and Python 3
++
++## Getting started
++
++```bash
++# Install dependencies and rebuild native modules
++npm install
++
++# Start the app in development mode
++npm run dev
++```
++
++## Available scripts
++
++| Script | Description |
++|--------|-------------|
++| `npm run dev` | Run the app in development mode with hot reload |
++| `npm run build` | Type-check and build for production |
++| `npm run build:smoke` | Build a smoke-testable binary |
++| `npm run preview` | Preview the production build |
++| `npm run typecheck` | Run TypeScript checks for Node and web targets |
++| `npm run lint` | Run ESLint |
++| `npm run format` | Format code with Prettier |
++| `npm run format:check` | Check formatting without writing |
++| `npm test` | Run unit tests with Vitest |
++| `npm run test:watch` | Run Vitest in watch mode |
++| `npm run test:mutation` | Run mutation tests with Stryker |
++| `npm run smoke` | Run the full smoke scenario suite |
++| `npm run smoke:macos` | Run macOS-focused smoke scenarios |
++| `npm run smoke:linux:installed` | Run smoke tests against the installed Linux package |
++| `npm run smoke:macos:installed` | Run smoke tests against the installed macOS package |
++| `npm run verify` | Run seams, ADR, architecture, lint, type-check, and unit tests |
++| `npm run pack:mac:arm64` | Build and package a macOS arm64 `.pkg` |
++| `npm run pack:linux:x64` | Build and package a Linux x64 `.deb` |
++| `npm run pack:linux:arm64` | Build and package a Linux arm64 `.deb` |
++
++## Project structure
++
++```
++├── build/                  # Packaging assets (icons, entitlements, pkg scripts)
++├── packages/               # Private local packages (e.g. @hvir/rename-noreplace)
++├── scripts/                # Build, test, and project-management scripts
++├── src/
++│   ├── main/               # Electron main process
++│   ├── preload/            # Electron preload scripts
++│   ├── renderer/           # React renderer process
++│   ├── shared/             # Shared types and utilities
++│   └── workers/            # Utility-process worker entries
++├── test/                   # Test suites and harnesses
++├── electron.vite.config.ts # Vite configuration for Electron builds
++├── electron-builder.yml    # Production packaging configuration
++└── vitest.config.ts        # Unit test configuration
++```
++
++## Testing
++
++Unit tests use [Vitest](https://vitest.dev/):
++
++```bash
++npm test
++```
++
++End-to-end validation uses a custom smoke harness. Build the smoke binary first, then run scenarios:
++
++```bash
++npm run build:smoke
++npm run smoke
++```
++
++## Packaging
++
++Platform-specific packages are produced with [electron-builder](https://www.electron.build/):
++
++```bash
++# macOS arm64 .pkg
++npm run pack:mac:arm64
++
++# Linux x64 .deb
++npm run pack:linux:x64
++
++# Linux arm64 .deb
++npm run pack:linux:arm64
++```
++
++## Contributing
++
++Contributions are welcome. Please run the full verification pipeline before opening a pull request:
++
++```bash
++npm run verify
++```
++
++## License
++
++hvir is licensed under the [MIT License](./LICENSE).
++
++See [THIRD_PARTY_NOTICES.md](./THIRD_PARTY_NOTICES.md) for attribution of bundled and redistributed third-party software.

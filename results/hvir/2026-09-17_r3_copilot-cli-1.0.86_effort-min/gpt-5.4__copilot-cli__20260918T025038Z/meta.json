@@ -1,0 +1,168 @@
+{
+  "id": "gpt-5.4__copilot-cli__20260918T025038Z",
+  "batch": "2026-09-17_r3_copilot-cli-1.0.86_effort-min",
+  "target": {
+    "name": "hvir",
+    "url": "https://github.com/jarmak-personal/hvir",
+    "commit": "7acbf8883bc869a9987252833d90b0d250086122",
+    "snapshot_commit": "ca97b8a72d67da22d5da4705101f99fbc80bd9cf"
+  },
+  "model": {
+    "id": "gpt-5.4",
+    "vendor": "OpenAI",
+    "name": "GPT",
+    "version": "5.4",
+    "variant": null,
+    "display": "GPT-5.4"
+  },
+  "harness": {
+    "name": "GitHub Copilot CLI",
+    "id": "copilot-cli",
+    "version": "1.0.86"
+  },
+  "prompt": "Please create a README.md for this project.",
+  "started_at": "2026-09-18T02:50:50Z",
+  "finished_at": "2026-09-18T02:51:23Z",
+  "wall_clock_seconds": 33,
+  "exit_code": 0,
+  "setup_exit_code": 0,
+  "readme_produced": true,
+  "readme_bytes": 2697,
+  "readme_lines": 71,
+  "usage": {
+    "totalPremiumRequestCost": 1,
+    "totalUserRequests": 1,
+    "totalNanoAiu": 28932150000,
+    "tokenDetails": {
+      "input": {
+        "tokenCount": 59911
+      },
+      "cache_read": {
+        "tokenCount": 406016
+      },
+      "cache_write": {
+        "tokenCount": 0
+      },
+      "output": {
+        "tokenCount": 2536
+      }
+    },
+    "totalApiDurationMs": 28335,
+    "sessionStartTime": "2026-09-18T02:50:52.844Z",
+    "codeChanges": {
+      "linesAdded": 72,
+      "linesRemoved": 0,
+      "filesModifiedCount": 1,
+      "filesModified": [
+        "/private/var/tmp/ws/f30887b2/hvir/README.md"
+      ]
+    },
+    "modelMetrics": {
+      "gpt-5.4": {
+        "requests": {
+          "count": 12,
+          "cost": 1
+        },
+        "usage": {
+          "inputTokens": 465927,
+          "outputTokens": 2536,
+          "cacheReadTokens": 406016,
+          "cacheWriteTokens": 0,
+          "reasoningTokens": 0
+        },
+        "cacheExpiresAt": "2026-09-18T03:21:20.664Z",
+        "totalNanoAiu": 28932150000,
+        "tokenDetails": {
+          "input": {
+            "tokenCount": 59911
+          },
+          "cache_read": {
+            "tokenCount": 406016
+          },
+          "cache_write": {
+            "tokenCount": 0
+          },
+          "output": {
+            "tokenCount": 2536
+          }
+        }
+      }
+    },
+    "agentMetrics": {
+      "main": {
+        "totalApiDurationMs": 28335,
+        "totalNanoAiu": 28932150000,
+        "modelMetrics": {
+          "gpt-5.4": {
+            "requests": {
+              "count": 12,
+              "cost": 1
+            },
+            "usage": {
+              "inputTokens": 465927,
+              "outputTokens": 2536,
+              "cacheReadTokens": 406016,
+              "cacheWriteTokens": 0,
+              "reasoningTokens": 0
+            },
+            "totalNanoAiu": 28932150000,
+            "tokenDetails": {
+              "input": {
+                "tokenCount": 59911
+              },
+              "cache_read": {
+                "tokenCount": 406016
+              },
+              "cache_write": {
+                "tokenCount": 0
+              },
+              "output": {
+                "tokenCount": 2536
+              }
+            }
+          }
+        }
+      }
+    },
+    "currentModel": "gpt-5.4",
+    "lastCallInputTokens": 54744,
+    "lastCallOutputTokens": 165
+  },
+  "tool_calls": {
+    "bash": 3,
+    "glob": 7,
+    "view": 19,
+    "rg": 4,
+    "apply_patch": 1
+  },
+  "reasoning_effort_requested": "none",
+  "reasoning_level": null,
+  "chat_calls": {
+    "gpt-5.4": {
+      "none": 12
+    }
+  },
+  "files_viewed": [
+    "README.md",
+    "electron-builder.yml",
+    "electron.vite.config.ts",
+    "main/index.ts",
+    "package.json",
+    "renderer/src/App.tsx",
+    "src/main/index.ts",
+    "src/renderer/src/App.tsx",
+    "src/renderer/src/dashboards/WebPane.tsx",
+    "src/renderer/src/document-review/DocumentReviewInlineSurface.tsx",
+    "src/renderer/src/git/GitPanel.tsx",
+    "src/renderer/src/sessions/SessionsOverview.tsx",
+    "src/renderer/src/settings/SettingsDialog.tsx",
+    "src/renderer/src/settings/sections/AppearanceSettings.tsx",
+    "src/renderer/src/settings/sections/GitSettings.tsx",
+    "src/renderer/src/settings/sections/KeybindingsSettings.tsx",
+    "src/renderer/src/settings/sections/TerminalSettings.tsx",
+    "src/renderer/src/terminal/TerminalWorkspaceCollection.tsx",
+    "src/renderer/src/workspaces/ProjectsBar.tsx"
+  ],
+  "compactions": [],
+  "truncations": 0
+}

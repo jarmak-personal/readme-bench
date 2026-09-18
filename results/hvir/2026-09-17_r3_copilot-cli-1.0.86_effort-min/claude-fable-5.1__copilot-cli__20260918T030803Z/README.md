@@ -1,0 +1,72 @@
+# hvir
+
+hvir is an Electron desktop workbench for running AI coding harnesses (Claude Code, Codex, GitHub Copilot CLI) alongside the projects they work on. It combines a Ghostty-based terminal, project file tree and viewer, Git tooling, document review, and embedded web panes into a single window, with support for both local and SSH-remote workspaces.
+
+## Features
+
+- **Terminal** — [ghostty-web](https://github.com/jarmak-personal/ghostty-web) rendering backed by `node-pty`, with splits, themes, attention badges, and clipboard/image paste.
+- **Harness profiles** — launch and resume Claude Code, Codex, or Copilot CLI sessions with per-project or global profiles, context-pressure telemetry, and usage tracking.
+- **Workspaces** — open local project folders or remote hosts over SSH (`ssh2`), with file watching and atomic file operations.
+- **Viewer** — Markdown (with Mermaid and task lists), syntax highlighting via Shiki, HTML preview, and CodeMirror-based diff/merge views.
+- **Git** — status, diff, and workflow tooling running in a dedicated worker.
+- **Document review** — annotate documents and send review comments back into a harness conversation.
+- **Web panes** — embed dashboards and web tools next to your terminals.
+- **Diagnostics** — built-in health reporting and diagnostic report capture.
+
+## Requirements
+
+- Node.js **>= 24**
+- A C/C++ toolchain for native modules (`node-gyp` builds `@hvir/rename-noreplace` and rebuilds `node-pty` against Electron)
+- macOS (arm64) or Linux (x64/arm64)
+
+## Getting started
+
+```bash
+npm ci          # installs deps, Electron, and rebuilds native modules
+npm run dev     # start the app with hot reload
+```
+
+Other useful commands:
+
+| Command | Purpose |
+| --- | --- |
+| `npm run build` | Typecheck and build main/preload/renderer bundles |
+| `npm run build:dir` | Build an unpacked app into `dist/` |
+| `npm run pack:mac:arm64` | Produce a macOS `.pkg` |
+| `npm run pack:linux:x64` / `pack:linux:arm64` | Produce a Linux `.deb` |
+| `npm test` / `npm run test:watch` | Run Vitest unit tests |
+| `npm run lint` / `npm run format` | ESLint / Prettier |
+| `npm run typecheck` | Type-check node and web projects |
+| `npm run verify` | Full local gate: seams, ADRs, architecture, lint, typecheck, tests |
+| `npm run smoke` | Build the smoke bundle and run Electron smoke scenarios |
+| `npm run test:mutation` | Stryker mutation testing |
+
+Install the pre-push hook (TypeScript checks + local smoke test) with:
+
+```bash
+npm run hooks:install
+```
+
+## Project layout
+
+```
+src/
+  main/       Electron main process: PTY, harness, git, sessions, workspaces, IPC
+  preload/    Context-bridge surface exposed to the renderer
+  renderer/   React UI: terminal, viewer, tree, git, settings, dashboards
+  shared/     Types and IPC contracts shared across processes
+  workers/    Worker-thread entry points (git, echo)
+packages/
+  rename-noreplace/   Node-API addon for atomic no-replace rename
+scripts/      Build, smoke, release, and project-management tooling
+test/         Vitest suites
+build/        Icons, entitlements, and packaging resources
+```
+
+## Continuous integration
+
+GitHub Actions workflows under `.github/workflows/` run CI, CodeQL, smoke stress, real-host SSH acceptance, and macOS/Linux package releases.
+
+## License
+
+MIT — see [LICENSE](LICENSE). Third-party notices for redistributed components are in [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md).

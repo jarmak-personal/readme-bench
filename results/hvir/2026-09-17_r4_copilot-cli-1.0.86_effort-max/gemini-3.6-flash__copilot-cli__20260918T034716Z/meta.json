@@ -1,0 +1,151 @@
+{
+  "id": "gemini-3.6-flash__copilot-cli__20260918T034716Z",
+  "batch": "2026-09-17_r4_copilot-cli-1.0.86_effort-max",
+  "target": {
+    "name": "hvir",
+    "url": "https://github.com/jarmak-personal/hvir",
+    "commit": "7acbf8883bc869a9987252833d90b0d250086122",
+    "snapshot_commit": "ca97b8a72d67da22d5da4705101f99fbc80bd9cf"
+  },
+  "model": {
+    "id": "gemini-3.6-flash",
+    "vendor": "Google",
+    "name": "Gemini Flash",
+    "version": "3.6",
+    "variant": null,
+    "display": "Gemini 3.6 Flash"
+  },
+  "harness": {
+    "name": "GitHub Copilot CLI",
+    "id": "copilot-cli",
+    "version": "1.0.86"
+  },
+  "prompt": "Please create a README.md for this project.",
+  "started_at": "2026-09-18T03:47:27Z",
+  "finished_at": "2026-09-18T03:48:54Z",
+  "wall_clock_seconds": 87,
+  "exit_code": 0,
+  "setup_exit_code": 0,
+  "readme_produced": true,
+  "readme_bytes": 4486,
+  "readme_lines": 149,
+  "usage": {
+    "totalPremiumRequestCost": 14,
+    "totalUserRequests": 1,
+    "totalNanoAiu": 20527432500,
+    "tokenDetails": {
+      "input": {
+        "tokenCount": 213239
+      },
+      "cache_read": {
+        "tokenCount": 505851
+      },
+      "cache_write": {
+        "tokenCount": 0
+      },
+      "output": {
+        "tokenCount": 1975
+      }
+    },
+    "totalApiDurationMs": 46356,
+    "sessionStartTime": "2026-09-18T03:47:30.649Z",
+    "codeChanges": {
+      "linesAdded": 149,
+      "linesRemoved": 0,
+      "filesModifiedCount": 1,
+      "filesModified": [
+        "/private/var/tmp/ws/2cb14b11/hvir/README.md"
+      ]
+    },
+    "modelMetrics": {
+      "gemini-3.6-flash": {
+        "requests": {
+          "count": 20,
+          "cost": 14
+        },
+        "usage": {
+          "inputTokens": 719090,
+          "outputTokens": 1975,
+          "cacheReadTokens": 505851,
+          "cacheWriteTokens": 0,
+          "reasoningTokens": 3819
+        },
+        "totalNanoAiu": 20527432500,
+        "tokenDetails": {
+          "input": {
+            "tokenCount": 213239
+          },
+          "cache_read": {
+            "tokenCount": 505851
+          },
+          "cache_write": {
+            "tokenCount": 0
+          },
+          "output": {
+            "tokenCount": 1975
+          }
+        }
+      }
+    },
+    "agentMetrics": {
+      "main": {
+        "totalApiDurationMs": 46356,
+        "totalNanoAiu": 20527432500,
+        "modelMetrics": {
+          "gemini-3.6-flash": {
+            "requests": {
+              "count": 20,
+              "cost": 14
+            },
+            "usage": {
+              "inputTokens": 719090,
+              "outputTokens": 1975,
+              "cacheReadTokens": 505851,
+              "cacheWriteTokens": 0,
+              "reasoningTokens": 3819
+            },
+            "totalNanoAiu": 20527432500,
+            "tokenDetails": {
+              "input": {
+                "tokenCount": 213239
+              },
+              "cache_read": {
+                "tokenCount": 505851
+              },
+              "cache_write": {
+                "tokenCount": 0
+              },
+              "output": {
+                "tokenCount": 1975
+              }
+            }
+          }
+        }
+      }
+    },
+    "currentModel": "gemini-3.6-flash",
+    "lastCallInputTokens": 47095,
+    "lastCallOutputTokens": 154
+  },
+  "tool_calls": {
+    "glob": 2,
+    "view": 4,
+    "bash": 12,
+    "create": 1
+  },
+  "reasoning_effort_requested": "high",
+  "reasoning_level": "high",
+  "chat_calls": {
+    "gemini-3.6-flash": {
+      "high": 20
+    }
+  },
+  "files_viewed": [
+    "LICENSE",
+    "electron-builder.yml",
+    "package.json",
+    "scripts/check-adrs.mjs"
+  ],
+  "compactions": [],
+  "truncations": 0
+}

@@ -1,0 +1,192 @@
+# hvir
+
+A modern terminal application built with Electron, featuring integrated SSH support, terminal themes, and a rich development environment for managing remote and local shells.
+
+## Features
+
+- **Multi-terminal workspace**: Manage multiple terminal sessions within a single window
+- **SSH integration**: Built-in SSH support for remote host connections
+- **Terminal themes**: Extensive terminal theme catalog with syntax highlighting via Shiki
+- **PTY management**: Native pseudo-terminal support with advanced session management
+- **Code editing**: Integration with CodeMirror for document review and editing
+- **Remote workspaces**: Connect to and manage remote project folders
+- **Terminal renderer**: Advanced Ghostty web renderer for high-performance terminal rendering
+- **Project management**: Manage multiple projects with persistent workspace configuration
+
+## Requirements
+
+- Node.js >= 24
+- npm or yarn package manager
+
+## Installation
+
+```bash
+npm install
+```
+
+### Post-Installation
+
+The project uses native modules that require compilation:
+
+```bash
+npm run install:runtime
+```
+
+This installs Electron, rebuilds native dependencies (`node-pty`, `@hvir/rename-noreplace`), and configures the terminal runtime.
+
+## Development
+
+### Run Development Server
+
+```bash
+npm run dev
+```
+
+Starts the Electron application in development mode with hot module reloading.
+
+### Build for Production
+
+```bash
+npm run build
+```
+
+Compiles TypeScript and builds the Electron application.
+
+### Smoke Testing
+
+Run automated smoke tests to verify core functionality:
+
+```bash
+npm run smoke
+npm run smoke:macos      # macOS-specific tests
+npm run smoke:capacity   # Performance and capacity tests
+```
+
+### Type Checking
+
+```bash
+npm run typecheck       # Full type check
+npm run typecheck:node  # Node.js context only
+npm run typecheck:web   # Web/renderer context only
+```
+
+### Linting & Formatting
+
+```bash
+npm run lint             # Check code with ESLint
+npm run format           # Format code with Prettier
+npm run format:check     # Check formatting without changes
+```
+
+### Testing
+
+```bash
+npm run test            # Run all tests once
+npm run test:watch      # Run tests in watch mode
+npm run test:mutation   # Run mutation testing with Stryker
+```
+
+## Project Structure
+
+```
+src/
+├── main/          # Electron main process
+├── preload/       # Preload scripts for IPC
+├── renderer/      # React renderer/UI
+├── shared/        # Shared utilities and types
+└── workers/       # Web workers
+
+packages/
+└── rename-noreplace/  # Native module for safe file operations
+
+scripts/          # Build, test, and utility scripts
+test/             # Test files
+```
+
+## Package Architecture
+
+The project consists of:
+
+- **Main process** (`src/main`): Window management, file operations, PTY management, SSH integration
+- **Renderer process** (`src/renderer`): React-based UI for terminals, workspace, and settings
+- **Shared utilities** (`src/shared`): Common types, interfaces, and utility functions
+- **Native modules** (`packages/rename-noreplace`): Platform-specific optimizations
+
+## Verification
+
+Run the complete verification suite:
+
+```bash
+npm run verify
+```
+
+This runs:
+- Seam checks (architecture boundaries)
+- Architecture decision reviews
+- Linting
+- Type checking
+- Unit tests
+
+## Distribution
+
+### macOS
+
+```bash
+npm run pack:mac:arm64           # Build unsigned package
+npm run pack:mac:arm64:signed    # Build signed package (requires signing certificate)
+```
+
+### Linux
+
+```bash
+npm run pack:linux:x64    # Build x64 DEB package
+npm run pack:linux:arm64  # Build ARM64 DEB package
+```
+
+### Acceptance Testing
+
+```bash
+npm run acceptance:ssh:macos        # Run SSH acceptance tests on macOS
+npm run acceptance:ssh:real-host    # Run acceptance tests against real host
+```
+
+## Configuration
+
+### Git Hooks
+
+Install git hooks for pre-commit checks:
+
+```bash
+npm run hooks:install
+```
+
+### Project Management Commands
+
+The project includes utilities for project planning and management:
+
+- `npm run project:kind` - Sync project kind configuration
+- `npm run project:audit` - Audit project structure
+- `npm run project:pr` - Sync pull request planning
+- `npm run project:status` - Read contributor status
+- `npm run issue:context` - Get issue context
+- `npm run issue:start` - Start working on an issue
+
+## License
+
+MIT License - See [LICENSE](LICENSE) file for details.
+
+## Contributing
+
+Contributions are welcome! Please ensure your changes pass all checks:
+
+```bash
+npm run verify    # Full verification suite
+npm run test      # Run tests
+npm run lint      # Check linting
+```
+
+Before committing, ensure git hooks are installed with `npm run hooks:install`.
+
+## Third-Party Licenses
+
+See [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md) for third-party dependencies and their licenses.

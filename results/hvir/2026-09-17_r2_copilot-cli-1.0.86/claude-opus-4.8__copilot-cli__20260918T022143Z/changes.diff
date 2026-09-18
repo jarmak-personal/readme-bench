@@ -1,0 +1,113 @@
+diff --git a/README.md b/README.md
+new file mode 100644
+index 0000000..6823db0
+--- /dev/null
++++ b/README.md
+@@ -0,0 +1,107 @@
++# hvir
++
++hvir is a cross-platform desktop workbench for developers who live in the terminal.
++It combines fast embedded terminals, git worktree workflows, remote SSH
++workspaces, a rich file and document viewer, and first-class integration with
++AI coding agents ("harnesses") in a single Electron application.
++
++## Features
++
++- **Embedded terminals** – GPU-accelerated terminals powered by
++  [`ghostty-web`](https://github.com/jarmak-personal/ghostty-web) with a native
++  [`node-pty`](https://github.com/microsoft/node-pty) backend, split layouts,
++  and per-terminal attention badges.
++- **Git-aware workspaces** – Browse the working tree, review changes, switch
++  branches, fetch/pull, and manage worktrees from a dedicated git panel and
++  commit graph.
++- **Remote workspaces over SSH** – Open and work in projects hosted on remote
++  machines using [`ssh2`](https://github.com/mscdex/ssh2) and SSH config
++  resolution.
++- **Document review & file viewer** – View and diff files with CodeMirror,
++  Shiki syntax highlighting, Markdown (including task lists) and Mermaid
++  diagram rendering.
++- **AI harness integration** – Connect coding-agent sessions with context
++  presentation, telemetry, and document-review insertion contracts.
++- **Sessions & diagnostics** – Track sessions, workbench health, and runtime
++  diagnostics across the app.
++
++## Requirements
++
++- **Node.js** `>= 24`
++- A supported desktop platform: **macOS** or **Linux** (Debian-based packages
++  are produced for distribution)
++
++## Getting started
++
++Install dependencies. The `postinstall` step rebuilds native modules
++(`node-pty`, `@hvir/rename-noreplace`) against Electron's ABI, so a working
++native toolchain is required.
++
++```bash
++npm install
++```
++
++Run the app in development mode with hot reload:
++
++```bash
++npm run dev
++```
++
++## Building
++
++Type-check and build the production bundle:
++
++```bash
++npm run build
++```
++
++Package platform installers:
++
++```bash
++npm run pack:mac:arm64      # macOS .pkg (arm64)
++npm run pack:linux:x64      # Linux .deb (x64)
++npm run pack:linux:arm64    # Linux .deb (arm64)
++```
++
++Build output is written to `dist/`.
++
++## Development
++
++Common scripts (see `package.json` for the full list):
++
++| Command | Description |
++| --- | --- |
++| `npm run dev` | Launch the app with hot reload |
++| `npm test` | Run the unit test suite (Vitest) |
++| `npm run test:watch` | Run tests in watch mode |
++| `npm run lint` | Lint with ESLint |
++| `npm run format` | Format with Prettier |
++| `npm run typecheck` | Type-check node and web targets |
++| `npm run smoke` | Run built end-to-end smoke scenarios |
++| `npm run verify` | Full gate: seams, ADRs, architecture, lint, typecheck, tests |
++
++Install the git hooks used by the project:
++
++```bash
++npm run hooks:install
++```
++
++## Project structure
++
++```
++src/
++  main/       Electron main process (terminals, git, projects, SSH, IPC)
++  preload/    Preload bridge exposed to the renderer
++  renderer/   React UI (workbench, terminals, viewer, git, sessions)
++  shared/     Types and contracts shared across the process boundary
++  workers/    Off-main-thread workers (git, echo)
++packages/
++  rename-noreplace/  Native addon for atomic, non-clobbering renames
++scripts/      Build, packaging, smoke, and project-management tooling
++build/        Packaging resources (icons, entitlements, installer scripts)
++```
++
++## License
++
++Released under the [MIT License](LICENSE). Third-party components are listed in
++[THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md).

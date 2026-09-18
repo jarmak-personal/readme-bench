@@ -1,0 +1,128 @@
+# hvir
+
+**hvir** is an Electron developer workbench for local and remote (SSH) projects. It combines a multi-pane terminal, file tree and viewers, Git tooling, and pluggable AI agent harnesses in one desktop app.
+
+| | |
+|---|---|
+| **Version** | 0.2.3 |
+| **License** | MIT |
+| **Stack** | Electron, React, TypeScript, electron-vite |
+| **Runtime** | Node.js ≥ 24 |
+| **Platforms** | macOS (pkg), Linux (deb) |
+
+## Features
+
+- **Projects & workspaces** — Open local folders or SSH hosts; switch projects from a shared projects bar with session recovery.
+- **Terminal** — Native PTY sessions via [ghostty-web](https://github.com/jarmak-personal/ghostty-web), split layouts, themes, search, attention badges, and move/recover flows.
+- **AI harnesses** — Launch and manage agent profiles for Claude Code, Codex, Cursor, Gemini, GitHub Copilot, Pi, plain shell, and custom commands (probe, resume, fork, and document-review delivery where supported).
+- **Files** — Project tree with create/rename/move/delete, filename search, external copy/move, and reveal-in-file-manager.
+- **Viewers** — Source, diff, rendered Markdown (incl. Mermaid), images, and HTML preview with split tabs and find.
+- **Git** — Changes rail, commit graph, branch/worktree operations, and blame-aware source views.
+- **Document review** — Review workspace with insert/send-now delivery into compatible harness composers.
+- **Web panes** — Embedded loopback web surfaces alongside the editor.
+- **Sessions** — Cross-workspace session overview and terminal detail.
+- **Diagnostics** — Workbench health, diagnostic reports, and evidence capture for support and smoke runs.
+
+## Requirements
+
+- **Node.js 24+**
+- Platform build tools for native modules (`node-pty`, `@hvir/rename-noreplace`)
+  - macOS: Xcode Command Line Tools
+  - Linux: build-essential / equivalent, plus GTK and related runtime libs (see packaging deps in `electron-builder.yml`)
+- Optional: SSH agent / keys for remote projects; installed CLI agents for harness profiles
+
+## Quick start
+
+```bash
+npm install
+npm run dev
+```
+
+`postinstall` rebuilds Electron-native bindings (`node-pty`, rename-noreplace). `predev` / `prebuild` verify the terminal runtime.
+
+### Common scripts
+
+| Command | Purpose |
+|--------|---------|
+| `npm run dev` | Development app via electron-vite |
+| `npm run build` | Typecheck + production build (`out/`) |
+| `npm run preview` | Preview the production build |
+| `npm test` | Unit/integration tests (Vitest) |
+| `npm run lint` | ESLint |
+| `npm run typecheck` | Node + web TypeScript checks |
+| `npm run format` | Prettier write |
+| `npm run verify` | Seams, ADRs, architecture, lint, typecheck, tests |
+| `npm run smoke` | Headless smoke scenario suite |
+| `npm run pack:mac:arm64` | macOS arm64 `.pkg` |
+| `npm run pack:linux:x64` / `pack:linux:arm64` | Linux `.deb` packages |
+
+## Project layout
+
+```
+src/
+  main/        Electron main process (PTY, IPC, hosts, Git, harness, smoke)
+  preload/     Context bridge
+  renderer/    React workbench UI
+  shared/      Cross-process types and IPC contracts
+  workers/     Git and utility workers
+packages/
+  rename-noreplace/   Native atomic rename helper
+scripts/              Build, smoke, architecture, release, project tooling
+test/                 Vitest suite and fixtures
+build/                Icons, entitlements, Linux packaging assets
+```
+
+## Development
+
+```bash
+npm run hooks:install   # optional local git hooks
+npm run lint
+npm run typecheck
+npm test
+npm run test:watch
+npm run verify          # full gate used before serious changes
+```
+
+Architecture and contributor tooling:
+
+- `npm run check-seams` / `check-adrs` / `architecture:check` — structural policy
+- `npm run project:status`, `issue:context`, `issue:start`, `project:pr` — planning helpers under `scripts/project-management/`
+- `npm run test:mutation` — Stryker mutation testing
+
+Smoke and acceptance:
+
+```bash
+npm run smoke
+npm run smoke:scenario -- <scenario-name>
+npm run acceptance:ssh:macos          # macOS SSH acceptance (when configured)
+npm run acceptance:ssh:real-host      # real-host SSH contract
+```
+
+## Packaging
+
+Production artifacts go to `dist/` via electron-builder.
+
+- **macOS:** hardened runtime, entitlements under `build/`, `.pkg` installer
+- **Linux:** `.deb` with AppArmor profile and install/remove hooks under `build/linux/`
+- Native helper binary is staged as `hvir-command`; third-party notices ship as an extra resource
+
+See `electron-builder.yml` and the release workflows under `.github/workflows/`.
+
+## Architecture notes
+
+- **Main owns authority** — file system, PTY, SSH, Git mutations, harness launch, and IPC policy live in `src/main`; the renderer is presentation and intent.
+- **Shared contracts** — `src/shared` defines IPC and domain types used on both sides.
+- **Workbench runtime** — lifecycle (start / suspend / reopen / shutdown) and ordered resource disposal are centralized in `WorkbenchRuntime`.
+- **Harness providers** — bundled providers implement a common probe/launch/resume/telemetry contract; profiles are user-configurable (global or per-project).
+
+## Configuration
+
+App settings (appearance, terminal, Git, keybindings, harness profiles) persist in the Electron user-data directory. Harness profiles can bind executables, args, environment, and path grants for local or remote hosts.
+
+## Third-party notices
+
+Bundled and modified dependencies are documented in [`THIRD_PARTY_NOTICES.md`](./THIRD_PARTY_NOTICES.md), including the ghostty-based terminal runtime and the `@hvir/rename-noreplace` binding.
+
+## License
+
+[MIT](./LICENSE) © 2026 hvir contributors

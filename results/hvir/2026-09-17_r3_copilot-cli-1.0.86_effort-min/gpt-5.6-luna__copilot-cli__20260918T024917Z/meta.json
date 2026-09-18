@@ -1,0 +1,153 @@
+{
+  "id": "gpt-5.6-luna__copilot-cli__20260918T024917Z",
+  "batch": "2026-09-17_r3_copilot-cli-1.0.86_effort-min",
+  "target": {
+    "name": "hvir",
+    "url": "https://github.com/jarmak-personal/hvir",
+    "commit": "7acbf8883bc869a9987252833d90b0d250086122",
+    "snapshot_commit": "ca97b8a72d67da22d5da4705101f99fbc80bd9cf"
+  },
+  "model": {
+    "id": "gpt-5.6-luna",
+    "vendor": "OpenAI",
+    "name": "GPT",
+    "version": "5.6",
+    "variant": "luna",
+    "display": "GPT-5.6 Luna"
+  },
+  "harness": {
+    "name": "GitHub Copilot CLI",
+    "id": "copilot-cli",
+    "version": "1.0.86"
+  },
+  "prompt": "Please create a README.md for this project.",
+  "started_at": "2026-09-18T02:49:28Z",
+  "finished_at": "2026-09-18T02:49:47Z",
+  "wall_clock_seconds": 19,
+  "exit_code": 0,
+  "setup_exit_code": 0,
+  "readme_produced": true,
+  "readme_bytes": 3740,
+  "readme_lines": 81,
+  "usage": {
+    "totalPremiumRequestCost": 1,
+    "totalUserRequests": 1,
+    "totalNanoAiu": 1491890000,
+    "tokenDetails": {
+      "input": {
+        "tokenCount": 18
+      },
+      "cache_read": {
+        "tokenCount": 153210
+      },
+      "cache_write": {
+        "tokenCount": 40334
+      },
+      "output": {
+        "tokenCount": 1473
+      }
+    },
+    "totalApiDurationMs": 14269,
+    "sessionStartTime": "2026-09-18T02:49:31.435Z",
+    "codeChanges": {
+      "linesAdded": 82,
+      "linesRemoved": 0,
+      "filesModifiedCount": 1,
+      "filesModified": [
+        "/private/var/tmp/ws/c681b28c/hvir/README.md"
+      ]
+    },
+    "modelMetrics": {
+      "gpt-5.6-luna": {
+        "requests": {
+          "count": 6,
+          "cost": 1
+        },
+        "usage": {
+          "inputTokens": 193562,
+          "outputTokens": 1473,
+          "cacheReadTokens": 153210,
+          "cacheWriteTokens": 40334,
+          "reasoningTokens": 0
+        },
+        "cacheExpiresAt": "2026-09-18T03:19:45.993Z",
+        "totalNanoAiu": 1491890000,
+        "tokenDetails": {
+          "input": {
+            "tokenCount": 18
+          },
+          "cache_read": {
+            "tokenCount": 153210
+          },
+          "cache_write": {
+            "tokenCount": 40334
+          },
+          "output": {
+            "tokenCount": 1473
+          }
+        }
+      }
+    },
+    "agentMetrics": {
+      "main": {
+        "totalApiDurationMs": 14269,
+        "totalNanoAiu": 1491890000,
+        "modelMetrics": {
+          "gpt-5.6-luna": {
+            "requests": {
+              "count": 6,
+              "cost": 1
+            },
+            "usage": {
+              "inputTokens": 193562,
+              "outputTokens": 1473,
+              "cacheReadTokens": 153210,
+              "cacheWriteTokens": 40334,
+              "reasoningTokens": 0
+            },
+            "totalNanoAiu": 1491890000,
+            "tokenDetails": {
+              "input": {
+                "tokenCount": 18
+              },
+              "cache_read": {
+                "tokenCount": 153210
+              },
+              "cache_write": {
+                "tokenCount": 40334
+              },
+              "output": {
+                "tokenCount": 1473
+              }
+            }
+          }
+        }
+      }
+    },
+    "currentModel": "gpt-5.6-luna",
+    "lastCallInputTokens": 40337,
+    "lastCallOutputTokens": 62
+  },
+  "tool_calls": {
+    "glob": 3,
+    "rg": 3,
+    "view": 4,
+    "apply_patch": 1,
+    "bash": 1
+  },
+  "reasoning_effort_requested": "none",
+  "reasoning_level": null,
+  "chat_calls": {
+    "gpt-5.6-luna": {
+      "none": 6
+    }
+  },
+  "files_viewed": [
+    ".gitignore",
+    "LICENSE",
+    "README.md",
+    "package.json"
+  ],
+  "compactions": [],
+  "truncations": 0
+}

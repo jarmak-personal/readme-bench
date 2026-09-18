@@ -1,0 +1,96 @@
+# hvir
+
+hvir is a desktop workbench for working with terminal-based AI coding harnesses (such as Claude Code and Codex) across local and remote project folders. It pairs a native terminal runtime with a project-aware workbench: split panes, git review, document review, and a file viewer, all in one Electron application.
+
+## Features
+
+- **Terminal-first workbench** — native PTY sessions (`node-pty` + `ghostty-web`) with splits, move/reattach, themes, and clipboard/image paste.
+- **Harness integration** — provider probing, profiles, session discovery and resume, context-pressure telemetry, and composer/send contracts for supported coding harnesses.
+- **Projects and workspaces** — multiple project folders, file watching, filename search, and a sessions projection across workspaces.
+- **Remote workspaces** — SSH-backed hosts (`ssh2`, `ssh-config`) with connection status and prompt handling.
+- **Review and viewing** — git status/diff workflows, document review, CodeMirror-based viewer with Shiki highlighting, Markdown and Mermaid rendering, and an HTML preview pane.
+- **Health and diagnostics** — workbench health checks, diagnostic reports, and renderer recovery.
+
+## Requirements
+
+- Node.js **>= 24**
+- Native toolchain for building `node-pty` and the bundled `@hvir/rename-noreplace` addon (Xcode Command Line Tools on macOS, `build-essential`/`python3` on Linux)
+
+## Getting started
+
+```bash
+npm install     # also rebuilds Electron + native modules via postinstall
+npm run dev     # launch the app in development
+```
+
+## Scripts
+
+### Develop and build
+
+| Command | Description |
+| --- | --- |
+| `npm run dev` | Run the app with `electron-vite` in dev mode |
+| `npm run build` | Typecheck, then build main/preload/renderer bundles |
+| `npm run build:dir` | Build and produce an unpacked app directory |
+| `npm run preview` | Preview a production build |
+
+### Packaging
+
+| Command | Description |
+| --- | --- |
+| `npm run pack:mac:arm64` | Build a macOS `.pkg` for arm64 |
+| `npm run pack:linux:x64` / `npm run pack:linux:arm64` | Build Linux `.deb` packages |
+| `npm run assemble:native-release` | Assemble native release artifacts |
+
+### Quality gates
+
+| Command | Description |
+| --- | --- |
+| `npm test` | Run the Vitest suite (`npm run test:watch` for watch mode) |
+| `npm run lint` | ESLint over the repository |
+| `npm run typecheck` | Typecheck node and web projects |
+| `npm run format` / `format:check` | Prettier write / verify |
+| `npm run verify` | Full gate: seams, ADRs, architecture, lint, typecheck, tests |
+| `npm run test:mutation` | Stryker mutation testing |
+
+### Smoke and acceptance
+
+| Command | Description |
+| --- | --- |
+| `npm run smoke` | Build the smoke bundle and run all smoke scenarios |
+| `npm run smoke:scenario -- <name>` | Run selected scenarios |
+| `npm run smoke:macos` / `smoke:macos:ci` | Platform-scoped smoke runs |
+| `npm run acceptance:ssh:macos` | macOS SSH acceptance run |
+| `npm run smoke:linux:installed` / `smoke:macos:installed` | Smoke the installed package |
+
+### Architecture checks
+
+`npm run check-seams`, `npm run check-adrs`, and `npm run architecture:report` / `architecture:check` enforce module boundaries and recorded architecture decisions.
+
+## Project layout
+
+```
+src/
+  main/        Electron main process: projects, git, pty, harness, sessions, window
+  preload/     Context-bridge surface exposed to the renderer
+  renderer/    React UI: workbench, terminal, viewer, git, settings, dashboards
+  shared/      IPC contracts and types shared across the process boundary
+  workers/     Off-main-thread workers (git, echo)
+packages/
+  rename-noreplace/   Native addon for atomic no-replace renames
+scripts/       Build, smoke, architecture, and project-management tooling
+test/          Vitest suites and smoke scenario harnesses
+build/         Icons, entitlements, and packaging resources
+```
+
+## Git hooks
+
+```bash
+npm run hooks:install
+```
+
+Installs the repository hooks from `.githooks`.
+
+## License
+
+MIT — see [LICENSE](LICENSE). Bundled third-party licenses are listed in [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md).

@@ -1,0 +1,92 @@
+# hvir
+
+hvir is an Electron workbench for working inside local and remote development projects. It combines a project file tree, Ghostty-backed terminal sessions, source and rendered document viewers, Git workflows, web panes, and configurable command/agent harnesses in one desktop app.
+
+## Features
+
+- **Project workbench**: open local folders or SSH-backed project hosts, browse files, create/move/delete entries, and keep views synchronized with filesystem changes.
+- **Terminal workspace**: run persistent `node-pty` terminal sessions with Ghostty rendering, splits, session recovery, search, file links, clipboard/file paste, and theme controls.
+- **Viewer workspace**: inspect source, diffs, Markdown, Mermaid, images, JSON, CSV, and large files with tabbed/split navigation.
+- **Git tools**: review changes, inspect history and graph views, fetch, pull, switch branches, and coordinate mutation authorization.
+- **Harness integrations**: launch shell, custom command, Claude Code, Codex, Gemini, GitHub Copilot, Cursor, and pi providers through configurable profiles.
+- **Operational surfaces**: sessions overview, diagnostics reports, workbench health, web panes, smoke scenarios, and architecture-policy checks.
+
+## Requirements
+
+- Node.js **24 or newer**
+- npm
+- A native build toolchain compatible with `node-gyp` for rebuilding native modules (`node-pty` and `@hvir/rename-noreplace`)
+- macOS or Linux for development and packaging targets
+
+## Getting started
+
+```bash
+npm ci
+npm run dev
+```
+
+`npm ci` installs the Electron runtime, verifies the pinned `ghostty-web` terminal runtime, and rebuilds native modules for the local Electron ABI.
+
+To start hvir against a specific project without using the folder picker:
+
+```bash
+HVIR_PROJECT_ROOT=/path/to/project npm run dev
+```
+
+## Common commands
+
+| Command | Description |
+| --- | --- |
+| `npm run dev` | Start the Electron app in development mode. |
+| `npm run build` | Type-check Node and web targets, then build the Electron bundles. |
+| `npm run build:dir` | Build and create an unpacked Electron app in `dist/`. |
+| `npm run pack:mac:arm64` | Build a macOS arm64 `.pkg`. |
+| `npm run pack:linux:x64` | Build a Linux x64 `.deb`. |
+| `npm run pack:linux:arm64` | Build a Linux arm64 `.deb`. |
+| `npm run lint` | Run ESLint across the repository. |
+| `npm run typecheck` | Run TypeScript checks for Node and renderer projects. |
+| `npm test` | Run the Vitest unit and component test suite. |
+| `npm run verify` | Run seam, ADR, architecture, lint, type, and unit-test gates. |
+| `npm run smoke` | Build the smoke app and run the default Electron smoke scenarios. |
+| `npm run smoke:scenario -- <name>` | Run one or more named Electron smoke scenarios. |
+
+On Linux, Electron smoke runs usually need a display server; CI runs them with `xvfb-run`.
+
+## Repository layout
+
+```text
+build/                    Packaging resources, icons, entitlements, and native install assets
+packages/rename-noreplace Private Node-API helper for atomic no-replace rename operations
+scripts/                  Release, architecture, smoke, project-management, and maintenance tools
+src/main/                 Electron main process, project hosts, PTY, Git, IPC, diagnostics, smoke runtime
+src/preload/              Electron preload bridge
+src/renderer/             React renderer, workbench UI, terminal/viewer/Git/settings surfaces
+src/shared/               Shared contracts, types, IPC payloads, and policies
+src/workers/              Utility-process workers used by the main process
+test/                     Vitest unit, integration-seam, and renderer component tests
+```
+
+## Architecture and quality gates
+
+The project keeps main, preload, renderer, shared contracts, and workers separated through explicit seams. The `verify` script is the standard pre-merge gate:
+
+```bash
+npm run verify
+```
+
+For focused checks while developing, use `npm run lint`, `npm run typecheck`, or `npm test`. Architecture reports and enforcement are available through `npm run architecture:report` and `npm run architecture:check`.
+
+## Packaging and releases
+
+Electron Builder configuration lives in `electron-builder.yml`. Release-oriented scripts are in `scripts/`, including native release assembly, installer rendering, release changelog generation, package smoke tests, and release PR validation.
+
+Generated outputs are intentionally ignored:
+
+- `out/` for Electron/Vite build output
+- `dist/` for packaged artifacts
+- `packages/*/build` for native package build products
+- `coverage/` for test coverage
+
+## License
+
+hvir is licensed under the MIT License. See [LICENSE](LICENSE) for details and [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md) for bundled third-party notices.

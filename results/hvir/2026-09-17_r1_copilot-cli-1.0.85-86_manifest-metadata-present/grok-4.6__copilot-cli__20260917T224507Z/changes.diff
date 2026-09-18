@@ -1,0 +1,93 @@
+diff --git a/README.md b/README.md
+new file mode 100644
+index 0000000..f59a17d
+--- /dev/null
++++ b/README.md
+@@ -0,0 +1,87 @@
++# hvir
++
++A lightweight, view-first workbench for agentic development.
++
++hvir is a desktop Electron app for working with local and SSH projects: browse files, review diffs, run terminals, and launch coding-agent harnesses without turning the editor into the center of gravity.
++
++## Features
++
++- **View-first workbench** — file tree, tabbed viewer, Git rail, terminals, and a web pane in one window
++- **Local and remote workspaces** — open folders on the local machine or over SSH
++- **File viewer** — source, rendered, and diff modes; Markdown, Mermaid, HTML, JSON, YAML, CSV, and images
++- **Git** — status, history, graph, worktrees, branch switch, fetch, and pull
++- **Terminals** — native PTYs rendered with [ghostty-web](https://github.com/jarmak-personal/ghostty-web)
++- **Agent harnesses** — bundled launch profiles for Claude Code, Codex, Gemini CLI, GitHub Copilot CLI, Cursor CLI, Pi, a plain shell, and custom commands
++- **Document review** — prepare and send review context into a trusted harness
++- **Sessions** — observe running terminal and harness sessions across workspaces
++
++Packaged builds currently target **macOS** (`.pkg`) and **Linux** (`.deb`).
++
++## Requirements
++
++- [Node.js](https://nodejs.org/) 24 or later
++- A C/C++ toolchain for native addons (`node-gyp`, `node-pty`, and `@hvir/rename-noreplace`)
++- Git, if you want repository features
++
++## Development
++
++```bash
++git clone https://github.com/jarmak-personal/hvir.git
++cd hvir
++npm install
++npm run dev
++```
++
++`npm install` rebuilds native modules against Electron. `npm run dev` starts the electron-vite development app.
++
++Optional local Git hooks (typecheck plus a platform smoke test on push):
++
++```bash
++npm run hooks:install
++```
++
++## Scripts
++
++| Command | Purpose |
++| --- | --- |
++| `npm run dev` | Run the Electron app in development |
++| `npm run build` | Typecheck and production-build |
++| `npm test` | Run the Vitest suite |
++| `npm run lint` | ESLint |
++| `npm run format` | Prettier write |
++| `npm run verify` | Seams, architecture, lint, typecheck, and tests |
++| `npm run smoke` | Headless Electron smoke scenarios |
++| `npm run pack:mac:arm64` | macOS `.pkg` (arm64) |
++| `npm run pack:linux:x64` | Linux `.deb` (x64) |
++| `npm run pack:linux:arm64` | Linux `.deb` (arm64) |
++
++## Architecture
++
++The process split is the usual Electron layout, with host I/O kept behind explicit seams:
++
++| Path | Role |
++| --- | --- |
++| `src/main` | Application runtime, IPC, PTY, Git, SSH, harnesses |
++| `src/preload` | Sandboxed bridge (`ipcRenderer` stays here) |
++| `src/renderer` | React workbench UI |
++| `src/shared` | Types and contracts shared across processes |
++| `src/workers` | Isolated Git (and echo) workers |
++| `packages/rename-noreplace` | Native no-replace rename binding |
++
++Host primitives (`fs`, `child_process`, `chokidar`, `node-pty`) are confined to the local project-host implementation. PTY spawn goes through the PTY supervisor. `npm run check-seams` and ESLint enforce those boundaries.
++
++## Contributing
++
++Bug reports, feature ideas, and questions belong in [GitHub Discussions](https://github.com/jarmak-personal/hvir/discussions).
++
++Before opening a change, run:
++
++```bash
++npm run verify
++```
++
++## License
++
++[MIT](LICENSE)
++
++Bundled third-party notices, including ghostty-web and the rename-noreplace binding, are in [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md).

@@ -1,0 +1,175 @@
+{
+  "id": "gemini-3.7-flash__copilot-cli__20260918T034238Z",
+  "batch": "2026-09-17_r4_copilot-cli-1.0.86_effort-max",
+  "target": {
+    "name": "hvir",
+    "url": "https://github.com/jarmak-personal/hvir",
+    "commit": "7acbf8883bc869a9987252833d90b0d250086122",
+    "snapshot_commit": "ca97b8a72d67da22d5da4705101f99fbc80bd9cf"
+  },
+  "model": {
+    "id": "gemini-3.7-flash",
+    "vendor": "Google",
+    "name": "Gemini Flash",
+    "version": "3.7",
+    "variant": null,
+    "display": "Gemini 3.7 Flash"
+  },
+  "harness": {
+    "name": "GitHub Copilot CLI",
+    "id": "copilot-cli",
+    "version": "1.0.86"
+  },
+  "prompt": "Please create a README.md for this project.",
+  "started_at": "2026-09-18T03:42:50Z",
+  "finished_at": "2026-09-18T03:47:11Z",
+  "wall_clock_seconds": 261,
+  "exit_code": 0,
+  "setup_exit_code": 0,
+  "readme_produced": true,
+  "readme_bytes": 9922,
+  "readme_lines": 231,
+  "usage": {
+    "totalPremiumRequestCost": 14,
+    "totalUserRequests": 1,
+    "totalNanoAiu": 42317227500,
+    "tokenDetails": {
+      "input": {
+        "tokenCount": 343477
+      },
+      "cache_read": {
+        "tokenCount": 1982277
+      },
+      "cache_write": {
+        "tokenCount": 0
+      },
+      "output": {
+        "tokenCount": 4505
+      }
+    },
+    "totalApiDurationMs": 170872,
+    "sessionStartTime": "2026-09-18T03:42:53.027Z",
+    "codeChanges": {
+      "linesAdded": 231,
+      "linesRemoved": 0,
+      "filesModifiedCount": 1,
+      "filesModified": [
+        "/private/var/tmp/ws/9fd4f504/hvir/README.md"
+      ]
+    },
+    "modelMetrics": {
+      "gemini-3.7-flash": {
+        "requests": {
+          "count": 40,
+          "cost": 14
+        },
+        "usage": {
+          "inputTokens": 2325754,
+          "outputTokens": 4505,
+          "cacheReadTokens": 1982277,
+          "cacheWriteTokens": 0,
+          "reasoningTokens": 6973
+        },
+        "totalNanoAiu": 42317227500,
+        "tokenDetails": {
+          "input": {
+            "tokenCount": 343477
+          },
+          "cache_read": {
+            "tokenCount": 1982277
+          },
+          "cache_write": {
+            "tokenCount": 0
+          },
+          "output": {
+            "tokenCount": 4505
+          }
+        }
+      }
+    },
+    "agentMetrics": {
+      "main": {
+        "totalApiDurationMs": 170872,
+        "totalNanoAiu": 42317227500,
+        "modelMetrics": {
+          "gemini-3.7-flash": {
+            "requests": {
+              "count": 40,
+              "cost": 14
+            },
+            "usage": {
+              "inputTokens": 2325754,
+              "outputTokens": 4505,
+              "cacheReadTokens": 1982277,
+              "cacheWriteTokens": 0,
+              "reasoningTokens": 6973
+            },
+            "totalNanoAiu": 42317227500,
+            "tokenDetails": {
+              "input": {
+                "tokenCount": 343477
+              },
+              "cache_read": {
+                "tokenCount": 1982277
+              },
+              "cache_write": {
+                "tokenCount": 0
+              },
+              "output": {
+                "tokenCount": 4505
+              }
+            }
+          }
+        }
+      }
+    },
+    "currentModel": "gemini-3.7-flash",
+    "lastCallInputTokens": 87981,
+    "lastCallOutputTokens": 209
+  },
+  "tool_calls": {
+    "glob": 6,
+    "bash": 12,
+    "view": 26,
+    "grep": 3,
+    "read_bash": 1,
+    "create": 1
+  },
+  "reasoning_effort_requested": "high",
+  "reasoning_level": "high",
+  "chat_calls": {
+    "gemini-3.7-flash": {
+      "high": 40
+    }
+  },
+  "files_viewed": [
+    "LICENSE",
+    "README.md",
+    "THIRD_PARTY_NOTICES.md",
+    "build/native/hvir-command",
+    "electron-builder.yml",
+    "package.json",
+    "renderer/src/App.tsx",
+    "scripts/architecture-hotspots.mjs",
+    "scripts/architecture-inventory.mts",
+    "scripts/architecture-policy.mts",
+    "scripts/check-adrs.mjs",
+    "scripts/check-seams.sh",
+    "scripts/native-installer.template.sh",
+    "src/main/harness/bundled-harness-providers.ts",
+    "src/main/index.ts",
+    "src/renderer/src/App.tsx",
+    "src/shared/harness-provider.ts",
+    "src/shared/index.ts",
+    "src/shared/keybindings.ts",
+    "src/shared/viewer-types.ts",
+    "src/shared/workspace-types.ts",
+    "test/adr-lifecycle.test.ts",
+    "test/architecture-policy.test.ts",
+    "test/ci-workflow.test.ts",
+    "test/release-pr-integrity.test.ts",
+    "test/viewer-types.test.ts"
+  ],
+  "compactions": [],
+  "truncations": 0
+}

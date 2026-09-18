@@ -1,0 +1,241 @@
+# hvir
+
+[![Node.js](https://img.shields.io/badge/node-%3E%3D24-brightgreen.svg)](https://nodejs.org/)
+[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
+[![Electron](https://img.shields.io/badge/Electron-43-informational.svg)](https://www.electronjs.org/)
+[![TypeScript](https://img.shields.io/badge/TypeScript-6-blue.svg)](https://www.typescriptlang.org/)
+
+**hvir** is an extensible developer desktop workbench built for AI coding agent workflows, high-performance terminal multitasking, and local and remote multi-workspace project management.
+
+Powered by Electron, React, TypeScript, and the WebAssembly VT engine of Ghostty Web (`ghostty-web`), hvir integrates first-class AI harness observability, rich file viewing, Git visualization, and native terminal execution into a cohesive environment.
+
+---
+
+## Table of Contents
+
+- [Key Features](#key-features)
+  - [AI Coding Agent Harnesses](#ai-coding-agent-harnesses)
+  - [High-Performance Terminal Workbench](#high-performance-terminal-workbench)
+  - [Local & Remote Workspace Management](#local--remote-workspace-management)
+  - [Integrated Git Visualizer & Diffs](#integrated-git-visualizer--diffs)
+  - [Rich File & Document Viewer](#rich-file--document-viewer)
+  - [Embedded Web Panes & Loopback Proxy](#embedded-web-panes--loopback-proxy)
+- [Architecture](#architecture)
+  - [Process Model](#process-model)
+  - [Architectural Seams & Invariants](#architectural-seams--invariants)
+- [Prerequisites](#prerequisites)
+- [Getting Started](#getting-started)
+  - [Installation](#installation)
+  - [Development Mode](#development-mode)
+  - [Production Build](#production-build)
+- [Default Keybindings](#default-keybindings)
+- [Available Scripts](#available-scripts)
+- [Packaging & Distribution](#packaging--distribution)
+- [License](#license)
+
+---
+
+## Key Features
+
+### AI Coding Agent Harnesses
+- **Bundled Providers**: Native launch adapters and execution configurations for popular agent harnesses:
+  - Claude Code
+  - OpenAI Codex
+  - Pi
+  - Google Gemini
+  - GitHub Copilot CLI
+  - Cursor
+  - Plain Shell & Custom Commands
+- **Context Telemetry Hub**: Real-time context window usage tracking, token pressure meters, and warning/critical threshold indicators.
+- **Session Lifecycle & Recovery**: Session persistence, identity discovery, exact session resume, and process-level forking.
+- **Document Review & Delivery Panel**: Stage, review, and comment on code diffs directly within the workbench, with one-click insertion or submission into the active agent harness session.
+- **Intentional Submit Control**: Keyboard negotiation supporting `modify-other-keys`, `csi-u`, and Enter vs Control+Enter / Meta+Enter submit modes.
+
+### High-Performance Terminal Workbench
+- **Ghostty Web VT Engine**: Hardware-accelerated terminal emulation powered by `ghostty-web` WebAssembly.
+- **Native PTY Supervisor**: Reliable native PTY supervision via `node-pty` with cross-platform support (macOS, Linux, and Windows ConPTY).
+- **Flexible Deck & Panes**: Split horizontal/vertical panes, tabbed decks, terminal repositioning, and workspace migration.
+- **Terminal Customization**: Built-in terminal theme gallery, font ligature rendering, cursor styling, and color schemes.
+- **Attention System**: Automatic attention badges and notifications when long-running background tasks complete or require user interaction.
+- **Modern Terminal Protocols**: OSC 7 (current working directory tracking), OSC 52 (clipboard integration), and clipboard file/image paste support.
+
+### Local & Remote Workspace Management
+- **Multi-Project Sidebar**: Quickly switch between multiple active workspaces and projects.
+- **SSH Remote Projects**: Built-in SSH client (`ssh2`) with connection pooling, identity key discovery, known-hosts verification, and credential dialogs.
+- **Confined File Operations**: Safe, project-root-confined file tree management, drag-and-drop organization, atomic renaming/moving, and system file manager reveal.
+- **Fuzzy Filename Search**: Fast project-wide file discovery (`Mod+P`).
+- **Workbench Health & Recovery**: Self-healing IPC, renderer crash recovery, and health status indicators.
+
+### Integrated Git Visualizer & Diffs
+- **Worker-Isolated Git Engine**: Git commands execute inside dedicated background utility processes (`git-worker.ts`) to keep UI threads responsive.
+- **Interactive Changes Panel**: Inspect staged, unstaged, and untracked changes with instant diff views.
+- **CodeMirror Merge Diff Viewer**: Fast side-by-side and unified diff visualization with syntax highlighting.
+- **Git Commit Graph & History**: Visual graph layout rendering commit lanes, branches, and tags.
+- **Branch & Worktree Operations**: Branch switching, worktree creation, pruning, fetching, and pulling.
+
+### Rich File & Document Viewer
+- **Multi-Tab Workspace**: Tab strip with retained state and workspace cache.
+- **Syntax Highlighting**: On-demand highlighting via Shiki for code files.
+- **Live Markdown Preview**: GitHub-Flavored Markdown rendering with interactive task lists, Mermaid diagrams, and relative project image resolution.
+- **Structured Data Viewers**: High-speed worker-based preview for CSV and JSON datasets.
+- **Large File Protection**: Streaming byte preview for large binaries and files exceeding comfort limits.
+
+### Embedded Web Panes & Loopback Proxy
+- Secure embedded browser panes (`hvir-preview:`) for previewing local development servers and web applications directly inside the workspace layout.
+- Main-process loopback HTTP proxy facilitating port-forwarding and remote SSH host web previews.
+
+---
+
+## Architecture
+
+### Process Model
+
+```
+ ┌─────────────────────────────────────────────────────────┐
+ │                  Electron Main Process                  │
+ │  - ProjectHost Catalog (LocalHost / SshHost)            │
+ │  - PtySupervisor (node-pty) & TerminalSessionRegistry   │
+ │  - Harness Profile Store & Telemetry Hub                │
+ │  - IPC Authority Router & Permission Gates              │
+ │  - Diagnostics & Health Coordination                    │
+ └─────────────┬─────────────────────────────┬─────────────┘
+               │ (Preload Bridge)            │ (Utility Process)
+               ▼                             ▼
+ ┌───────────────────────────┐ ┌───────────────────────────┐
+ │      Renderer Process     │ │    Background Workers     │
+ │  - React 19 UI            │ │  - git-worker.ts          │
+ │  - Ghostty Web WASM Term  │ │  - echo-worker.ts         │
+ │  - CodeMirror 6 Merge     │ │                           │
+ │  - Shiki / Markdown Wasm  │ └───────────────────────────┘
+ └───────────────────────────┘
+```
+
+- **`src/main`**: Core orchestrator managing window lifecycles, project host abstractions, PTY supervision, SSH transport pools, harness probes, and IPC security routing.
+- **`src/preload`**: Hardened context bridge exposing narrow, strictly-typed IPC channels to the renderer without exposing raw Node or Electron APIs.
+- **`src/renderer`**: React 19 single-page application orchestrating the workbench layouts, terminals, file viewers, Git visualizers, and settings.
+- **`src/shared`**: Shared TypeScript contracts, protocol definitions, and data models ensuring end-to-end type safety.
+- **`src/workers`**: Standalone utility processes dedicated to non-blocking tasks such as Git operations.
+
+### Architectural Seams & Invariants
+
+The codebase strictly enforces architectural boundaries (verified with `npm run check-seams`):
+- `ipcRenderer` is isolated exclusively inside `src/preload/`.
+- Native host primitives (`fs`, `child_process`, `chokidar`, `node-pty`) are restricted to host adapters.
+- PTY spawns are centralized through `PtySupervisor`.
+- Bundled harness provider definitions stay within `src/main/harness/`.
+- Feature IPC handlers use central authority routers and canonical path verification.
+- `ssh2` details remain encapsulated within the SSH host adapters.
+
+---
+
+## Prerequisites
+
+- **Node.js**: `v24.0.0` or higher
+- **npm**: `v10` or higher
+- **C/C++ Compiler & Python 3**: Required by `node-gyp` to build native addons (`@hvir/rename-noreplace`, `node-pty`).
+  - **macOS**: Xcode Command Line Tools (`xcode-select --install`)
+  - **Linux**: `build-essential`, `python3`
+
+---
+
+## Getting Started
+
+### Installation
+
+Clone the repository and install dependencies:
+
+```bash
+git clone https://github.com/jarmak-personal/hvir.git
+cd hvir
+npm install
+```
+
+> **Note**: `npm install` automatically runs the `postinstall` script, which compiles native modules (`node-gyp rebuild` for `@hvir/rename-noreplace` and `electron-rebuild` for `node-pty`).
+
+### Development Mode
+
+To run hvir in development mode with live reloading and HMR:
+
+```bash
+npm run dev
+```
+
+### Production Build
+
+To compile TypeScript and bundle the application using Electron Vite:
+
+```bash
+npm run build
+```
+
+To preview the packaged build output:
+
+```bash
+npm run preview
+```
+
+---
+
+## Default Keybindings
+
+| Shortcut | Action | Context |
+|---|---|---|
+| `Mod+P` | Quick Open / Find File | Workbench |
+| `Mod+F` | Find in File / Viewer | Workbench |
+| `Mod+Shift+F` | Find in Terminal | Terminal |
+| `Ctrl+G` | Go to Line | Workbench |
+| `Mod+J` | Focus Terminal | Workbench |
+| `Mod+Shift+J` | Toggle Terminal Focus | Workbench |
+| `Mod+1` | Focus File Viewer | Workbench |
+| `Mod+0` | Focus File Tree | Workbench |
+| `Mod+Shift+M` | Cycle Viewer Mode | Workbench |
+| `Mod+Alt+]` | Next Workspace | All |
+| `Mod+Alt+[` | Previous Workspace | All |
+
+*(Note: `Mod` corresponds to `Cmd` on macOS and `Ctrl` on Linux/Windows.)*
+
+---
+
+## Available Scripts
+
+| Script | Description |
+|---|---|
+| `npm run dev` | Starts Electron Vite development server with HMR |
+| `npm run build` | Runs type checking and builds main, preload, and renderer bundles |
+| `npm run preview` | Previews the built production application |
+| `npm run typecheck` | Validates TypeScript types across node and web targets |
+| `npm run lint` | Runs ESLint across the codebase |
+| `npm run format` | Formats code with Prettier |
+| `npm run format:check` | Verifies code formatting with Prettier |
+| `npm test` | Runs the Vitest test suite |
+| `npm run test:watch` | Runs Vitest in interactive watch mode |
+| `npm run test:mutation` | Executes Stryker mutation testing |
+| `npm run check-seams` | Validates architectural boundary invariants |
+| `npm run architecture:report`| Inspects file size budgets and module graph dependencies |
+| `npm run smoke` | Executes end-to-end Electron smoke test scenarios |
+| `npm run verify` | Runs complete verification suite (seams, lint, typecheck, tests) |
+
+---
+
+## Packaging & Distribution
+
+hvir uses `electron-builder` to package native desktop installers:
+
+- **macOS (Apple Silicon)**:
+  ```bash
+  npm run pack:mac:arm64
+  ```
+  Produces an installer package (`.pkg`) in `dist/`.
+
+- **Linux (x64 / arm64)**:
+  ```bash
+  npm run pack:linux:x64
+  npm run pack:linux:arm64
+  ```
+  Produces Debian packages (`.deb`) with integrated AppArmor profiles in `dist/`.
+
+---
+
+## License
+
+This project is licensed under the [MIT License](LICENSE). Third-party software notices are documented in [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md).

@@ -1,0 +1,89 @@
+diff --git a/README.md b/README.md
+new file mode 100644
+index 0000000..8dece47
+--- /dev/null
++++ b/README.md
+@@ -0,0 +1,83 @@
++# hvir
++
++hvir is an Electron workbench for working with local and SSH-hosted projects. It combines a project file tree and editor with Git status and history, a terminal workspace, browser panes, document review, and integrations for Claude and Codex sessions.
++
++## Features
++
++- Open, browse, edit, and organize local or SSH-hosted project workspaces.
++- Work with multiple terminal sessions, split terminal layouts, terminal search, and terminal-rendered web panes.
++- Inspect Git changes, diffs, commit history, branches, fetch/pull state, and the commit graph.
++- Preview Markdown, Mermaid diagrams, syntax-highlighted source, and document-review changes.
++- Track Claude and Codex session context and usage from supported local harness artifacts.
++- Use configurable themes, terminal settings, keybindings, workspace tabs, and diagnostics.
++
++## Requirements
++
++- Node.js 24 or later
++- npm
++- A native build toolchain compatible with `node-gyp`, required for `node-pty` and the local `@hvir/rename-noreplace` module
++
++On Linux, Electron also requires the system libraries declared in [`electron-builder.yml`](electron-builder.yml). Release packages target macOS on Apple Silicon and Debian-based Linux on x64 or ARM64.
++
++## Getting started
++
++```bash
++git clone <repository-url>
++cd hvir
++npm ci
++npm run dev
++```
++
++`npm ci` runs the project's post-install step, which installs Electron and rebuilds the native runtime modules for Electron's ABI. The development application opens through Electron Vite; use the project picker to choose a local folder or configured SSH workspace.
++
++## Development
++
++| Command | Purpose |
++| --- | --- |
++| `npm run dev` | Start the Electron development environment. |
++| `npm run build` | Type-check and build the application into `out/`. |
++| `npm run preview` | Preview a built application. |
++| `npm run lint` | Run ESLint. |
++| `npm run typecheck` | Type-check main/preload and renderer code. |
++| `npm test` | Run the Vitest test suite. |
++| `npm run verify` | Run seam, ADR, architecture, lint, type, and unit-test checks. |
++| `npm run smoke` | Build the smoke target and run the cross-platform Electron smoke scenarios. |
++| `npm run smoke:macos` | Run the macOS-specific smoke scenario set. |
++
++Install the repository's pre-push hook to run type checks and the local-platform smoke suite before pushing:
++
++```bash
++npm run hooks:install
++```
++
++## Packaging
++
++Build distributable packages on their target platform:
++
++```bash
++# macOS Apple Silicon installer
++npm run pack:mac:arm64
++
++# Debian package for x64 Linux
++npm run pack:linux:x64
++
++# Debian package for ARM64 Linux
++npm run pack:linux:arm64
++```
++
++Artifacts are written to `dist/`. Use `npm run build:dir` to create an unpacked application directory instead.
++
++## Project layout
++
++- `src/main/` — Electron main process, project hosts, Git, PTY, diagnostics, and application services.
++- `src/preload/` — typed and restricted renderer-to-main bridge.
++- `src/renderer/` — React workbench UI.
++- `src/shared/` — shared contracts and domain types.
++- `src/workers/` — Electron utility-process workers.
++- `test/` — Vitest unit and integration tests.
++- `scripts/` — release, architecture, smoke, and project-maintenance tooling.
++- `build/` — application icons, entitlements, installer configuration, and native packaging assets.
++
++## License
++
++[MIT](LICENSE) © 2026 hvir contributors.

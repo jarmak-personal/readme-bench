@@ -1,0 +1,144 @@
+{
+  "id": "grok-4.5__copilot-cli__20260918T015411Z",
+  "batch": "2026-09-17_r2_copilot-cli-1.0.86",
+  "target": {
+    "name": "hvir",
+    "url": "https://github.com/jarmak-personal/hvir",
+    "commit": "7acbf8883bc869a9987252833d90b0d250086122",
+    "snapshot_commit": "ca97b8a72d67da22d5da4705101f99fbc80bd9cf"
+  },
+  "model": {
+    "id": "grok-4.5",
+    "vendor": "xAI",
+    "name": "Grok",
+    "version": "4.5",
+    "variant": null,
+    "display": "Grok 4.5"
+  },
+  "harness": {
+    "name": "GitHub Copilot CLI",
+    "id": "copilot-cli",
+    "version": "1.0.86"
+  },
+  "prompt": "Please create a README.md for this project.",
+  "started_at": "2026-09-18T01:54:23Z",
+  "finished_at": "2026-09-18T01:55:01Z",
+  "wall_clock_seconds": 38,
+  "exit_code": 0,
+  "setup_exit_code": 0,
+  "readme_produced": true,
+  "readme_bytes": 3754,
+  "readme_lines": 81,
+  "usage": {
+    "totalPremiumRequestCost": 1,
+    "totalUserRequests": 1,
+    "totalNanoAiu": 12180800000,
+    "tokenDetails": {
+      "input": {
+        "tokenCount": 29571
+      },
+      "cache_read": {
+        "tokenCount": 102400
+      },
+      "output": {
+        "tokenCount": 1911
+      }
+    },
+    "totalApiDurationMs": 34191,
+    "sessionStartTime": "2026-09-18T01:54:26.140Z",
+    "codeChanges": {
+      "linesAdded": 81,
+      "linesRemoved": 0,
+      "filesModifiedCount": 1,
+      "filesModified": [
+        "/private/var/tmp/ws/db743e3d/hvir/README.md"
+      ]
+    },
+    "modelMetrics": {
+      "grok-4.5": {
+        "requests": {
+          "count": 6,
+          "cost": 1
+        },
+        "usage": {
+          "inputTokens": 131971,
+          "outputTokens": 1911,
+          "cacheReadTokens": 102400,
+          "cacheWriteTokens": 0,
+          "reasoningTokens": 265
+        },
+        "totalNanoAiu": 12180800000,
+        "tokenDetails": {
+          "input": {
+            "tokenCount": 29571
+          },
+          "cache_read": {
+            "tokenCount": 102400
+          },
+          "output": {
+            "tokenCount": 1911
+          }
+        }
+      }
+    },
+    "agentMetrics": {
+      "main": {
+        "totalApiDurationMs": 34191,
+        "totalNanoAiu": 12180800000,
+        "modelMetrics": {
+          "grok-4.5": {
+            "requests": {
+              "count": 6,
+              "cost": 1
+            },
+            "usage": {
+              "inputTokens": 131971,
+              "outputTokens": 1911,
+              "cacheReadTokens": 102400,
+              "cacheWriteTokens": 0,
+              "reasoningTokens": 265
+            },
+            "totalNanoAiu": 12180800000,
+            "tokenDetails": {
+              "input": {
+                "tokenCount": 29571
+              },
+              "cache_read": {
+                "tokenCount": 102400
+              },
+              "output": {
+                "tokenCount": 1911
+              }
+            }
+          }
+        }
+      }
+    },
+    "currentModel": "grok-4.5",
+    "lastCallInputTokens": 29209,
+    "lastCallOutputTokens": 88
+  },
+  "tool_calls": {
+    "bash": 4,
+    "view": 6,
+    "glob": 1,
+    "grep": 1,
+    "create": 1
+  },
+  "reasoning_level": "medium",
+  "chat_calls": {
+    "grok-4.5": {
+      "medium": 6
+    }
+  },
+  "files_viewed": [
+    "LICENSE",
+    "electron-builder.yml",
+    "package.json",
+    "src/main/index.ts",
+    "src/renderer/src/App.tsx",
+    "src/shared/harness-provider.ts"
+  ],
+  "compactions": [],
+  "truncations": 0
+}
