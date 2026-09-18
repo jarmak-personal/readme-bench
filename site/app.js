@@ -116,6 +116,8 @@
       s += `<g class="axis">${xt.map(v => `<text x="${X(v)}" y="${Hh - m.b + 16}" text-anchor="middle">${fmtTok(v)}</text>`).join('')}${yt.map(v => `<text x="${m.l - 8}" y="${Y(v) + 4}" text-anchor="end">${v}</text>`).join('')}<text class="t" x="${W - m.r}" y="${Hh - 6}" text-anchor="end">input tokens →</text><text class="t" x="${m.l}" y="${m.t - 4}">↑ README lines</text></g>`;
       const groups = byModel(plotted);
       for (const g of groups) s += `<polyline class="path ${g.model === held ? 'hot' : ''}" points="${g.runs.map(r => `${X(r.tokens.input)},${Y(r.readme_lines || 0)}`).join(' ')}" data-model="${esc(g.model)}"/>`;
+      // Invisible fat strokes so a finger can land on a line; CSS shows them only for coarse pointers.
+      for (const g of groups) s += `<polyline class="hit" points="${g.runs.map(r => `${X(r.tokens.input)},${Y(r.readme_lines || 0)}`).join(' ')}" data-model="${esc(g.model)}"/>`;
       for (const g of groups) for (const r of g.runs) s += `<circle class="dot ${r.tier}" r="${g.model === held ? 6 : 4.5}" cx="${X(r.tokens.input)}" cy="${Y(r.readme_lines || 0)}" data-id="${esc(r.id)}"><title>${esc(r.model.display)} · ${esc(r.reasoning_level || r.tier)}</title></circle>`;
       for (const g of groups) if (g.model === held) { const r = g.runs[g.runs.length - 1], px = X(r.tokens.input), right = px > W - 150; s += `<text class="lab ${g.model === held ? 'hot' : ''}" x="${right ? px - 9 : px + 9}" y="${Y(r.readme_lines || 0) + 4}" text-anchor="${right ? 'end' : 'start'}">${esc(g.model)}</text>`; }
       return s;
@@ -145,7 +147,7 @@
       ${targetSelect(target) ? `<div class="controls">${targetSelect(target)}</div>` : ''}
       <div class="home">
         <div class="fig">
-          <div class="cap"><span class="legend">${TIERS.map(k => `<span><span class="tier ${k}"></span> ${k} effort</span>`).join('')}</span><a href="#/effort/${esc(target)}">Effort grid →</a></div>
+          <div class="cap"><span class="legend">${TIERS.map(k => `<span><span class="tier ${k}"></span> ${k} effort</span>`).join('')}</span><a href="#/effort/${esc(target)}">Effort grid →</a><span class="held" id="chart-held"></span></div>
           <svg id="chart" viewBox="0 0 ${W} ${Hh}" role="img" aria-label="Input tokens against README lines, one point per run">${chart()}</svg>
         </div>
         <div class="hl-col">
@@ -162,11 +164,23 @@
         </div>
       </section>`;
     bindTargetSelect(n => `#/`);
-    const svg = document.getElementById('chart');
-    const hold = model => { if (model === held) return; held = model; svg.innerHTML = chart(); };
-    svg.addEventListener('click', e => { const d = e.target.closest('.dot'); if (d) location.hash = `#/run/${d.dataset.id}`; });
-    svg.addEventListener('mouseover', e => { const d = e.target.closest('.dot'), p = e.target.closest('.path'); if (d) hold(runs.find(x => x.id === d.dataset.id).model.display); else if (p) hold(p.dataset.model); });
-    svg.addEventListener('mouseleave', () => hold(null));
+    const svg = document.getElementById('chart'), heldOut = document.getElementById('chart-held');
+    const hold = model => { if (model === held) return; held = model; svg.innerHTML = chart(); heldOut.textContent = model ? `${model} — tap a dot again to open the run` : ''; };
+    const modelOf = d => runs.find(x => x.id === d.dataset.id).model.display;
+    // Touch has no hover (and iOS drops the click when mouseover rewrites the DOM), so taps do the holding:
+    // tap a line or dot to name the model, tap a dot of the held model to open it, tap elsewhere to clear.
+    if (matchMedia('(pointer: coarse)').matches) {
+      svg.addEventListener('click', e => {
+        const d = e.target.closest('.dot'), p = e.target.closest('.hit, .path');
+        if (d) { const m = modelOf(d); if (m === held) location.hash = `#/run/${d.dataset.id}`; else hold(m); }
+        else if (p) hold(p.dataset.model);
+        else hold(null);
+      });
+    } else {
+      svg.addEventListener('click', e => { const d = e.target.closest('.dot'); if (d) location.hash = `#/run/${d.dataset.id}`; });
+      svg.addEventListener('mouseover', e => { const d = e.target.closest('.dot'), p = e.target.closest('.path'); if (d) hold(modelOf(d)); else if (p) hold(p.dataset.model); });
+      svg.addEventListener('mouseleave', () => hold(null));
+    }
   }
 
   // ---------- reading room ----------
@@ -298,7 +312,9 @@
     };
     const lbl = (r, full) => `<div class="lbl ${open === r ? 'hot' : ''}"><span>${full ? esc(r.model.display) : `${tierDot(r)} ${esc(r.tier)}`}</span><span class="eff">${esc(r.reasoning_level || '')}</span></div>`;
     const stat = r => `<div class="stat ${open === r ? 'hot' : ''}"><span>${fmtTime(dur(r))}</span><span class="muted">${r.readme_produced ? r.readme_lines + ' ln' : '—'}</span><a href="#/trace/${esc(target)}/${esc(runName(r))}">read →</a></div>`;
-    const ticks = clock === 'abs' ? [0, 60, 120, 180, 240, 300, 360, 420, 480, 600, 900].filter(t => t <= maxDur) : [0, 25, 50, 75, 100];
+    // Narrow screens get half the ticks; the labels collide otherwise.
+    const narrow = matchMedia('(max-width: 800px)').matches;
+    const ticks = clock === 'abs' ? (narrow ? [0, 180, 360, 540, 720, 900] : [0, 60, 120, 180, 240, 300, 360, 420, 480, 600, 900]).filter(t => t <= maxDur) : (narrow ? [0, 50, 100] : [0, 25, 50, 75, 100]);
     let wall = `<div class="hd">Run</div><div class="axis">${ticks.map(t => `<span style="left:${clock === 'abs' ? t / maxDur * 100 : t}%">${clock === 'abs' ? fmtTime(t) : t + '%'}</span>`).join('')}</div><div class="hd">time · README</div>`;
     if (order === 'model') for (const g of byModel(runs)) { wall += `<div class="group">${esc(g.model)} <span class="muted">· ${esc(g.vendor || '')}</span></div>`; for (const r of g.runs) wall += lbl(r) + strip(r) + stat(r); }
     else for (const r of [...runs].sort((a, b) => order === 'dur' ? dur(b) - dur(a) : b.tool_calls - a.tool_calls)) wall += lbl(r, true) + strip(r) + stat(r);
