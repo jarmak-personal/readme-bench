@@ -122,13 +122,16 @@
       for (const g of groups) if (g.model === held) { const r = g.runs[g.runs.length - 1], px = X(r.tokens.input), right = px > W - 150; s += `<text class="lab ${g.model === held ? 'hot' : ''}" x="${right ? px - 9 : px + 9}" y="${Y(r.readme_lines || 0) + 4}" text-anchor="${right ? 'end' : 'start'}">${esc(g.model)}</text>`; }
       return s;
     }
+    // A highlight is a pointer: with no text of its own it shows the post's summary, or the run's note summary.
     const card = h => {
       const r = h.run ? runs.find(x => x.id === h.run) : null;
+      const post = h.post ? DB.posts.find(p => p.slug === h.post) : null;
+      const body = h.text || post?.summary || r?.notes?.summary || '';
       return `<div class="hl">
         <div class="k"><b>${r ? `<a href="#/run/${esc(r.id)}">${esc(r.model.display)}</a> <span class="muted">· ${esc(r.tier)} tier${r.reasoning_level ? ` · <span class="num">${esc(r.reasoning_level)}</span>` : ''}</span>` : ''}</b><span>${esc(h.kind || '')}</span></div>
         ${h.quote ? `<q>${esc(h.quote)}</q>` : ''}
-        <div class="hl-text">${md(h.text || '')}</div>
-        <div class="hl-links">${r ? `<a href="#/runs/${esc(r.target)}/${esc(runName(r))}">read</a><a href="#/trace/${esc(r.target)}/${esc(runName(r))}">trace</a>` : ''}${h.post ? `<a href="#/notes/${esc(h.post)}">${esc(DB.posts.find(p => p.slug === h.post)?.title || 'read more')} →</a>` : ''}</div>
+        <div class="hl-text">${md(body)}</div>
+        <div class="hl-links">${r ? `<a href="#/runs/${esc(r.target)}/${esc(runName(r))}">read</a><a href="#/trace/${esc(r.target)}/${esc(runName(r))}">trace</a>` : ''}${post ? `<a href="#/notes/${esc(post.slug)}">${esc(post.title)} →</a>` : ''}</div>
       </div>`;
     };
     const kinds = {};

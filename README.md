@@ -198,8 +198,9 @@ Curation inputs, all optional:
   run page, in the reading room and trace drawer, and on the Notes page.
 * `notes/highlights.json` — the cards on the overview page. A list of
   `{"run": "<target>/<run-id>", "kind": "readme|trace|no readme", "quote":
-  "…", "text": "markdown", "post": "<slug>"}`; every field but `text` is
-  optional. Hovering a card holds its model in the chart.
+  "…", "text": "markdown", "post": "<slug>"}`, all optional. A highlight is
+  a pointer, not a third place to write the same thing: leave `text` out
+  and the card shows the post's `summary`, or else the run's note `summary`.
 * `notes/<slug>.md` — a longer post, linked from a highlight's `post:` or
   the Notes page. Front matter `title:`, `date:`, `summary:`.
 * `about.md` — the About page. Plain markdown; links like `#/targets` and
