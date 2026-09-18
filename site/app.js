@@ -41,6 +41,8 @@
   }
   // What a tool call did, for the trace wall.
   const toolKind = t => /^(view|read_file)$/.test(t) ? 'read' : /^(glob|rg|grep|file_search|grep_search|list_dir|search)$/.test(t) ? 'search' : /^(bash|shell|powershell)$/.test(t) ? 'shell' : /^(create|edit|apply_patch|write)/.test(t) ? 'write' : /subagent|^task$/.test(t) ? 'delegate' : 'other';
+  const notesFor = r => DB.notes.filter(n => n.run === r.id);
+  const noteBody = async n => n.has_body ? text(`data/notes/${n.slug}.md`).catch(() => '') : '';
   const effortText = r => r.reasoning_level ? `<span class="num">${esc(r.reasoning_level)}</span>` : '<span class="muted">no effort setting</span>';
   const tierDot = r => `<span class="tier ${esc(r.tier)}" title="${esc(r.tier)} tier"></span>`;
 
@@ -83,15 +85,11 @@
     </dl>`;
   }
   const runLinks = r => `<a href="#/run/${esc(r.id)}">Run page</a>${r.has_session ? `<a href="#/session/${esc(r.id)}">Transcript</a>` : ''}${r.has_diff ? `<a href="#/diff/${esc(r.id)}">Diff</a>` : ''}${r.readme_produced ? `<a href="${runPath(r, 'README.md')}">Raw</a>` : ''}`;
-  const notesBlock = async r => {
-    if (!r.notes || !r.readme_produced) return '';
-    const body = r.notes.has_body ? await text(runPath(r, 'notes.md')).catch(() => '') : '';
-    return `<aside class="notes"><div class="eyebrow">Curator's notes</div>${r.notes.summary ? `<div class="summary">${esc(r.notes.summary)}</div>` : ''}${r.notes.tags?.length ? `<div class="tags">${r.notes.tags.map(esc).join(' · ')}</div>` : ''}${body ? `<div class="body">${md(body)}</div>` : ''}</aside>`;
-  };
+  const noteAside = async n => `<aside class="notes"><div class="eyebrow">Curator's note · <a href="#/notes/${esc(n.slug)}">${esc(n.title)}</a></div>${n.tags?.length ? `<div class="tags">${n.tags.map(esc).join(' · ')}</div>` : ''}<div class="body">${md(await noteBody(n))}</div></aside>`;
+  const notesBlock = async r => r.readme_produced ? (await Promise.all(notesFor(r).map(noteAside))).join('') : '';
   const readmeSheet = async r => {
     if (r.readme_produced) return `<article class="sheet markdown-body">${md(await text(runPath(r, 'README.md')).catch(() => '*(README.md could not be loaded)*'))}</article>`;
-    const body = r.notes?.has_body ? await text(runPath(r, 'notes.md')).catch(() => '') : '';
-    return `<div class="sheet empty"><p>No README.md was produced${r.exit_code ? ` (exit code ${r.exit_code})` : ''}.</p>${r.notes ? `<div class="notes"><div class="eyebrow">Curator's notes</div>${r.notes.summary ? `<div class="summary">${esc(r.notes.summary)}</div>` : ''}${body ? `<div class="body">${md(body)}</div>` : ''}</div>` : ''}</div>`;
+    return `<div class="sheet empty"><p>No README.md was produced${r.exit_code ? ` (exit code ${r.exit_code})` : ''}.</p>${(await Promise.all(notesFor(r).map(noteAside))).join('')}</div>`;
   };
 
   // ---------- home: chart + editor's notes ----------
@@ -100,7 +98,7 @@
     const t = targetOf(target);
     const runs = runsOf(target);
     const models = new Set(runs.map(r => r.model.display)), harnesses = new Set(runs.map(r => r.harness.name));
-    const hls = DB.highlights.filter(h => !h.run || runs.some(r => r.id === h.run));
+    const pinned = DB.notes.filter(n => n.pin && (!n.run || runs.some(r => r.id === n.run)));
     let held = null;
 
     // Looked vs wrote: input tokens (log) against README lines. A run with no README sits on the baseline.
@@ -123,15 +121,13 @@
       return s;
     }
     // A highlight is a pointer: with no text of its own it shows the post's summary, or the run's note summary.
-    const card = h => {
-      const r = h.run ? runs.find(x => x.id === h.run) : null;
-      const post = h.post ? DB.posts.find(p => p.slug === h.post) : null;
-      const body = h.text || post?.summary || r?.notes?.summary || '';
+    const card = n => {
+      const r = n.run ? runs.find(x => x.id === n.run) : null;
       return `<div class="hl">
-        <div class="k"><b>${r ? `<a href="#/run/${esc(r.id)}">${esc(r.model.display)}</a> <span class="muted">· ${esc(r.tier)} tier${r.reasoning_level ? ` · <span class="num">${esc(r.reasoning_level)}</span>` : ''}</span>` : ''}</b><span>${esc(h.kind || '')}</span></div>
-        ${h.quote ? `<q>${esc(h.quote)}</q>` : ''}
-        <div class="hl-text">${md(body)}</div>
-        <div class="hl-links">${r ? `<a href="#/runs/${esc(r.target)}/${esc(runName(r))}">read</a><a href="#/trace/${esc(r.target)}/${esc(runName(r))}">trace</a>` : ''}${post ? `<a href="#/notes/${esc(post.slug)}">${esc(post.title)} →</a>` : ''}</div>
+        <div class="k"><b>${r ? `<a href="#/run/${esc(r.id)}">${esc(r.model.display)}</a> <span class="muted">· ${esc(r.tier)} tier${r.reasoning_level ? ` · <span class="num">${esc(r.reasoning_level)}</span>` : ''}</span>` : esc(n.title)}</b><span>${esc(n.kind || '')}</span></div>
+        ${n.quote ? `<q>${esc(n.quote)}</q>` : ''}
+        <div class="hl-text">${md(n.summary)}</div>
+        <div class="hl-links">${r ? `<a href="#/runs/${esc(r.target)}/${esc(runName(r))}">read</a><a href="#/trace/${esc(r.target)}/${esc(runName(r))}">trace</a>` : ''}${n.has_body ? `<a href="#/notes/${esc(n.slug)}">${r ? esc(n.title) : 'more'} →</a>` : ''}</div>
       </div>`;
     };
     const kinds = {};
@@ -154,7 +150,7 @@
         </div>
         <div class="hl-col">
           <h2>Editor's notes <a href="#/notes">all notes →</a></h2>
-          ${hls.length ? hls.map(card).join('') : '<p class="muted">No highlights yet. Add cards to <code>notes/highlights.json</code>.</p>'}
+          ${pinned.length ? pinned.map(card).join('') : '<p class="muted">Nothing pinned yet. Add <code>pin: true</code> to a note in <code>notes/</code>.</p>'}
         </div>
       </div>
       <section class="explore">
@@ -188,7 +184,7 @@
     const shown = runs.filter(r => !filter || `${r.model.display} ${r.model.vendor} ${r.reasoning_level || ''} ${r.tier} ${r.harness.name}`.toLowerCase().includes(filter));
     let order_ids, list;
     const row = (r, full) => `<a class="row ${r === sel ? 'sel' : ''} ${r === pin ? 'pin' : ''}" href="#/runs/${esc(target)}/${esc(runName(r))}${pin ? `?pin=${esc(runName(pin))}` : ''}">
-      <span class="name">${full ? esc(r.model.display) : `${tierDot(r)} ${esc(r.tier)}`}${r.notes ? ' <span class="mark" title="Has curator\'s notes">※</span>' : ''}</span><span class="eff">${full ? `${r.reasoning_level ? esc(r.reasoning_level) + ' · ' : ''}${esc(r.tier)}` : esc(r.reasoning_level || '')}</span>
+      <span class="name">${full ? esc(r.model.display) : `${tierDot(r)} ${esc(r.tier)}`}${notesFor(r).length ? ' <span class="mark" title="Has a curator\'s note">※</span>' : ''}</span><span class="eff">${full ? `${r.reasoning_level ? esc(r.reasoning_level) + ' · ' : ''}${esc(r.tier)}` : esc(r.reasoning_level || '')}</span>
       <span class="bars"><span class="bar len"><i style="width:${(metric.get(r) || 0) / maxMetric * 100}%"></i></span><small>${metric.get(r) == null ? '—' : metric.fmt(metric.get(r))}</small></span>
     </a>`;
     if (order === 'model') {
@@ -273,7 +269,7 @@
           <h3><a href="#/run/${esc(sel.id)}">${esc(sel.model.display)}</a></h3>
           <div class="muted">${esc(sel.harness.name)} ${esc(sel.harness.version || '')} · ${fmtDate(sel.started_at)}</div>
           <dl class="kv"><dt>Time</dt><dd>${fmtTime(sel.wall_clock_seconds)}</dd><dt>Requests</dt><dd>${fmtInt(sel.requests)}</dd><dt>Input / output</dt><dd>${fmtTok(sel.tokens.input)} / ${fmtTok(sel.tokens.output)}</dd><dt>Tool calls</dt><dd>${fmtInt(sel.tool_calls)}</dd><dt>Files read</dt><dd>${fmtInt(sel.files_viewed)}</dd><dt>README</dt><dd>${sel.readme_produced ? `${sel.readme_lines} lines · ${fmtTok(sel.readme_bytes)}B` : 'none'}</dd></dl>
-          ${sel.notes?.summary ? `<div class="notes"><div class="eyebrow">Curator's notes</div>${esc(sel.notes.summary)}</div>` : ''}
+          ${notesFor(sel).map(n => `<div class="notes"><div class="eyebrow">Curator's note</div><a href="#/notes/${esc(n.slug)}">${esc(n.title)}</a> — ${esc(n.summary)}</div>`).join('')}
           <p class="runlinks"><a href="#/runs/${esc(target)}/${esc(runName(sel))}">Read the README</a><a href="#/trace/${esc(target)}/${esc(runName(sel))}">Trace</a>${sel.has_session ? `<a href="#/session/${esc(sel.id)}">Transcript</a>` : ''}</p>
         </aside>
       </div>
@@ -487,29 +483,30 @@
       ${t.manifest_fixups.length ? `<details><summary>${t.manifest_fixups.length} manifest fixup${t.manifest_fixups.length === 1 ? '' : 's'}</summary><ul>${t.manifest_fixups.map(p => `<li>${esc(p)}</li>`).join('')}</ul></details>` : ''}`;
   }
 
-  // ---------- notes: posts, then per-run notes ----------
+  // ---------- notes ----------
   function viewNotes() {
     setNav('notes');
-    const noted = DB.runs.filter(r => r.notes);
+    const line = n => { const r = n.run ? DB.runs.find(x => x.id === n.run) : null; return `<div class="post">
+      <h2><a href="#/notes/${esc(n.slug)}">${esc(n.title)}</a></h2>
+      <div class="muted num">${esc(n.date)}${r ? ` · ${tierDot(r)} <a href="#/run/${esc(r.id)}">${esc(r.model.display)}</a> · ${esc(r.reasoning_level || r.tier)}` : ''}${n.tags?.length ? ` · ${n.tags.map(esc).join(', ')}` : ''}</div>
+      ${n.summary ? `<p>${esc(n.summary)}</p>` : ''}</div>`; };
     $app.innerHTML = `
       <div class="pagehead"><div class="eyebrow">Notes</div><h1>Curator's notes</h1>
       <p class="lede">One person's reading of the runs, kept separate from the artifacts and never turned into a score.</p></div>
-      ${DB.posts.length ? `<div class="posts">${DB.posts.map(p => `<div class="post"><h2><a href="#/notes/${esc(p.slug)}">${esc(p.title)}</a></h2><div class="muted num">${esc(p.date)}</div>${p.summary ? `<p>${esc(p.summary)}</p>` : ''}</div>`).join('')}</div>` : ''}
-      <h2 class="section">On individual runs</h2>
-      ${noted.length ? noted.map(r => `<div class="runnote">
-        <h3>${tierDot(r)} <a href="#/run/${esc(r.id)}">${esc(r.model.display)}</a> <span class="muted">· ${esc(r.reasoning_level || r.tier)}${r.notes.tags?.length ? ` · ${r.notes.tags.map(esc).join(', ')}` : ''}</span></h3>
-        ${r.notes.summary ? `<p>${esc(r.notes.summary)}${r.notes.has_body ? ` <a href="#/run/${esc(r.id)}">more →</a>` : ''}</p>` : ''}
-      </div>`).join('') : '<p class="muted">No notes yet.</p>'}`;
+      ${DB.notes.length ? `<div class="posts">${DB.notes.map(line).join('')}</div>` : '<p class="muted">No notes yet. Add a markdown file to <code>notes/</code>.</p>'}`;
   }
 
-  async function viewPost(slug) {
+  async function viewNote(slug) {
     setNav('notes');
-    const p = DB.posts.find(p => p.slug === slug);
-    if (!p) return notFound();
-    const body = await text(`data/posts/${slug}.md`).catch(() => '');
+    const n = DB.notes.find(n => n.slug === slug);
+    if (!n) return notFound();
+    const r = n.run ? DB.runs.find(x => x.id === n.run) : null;
     $app.innerHTML = `
-      <div class="pagehead"><div class="eyebrow"><a href="#/notes">Notes</a></div><h1>${esc(p.title)}</h1><div class="muted num">${esc(p.date)}</div></div>
-      <article class="prose">${md(body)}</article>`;
+      <div class="pagehead"><div class="eyebrow"><a href="#/notes">Notes</a></div><h1>${esc(n.title)}</h1>
+      <div class="muted num">${esc(n.date)}${n.tags?.length ? ` · ${n.tags.map(esc).join(', ')}` : ''}</div>
+      ${r ? `<p class="runlinks" style="margin-top:.5rem">${tierDot(r)} <a href="#/run/${esc(r.id)}">${esc(r.model.display)} · ${esc(r.reasoning_level || r.tier)}</a><a href="#/runs/${esc(r.target)}/${esc(runName(r))}">Reading room</a><a href="#/trace/${esc(r.target)}/${esc(runName(r))}">Trace</a></p>` : ''}</div>
+      ${n.quote ? `<blockquote class="prompt">${esc(n.quote)}</blockquote>` : ''}
+      <article class="prose">${md(await noteBody(n))}</article>`;
   }
 
   async function viewAbout() {
@@ -559,7 +556,7 @@
       if (p0 === 'compare') return await viewCompare(tgt, p2, p3);
       if (p0 === 'targets') return viewTargets();
       if (p0 === 'target' && p1) return await viewTarget(p1);
-      if (p0 === 'notes' && p1) return await viewPost(p1);
+      if (p0 === 'notes' && p1) return await viewNote(p1);
       if (p0 === 'notes') return viewNotes();
       if (p0 === 'about') return await viewAbout();
       notFound();
@@ -571,7 +568,7 @@
   }
 
   fetch('data/index.json').then(r => r.json()).then(db => {
-    DB = db; DB.posts = DB.posts || []; DB.highlights = DB.highlights || [];
+    DB = db; DB.notes = DB.notes || [];
     document.title = db.title;
     document.getElementById('colophon-text').innerHTML = `${esc(db.tagline)} · ${db.runs.length} run${db.runs.length === 1 ? '' : 's'} · <a href="${esc(db.repo_url)}">source &amp; data</a>`;
     window.addEventListener('hashchange', render);

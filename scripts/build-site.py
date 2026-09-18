@@ -4,16 +4,15 @@
     scripts/build-site.py [--out site]
 
 The site is a pure function of the run directories, the target lock files,
-and four optional curation inputs:
+and the curator's markdown:
 
-    results/<target>/<batch>/<run>/notes.md   curator's notes on one run
-    targets/<name>.md                          curator's "about this project"
-    notes/highlights.json                      cards on the landing page
-    notes/<slug>.md                            longer posts (front matter: title, date, summary)
-    about.md                                   the About page, in the curator's words
+    notes/<slug>.md      a note. Front matter: title, date, summary, tags,
+                         run (attach to a run), quote, kind, pin (show on the overview)
+    about.md             the About page
+    targets/<name>.md    about a target
 
-Output goes to site/data/ (index.json, traces.json, per-run README/notes
-copies, posts); the static app in site/ reads it at runtime. Nothing here
+Output goes to site/data/ (index.json, traces.json, per-run README copies,
+notes); the static app in site/ reads it at runtime. Nothing here
 renders markdown — the browser does that, so the README is shown exactly as
 produced.
 """
@@ -176,13 +175,6 @@ def main():
             if (run_dir / f).exists():
                 shutil.copy(run_dir / f, dest / f)
 
-        notes = None
-        if (run_dir / "notes.md").exists():
-            nmeta, nbody = front_matter((run_dir / "notes.md").read_text())
-            (dest / "notes.md").write_text(nbody)
-            notes = {"summary": nmeta.get("summary", ""), "tags": nmeta.get("tags", []),
-                     "has_body": bool(nbody.strip())}
-
         m = meta.get("model", {})
         reg = models.get(m.get("id"), {})
         usage = meta.get("usage") or {}
@@ -229,7 +221,6 @@ def main():
             "truncations": meta.get("truncations", 0),
             "has_session": (run_dir / "session.md").exists(),
             "has_diff": (run_dir / "changes.diff").exists() and (run_dir / "changes.diff").stat().st_size > 0,
-            "notes": notes,
         })
         tr = trace_of(run_dir)
         if tr:
@@ -238,25 +229,26 @@ def main():
     runs.sort(key=lambda r: (r["model"]["name"].lower(), version_key(r["model"]["version"]),
                              r["model"]["variant"] or "", r["harness"].get("name", ""), r["started_at"] or ""))
 
-    # --- curation: posts and landing-page highlights ---
+    # --- notes: one markdown file each ---
+    notes = []
     notes_dir = BENCH_ROOT / "notes"
-    posts = []
+    run_ids = {r["id"] for r in runs}
     if notes_dir.exists():
-        (data / "posts").mkdir()
+        (data / "notes").mkdir()
         for p in sorted(notes_dir.glob("*.md")):
-            pmeta, pbody = front_matter(p.read_text())
-            (data / "posts" / p.name).write_text(pbody)
-            posts.append({"slug": p.stem, "title": pmeta.get("title", p.stem),
-                          "date": pmeta.get("date", ""), "summary": pmeta.get("summary", "")})
-        posts.sort(key=lambda p: p["date"], reverse=True)
-    highlights = []
-    if (notes_dir / "highlights.json").exists():
-        run_ids = {r["id"] for r in runs}
-        for h in json.loads((notes_dir / "highlights.json").read_text()):
-            if h.get("run") and h["run"] not in run_ids:
-                print(f"warning: highlight refers to unknown run {h['run']}", file=sys.stderr)
-                continue
-            highlights.append(h)
+            meta, body = front_matter(p.read_text())
+            if meta.get("run") and meta["run"] not in run_ids:
+                print(f"warning: {p.name} refers to unknown run {meta['run']}", file=sys.stderr)
+            (data / "notes" / p.name).write_text(body)
+            first = next((para.strip() for para in re.split(r"\n\s*\n", body) if para.strip() and not para.lstrip().startswith(("#", ">"))), "")
+            notes.append({
+                "slug": p.stem, "title": meta.get("title") or p.stem.replace("-", " "),
+                "date": meta.get("date", ""), "summary": meta.get("summary") or first,
+                "run": meta.get("run"), "quote": meta.get("quote"), "kind": meta.get("kind"),
+                "tags": meta.get("tags") or [], "pin": str(meta.get("pin", "")).lower() in ("true", "yes", "1"),
+                "has_body": bool(body.strip()),
+            })
+        notes.sort(key=lambda n: n["date"], reverse=True)
 
     about = BENCH_ROOT / "about.md"
     if about.exists():
@@ -266,10 +258,10 @@ def main():
     (data / "index.json").write_text(json.dumps({
         "title": bench["title"], "tagline": bench.get("tagline", ""), "intro": bench.get("intro", ""),
         "repo_url": bench.get("repo_url"), "prompt": (BENCH_ROOT / "prompt.txt").read_text().strip(),
-        "targets": targets, "runs": runs, "posts": posts, "highlights": highlights,
+        "targets": targets, "runs": runs, "notes": notes,
         "has_about": about.exists(),
     }, indent=1))
-    print(f"{len(runs)} run(s), {len(traces)} trace(s), {len(targets)} target(s), {len(posts)} post(s), {len(highlights)} highlight(s) → {data}")
+    print(f"{len(runs)} run(s), {len(traces)} trace(s), {len(targets)} target(s), {len(notes)} note(s) → {data}")
 
 if __name__ == "__main__":
     main()

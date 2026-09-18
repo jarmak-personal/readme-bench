@@ -128,7 +128,6 @@ Each run lives in `results/<target>/<batch>/<run-id>/`:
 | `session.md` | human-readable transcript |
 | `changes.diff` | everything the agent changed in the working tree |
 | `setup.log` | output of the target's dependency setup |
-| `notes.md` | *(optional)* curator's notes; kept separate from the artifact |
 
 Token counts are not comparable across vendors (different tokenizers,
 different cache accounting), and compaction counts depend on each model's
@@ -186,25 +185,22 @@ on push.
 | **Reading room** (`#/runs`) | every run in a rail with time and length bars; the README as produced on the right; pin one run and the next opens beside it, with a by-section compare a click away |
 | **Effort** (`#/effort`) | the models × tiers grid, shaded by any one metric |
 | **Trace** (`#/trace`) | every run on one clock: each tool call a tick (rust = the write), hatched while the model thinks and solid while it streams, from `events.jsonl`; click a strip to read that README in a drawer |
-| **Notes** (`#/notes`) | longer posts, then the per-run notes |
+| **Notes** (`#/notes`) | every note, newest first |
 
 Plus a page per run (README, facts, tool calls, files read), transcript and
 diff pages, and target pages.
 
-Curation inputs, all optional:
+Everything the curator writes is markdown, in one place:
 
-* `results/<target>/<batch>/<run>/notes.md` — notes on one run. Front matter
-  `summary:` (one line) and `tags: [a, b]`; body is markdown. Shown on the
-  run page, in the reading room and trace drawer, and on the Notes page.
-* `notes/highlights.json` — the cards on the overview page. A list of
-  `{"run": "<target>/<run-id>", "kind": "readme|trace|no readme", "quote":
-  "…", "text": "markdown", "post": "<slug>"}`, all optional. A highlight is
-  a pointer, not a third place to write the same thing: leave `text` out
-  and the card shows the post's `summary`, or else the run's note `summary`.
-* `notes/<slug>.md` — a longer post, linked from a highlight's `post:` or
-  the Notes page. Front matter `title:`, `date:`, `summary:`.
-* `about.md` — the About page. Plain markdown; links like `#/targets` and
-  `#/notes` work. Without it the site shows a short built-in description.
+* `notes/<slug>.md` — a note. Front matter, all optional: `title:`,
+  `date:`, `summary:` (one line; defaults to the body's first paragraph),
+  `tags: [a, b]`, `run: <target>/<run-id>` (attaches the note to that run:
+  it then appears on the run page, in the reading room and the trace
+  drawer, and marks the run with ※), `quote:` (a line from the README or
+  transcript, shown on the card), `kind:` (a small label), and `pin: true`
+  (show it on the overview). The Notes page lists every note; each has its
+  own page at `#/notes/<slug>`.
+* `about.md` — the About page.
 * `targets/<name>.md` — about the target, in the curator's words: what it
   actually does, real install/usage, things that don't exist. Front matter
   `title:` and `summary:`.
