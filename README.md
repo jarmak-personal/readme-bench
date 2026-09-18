@@ -202,6 +202,8 @@ Curation inputs, all optional:
   optional. Hovering a card holds its model in the chart.
 * `notes/<slug>.md` — a longer post, linked from a highlight's `post:` or
   the Notes page. Front matter `title:`, `date:`, `summary:`.
+* `about.md` — the About page. Plain markdown; links like `#/targets` and
+  `#/notes` work. Without it the site shows a short built-in description.
 * `targets/<name>.md` — about the target, in the curator's words: what it
   actually does, real install/usage, things that don't exist. Front matter
   `title:` and `summary:`.

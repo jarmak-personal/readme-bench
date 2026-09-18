@@ -10,6 +10,7 @@ and four optional curation inputs:
     targets/<name>.md                          curator's "about this project"
     notes/highlights.json                      cards on the landing page
     notes/<slug>.md                            longer posts (front matter: title, date, summary)
+    about.md                                   the About page, in the curator's words
 
 Output goes to site/data/ (index.json, traces.json, per-run README/notes
 copies, posts); the static app in site/ reads it at runtime. Nothing here
@@ -257,11 +258,16 @@ def main():
                 continue
             highlights.append(h)
 
+    about = BENCH_ROOT / "about.md"
+    if about.exists():
+        (data / "about.md").write_text(front_matter(about.read_text())[1])
+
     (data / "traces.json").write_text(json.dumps(traces, separators=(",", ":")))
     (data / "index.json").write_text(json.dumps({
         "title": bench["title"], "tagline": bench.get("tagline", ""), "intro": bench.get("intro", ""),
         "repo_url": bench.get("repo_url"), "prompt": (BENCH_ROOT / "prompt.txt").read_text().strip(),
         "targets": targets, "runs": runs, "posts": posts, "highlights": highlights,
+        "has_about": about.exists(),
     }, indent=1))
     print(f"{len(runs)} run(s), {len(traces)} trace(s), {len(targets)} target(s), {len(posts)} post(s), {len(highlights)} highlight(s) → {data}")
 

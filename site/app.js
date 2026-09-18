@@ -511,11 +511,12 @@
       <article class="prose">${md(body)}</article>`;
   }
 
-  function viewAbout() {
+  async function viewAbout() {
     setNav('about');
+    const own = DB.has_about ? await text('data/about.md').catch(() => '') : '';
     $app.innerHTML = `
       <div class="pagehead"><div class="eyebrow">About</div><h1>${esc(DB.title)}</h1><p class="lede">${esc(DB.tagline)}</p></div>
-      <article class="prose">
+      ${own ? `<article class="prose">${md(own)}</article>` : `<article class="prose">
         <p>A small, informal benchmark for how well coding agents understand an unfamiliar repository and explain it. Take a repository, remove its documentation and agent-instruction files, and give every model the same prompt:</p>
         <blockquote class="prompt">${esc(DB.prompt)}</blockquote>
         <p>The agent inspects the repository with its tools, offline, and writes the README. The README is published exactly as produced. That is the result — there is no score.</p>
@@ -531,7 +532,7 @@
         <h2>Isolation</h2>
         <p>The agent has no network access and can see only the working copy plus a scratch home directory. Git history is a single commit. Dependencies are installed before the agent starts, so it can run the project's own tooling but cannot fetch anything.</p>
         <p><a href="#/targets">The targets</a> · method, scripts, and raw run data: <a href="${esc(DB.repo_url)}">${esc(DB.repo_url)}</a>.</p>
-      </article>`;
+      </article>`}`;
   }
 
   function notFound() { $app.innerHTML = `<p class="muted">Not found. <a href="#/">Back to the overview.</a></p>`; }
@@ -559,7 +560,7 @@
       if (p0 === 'target' && p1) return await viewTarget(p1);
       if (p0 === 'notes' && p1) return await viewPost(p1);
       if (p0 === 'notes') return await viewNotes();
-      if (p0 === 'about') return viewAbout();
+      if (p0 === 'about') return await viewAbout();
       notFound();
     } catch (e) {
       $app.innerHTML = `<p class="muted">Error: ${esc(e.message)}</p>`;
