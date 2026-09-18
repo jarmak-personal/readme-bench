@@ -366,4 +366,8 @@ pre.raw { font-family: var(--mono); font-size: 0.8rem; white-space: pre-wrap; wo
 .posts { margin-bottom: 2rem; }
 .post { border-top: 1px solid var(--rule); padding: 1.25rem 0; }
 .post h2 a { color: var(--ink); } .post p { margin: 0.4rem 0 0; color: var(--ink-2); max-width: 70ch; }
+.runnote { border-top: 1px solid var(--rule-2); padding: 0.8rem 0; max-width: 70ch; }
+.runnote h3 { font-weight: 500; }
+.runnote h3 a { color: var(--ink); }
+.runnote p { margin: 0.2rem 0 0; color: var(--ink-2); font-size: 0.95rem; }
 h2.section { font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.08em; color: var(--muted); font-weight: 500; margin: 1.5rem 0 0.5rem; }

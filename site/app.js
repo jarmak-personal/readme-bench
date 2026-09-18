@@ -488,19 +488,17 @@
   }
 
   // ---------- notes: posts, then per-run notes ----------
-  async function viewNotes() {
+  function viewNotes() {
     setNav('notes');
     const noted = DB.runs.filter(r => r.notes);
-    const bodies = await Promise.all(noted.map(r => r.notes.has_body ? text(runPath(r, 'notes.md')).catch(() => '') : ''));
     $app.innerHTML = `
       <div class="pagehead"><div class="eyebrow">Notes</div><h1>Curator's notes</h1>
       <p class="lede">One person's reading of the runs, kept separate from the artifacts and never turned into a score.</p></div>
       ${DB.posts.length ? `<div class="posts">${DB.posts.map(p => `<div class="post"><h2><a href="#/notes/${esc(p.slug)}">${esc(p.title)}</a></h2><div class="muted num">${esc(p.date)}</div>${p.summary ? `<p>${esc(p.summary)}</p>` : ''}</div>`).join('')}</div>` : ''}
       <h2 class="section">On individual runs</h2>
-      ${noted.length ? noted.map((r, i) => `<div class="targetcard">
-        <h2>${tierDot(r)} <a href="#/run/${esc(r.id)}">${esc(r.model.display)}</a> <span class="muted">· ${esc(r.reasoning_level || r.tier)} · ${esc(targetOf(r.target)?.title || r.target)}</span></h2>
-        ${r.notes.summary ? `<p class="summary">${esc(r.notes.summary)}</p>` : ''}
-        ${bodies[i] ? `<div class="prose">${md(bodies[i])}</div>` : ''}
+      ${noted.length ? noted.map(r => `<div class="runnote">
+        <h3>${tierDot(r)} <a href="#/run/${esc(r.id)}">${esc(r.model.display)}</a> <span class="muted">· ${esc(r.reasoning_level || r.tier)}${r.notes.tags?.length ? ` · ${r.notes.tags.map(esc).join(', ')}` : ''}</span></h3>
+        ${r.notes.summary ? `<p>${esc(r.notes.summary)}${r.notes.has_body ? ` <a href="#/run/${esc(r.id)}">more →</a>` : ''}</p>` : ''}
       </div>`).join('') : '<p class="muted">No notes yet.</p>'}`;
   }
 
@@ -562,7 +560,7 @@
       if (p0 === 'targets') return viewTargets();
       if (p0 === 'target' && p1) return await viewTarget(p1);
       if (p0 === 'notes' && p1) return await viewPost(p1);
-      if (p0 === 'notes') return await viewNotes();
+      if (p0 === 'notes') return viewNotes();
       if (p0 === 'about') return await viewAbout();
       notFound();
     } catch (e) {
