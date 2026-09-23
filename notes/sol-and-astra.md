@@ -1,11 +1,11 @@
 ---
 title: GPT-6 Sol, GPT-5.6 Sol, GPT-6 Astra
 date: 2026-09-23
-summary: GPT-6 Sol thinks and explores as much as the others but writes the least. And one line in the harness prompt cut its exploring by two-thirds.
+summary: GPT-6 Sol has the shortest readmes, and searched for previous copilot sessions for info
 run: hvir/gpt-6-sol__copilot-cli__20260923T054112Z
 kind: comparison
 tags: [gpt, effort, harness]
-pin: false
+pin: true
 ---
 
 GPT-6 Sol reads as brief. I wanted to know whether that's the thinking, the exploring, or
@@ -27,7 +27,7 @@ just the writing.
 of 5.6 Sol (6,544 vs 3,166), though less than Astra. (Copilot only reports reasoning token
 counts, not the reasoning itself, so the count is all there is to compare.)
 
-**Nor is exploring.** At max, GPT-6 Sol makes the most tool calls of the three and reads the
+**Exploring isn't short either.** At max, GPT-6 Sol makes the most tool calls of the three and reads the
 most files: 55, against 30 and 32. Like the others at max, it hands part of the search to
 Copilot's search subagent.
 
