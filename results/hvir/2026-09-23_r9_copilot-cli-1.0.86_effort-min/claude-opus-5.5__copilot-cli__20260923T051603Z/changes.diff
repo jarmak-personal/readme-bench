@@ -1,0 +1,80 @@
+diff --git a/README.md b/README.md
+new file mode 100644
+index 0000000..4c2dadb
+--- /dev/null
++++ b/README.md
+@@ -0,0 +1,74 @@
++# hvir
++
++hvir is an Electron desktop workbench for running AI coding-agent harnesses
++(such as Claude Code and Codex) alongside the tools you use with them. It
++combines terminal panes, file and diff viewers, Git workflows, document review,
++web panes, and session tracking in one window, for local and SSH-remote
++projects.
++
++## Features
++
++- **Terminals** – PTY-backed terminals rendered with `ghostty-web`, with split,
++  move, and theme support.
++- **Harness integration** – launch, resume, and fork agent sessions, with
++  context and usage telemetry.
++- **Viewers** – CodeMirror-based file and merge views, Shiki syntax
++  highlighting, and Markdown/Mermaid rendering.
++- **Git** – Git operations run in a worker process.
++- **Remote workspaces** – SSH hosts via `ssh2` and your `~/.ssh/config`.
++- **Document review** and embedded **web panes**.
++
++## Requirements
++
++- Node.js 24 or later
++- A native build toolchain for `node-gyp` (Xcode Command Line Tools on macOS,
++  `build-essential` and Python on Linux)
++
++## Getting started
++
++```sh
++npm install        # also rebuilds native modules for Electron
++npm run dev        # start the app in development mode
++```
++
++## Common scripts
++
++| Script                 | Purpose                                            |
++| ---------------------- | -------------------------------------------------- |
++| `npm run build`        | Typecheck and build to `out/`                      |
++| `npm test`             | Run unit tests (Vitest)                            |
++| `npm run lint`         | Lint with ESLint                                   |
++| `npm run typecheck`    | Typecheck main and renderer code                   |
++| `npm run format`       | Format with Prettier                               |
++| `npm run verify`       | Run seam, ADR, and architecture checks, then lint, typecheck, and tests |
++| `npm run smoke`        | Build and run end-to-end smoke scenarios           |
++| `npm run hooks:install`| Install the repository's Git hooks                 |
++
++## Packaging
++
++```sh
++npm run pack:mac:arm64     # macOS .pkg (Apple silicon)
++npm run pack:linux:x64     # Debian package (x64)
++npm run pack:linux:arm64   # Debian package (arm64)
++npm run build:dir          # unpacked build for local testing
++```
++
++Artifacts are written to `dist/`.
++
++## Project layout
++
++```
++src/main/       Electron main process (PTY, Git, harnesses, SSH, IPC)
++src/preload/    Preload bridge
++src/renderer/   React UI
++src/shared/     Types and contracts shared across processes
++src/workers/    Background worker processes
++packages/       Local native module (rename-noreplace)
++scripts/        Build, smoke, release, and project tooling
++test/           Test suites
++```
++
++## License
++
++MIT. See [LICENSE](LICENSE). Third-party notices are in
++[THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md).

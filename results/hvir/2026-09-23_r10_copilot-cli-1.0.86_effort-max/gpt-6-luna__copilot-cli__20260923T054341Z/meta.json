@@ -1,0 +1,162 @@
+{
+  "id": "gpt-6-luna__copilot-cli__20260923T054341Z",
+  "batch": "2026-09-23_r10_copilot-cli-1.0.86_effort-max",
+  "target": {
+    "name": "hvir",
+    "url": "https://github.com/jarmak-personal/hvir",
+    "commit": "7acbf8883bc869a9987252833d90b0d250086122",
+    "snapshot_commit": "ca97b8a72d67da22d5da4705101f99fbc80bd9cf"
+  },
+  "model": {
+    "id": "gpt-6-luna",
+    "vendor": "OpenAI",
+    "name": "GPT",
+    "version": "6",
+    "variant": "luna",
+    "display": "GPT-6 Luna"
+  },
+  "harness": {
+    "name": "GitHub Copilot CLI",
+    "id": "copilot-cli",
+    "version": "1.0.86"
+  },
+  "prompt": "Please create a README.md for this project.",
+  "started_at": "2026-09-23T05:43:53Z",
+  "finished_at": "2026-09-23T05:45:16Z",
+  "wall_clock_seconds": 83,
+  "exit_code": 0,
+  "setup_exit_code": 0,
+  "readme_produced": true,
+  "readme_bytes": 2388,
+  "readme_lines": 80,
+  "usage": {
+    "totalPremiumRequestCost": 1,
+    "totalUserRequests": 1,
+    "totalNanoAiu": 1128224500,
+    "tokenDetails": {
+      "input": {
+        "tokenCount": 21
+      },
+      "cache_read": {
+        "tokenCount": 184152
+      },
+      "cache_write": {
+        "tokenCount": 46093
+      },
+      "output": {
+        "tokenCount": 7354
+      }
+    },
+    "totalApiDurationMs": 79324,
+    "sessionStartTime": "2026-09-23T05:43:55.488Z",
+    "codeChanges": {
+      "linesAdded": 81,
+      "linesRemoved": 0,
+      "filesModifiedCount": 1,
+      "filesModified": [
+        "/private/var/tmp/ws/40454b39/hvir/README.md"
+      ]
+    },
+    "modelMetrics": {
+      "gpt-6-luna": {
+        "requests": {
+          "count": 7,
+          "cost": 1
+        },
+        "usage": {
+          "inputTokens": 230266,
+          "outputTokens": 7354,
+          "cacheReadTokens": 184152,
+          "cacheWriteTokens": 46093,
+          "reasoningTokens": 5859
+        },
+        "cacheExpiresAt": "2026-09-23T06:15:11.711Z",
+        "totalNanoAiu": 1128224500,
+        "tokenDetails": {
+          "input": {
+            "tokenCount": 21
+          },
+          "cache_read": {
+            "tokenCount": 184152
+          },
+          "cache_write": {
+            "tokenCount": 46093
+          },
+          "output": {
+            "tokenCount": 7354
+          }
+        }
+      }
+    },
+    "agentMetrics": {
+      "main": {
+        "totalApiDurationMs": 79324,
+        "totalNanoAiu": 1128224500,
+        "modelMetrics": {
+          "gpt-6-luna": {
+            "requests": {
+              "count": 7,
+              "cost": 1
+            },
+            "usage": {
+              "inputTokens": 230266,
+              "outputTokens": 7354,
+              "cacheReadTokens": 184152,
+              "cacheWriteTokens": 46093,
+              "reasoningTokens": 5859
+            },
+            "totalNanoAiu": 1128224500,
+            "tokenDetails": {
+              "input": {
+                "tokenCount": 21
+              },
+              "cache_read": {
+                "tokenCount": 184152
+              },
+              "cache_write": {
+                "tokenCount": 46093
+              },
+              "output": {
+                "tokenCount": 7354
+              }
+            }
+          }
+        }
+      }
+    },
+    "currentModel": "gpt-6-luna",
+    "lastCallInputTokens": 46096,
+    "lastCallOutputTokens": 280
+  },
+  "tool_calls": {
+    "bash": 3,
+    "glob": 3,
+    "view": 13,
+    "rg": 1,
+    "apply_patch": 1
+  },
+  "reasoning_effort_requested": "max",
+  "reasoning_level": "max",
+  "chat_calls": {
+    "gpt-6-luna": {
+      "max": 7
+    }
+  },
+  "files_viewed": [
+    "README.md",
+    "electron-builder.yml",
+    "package.json",
+    "scripts/check-terminal-runtime.mts",
+    "src/main/harness/bundled-harness-providers.ts",
+    "src/main/harness/harness-provider-contract.ts",
+    "src/main/harness/harness-provider.ts",
+    "src/main/index.ts",
+    "src/main/ipc/features/git.ts",
+    "src/main/project-host/project-host-catalog.ts",
+    "src/main/project-host/project-host.ts",
+    "src/renderer/src/App.tsx",
+    "src/renderer/src/workspaces/ProjectsBar.tsx"
+  ],
+  "compactions": [],
+  "truncations": 0
+}

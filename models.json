@@ -7,6 +7,7 @@
   "claude-opus-4.8":      { "vendor": "Anthropic",   "name": "Claude Opus",   "version": "4.8",  "display": "Claude Opus 4.8" },
   "claude-opus-4.8-fast": { "vendor": "Anthropic",   "name": "Claude Opus",   "version": "4.8",  "display": "Claude Opus 4.8 (fast mode)", "variant": "fast" },
   "claude-opus-5":        { "vendor": "Anthropic",   "name": "Claude Opus",   "version": "5",    "display": "Claude Opus 5" },
+  "claude-opus-5.5":      { "vendor": "Anthropic",   "name": "Claude Opus",   "version": "5.5",  "display": "Claude Opus 5.5" },
   "claude-fable-5":       { "vendor": "Anthropic",   "name": "Claude Fable",  "version": "5",    "display": "Claude Fable 5" },
   "claude-fable-5.1":     { "vendor": "Anthropic",   "name": "Claude Fable",  "version": "5.1",  "display": "Claude Fable 5.1" },
 
@@ -19,6 +20,8 @@
   "gpt-5.6-sol":          { "vendor": "OpenAI",      "name": "GPT",           "version": "5.6",  "display": "GPT-5.6 Sol",   "variant": "sol" },
   "gpt-5.6-terra":        { "vendor": "OpenAI",      "name": "GPT",           "version": "5.6",  "display": "GPT-5.6 Terra", "variant": "terra" },
   "gpt-6-astra":          { "vendor": "OpenAI",      "name": "GPT",           "version": "6",    "display": "GPT-6 Astra",   "variant": "astra" },
+  "gpt-6-luna":           { "vendor": "OpenAI",      "name": "GPT",           "version": "6",    "display": "GPT-6 Luna",    "variant": "luna" },
+  "gpt-6-sol":            { "vendor": "OpenAI",      "name": "GPT",           "version": "6",    "display": "GPT-6 Sol",     "variant": "sol" },
 
   "gemini-3.5-flash":     { "vendor": "Google",      "name": "Gemini Flash",  "version": "3.5",  "display": "Gemini 3.5 Flash" },
   "gemini-3.6-flash":     { "vendor": "Google",      "name": "Gemini Flash",  "version": "3.6",  "display": "Gemini 3.6 Flash" },

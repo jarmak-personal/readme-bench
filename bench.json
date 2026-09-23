@@ -6,7 +6,11 @@
     "hvir"
   ],
   "hidden_batches": [
-    "2026-09-17_r1_copilot-cli-1.0.85-86_manifest-metadata-present"
+    "2026-09-17_r1_copilot-cli-1.0.85-86_manifest-metadata-present",
+    "2026-09-22_r7_copilot-cli-1.0.88_effort-max_timeout-1200s",
+    "2026-09-22_r5_copilot-cli-1.0.88",
+    "2026-09-22_r6_copilot-cli-1.0.88_effort-min",
+    "2026-09-22_r7_copilot-cli-1.0.88_effort-max"
   ],
   "_hidden_batches": "Batches kept in results/ but left off the site, e.g. runs against an earlier snapshot of the target that aren't comparable with the current ones.",
   "intro": "Welcome to the readme challenge! We ask a short and simple question to copilot with different models to see the differences how they approach it. For more details check out [About](#/about), for some thoughts, check out [Notes](#/notes)."

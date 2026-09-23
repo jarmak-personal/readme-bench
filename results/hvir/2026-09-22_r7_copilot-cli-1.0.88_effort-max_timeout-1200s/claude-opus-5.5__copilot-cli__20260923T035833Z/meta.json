@@ -1,0 +1,184 @@
+{
+  "id": "claude-opus-5.5__copilot-cli__20260923T035833Z",
+  "batch": "2026-09-22_r7_copilot-cli-1.0.88_effort-max_timeout-1200s",
+  "target": {
+    "name": "hvir",
+    "url": "https://github.com/jarmak-personal/hvir",
+    "commit": "7acbf8883bc869a9987252833d90b0d250086122",
+    "snapshot_commit": "ca97b8a72d67da22d5da4705101f99fbc80bd9cf"
+  },
+  "model": {
+    "id": "claude-opus-5.5",
+    "vendor": "Anthropic",
+    "name": "Claude Opus",
+    "version": "5.5",
+    "variant": null,
+    "display": "Claude Opus 5.5"
+  },
+  "harness": {
+    "name": "GitHub Copilot CLI",
+    "id": "copilot-cli",
+    "version": "1.0.88"
+  },
+  "prompt": "Please create a README.md for this project.",
+  "started_at": "2026-09-23T03:58:45Z",
+  "finished_at": "2026-09-23T04:18:45Z",
+  "wall_clock_seconds": 1200,
+  "exit_code": 124,
+  "setup_exit_code": 0,
+  "readme_produced": false,
+  "readme_bytes": null,
+  "readme_lines": null,
+  "usage": {
+    "totalPremiumRequestCost": 1,
+    "totalUserRequests": 1,
+    "totalNanoAiu": 716681600000,
+    "tokenDetails": {
+      "input": {
+        "tokenCount": 302
+      },
+      "cache_read": {
+        "tokenCount": 17391090
+      },
+      "cache_write": {
+        "tokenCount": 308594
+      },
+      "output": {
+        "tokenCount": 107221
+      }
+    },
+    "totalApiDurationMs": 1143734,
+    "sessionStartTime": "2026-09-23T03:58:48.012Z",
+    "codeChanges": {
+      "linesAdded": 0,
+      "linesRemoved": 0,
+      "filesModifiedCount": 0,
+      "filesModified": []
+    },
+    "modelMetrics": {
+      "claude-opus-5.5": {
+        "requests": {
+          "count": 150,
+          "cost": 1
+        },
+        "usage": {
+          "inputTokens": 17699986,
+          "outputTokens": 107221,
+          "cacheReadTokens": 17391090,
+          "cacheWriteTokens": 308594,
+          "reasoningTokens": 74683
+        },
+        "cacheExpiresAt": "2026-09-23T04:23:17.834Z",
+        "totalNanoAiu": 716681600000,
+        "tokenDetails": {
+          "input": {
+            "tokenCount": 302
+          },
+          "cache_read": {
+            "tokenCount": 17391090
+          },
+          "cache_write": {
+            "tokenCount": 308594
+          },
+          "output": {
+            "tokenCount": 107221
+          }
+        }
+      }
+    },
+    "agentMetrics": {
+      "main": {
+        "totalApiDurationMs": 1143734,
+        "totalNanoAiu": 716681600000,
+        "modelMetrics": {
+          "claude-opus-5.5": {
+            "requests": {
+              "count": 150,
+              "cost": 1
+            },
+            "usage": {
+              "inputTokens": 17699986,
+              "outputTokens": 107221,
+              "cacheReadTokens": 17391090,
+              "cacheWriteTokens": 308594,
+              "reasoningTokens": 74683
+            },
+            "totalNanoAiu": 716681600000,
+            "tokenDetails": {
+              "input": {
+                "tokenCount": 302
+              },
+              "cache_read": {
+                "tokenCount": 17391090
+              },
+              "cache_write": {
+                "tokenCount": 308594
+              },
+              "output": {
+                "tokenCount": 107221
+              }
+            }
+          }
+        }
+      }
+    },
+    "currentModel": "claude-opus-5.5",
+    "lastCallInputTokens": 94713,
+    "lastCallOutputTokens": 152
+  },
+  "tool_calls": {
+    "bash": 129,
+    "glob": 1,
+    "view": 51,
+    "grep": 6
+  },
+  "reasoning_effort_requested": "max",
+  "reasoning_level": "max",
+  "chat_calls": {
+    "claude-opus-5.5": {
+      "max": 151
+    }
+  },
+  "files_viewed": [
+    ".github/workflows/ci.yml",
+    ".github/workflows/release.yml",
+    "/private/var/tmp/ws/cdd245b9/home/tmp/1790135940694-copilot-tool-output-30711-6d1cd9fd-3b0e-4b86-b294-03727399a0ef.txt",
+    "LICENSE",
+    "THIRD_PARTY_NOTICES.md",
+    "build/native/hvir-command",
+    "electron-builder.yml",
+    "electron.vite.config.ts",
+    "package.json",
+    "scripts/check-adrs.mjs",
+    "scripts/check-seams.sh",
+    "scripts/check-terminal-runtime.mts",
+    "scripts/native-installer.template.sh",
+    "scripts/render-native-installer.mjs",
+    "src/main/application-runtime-policy.ts",
+    "src/main/harness/harness-launch.ts",
+    "src/main/harness/providers/claude-code.ts",
+    "src/main/harness/providers/codex.ts",
+    "src/main/harness/providers/github-copilot.ts",
+    "src/main/harness/providers/shell.ts",
+    "src/main/index.ts",
+    "src/main/project-host/project-host-catalog.ts",
+    "src/main/project-host/ssh-host.ts",
+    "src/main/project-registry.ts",
+    "src/renderer/src/App.tsx",
+    "src/renderer/src/dashboards/WebPane.tsx",
+    "src/renderer/src/settings/sections/TerminalSettings.tsx",
+    "src/renderer/src/settings/settings-model.ts",
+    "src/renderer/src/terminal/TerminalWorkspace.tsx",
+    "src/renderer/src/workbench/use-workbench-layout.ts",
+    "src/renderer/src/workspaces/SessionDialog.tsx",
+    "src/shared/document-review.ts",
+    "src/shared/harness-profile.ts",
+    "src/shared/harness-provider.ts",
+    "src/shared/keybindings.ts",
+    "src/shared/viewer-types.ts",
+    "src/shared/web-pane.ts",
+    "src/shared/workspace-types.ts"
+  ],
+  "compactions": [],
+  "truncations": 0
+}

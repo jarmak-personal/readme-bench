@@ -1,0 +1,49 @@
+# hvir
+
+hvir is a desktop workbench for local and SSH-hosted projects. It brings terminals, files, Git, and coding-agent CLI sessions into one Electron app.
+
+## Features
+
+- Open local folders or remote projects using hosts from `~/.ssh/config`, and switch between projects and Git worktrees.
+- Run shells and configured coding-agent CLIs in integrated terminals; inspect active sessions in the Sessions view. Built-in harness profiles include Claude Code, Codex, Gemini, GitHub Copilot, Cursor, and Pi, as well as custom commands.
+- Browse and edit files, view diffs, and preview Markdown, Mermaid diagrams, images, HTML, CSV, JSON, and YAML.
+- Inspect Git changes, branches, history, and the commit graph; fetch, pull, and manage worktrees from the workbench.
+- Open web panes alongside your project and customize the terminal and app appearance.
+
+## Install and open a project
+
+Download the package for your system from [Releases](../../releases): macOS on Apple silicon (`.pkg`) or Linux on x64/arm64 (`.deb`). The packages install the desktop app and an `hvir` command. Windows packages are not currently provided.
+
+Launch the app and choose a local folder, or open a local folder from the terminal:
+
+```sh
+hvir .
+hvir /path/to/project
+```
+
+To open a remote project, add the host to `~/.ssh/config` and select it in the app's project picker. Git functionality requires Git on the relevant host. Coding-agent CLIs are separate programs: install the ones you want to use on the host where their terminal will run, then configure them under **Settings → Harnesses**.
+
+## Develop from source
+
+You need Node.js 24 or newer, npm, and a native build toolchain for the Electron modules rebuilt during installation. From a checkout:
+
+```sh
+npm ci
+npm run dev
+```
+
+`npm ci` runs the postinstall step that prepares Electron and rebuilds native modules; use it again if the installed dependencies no longer match the checkout.
+
+| Command | Purpose |
+| --- | --- |
+| `npm run build` | Type-check and build the app into `out/`. |
+| `npm test` | Run the Vitest suite. |
+| `npm run verify` | Run repository checks, lint, type checks, and tests. |
+| `npm run pack:mac:arm64` | Build a macOS Apple silicon package. |
+| `npm run pack:linux:x64` / `npm run pack:linux:arm64` | Build a Linux package for the specified architecture. |
+
+Run packaging commands on the corresponding operating system; native packages are written to `dist/`. The Electron main process lives in `src/main`, the React UI in `src/renderer`, shared contracts in `src/shared`, and tests in `test`.
+
+## License
+
+[MIT](LICENSE). Third-party licenses and notices are listed in [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md).

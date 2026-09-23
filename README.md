@@ -31,8 +31,7 @@ A repository at one commit, prepared by `scripts/prepare-target.py` into
 upstream commit, everything removed, and any manifest fixups. The script
 clones, strips human-authored explanation, and re-initialises git as a single
 orphan commit ("Initial commit", no upstream URL) so the removed files are not
-recoverable from history. Agents do go looking: one run tried `git fsck
---lost-found` and `git log -S AGENTS.md`. Several targets can coexist;
+recoverable from history. Several targets can coexist;
 results are keyed by target.
 
 **Scars.** Stripping leaves references behind: a CI step that lints
@@ -107,12 +106,21 @@ The harness is part of the system under test. The first batches use
 harness with good usage reporting. Runs on other harnesses (vendor-native
 agents, minimal agents) are separate runs, not interchangeable ones.
 
-The CLI version cannot be pinned forever, since new models require new
-versions. A **batch** is one CLI version; every run records its batch.
+The CLI version is pinned in `harness/copilot-cli.version`; `run-copilot.sh`
+installs exactly that version from npm into the bench cache dir and never
+uses a system `copilot`, which updates itself. The version matters: the
+system prompt changes between releases (1.0.88 added an instruction telling
+GPT models not to delegate to subagents), so runs on different versions are
+not comparable. Bumping the pin means re-running every model. A **batch** is
+one CLI version; every run records its batch.
 
 Autonomy policy: `--no-ask-user`. An agent that would have asked a
 clarifying question instead proceeds or stops. A run that produces no
 README is still a run.
+
+No time limit: a run ends when the agent stops. (`--timeout <seconds>`
+exists for debugging; the first Opus 5.5 max run was cut off at 20 minutes,
+still exploring, and is kept in a hidden batch.)
 
 ### Capture
 
@@ -219,8 +227,8 @@ scripts/run-copilot.sh --target hvir --model claude-sonnet-5
 # Options: --batch <id>  --prompt-file <file>  --out <dir>  --scratch-root <dir>  --keep-work
 ```
 
-Requirements: `copilot` (GitHub Copilot CLI), `gh` (for the auth token),
-`git`, `python3`. macOS for the Seatbelt sandbox; Linux works with
+Requirements: `node`/`npm` (the pinned Copilot CLI installs itself on first
+run), `gh` (for the auth token), `git`, `python3`. macOS for the Seatbelt sandbox; Linux works with
 `bwrap` and the namespace tooling Copilot's sandbox requires.
 
 Available model ids: `curl -H "Authorization: Bearer $(gh auth token)" https://api.githubcopilot.com/models`.

@@ -1,0 +1,155 @@
+{
+  "id": "gpt-6-sol__copilot-cli__20260923T051647Z",
+  "batch": "2026-09-23_r9_copilot-cli-1.0.86_effort-min",
+  "target": {
+    "name": "hvir",
+    "url": "https://github.com/jarmak-personal/hvir",
+    "commit": "7acbf8883bc869a9987252833d90b0d250086122",
+    "snapshot_commit": "ca97b8a72d67da22d5da4705101f99fbc80bd9cf"
+  },
+  "model": {
+    "id": "gpt-6-sol",
+    "vendor": "OpenAI",
+    "name": "GPT",
+    "version": "6",
+    "variant": "sol",
+    "display": "GPT-6 Sol"
+  },
+  "harness": {
+    "name": "GitHub Copilot CLI",
+    "id": "copilot-cli",
+    "version": "1.0.86"
+  },
+  "prompt": "Please create a README.md for this project.",
+  "started_at": "2026-09-23T05:16:59Z",
+  "finished_at": "2026-09-23T05:17:16Z",
+  "wall_clock_seconds": 17,
+  "exit_code": 0,
+  "setup_exit_code": 0,
+  "readme_produced": true,
+  "readme_bytes": 2224,
+  "readme_lines": 44,
+  "usage": {
+    "totalPremiumRequestCost": 1,
+    "totalUserRequests": 1,
+    "totalNanoAiu": 8499060000,
+    "tokenDetails": {
+      "input": {
+        "tokenCount": 15
+      },
+      "cache_read": {
+        "tokenCount": 67353
+      },
+      "cache_write": {
+        "tokenCount": 24076
+      },
+      "output": {
+        "tokenCount": 1130
+      }
+    },
+    "totalApiDurationMs": 13409,
+    "sessionStartTime": "2026-09-23T05:17:01.777Z",
+    "codeChanges": {
+      "linesAdded": 45,
+      "linesRemoved": 0,
+      "filesModifiedCount": 1,
+      "filesModified": [
+        "/private/var/tmp/ws/b24a14c7/hvir/README.md"
+      ]
+    },
+    "modelMetrics": {
+      "gpt-6-sol": {
+        "requests": {
+          "count": 5,
+          "cost": 1
+        },
+        "usage": {
+          "inputTokens": 91444,
+          "outputTokens": 1130,
+          "cacheReadTokens": 67353,
+          "cacheWriteTokens": 24076,
+          "reasoningTokens": 0
+        },
+        "cacheExpiresAt": "2026-09-23T05:47:14.991Z",
+        "totalNanoAiu": 8499060000,
+        "tokenDetails": {
+          "input": {
+            "tokenCount": 15
+          },
+          "cache_read": {
+            "tokenCount": 67353
+          },
+          "cache_write": {
+            "tokenCount": 24076
+          },
+          "output": {
+            "tokenCount": 1130
+          }
+        }
+      }
+    },
+    "agentMetrics": {
+      "main": {
+        "totalApiDurationMs": 13409,
+        "totalNanoAiu": 8499060000,
+        "modelMetrics": {
+          "gpt-6-sol": {
+            "requests": {
+              "count": 5,
+              "cost": 1
+            },
+            "usage": {
+              "inputTokens": 91444,
+              "outputTokens": 1130,
+              "cacheReadTokens": 67353,
+              "cacheWriteTokens": 24076,
+              "reasoningTokens": 0
+            },
+            "totalNanoAiu": 8499060000,
+            "tokenDetails": {
+              "input": {
+                "tokenCount": 15
+              },
+              "cache_read": {
+                "tokenCount": 67353
+              },
+              "cache_write": {
+                "tokenCount": 24076
+              },
+              "output": {
+                "tokenCount": 1130
+              }
+            }
+          }
+        }
+      }
+    },
+    "currentModel": "gpt-6-sol",
+    "lastCallInputTokens": 24079,
+    "lastCallOutputTokens": 30
+  },
+  "tool_calls": {
+    "bash": 2,
+    "glob": 1,
+    "view": 6,
+    "rg": 1,
+    "apply_patch": 1
+  },
+  "reasoning_effort_requested": "none",
+  "reasoning_level": null,
+  "chat_calls": {
+    "gpt-6-sol": {
+      "none": 5
+    }
+  },
+  "files_viewed": [
+    ".github/workflows/ci.yml",
+    "electron-builder.yml",
+    "package.json",
+    "src/main/harness/bundled-harness-providers.ts",
+    "src/renderer/src/App.tsx",
+    "src/renderer/src/workspaces/WorkspaceCatalogDialogs.tsx"
+  ],
+  "compactions": [],
+  "truncations": 0
+}

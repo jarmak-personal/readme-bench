@@ -1,0 +1,114 @@
+# hvir
+
+hvir is a desktop workbench for running terminal-based coding agents next to the
+project they work on. It combines a terminal (built on a modified
+[ghostty-web](https://github.com/jarmak-personal/ghostty-web)), a project file
+tree and viewer, Git tooling, and document review in one Electron app. Projects can
+be local directories or remote hosts reached over SSH.
+
+## Features
+
+- **Agent harnesses** – launch and track sessions for Claude Code, Codex, Cursor,
+  Gemini, GitHub Copilot, Pi, or a plain shell. Each harness supports configurable
+  profiles, session recovery, and context/usage telemetry where the provider exposes
+  it.
+- **Terminals** – split, move, and theme terminal panes. Themes come from a bundled
+  catalog.
+- **Projects and workspaces** – open several projects and switch between workspaces,
+  including Git worktrees. Workspaces that need attention are flagged.
+- **Remote projects over SSH** – reads your `~/.ssh/config`, verifies host keys,
+  and handles authentication prompts, file access, and file watching on the remote
+  host.
+- **File viewer** – syntax highlighting (Shiki), rendered Markdown with Mermaid
+  diagrams, CSV and JSON views, a large-file mode, diffs, find, and go-to-line.
+- **Git** – status, diffs, history, branches, and worktrees.
+- **Document review** – annotate source or rendered documents and send the review
+  comments straight to an agent session.
+- **Web panes** – embed web pages such as dashboards or local dev servers alongside
+  your terminals.
+
+## Installation
+
+Pre-built packages are published on the
+[releases page](https://github.com/jarmak-personal/hvir/releases). Supported
+targets:
+
+- Linux x64 and arm64 (`.deb`; requires glibc 2.35 or newer)
+- macOS on Apple silicon (`.pkg`)
+
+Each release ships an `install.sh` that downloads the right package for your
+platform, checks its checksum, and installs it:
+
+```sh
+curl -fsSLO https://github.com/jarmak-personal/hvir/releases/latest/download/install.sh
+bash install.sh              # install or update
+bash install.sh --uninstall  # remove the app but keep user state
+bash install.sh --uninstall --purge  # also delete hvir settings and cache
+```
+
+The installer adds an `hvir` command (`/usr/bin/hvir` on Linux,
+`/usr/local/bin/hvir` on macOS). Pass it a directory to open that project:
+
+```sh
+hvir ~/code/my-project
+```
+
+## Development
+
+### Prerequisites
+
+- Node.js 24 or newer
+- A C/C++ toolchain for native modules (`node-pty` and the bundled
+  `@hvir/rename-noreplace` binding)
+- On headless Linux, Xvfb (`xvfb-run`) for the smoke tests
+
+### Getting started
+
+```sh
+npm ci              # installs dependencies and rebuilds native modules for Electron
+npm run hooks:install  # optional: pre-push typecheck and smoke test
+npm run dev         # start the app with hot reload
+```
+
+### Common scripts
+
+| Command                   | Purpose                                                          |
+| ------------------------- | ---------------------------------------------------------------- |
+| `npm run dev`             | Run the app in development mode (electron-vite)                  |
+| `npm run build`           | Typecheck and build to `out/`                                    |
+| `npm run build:dir`       | Build an unpacked app with electron-builder                      |
+| `npm run pack:linux:x64`  | Build a Linux `.deb` (also `pack:linux:arm64`)                   |
+| `npm run pack:mac:arm64`  | Build a macOS `.pkg`                                             |
+| `npm test`                | Run the unit tests (Vitest)                                      |
+| `npm run test:mutation`   | Run mutation testing (Stryker)                                   |
+| `npm run lint`            | Lint with ESLint                                                 |
+| `npm run typecheck`       | Typecheck the main/preload and renderer projects                 |
+| `npm run format`          | Format with Prettier (`format:check` to verify only)             |
+| `npm run smoke`           | Build a smoke bundle and run the Electron end-to-end scenarios   |
+| `npm run smoke:macos`     | Smoke scenarios supported on macOS                               |
+| `npm run smoke:scenario`  | Run specific smoke scenarios by name                             |
+| `npm run verify`          | Seam, ADR, and architecture checks, then lint, typecheck, test   |
+
+Run `npm run verify` before opening a pull request.
+
+### Project layout
+
+```
+src/
+  main/       Electron main process: PTYs, harness providers, Git, SSH project hosts,
+              file operations, sessions, IPC, and smoke scenarios
+  preload/    Context-isolated bridge between main and renderer
+  renderer/   React UI: terminals, tree, viewer, Git, document review, settings
+  shared/     Types and IPC contracts shared across processes
+  workers/    Background worker entry points
+packages/
+  rename-noreplace/  Node-API binding for atomic no-replace renames
+scripts/      Build, release, smoke, architecture, and project-management tooling
+test/         Vitest suites and fixtures
+build/        Packaging resources: icons, entitlements, installer scripts
+```
+
+## License
+
+[MIT](LICENSE). Third-party components and their licenses are listed in
+[THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md).

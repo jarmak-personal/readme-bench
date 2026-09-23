@@ -1,0 +1,86 @@
+diff --git a/README.md b/README.md
+new file mode 100644
+index 0000000..0cfc294
+--- /dev/null
++++ b/README.md
+@@ -0,0 +1,80 @@
++# hvir
++
++hvir is a desktop workbench for local and SSH-hosted projects and Git worktrees. It
++brings file browsing, Git, and terminal-based workflows together in one Electron app.
++
++## Features
++
++- Register local folders or SSH projects using aliases from `~/.ssh/config`, and
++  switch between projects and discovered Git worktrees.
++- Browse and edit files, inspect source and diffs, and preview Markdown, Mermaid,
++  images, HTML, JSON, YAML, and CSV.
++- Inspect Git changes, history, and the commit graph; switch branches, fetch, and
++  pull.
++- Run split shell terminals or configured CLI harnesses, with a Sessions view and
++  recovery for supported agent sessions.
++
++## Requirements
++
++- macOS or Linux, Node.js 24 or later, and npm.
++- Python 3 and native build tools for the Electron addons (`node-pty` and
++  `@hvir/rename-noreplace`): Xcode Command Line Tools on macOS, or a C/C++
++  compiler and `make` on Linux.
++- Git for repository features. SSH projects need a reachable host configured in
++  `~/.ssh/config`. CLI harnesses require their executables to be installed on the
++  selected host; hvir does not bundle them.
++
++## Run from source
++
++```sh
++npm ci
++npm run dev
++```
++
++`npm ci` installs the pinned terminal runtime and rebuilds native addons for
++Electron; do not skip install scripts. On first launch, choose a local project
++folder. hvir restores registered projects on subsequent launches. Use the `+`
++button in the Projects bar to register another local folder or an SSH project,
++and **Settings → Harnesses** to configure terminal launch profiles.
++
++To open a particular local folder at startup, set an absolute path:
++
++```sh
++HVIR_PROJECT_ROOT=/absolute/path/to/project npm run dev
++```
++
++## Development
++
++| Command | Purpose |
++| --- | --- |
++| `npm run build` | Type-check and bundle the Electron app. |
++| `npm run typecheck` | Check main/preload and renderer TypeScript. |
++| `npm run lint` | Run ESLint. |
++| `npm test` | Run the Vitest suite. |
++| `npm run smoke` | Build and run Electron smoke scenarios; requires a graphical display (`xvfb-run -a npm run smoke` on headless Linux). |
++| `npm run build:dir` | Build an unpacked desktop app in `dist/`. |
++
++To build native installers on the corresponding platform:
++
++```sh
++npm run pack:mac:arm64   # macOS arm64 .pkg
++npm run pack:linux:x64   # Linux x64 .deb
++npm run pack:linux:arm64 # Linux arm64 .deb
++```
++
++Packages are written to `dist/`. Distribution signing/notarization requires
++separate platform-specific credentials.
++
++## Repository layout
++
++- `src/main/` — Electron lifecycle, project hosts, terminals, Git, and IPC.
++- `src/preload/` — the renderer's IPC bridge.
++- `src/renderer/src/` — React workbench UI.
++- `src/shared/` — shared types and IPC contracts.
++- `src/workers/` — background Git and echo workers.
++- `test/` and `scripts/` — tests, smoke scenarios, and build/release tooling.
++- `packages/rename-noreplace/` — native filesystem addon.
++
++## License
++
++[MIT](LICENSE). See [third-party notices](THIRD_PARTY_NOTICES.md).

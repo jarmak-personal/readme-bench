@@ -1,0 +1,56 @@
+diff --git a/README.md b/README.md
+new file mode 100644
+index 0000000..d4ac86a
+--- /dev/null
++++ b/README.md
+@@ -0,0 +1,50 @@
++# hvir
++
++hvir is a desktop workbench for working in local and SSH-hosted project folders. It brings terminals, files, Git, and web panes into one workspace, with a Sessions view for navigating terminal activity.
++
++## What you can do
++
++- Open a local folder or connect to a host configured in your SSH config, then browse and switch projects and workspaces.
++- Run terminal sessions in your workspace, including split panes and configurable terminal themes and harness profiles.
++- Browse, search, edit, and compare files. View rendered Markdown, images, JSON, and CSV alongside source files.
++- Inspect Git changes and history, switch branches, and manage worktrees from the workbench.
++- Open web panes and adjust appearance, keybindings, terminal behavior, and Git refresh settings.
++
++## Getting started
++
++### Use the desktop app
++
++This repository builds macOS arm64 `.pkg` and Linux x64/arm64 `.deb` installers. After installing, open hvir, add a project, choose **Local** or an available SSH host, and select a folder. SSH hosts are discovered from your SSH configuration; configure access to the host before selecting it in hvir. Git features are available for folders containing a Git repository.
++
++### Run from source
++
++You need Node.js **24 or newer**, npm, Git, and a native build toolchain for the Node modules rebuilt during installation. Run the following from the repository root on macOS or Linux:
++
++```sh
++npm ci
++npm run dev
++```
++
++`npm ci` installs dependencies and rebuilds the native terminal modules. The development command starts Electron via electron-vite. If a build or dev command reports an incompatible terminal runtime, rerun `npm ci` in the current checkout.
++
++## Development
++
++| Command | Purpose |
++| --- | --- |
++| `npm run typecheck` | Check main/preload and renderer TypeScript. |
++| `npm run lint` | Run ESLint. |
++| `npm test` | Run the Vitest suite. |
++| `npm run verify` | Run architecture checks, lint, type checks, and tests. |
++| `npm run build` | Type-check and build the Electron app into `out/`. |
++| `npm run smoke` | Build and run the Electron smoke scenarios. |
++| `npm run build:dir` | Build an unpacked application in `dist/`. |
++| `npm run pack:mac:arm64` | Build the macOS arm64 `.pkg` in `dist/`. |
++| `npm run pack:linux:x64` / `npm run pack:linux:arm64` | Build a Linux `.deb` in `dist/`. |
++
++On a headless Linux machine, run GUI smoke tests under Xvfb (for example, `xvfb-run -a npm run smoke`). On macOS, `npm run smoke:macos` runs the platform-specific smoke scenarios.
++
++The application uses Electron with a React/TypeScript renderer (`src/renderer`), Electron main process (`src/main`), preload bridge (`src/preload`), and shared contracts (`src/shared`). Tests live in `test/`; packaging assets and configuration live in `build/` and `electron-builder.yml`.
++
++## License
++
++MIT; see [LICENSE](LICENSE). Third-party acknowledgments are in [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md).

@@ -1,0 +1,277 @@
+{
+  "id": "gpt-6-sol__copilot-cli__20260923T054112Z",
+  "batch": "2026-09-23_r10_copilot-cli-1.0.86_effort-max",
+  "target": {
+    "name": "hvir",
+    "url": "https://github.com/jarmak-personal/hvir",
+    "commit": "7acbf8883bc869a9987252833d90b0d250086122",
+    "snapshot_commit": "ca97b8a72d67da22d5da4705101f99fbc80bd9cf"
+  },
+  "model": {
+    "id": "gpt-6-sol",
+    "vendor": "OpenAI",
+    "name": "GPT",
+    "version": "6",
+    "variant": "sol",
+    "display": "GPT-6 Sol"
+  },
+  "harness": {
+    "name": "GitHub Copilot CLI",
+    "id": "copilot-cli",
+    "version": "1.0.86"
+  },
+  "prompt": "Please create a README.md for this project.",
+  "started_at": "2026-09-23T05:41:24Z",
+  "finished_at": "2026-09-23T05:43:37Z",
+  "wall_clock_seconds": 133,
+  "exit_code": 0,
+  "setup_exit_code": 0,
+  "readme_produced": true,
+  "readme_bytes": 2987,
+  "readme_lines": 80,
+  "usage": {
+    "totalPremiumRequestCost": 1,
+    "totalUserRequests": 1,
+    "totalNanoAiu": 40106840000,
+    "tokenDetails": {
+      "input": {
+        "tokenCount": 21941
+      },
+      "cache_read": {
+        "tokenCount": 598813
+      },
+      "cache_write": {
+        "tokenCount": 73132
+      },
+      "output": {
+        "tokenCount": 11734
+      }
+    },
+    "totalApiDurationMs": 126699,
+    "sessionStartTime": "2026-09-23T05:41:27.708Z",
+    "codeChanges": {
+      "linesAdded": 81,
+      "linesRemoved": 0,
+      "filesModifiedCount": 1,
+      "filesModified": [
+        "/private/var/tmp/ws/e01ee073/hvir/README.md"
+      ]
+    },
+    "modelMetrics": {
+      "gpt-6-sol": {
+        "requests": {
+          "count": 14,
+          "cost": 1
+        },
+        "usage": {
+          "inputTokens": 644746,
+          "outputTokens": 10384,
+          "cacheReadTokens": 571572,
+          "cacheWriteTokens": 73132,
+          "reasoningTokens": 6544
+        },
+        "cacheExpiresAt": "2026-09-23T06:13:33.931Z",
+        "totalNanoAiu": 40106840000,
+        "tokenDetails": {
+          "input": {
+            "tokenCount": 42
+          },
+          "cache_read": {
+            "tokenCount": 571572
+          },
+          "cache_write": {
+            "tokenCount": 73132
+          },
+          "output": {
+            "tokenCount": 10384
+          }
+        }
+      },
+      "copilot-search-a": {
+        "requests": {
+          "count": 4,
+          "cost": 0
+        },
+        "usage": {
+          "inputTokens": 49140,
+          "outputTokens": 1350,
+          "cacheReadTokens": 27241,
+          "cacheWriteTokens": 0,
+          "reasoningTokens": 0
+        },
+        "totalNanoAiu": 0,
+        "tokenDetails": {
+          "input": {
+            "tokenCount": 21899
+          },
+          "cache_read": {
+            "tokenCount": 27241
+          },
+          "cache_write": {
+            "tokenCount": 0
+          },
+          "output": {
+            "tokenCount": 1350
+          }
+        }
+      }
+    },
+    "agentMetrics": {
+      "main": {
+        "totalApiDurationMs": 121503,
+        "totalNanoAiu": 40106840000,
+        "modelMetrics": {
+          "gpt-6-sol": {
+            "requests": {
+              "count": 14,
+              "cost": 1
+            },
+            "usage": {
+              "inputTokens": 644746,
+              "outputTokens": 10384,
+              "cacheReadTokens": 571572,
+              "cacheWriteTokens": 73132,
+              "reasoningTokens": 6544
+            },
+            "totalNanoAiu": 40106840000,
+            "tokenDetails": {
+              "input": {
+                "tokenCount": 42
+              },
+              "cache_read": {
+                "tokenCount": 571572
+              },
+              "cache_write": {
+                "tokenCount": 73132
+              },
+              "output": {
+                "tokenCount": 10384
+              }
+            }
+          }
+        }
+      },
+      "call_WTXcTCGuPHgmH0TR5E0mY2dp": {
+        "agentName": "search-subagent",
+        "agentDisplayName": "Search Subagent",
+        "totalApiDurationMs": 5196,
+        "totalNanoAiu": 0,
+        "modelMetrics": {
+          "copilot-search-a": {
+            "requests": {
+              "count": 4,
+              "cost": 0
+            },
+            "usage": {
+              "inputTokens": 49140,
+              "outputTokens": 1350,
+              "cacheReadTokens": 27241,
+              "cacheWriteTokens": 0,
+              "reasoningTokens": 0
+            },
+            "totalNanoAiu": 0,
+            "tokenDetails": {
+              "input": {
+                "tokenCount": 21899
+              },
+              "cache_read": {
+                "tokenCount": 27241
+              },
+              "cache_write": {
+                "tokenCount": 0
+              },
+              "output": {
+                "tokenCount": 1350
+              }
+            }
+          }
+        }
+      }
+    },
+    "currentModel": "gpt-6-sol",
+    "lastCallInputTokens": 73135,
+    "lastCallOutputTokens": 194
+  },
+  "tool_calls": {
+    "view": 60,
+    "bash": 3,
+    "session_store_sql": 1,
+    "read_file": 12,
+    "file_search": 5,
+    "grep_search": 7,
+    "search_code_subagent": 1,
+    "glob": 2,
+    "rg": 3,
+    "apply_patch": 1
+  },
+  "reasoning_effort_requested": "max",
+  "reasoning_level": "max",
+  "chat_calls": {
+    "gpt-6-sol": {
+      "max": 2
+    },
+    "copilot-search-a": {
+      "max": 1,
+      "none": 12
+    }
+  },
+  "files_viewed": [
+    ".",
+    ".github",
+    ".github/workflows",
+    ".github/workflows/ci.yml",
+    ".github/workflows/release.yml",
+    ".gitignore",
+    ".prettierignore",
+    "LICENSE",
+    "README.md",
+    "build",
+    "build/native",
+    "package.json",
+    "packages",
+    "scripts",
+    "scripts/architecture-hotspots.mjs",
+    "scripts/check-adrs.mjs",
+    "scripts/check-terminal-runtime.mts",
+    "src",
+    "src/main",
+    "src/main/application-runtime.ts",
+    "src/main/harness/bundled-harness-providers.ts",
+    "src/main/harness/harness-provider.ts",
+    "src/main/harness/providers/claude-code.ts",
+    "src/main/harness/providers/codex.ts",
+    "src/main/index.ts",
+    "src/main/project-coordinator.ts",
+    "src/main/project-host",
+    "src/main/project-host/project-host-catalog.ts",
+    "src/main/project-host/ssh-config.ts",
+    "src/main/project-registry.ts",
+    "src/renderer",
+    "src/renderer/src",
+    "src/renderer/src/App.tsx",
+    "src/renderer/src/git",
+    "src/renderer/src/git/GitPanel.tsx",
+    "src/renderer/src/harness",
+    "src/renderer/src/sessions/SessionsApplicationDestination.tsx",
+    "src/renderer/src/settings/HarnessProfilesSettings.tsx",
+    "src/renderer/src/settings/SettingsDialog.tsx",
+    "src/renderer/src/settings/settings-navigation.ts",
+    "src/renderer/src/terminal",
+    "src/renderer/src/terminal/TerminalRail.tsx",
+    "src/renderer/src/terminal/TerminalWorkspaceControls.tsx",
+    "src/renderer/src/viewer",
+    "src/renderer/src/viewer/FileViewer.tsx",
+    "src/renderer/src/viewer/RenderedView.tsx",
+    "src/renderer/src/workbench",
+    "src/renderer/src/workspaces",
+    "src/renderer/src/workspaces/ProjectsBar.tsx",
+    "src/renderer/src/workspaces/SessionDialog.tsx",
+    "src/renderer/src/workspaces/WorkspaceCatalogDialogs.tsx",
+    "src/renderer/src/workspaces/project-session.ts",
+    "src/shared",
+    "src/workers",
+    "test"
+  ],
+  "compactions": [],
+  "truncations": 0
+}

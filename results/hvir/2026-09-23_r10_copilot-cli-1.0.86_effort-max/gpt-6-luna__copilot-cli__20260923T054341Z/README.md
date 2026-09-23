@@ -1,0 +1,80 @@
+# hvir
+
+hvir is a desktop workbench for software projects. It brings project workspaces,
+terminals, file browsing and preview, Git tools, and coding-agent command-line
+integrations together in one Electron app.
+
+## Features
+
+- Work with local projects or remote hosts configured in `~/.ssh/config`.
+- Keep multiple workspaces and Git worktrees organized within a project.
+- Browse and edit project files, inspect diffs, and preview Markdown, diagrams,
+  and images.
+- Use integrated Git controls for changes, branches, history, and commit graphs.
+- Run terminals and supported coding-agent CLIs, including Claude Code, Codex,
+  Pi, Gemini, GitHub Copilot, and Cursor. Shells and custom commands are also
+  supported.
+- Open web panes and review project documents alongside your terminal and files.
+
+Agent CLIs are separate tools: install and configure the ones you use on the
+local or SSH host where you run them. hvir provides the integration, but does
+not bundle their executables or credentials.
+
+## Requirements
+
+- Node.js 24 or newer and npm for development.
+- A native build toolchain for the Electron and Node.js modules used by the app.
+- An OpenSSH configuration and credentials for any remote hosts you want to use.
+
+## Run locally
+
+From the repository root:
+
+```sh
+npm ci
+npm run dev
+```
+
+`npm ci` also installs and rebuilds the native runtime modules required by
+Electron. The development and build commands check that the installed
+`ghostty-web` terminal runtime matches the capabilities expected by this
+checkout.
+
+## Build and package
+
+```sh
+npm run build
+npm run build:dir
+```
+
+`build:dir` creates an unpacked application under `dist/`. Installer scripts are
+available for macOS ARM64 and Linux:
+
+```sh
+npm run pack:mac:arm64
+npm run pack:linux:x64
+npm run pack:linux:arm64
+```
+
+## Checks
+
+Run the full repository verification suite with:
+
+```sh
+npm run verify
+```
+
+Individual checks include `npm test`, `npm run typecheck`, `npm run lint`, and
+`npm run format:check`.
+
+## Project layout
+
+- `src/main/` — Electron main process, project hosts, terminals, Git, and agent
+  integrations.
+- `src/renderer/` — React workbench UI.
+- `src/shared/` — Shared types and contracts.
+- `test/` — Unit and UI tests.
+- `build/` — Application icons and packaging resources.
+
+See [LICENSE](LICENSE) and [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md) for
+licensing information.

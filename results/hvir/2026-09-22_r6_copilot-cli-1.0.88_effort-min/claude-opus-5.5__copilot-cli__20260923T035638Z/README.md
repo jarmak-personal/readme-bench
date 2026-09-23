@@ -1,0 +1,61 @@
+# hvir
+
+hvir is an Electron desktop workbench for developer workflows around terminals and AI coding harnesses (such as Claude Code and Codex). It combines terminals, file viewing, git workflows, document review, web panes, and local or SSH-remote workspaces in one window.
+
+## Features
+
+- **Terminals** — native PTY terminals rendered with [ghostty-web](https://github.com/jarmak-personal/ghostty-web), with splits, themes, and moving terminals between panes.
+- **Harness integration** — launch profiles, session discovery and recovery, and context/usage telemetry for AI coding harnesses.
+- **Viewer and document review** — syntax highlighting (Shiki), Markdown with Mermaid diagrams, and diff/merge views (CodeMirror).
+- **Git workflows** — inspect and work with repository changes.
+- **Remote workspaces** — open projects over SSH using your `~/.ssh/config`.
+- **Web panes** and HTML preview.
+
+## Requirements
+
+- Node.js **>= 24**
+- A C/C++ toolchain for native modules (`node-pty`, `@hvir/rename-noreplace`)
+- macOS (arm64) or Linux (x64/arm64)
+
+## Getting started
+
+```sh
+npm install        # also rebuilds native modules for Electron
+npm run dev        # start the app in development mode
+```
+
+## Common scripts
+
+| Script                                           | Purpose                                                     |
+| ------------------------------------------------ | ----------------------------------------------------------- |
+| `npm run dev`                                    | Run with hot reload                                         |
+| `npm run build`                                  | Type-check and build to `out/`                              |
+| `npm test`                                       | Run unit tests (Vitest)                                     |
+| `npm run lint` / `npm run format`                | ESLint / Prettier                                           |
+| `npm run typecheck`                              | TypeScript checks for main and renderer                     |
+| `npm run verify`                                 | Seams, ADRs, architecture, lint, type-check, and tests      |
+| `npm run smoke`                                  | Build and run Electron smoke scenarios                      |
+| `npm run pack:mac:arm64`                         | Build a macOS `.pkg`                                        |
+| `npm run pack:linux:x64` / `pack:linux:arm64`    | Build a Linux `.deb`                                        |
+| `npm run hooks:install`                          | Install the git `pre-push` hook (type-check + smoke test)   |
+
+On headless Linux, smoke tests need a `DISPLAY` or `xvfb-run`.
+
+## Project layout
+
+```
+src/
+  main/       Electron main process (PTY, git, harness, SSH hosts, IPC)
+  preload/    Preload bridge
+  renderer/   React UI
+  shared/     Code shared across processes
+  workers/    Background workers
+packages/     Local native package (rename-noreplace)
+scripts/      Build, smoke, release, and project tooling
+test/         Unit and integration tests
+build/        Packaging resources
+```
+
+## License
+
+MIT — see [LICENSE](LICENSE). Third-party notices are in [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md).

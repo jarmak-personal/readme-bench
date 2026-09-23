@@ -1,0 +1,145 @@
+{
+  "id": "claude-opus-5.5__copilot-cli__20260923T051603Z",
+  "batch": "2026-09-23_r9_copilot-cli-1.0.86_effort-min",
+  "target": {
+    "name": "hvir",
+    "url": "https://github.com/jarmak-personal/hvir",
+    "commit": "7acbf8883bc869a9987252833d90b0d250086122",
+    "snapshot_commit": "ca97b8a72d67da22d5da4705101f99fbc80bd9cf"
+  },
+  "model": {
+    "id": "claude-opus-5.5",
+    "vendor": "Anthropic",
+    "name": "Claude Opus",
+    "version": "5.5",
+    "variant": null,
+    "display": "Claude Opus 5.5"
+  },
+  "harness": {
+    "name": "GitHub Copilot CLI",
+    "id": "copilot-cli",
+    "version": "1.0.86"
+  },
+  "prompt": "Please create a README.md for this project.",
+  "started_at": "2026-09-23T05:16:14Z",
+  "finished_at": "2026-09-23T05:16:43Z",
+  "wall_clock_seconds": 29,
+  "exit_code": 0,
+  "setup_exit_code": 0,
+  "readme_produced": true,
+  "readme_bytes": 2795,
+  "readme_lines": 74,
+  "usage": {
+    "totalPremiumRequestCost": 1,
+    "totalUserRequests": 1,
+    "totalNanoAiu": 13537020000,
+    "tokenDetails": {
+      "input": {
+        "tokenCount": 14
+      },
+      "cache_read": {
+        "tokenCount": 128271
+      },
+      "cache_write": {
+        "tokenCount": 14224
+      },
+      "output": {
+        "tokenCount": 1927
+      }
+    },
+    "totalApiDurationMs": 24449,
+    "sessionStartTime": "2026-09-23T05:16:17.667Z",
+    "codeChanges": {
+      "linesAdded": 74,
+      "linesRemoved": 0,
+      "filesModifiedCount": 1,
+      "filesModified": [
+        "/private/var/tmp/ws/57e6100f/hvir/README.md"
+      ]
+    },
+    "modelMetrics": {
+      "claude-opus-5.5": {
+        "requests": {
+          "count": 6,
+          "cost": 1
+        },
+        "usage": {
+          "inputTokens": 142509,
+          "outputTokens": 1927,
+          "cacheReadTokens": 128271,
+          "cacheWriteTokens": 14224,
+          "reasoningTokens": 0
+        },
+        "cacheExpiresAt": "2026-09-23T05:21:39.533Z",
+        "totalNanoAiu": 13537020000,
+        "tokenDetails": {
+          "input": {
+            "tokenCount": 14
+          },
+          "cache_read": {
+            "tokenCount": 128271
+          },
+          "cache_write": {
+            "tokenCount": 14224
+          },
+          "output": {
+            "tokenCount": 1927
+          }
+        }
+      }
+    },
+    "agentMetrics": {
+      "main": {
+        "totalApiDurationMs": 24449,
+        "totalNanoAiu": 13537020000,
+        "modelMetrics": {
+          "claude-opus-5.5": {
+            "requests": {
+              "count": 6,
+              "cost": 1
+            },
+            "usage": {
+              "inputTokens": 142509,
+              "outputTokens": 1927,
+              "cacheReadTokens": 128271,
+              "cacheWriteTokens": 14224,
+              "reasoningTokens": 0
+            },
+            "totalNanoAiu": 13537020000,
+            "tokenDetails": {
+              "input": {
+                "tokenCount": 14
+              },
+              "cache_read": {
+                "tokenCount": 128271
+              },
+              "cache_write": {
+                "tokenCount": 14224
+              },
+              "output": {
+                "tokenCount": 1927
+              }
+            }
+          }
+        }
+      }
+    },
+    "currentModel": "claude-opus-5.5",
+    "lastCallInputTokens": 26769,
+    "lastCallOutputTokens": 272
+  },
+  "tool_calls": {
+    "bash": 4,
+    "create": 1
+  },
+  "reasoning_effort_requested": "low",
+  "reasoning_level": "low",
+  "chat_calls": {
+    "claude-opus-5.5": {
+      "low": 6
+    }
+  },
+  "files_viewed": [],
+  "compactions": [],
+  "truncations": 0
+}

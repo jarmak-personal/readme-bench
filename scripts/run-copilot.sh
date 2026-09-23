@@ -31,6 +31,10 @@
 # copilot command line lives under the scratch dir or the agent's fake HOME,
 # and the scratch dir is deleted after the run (--keep-work to keep it).
 #
+# The CLI is pinned: harness/copilot-cli.version names the version, installed
+# from npm on first use into the bench cache dir. The Homebrew/standalone
+# `copilot` updates itself and is never used here.
+#
 # Auth: COPILOT_GITHUB_TOKEN if set, otherwise `gh auth token`, because
 # COPILOT_HOME is redirected to harness/copilot and won't see ~/.copilot creds.
 set -euo pipefail
@@ -45,7 +49,7 @@ BATCH=""
 PROMPT_FILE="$BENCH_ROOT/prompt.txt"
 OUT_ROOT="$BENCH_ROOT/results"
 EFFORT=""   # copilot --reasoning-effort; empty = harness default for the model
-TIMEOUT=1200  # seconds before a stalled run is killed (exit code 124, like timeout(1))
+TIMEOUT=0     # seconds before a run is killed (exit code 124, like timeout(1)); 0 = no limit
 
 while [ $# -gt 0 ]; do
   case "$1" in
@@ -68,11 +72,20 @@ TARGET="$BENCH_ROOT/targets/$TARGET_NAME"
 LOCK="$BENCH_ROOT/targets/$TARGET_NAME.lock.json"
 [ -d "$TARGET/.git" ] && [ -f "$LOCK" ] || { echo "error: target '$TARGET_NAME' not prepared; run scripts/prepare-target.py" >&2; exit 1; }
 
-HARNESS_VERSION="$(copilot --version 2>/dev/null | sed -nE 's/^GitHub Copilot CLI ([0-9]+(\.[0-9]+)*)\.?$/\1/p' | head -1)"
-[ -n "$HARNESS_VERSION" ] || { echo "error: could not determine copilot version" >&2; exit 1; }
+PINNED="$(tr -d '[:space:]' < "$BENCH_ROOT/harness/copilot-cli.version")"
+CLI_DIR="$CACHE_ROOT/copilot-cli/$PINNED"
+COPILOT_BIN="$CLI_DIR/node_modules/.bin/copilot"
+if [ ! -x "$COPILOT_BIN" ]; then
+  echo "installing copilot-cli $PINNED into $CLI_DIR"
+  mkdir -p "$CLI_DIR"
+  npm install --prefix "$CLI_DIR" --no-audit --no-fund --silent "@github/copilot@$PINNED" \
+    || { echo "error: could not install @github/copilot@$PINNED" >&2; exit 1; }
+fi
+HARNESS_VERSION="$(COPILOT_AUTO_UPDATE=false "$COPILOT_BIN" --version 2>/dev/null | sed -nE 's/^GitHub Copilot CLI ([0-9]+(\.[0-9]+)*)\.?$/\1/p' | head -1)"
+[ "$HARNESS_VERSION" = "$PINNED" ] || { echo "error: $COPILOT_BIN reports '$HARNESS_VERSION', expected $PINNED" >&2; exit 1; }
 BATCH="${BATCH:-$(date -u +%Y-%m-%d)_copilot-cli-$HARNESS_VERSION}"
 # The harness is part of what's measured, so a batch must not mix versions
-# (Copilot CLI auto-updates whenever it's run outside this script).
+# (belt and braces now that the CLI is pinned).
 DRIFT="$(python3 -c '
 import glob, json, os, sys
 seen = {json.load(open(m))["harness"]["version"] for m in glob.glob(os.path.join(sys.argv[1], "*", "meta.json"))}
@@ -177,7 +190,7 @@ set +e
 # macOS has no timeout(1); a watchdog subshell kills the run's process group
 # if it stalls (seen once: copilot 1.0.86 idling before its first model call).
 (
-  cd "$WORK" && exec env -i "${CLEAN_ENV[@]}" copilot \
+  cd "$WORK" && exec env -i "${CLEAN_ENV[@]}" "$COPILOT_BIN" \
     -p "$PROMPT" \
     --model "$MODEL" \
     ${EFFORT:+--reasoning-effort "$EFFORT"} \
@@ -196,7 +209,7 @@ set +e
     --log-level info
 ) > "$OUT/events.jsonl" 2> "$OUT/stderr.log" &
 RUN_PID=$!
-( sleep "$TIMEOUT"; kill -0 "$RUN_PID" 2>/dev/null && { echo "timeout: killing run after ${TIMEOUT}s" >&2; touch "$OUT/.timed-out"; kill -TERM "$RUN_PID"; sleep 10; kill -KILL "$RUN_PID" 2>/dev/null; } ) &
+[ "$TIMEOUT" -gt 0 ] && ( sleep "$TIMEOUT"; kill -0 "$RUN_PID" 2>/dev/null && { echo "timeout: killing run after ${TIMEOUT}s" >&2; touch "$OUT/.timed-out"; kill -TERM "$RUN_PID"; sleep 10; kill -KILL "$RUN_PID" 2>/dev/null; } ) &
 WATCHDOG=$!
 wait "$RUN_PID"; EXIT_CODE=$?
 pkill -P "$WATCHDOG" 2>/dev/null; kill "$WATCHDOG" 2>/dev/null; wait "$WATCHDOG" 2>/dev/null   # its sleep too, or it holds stdout open

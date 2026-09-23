@@ -1,0 +1,218 @@
+{
+  "id": "claude-opus-5.5__copilot-cli__20260923T051759Z",
+  "batch": "2026-09-23_r10_copilot-cli-1.0.86_effort-max",
+  "target": {
+    "name": "hvir",
+    "url": "https://github.com/jarmak-personal/hvir",
+    "commit": "7acbf8883bc869a9987252833d90b0d250086122",
+    "snapshot_commit": "ca97b8a72d67da22d5da4705101f99fbc80bd9cf"
+  },
+  "model": {
+    "id": "claude-opus-5.5",
+    "vendor": "Anthropic",
+    "name": "Claude Opus",
+    "version": "5.5",
+    "variant": null,
+    "display": "Claude Opus 5.5"
+  },
+  "harness": {
+    "name": "GitHub Copilot CLI",
+    "id": "copilot-cli",
+    "version": "1.0.86"
+  },
+  "prompt": "Please create a README.md for this project.",
+  "started_at": "2026-09-23T05:18:10Z",
+  "finished_at": "2026-09-23T05:41:07Z",
+  "wall_clock_seconds": 1377,
+  "exit_code": 0,
+  "setup_exit_code": 0,
+  "readme_produced": true,
+  "readme_bytes": 19483,
+  "readme_lines": 285,
+  "usage": {
+    "totalPremiumRequestCost": 1,
+    "totalUserRequests": 1,
+    "totalNanoAiu": 841677520000,
+    "tokenDetails": {
+      "input": {
+        "tokenCount": 318
+      },
+      "cache_read": {
+        "tokenCount": 21041766
+      },
+      "cache_write": {
+        "tokenCount": 377486
+      },
+      "output": {
+        "tokenCount": 115986
+      }
+    },
+    "totalApiDurationMs": 1234153,
+    "sessionStartTime": "2026-09-23T05:18:13.186Z",
+    "codeChanges": {
+      "linesAdded": 413,
+      "linesRemoved": 20,
+      "filesModifiedCount": 2,
+      "filesModified": [
+        "/private/var/tmp/ws/ffb55c2b/hvir/README.md",
+        "/private/var/tmp/ws/ffb55c2b/home/tmp/validate-readme.mjs"
+      ]
+    },
+    "modelMetrics": {
+      "claude-opus-5.5": {
+        "requests": {
+          "count": 156,
+          "cost": 1
+        },
+        "usage": {
+          "inputTokens": 21419570,
+          "outputTokens": 115986,
+          "cacheReadTokens": 21041766,
+          "cacheWriteTokens": 377486,
+          "reasoningTokens": 61594
+        },
+        "cacheExpiresAt": "2026-09-23T05:45:59.408Z",
+        "totalNanoAiu": 841677520000,
+        "tokenDetails": {
+          "input": {
+            "tokenCount": 318
+          },
+          "cache_read": {
+            "tokenCount": 21041766
+          },
+          "cache_write": {
+            "tokenCount": 377486
+          },
+          "output": {
+            "tokenCount": 115986
+          }
+        }
+      }
+    },
+    "agentMetrics": {
+      "main": {
+        "totalApiDurationMs": 1234153,
+        "totalNanoAiu": 841677520000,
+        "modelMetrics": {
+          "claude-opus-5.5": {
+            "requests": {
+              "count": 156,
+              "cost": 1
+            },
+            "usage": {
+              "inputTokens": 21419570,
+              "outputTokens": 115986,
+              "cacheReadTokens": 21041766,
+              "cacheWriteTokens": 377486,
+              "reasoningTokens": 61594
+            },
+            "totalNanoAiu": 841677520000,
+            "tokenDetails": {
+              "input": {
+                "tokenCount": 318
+              },
+              "cache_read": {
+                "tokenCount": 21041766
+              },
+              "cache_write": {
+                "tokenCount": 377486
+              },
+              "output": {
+                "tokenCount": 115986
+              }
+            }
+          }
+        }
+      }
+    },
+    "currentModel": "claude-opus-5.5",
+    "lastCallInputTokens": 153246,
+    "lastCallOutputTokens": 696
+  },
+  "tool_calls": {
+    "bash": 70,
+    "view": 90,
+    "grep": 56,
+    "read_bash": 3,
+    "create": 2,
+    "edit": 15
+  },
+  "reasoning_effort_requested": "max",
+  "reasoning_level": "max",
+  "chat_calls": {
+    "claude-opus-5.5": {
+      "max": 156
+    }
+  },
+  "files_viewed": [
+    ".github/workflows/ci.yml",
+    ".github/workflows/release.yml",
+    "LICENSE",
+    "README.md",
+    "THIRD_PARTY_NOTICES.md",
+    "build/icon-macos.svg",
+    "build/icons-linux/256x256.png",
+    "build/linux/after-install.sh",
+    "build/native/hvir-command",
+    "electron-builder.yml",
+    "electron.vite.config.ts",
+    "node_modules/electron-vite/dist/cli.js",
+    "package.json",
+    "packages/rename-noreplace/package.json",
+    "scripts/architecture-github.mts",
+    "scripts/architecture-hotspots.json",
+    "scripts/architecture-hotspots.mjs",
+    "scripts/architecture-policy.mts",
+    "scripts/assemble-native-release.mjs",
+    "scripts/check-seams.sh",
+    "scripts/check-terminal-runtime.mts",
+    "scripts/native-installer.template.sh",
+    "scripts/render-native-installer.mjs",
+    "scripts/run-smoke-scenarios.mts",
+    "scripts/run-smoke.sh",
+    "src/main/application-runtime-policy.ts",
+    "src/main/application-runtime.ts",
+    "src/main/harness/bundled-harness-providers.ts",
+    "src/main/harness/providers/claude-code.ts",
+    "src/main/harness/providers/codex.ts",
+    "src/main/harness/providers/shell.ts",
+    "src/main/harness/remote-image-paste.ts",
+    "src/main/index.ts",
+    "src/main/project-host/project-host-catalog.ts",
+    "src/main/project-host/project-host.ts",
+    "src/main/web-pane/loopback-http-proxy.ts",
+    "src/renderer/index.html",
+    "src/renderer/src/App.tsx",
+    "src/renderer/src/health/WorkbenchHealthControl.tsx",
+    "src/renderer/src/settings/ComposerSubmitConsentDialog.tsx",
+    "src/renderer/src/settings/HarnessProfileAdvancedFields.tsx",
+    "src/renderer/src/settings/sections/KeybindingsSettings.tsx",
+    "src/renderer/src/settings/sections/TerminalSettings.tsx",
+    "src/renderer/src/settings/settings-model.ts",
+    "src/renderer/src/settings/settings-navigation.ts",
+    "src/renderer/src/settings/settings.ts",
+    "src/renderer/src/terminal/TerminalMoveDialog.tsx",
+    "src/renderer/src/terminal/TerminalRail.tsx",
+    "src/renderer/src/terminal/TerminalView.tsx",
+    "src/renderer/src/viewer/DiffView.tsx",
+    "src/renderer/src/workbench/workbench-command-router.ts",
+    "src/renderer/src/workspaces/ProjectsBar.tsx",
+    "src/renderer/src/workspaces/SessionDialog.tsx",
+    "src/shared/application-build-channel.ts",
+    "src/shared/composer-submit.ts",
+    "src/shared/document-review.ts",
+    "src/shared/harness-profile.ts",
+    "src/shared/harness-provider.ts",
+    "src/shared/keybindings.ts",
+    "src/shared/viewer-types.ts",
+    "src/shared/web-pane.ts",
+    "stryker.config.json",
+    "test/issue-lifecycle-guidance.test.ts",
+    "test/merge-pr-skill.test.ts",
+    "test/release-pr-integrity.test.ts",
+    "test/smoke-scenario-runner.test.ts",
+    "vitest.config.ts"
+  ],
+  "compactions": [],
+  "truncations": 0
+}
