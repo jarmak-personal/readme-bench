@@ -1,0 +1,89 @@
+{
+  "totalPremiumRequestCost": 1,
+  "totalUserRequests": 1,
+  "totalNanoAiu": 96457800000,
+  "tokenDetails": {
+    "input": {
+      "tokenCount": 176369
+    },
+    "cache_read": {
+      "tokenCount": 1086976
+    },
+    "output": {
+      "tokenCount": 11392
+    }
+  },
+  "totalApiDurationMs": 595543,
+  "sessionStartTime": "2026-10-01T04:49:00.172Z",
+  "codeChanges": {
+    "linesAdded": 98,
+    "linesRemoved": 0,
+    "filesModifiedCount": 1,
+    "filesModified": [
+      "/private/var/tmp/ws/5f04487e/hvir/README.md"
+    ]
+  },
+  "modelMetrics": {
+    "grok-4.7": {
+      "requests": {
+        "count": 27,
+        "cost": 1
+      },
+      "usage": {
+        "inputTokens": 1263345,
+        "outputTokens": 11392,
+        "cacheReadTokens": 1086976,
+        "cacheWriteTokens": 0,
+        "reasoningTokens": 6732
+      },
+      "totalNanoAiu": 96457800000,
+      "tokenDetails": {
+        "input": {
+          "tokenCount": 176369
+        },
+        "cache_read": {
+          "tokenCount": 1086976
+        },
+        "output": {
+          "tokenCount": 11392
+        }
+      }
+    }
+  },
+  "agentMetrics": {
+    "main": {
+      "totalApiDurationMs": 595543,
+      "totalNanoAiu": 96457800000,
+      "modelMetrics": {
+        "grok-4.7": {
+          "requests": {
+            "count": 27,
+            "cost": 1
+          },
+          "usage": {
+            "inputTokens": 1263345,
+            "outputTokens": 11392,
+            "cacheReadTokens": 1086976,
+            "cacheWriteTokens": 0,
+            "reasoningTokens": 6732
+          },
+          "totalNanoAiu": 96457800000,
+          "tokenDetails": {
+            "input": {
+              "tokenCount": 176369
+            },
+            "cache_read": {
+              "tokenCount": 1086976
+            },
+            "output": {
+              "tokenCount": 11392
+            }
+          }
+        }
+      }
+    }
+  },
+  "currentModel": "grok-4.7",
+  "lastCallInputTokens": 65703,
+  "lastCallOutputTokens": 184
+}

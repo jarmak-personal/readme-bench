@@ -1,0 +1,191 @@
+{
+  "id": "grok-4.7__copilot-cli__20261001T044843Z",
+  "batch": "2026-10-01_r13_copilot-cli-1.0.86_effort-max",
+  "target": {
+    "name": "hvir",
+    "url": "https://github.com/jarmak-personal/hvir",
+    "commit": "7acbf8883bc869a9987252833d90b0d250086122",
+    "snapshot_commit": "ca97b8a72d67da22d5da4705101f99fbc80bd9cf"
+  },
+  "model": {
+    "id": "grok-4.7",
+    "vendor": "xAI",
+    "name": "Grok",
+    "version": "4.7",
+    "variant": null,
+    "display": "Grok 4.7"
+  },
+  "harness": {
+    "name": "GitHub Copilot CLI",
+    "id": "copilot-cli",
+    "version": "1.0.86"
+  },
+  "prompt": "Please create a README.md for this project.",
+  "started_at": "2026-10-01T04:48:57Z",
+  "finished_at": "2026-10-01T04:58:59Z",
+  "wall_clock_seconds": 602,
+  "exit_code": 0,
+  "setup_exit_code": 0,
+  "readme_produced": true,
+  "readme_bytes": 5253,
+  "readme_lines": 98,
+  "usage": {
+    "totalPremiumRequestCost": 1,
+    "totalUserRequests": 1,
+    "totalNanoAiu": 96457800000,
+    "tokenDetails": {
+      "input": {
+        "tokenCount": 176369
+      },
+      "cache_read": {
+        "tokenCount": 1086976
+      },
+      "output": {
+        "tokenCount": 11392
+      }
+    },
+    "totalApiDurationMs": 595543,
+    "sessionStartTime": "2026-10-01T04:49:00.172Z",
+    "codeChanges": {
+      "linesAdded": 98,
+      "linesRemoved": 0,
+      "filesModifiedCount": 1,
+      "filesModified": [
+        "/private/var/tmp/ws/5f04487e/hvir/README.md"
+      ]
+    },
+    "modelMetrics": {
+      "grok-4.7": {
+        "requests": {
+          "count": 27,
+          "cost": 1
+        },
+        "usage": {
+          "inputTokens": 1263345,
+          "outputTokens": 11392,
+          "cacheReadTokens": 1086976,
+          "cacheWriteTokens": 0,
+          "reasoningTokens": 6732
+        },
+        "totalNanoAiu": 96457800000,
+        "tokenDetails": {
+          "input": {
+            "tokenCount": 176369
+          },
+          "cache_read": {
+            "tokenCount": 1086976
+          },
+          "output": {
+            "tokenCount": 11392
+          }
+        }
+      }
+    },
+    "agentMetrics": {
+      "main": {
+        "totalApiDurationMs": 595543,
+        "totalNanoAiu": 96457800000,
+        "modelMetrics": {
+          "grok-4.7": {
+            "requests": {
+              "count": 27,
+              "cost": 1
+            },
+            "usage": {
+              "inputTokens": 1263345,
+              "outputTokens": 11392,
+              "cacheReadTokens": 1086976,
+              "cacheWriteTokens": 0,
+              "reasoningTokens": 6732
+            },
+            "totalNanoAiu": 96457800000,
+            "tokenDetails": {
+              "input": {
+                "tokenCount": 176369
+              },
+              "cache_read": {
+                "tokenCount": 1086976
+              },
+              "output": {
+                "tokenCount": 11392
+              }
+            }
+          }
+        }
+      }
+    },
+    "currentModel": "grok-4.7",
+    "lastCallInputTokens": 65703,
+    "lastCallOutputTokens": 184
+  },
+  "tool_calls": {
+    "glob": 9,
+    "view": 54,
+    "grep": 21,
+    "bash": 2,
+    "create": 1
+  },
+  "reasoning_effort_requested": "high",
+  "reasoning_level": "high",
+  "chat_calls": {
+    "grok-4.7": {
+      "high": 27
+    }
+  },
+  "files_viewed": [
+    ".githooks",
+    ".githooks/pre-push",
+    ".github",
+    ".github/workflows",
+    ".github/workflows/ci.yml",
+    ".github/workflows/macos-package-release.yml",
+    ".github/workflows/release.yml",
+    ".gitignore",
+    ".prettierignore",
+    ".prettierrc.json",
+    "LICENSE",
+    "THIRD_PARTY_NOTICES.md",
+    "build",
+    "build/linux/after-install.sh",
+    "build/native/hvir-command",
+    "electron-builder.yml",
+    "electron.vite.config.ts",
+    "package.json",
+    "packages/rename-noreplace/package.json",
+    "scripts",
+    "scripts/architecture-hotspots.json",
+    "scripts/check-adrs.mjs",
+    "scripts/check-seams.sh",
+    "scripts/check-terminal-runtime.mts",
+    "scripts/native-installer.template.sh",
+    "src",
+    "src/main",
+    "src/main/harness/bundled-harness-providers.ts",
+    "src/main/harness/harness-provider.ts",
+    "src/main/harness/providers/claude-code.ts",
+    "src/main/harness/providers/codex.ts",
+    "src/main/harness/providers/cursor.ts",
+    "src/main/harness/providers/gemini.ts",
+    "src/main/harness/providers/github-copilot.ts",
+    "src/main/harness/providers/pi.ts",
+    "src/main/harness/providers/shell.ts",
+    "src/main/index.ts",
+    "src/main/project-host/project-host-catalog.ts",
+    "src/renderer/index.html",
+    "src/renderer/src/App.tsx",
+    "src/renderer/src/document-review/document-review-types.ts",
+    "src/renderer/src/git/GitPanel.tsx",
+    "src/renderer/src/sessions/SessionsOverview.tsx",
+    "src/renderer/src/settings/sections/AppearanceSettings.tsx",
+    "src/renderer/src/settings/sections/GitSettings.tsx",
+    "src/renderer/src/settings/sections/KeybindingsSettings.tsx",
+    "src/renderer/src/settings/sections/TerminalSettings.tsx",
+    "src/renderer/src/settings/settings-navigation.ts",
+    "src/shared",
+    "src/shared/viewer-types.ts",
+    "src/shared/web-pane.ts",
+    "test/native-command.test.ts"
+  ],
+  "compactions": [],
+  "truncations": 0
+}

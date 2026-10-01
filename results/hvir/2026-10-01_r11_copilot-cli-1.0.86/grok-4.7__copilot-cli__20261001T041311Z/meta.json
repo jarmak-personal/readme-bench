@@ -1,0 +1,164 @@
+{
+  "id": "grok-4.7__copilot-cli__20261001T041311Z",
+  "batch": "2026-10-01_r11_copilot-cli-1.0.86",
+  "target": {
+    "name": "hvir",
+    "url": "https://github.com/jarmak-personal/hvir",
+    "commit": "7acbf8883bc869a9987252833d90b0d250086122",
+    "snapshot_commit": "ca97b8a72d67da22d5da4705101f99fbc80bd9cf"
+  },
+  "model": {
+    "id": "grok-4.7",
+    "vendor": "xAI",
+    "name": "Grok",
+    "version": "4.7",
+    "variant": null,
+    "display": "Grok 4.7"
+  },
+  "harness": {
+    "name": "GitHub Copilot CLI",
+    "id": "copilot-cli",
+    "version": "1.0.86"
+  },
+  "prompt": "Please create a README.md for this project.",
+  "started_at": "2026-10-01T04:13:29Z",
+  "finished_at": "2026-10-01T04:15:25Z",
+  "wall_clock_seconds": 116,
+  "exit_code": 0,
+  "setup_exit_code": 0,
+  "readme_produced": true,
+  "readme_bytes": 3152,
+  "readme_lines": 90,
+  "usage": {
+    "totalPremiumRequestCost": 1,
+    "totalUserRequests": 1,
+    "totalNanoAiu": 64622600000,
+    "tokenDetails": {
+      "input": {
+        "tokenCount": 221075
+      },
+      "cache_read": {
+        "tokenCount": 357632
+      },
+      "output": {
+        "tokenCount": 4210
+      }
+    },
+    "totalApiDurationMs": 109256,
+    "sessionStartTime": "2026-10-01T04:13:33.689Z",
+    "codeChanges": {
+      "linesAdded": 90,
+      "linesRemoved": 0,
+      "filesModifiedCount": 1,
+      "filesModified": [
+        "/private/var/tmp/ws/060d9d62/hvir/README.md"
+      ]
+    },
+    "modelMetrics": {
+      "grok-4.7": {
+        "requests": {
+          "count": 16,
+          "cost": 1
+        },
+        "usage": {
+          "inputTokens": 578707,
+          "outputTokens": 4210,
+          "cacheReadTokens": 357632,
+          "cacheWriteTokens": 0,
+          "reasoningTokens": 1545
+        },
+        "totalNanoAiu": 64622600000,
+        "tokenDetails": {
+          "input": {
+            "tokenCount": 221075
+          },
+          "cache_read": {
+            "tokenCount": 357632
+          },
+          "output": {
+            "tokenCount": 4210
+          }
+        }
+      }
+    },
+    "agentMetrics": {
+      "main": {
+        "totalApiDurationMs": 109256,
+        "totalNanoAiu": 64622600000,
+        "modelMetrics": {
+          "grok-4.7": {
+            "requests": {
+              "count": 16,
+              "cost": 1
+            },
+            "usage": {
+              "inputTokens": 578707,
+              "outputTokens": 4210,
+              "cacheReadTokens": 357632,
+              "cacheWriteTokens": 0,
+              "reasoningTokens": 1545
+            },
+            "totalNanoAiu": 64622600000,
+            "tokenDetails": {
+              "input": {
+                "tokenCount": 221075
+              },
+              "cache_read": {
+                "tokenCount": 357632
+              },
+              "output": {
+                "tokenCount": 4210
+              }
+            }
+          }
+        }
+      }
+    },
+    "currentModel": "grok-4.7",
+    "lastCallInputTokens": 48227,
+    "lastCallOutputTokens": 78
+  },
+  "tool_calls": {
+    "glob": 9,
+    "view": 26,
+    "grep": 12,
+    "bash": 3,
+    "create": 1
+  },
+  "reasoning_effort_requested": null,
+  "reasoning_level": "medium",
+  "chat_calls": {
+    "grok-4.7": {
+      "medium": 16
+    }
+  },
+  "files_viewed": [
+    ".githooks",
+    ".githooks/pre-push",
+    ".github/workflows/ci.yml",
+    ".github/workflows/macos-package-release.yml",
+    ".github/workflows/release.yml",
+    ".gitignore",
+    ".prettierignore",
+    ".prettierrc.json",
+    "LICENSE",
+    "THIRD_PARTY_NOTICES.md",
+    "electron-builder.yml",
+    "package.json",
+    "scripts/check-adrs.mjs",
+    "scripts/check-terminal-runtime.mts",
+    "scripts/install-git-hooks.sh",
+    "src/main/harness/bundled-harness-providers.ts",
+    "src/main/harness/harness-provider.ts",
+    "src/main/index.ts",
+    "src/main/project-host/project-host.ts",
+    "src/main/smoke/index.ts",
+    "src/main/window/window-policy.ts",
+    "src/renderer/index.html",
+    "src/renderer/src/App.tsx",
+    "src/shared/harness-provider.ts",
+    "src/workers"
+  ],
+  "compactions": [],
+  "truncations": 0
+}

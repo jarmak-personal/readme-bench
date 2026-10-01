@@ -1,0 +1,68 @@
+diff --git a/README.md b/README.md
+new file mode 100644
+index 0000000..b004b52
+--- /dev/null
++++ b/README.md
+@@ -0,0 +1,62 @@
++# hvir
++
++Desktop developer workbench for local and SSH projects. It combines a native terminal, Git and worktree workflows, file viewing and document review, and launch profiles for coding-agent harnesses.
++
++hvir is an Electron app (React renderer, Node main process). Terminals run through `node-pty` and [ghostty-web](https://github.com/jarmak-personal/ghostty-web). Bundled harness providers include a plain shell, Claude Code, Codex, Pi, Gemini, GitHub Copilot, Cursor, and custom commands.
++
++## Requirements
++
++- Node.js 24 or newer
++- npm
++- A C/C++ toolchain for native modules (`node-pty`, `@hvir/rename-noreplace`)
++- macOS or Linux for packaged builds (macOS `.pkg`, Linux `.deb`)
++
++`postinstall` rebuilds native modules against Electron. On a fresh clone that step needs the same toolchain used to compile Node addons.
++
++## Develop
++
++```sh
++npm install
++npm run dev
++```
++
++Other day-to-day commands:
++
++| Command | Purpose |
++| --- | --- |
++| `npm run build` | Typecheck and production build |
++| `npm run preview` | Preview the production renderer build |
++| `npm test` | Unit tests (Vitest) |
++| `npm run lint` | ESLint |
++| `npm run format` | Prettier write |
++| `npm run typecheck` | `tsc` for the Node and web projects |
++| `npm run verify` | Architecture checks, lint, typecheck, and tests |
++| `npm run smoke` | Build the smoke app and run the scenario suite |
++| `npm run hooks:install` | Install the repo git hooks |
++
++`npm run smoke:scenario <name>` runs one smoke scenario after a smoke build. See `package.json` for the full scenario list used by `npm run smoke`.
++
++## Layout
++
++- `src/main` — Electron main process: projects, PTY, Git, SSH hosts, windows, IPC
++- `src/preload` — renderer bridge
++- `src/renderer` — React workbench UI
++- `src/shared` — IPC and domain types shared by main and renderer
++- `src/workers` — utility and Git workers
++- `packages/rename-noreplace` — optional native rename helper
++- `scripts` — smoke, release, architecture, and project-management tooling
++- `test` — Vitest suites and fixtures
++
++## Package
++
++```sh
++npm run pack:mac:arm64
++npm run pack:linux:x64
++npm run pack:linux:arm64
++```
++
++Artifacts are written under `dist/`. Signing is opt-in via `npm run pack:mac:arm64:signed`. Do not commit signing secrets.
++
++## License
++
++MIT. See [LICENSE](LICENSE). Third-party notices shipped with the app are in [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md).

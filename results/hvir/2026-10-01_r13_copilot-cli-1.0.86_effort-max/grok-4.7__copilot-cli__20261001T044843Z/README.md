@@ -1,0 +1,98 @@
+# hvir
+
+hvir is a desktop workbench for local and SSH project directories. It keeps a Ghostty terminal, a file tree and viewer, Git history and diffs, and coding-agent launch profiles in one Electron app.
+
+Packaged builds install a `hvir` command. From a shell, `hvir` opens the app, and `hvir path/to/project` opens that local directory.
+
+## Features
+
+- **Projects.** Open several workspaces on the local machine or on SSH hosts discovered from OpenSSH config. Connection state, host-key trust, and authentication prompts stay with the host.
+- **Terminals.** Run login shells and agent CLIs in `node-pty` sessions rendered by [ghostty-web](https://github.com/coder/ghostty-web). Split panes, search, themes, attention, file paste, and moving a session between workspaces are built in.
+- **Files.** Browse and search the project tree, create and rename entries, and copy or move files without leaving the workbench. The viewer opens source, rendered Markdown, Mermaid, HTML, JSON, YAML, CSV, and images, and can show a diff against the working tree, `HEAD`, or the branch point.
+- **Git.** Review changes, history, and the commit graph; switch branches; fetch and pull; and inspect worktrees. Remote refresh can run on a timer.
+- **Harnesses.** Launch a plain shell or a configured profile for Claude Code, Codex, Pi, Gemini CLI, GitHub Copilot CLI, Cursor CLI, or a custom command. Those CLIs are not bundled; hvir starts the executable already installed on the host.
+- **Document review.** Anchor comments to a document snapshot and hand a supported review batch to an agent composer.
+- **Web panes.** Open loopback HTTP targets, such as a local dev server, inside the workbench. Arbitrary remote browsing is not a web pane.
+- **Sessions.** Scan terminal sessions across open projects, including usage when a provider can report it.
+- **Diagnostics.** Record workbench health and export a diagnostic report when something fails.
+
+Settings cover appearance, terminal behavior, Git auto-fetch, keybindings, and harness profiles.
+
+## Platforms
+
+Development and packaging target **macOS** and **Linux**. Windows is not a supported host: the native rename helper and the installed `hvir` command are limited to those two platforms.
+
+Release packages are:
+
+| Platform | Package | Install location |
+| --- | --- | --- |
+| macOS arm64 | `pkg` | `/Applications/hvir.app` |
+| Linux x64 and arm64 | `deb` | `/opt/hvir` |
+
+Linux packages expect glibc 2.35 or newer.
+
+## Requirements
+
+- Node.js 24 or newer
+- npm
+- Git
+- A C toolchain for the native modules rebuilt on install (`node-pty` and `@hvir/rename-noreplace`). On macOS that is the Xcode command-line tools. On Linux that is a compiler, `make`, and Python 3.
+- A display for Electron. Linux smoke tests use `xvfb-run` when `DISPLAY` is unset.
+
+## Develop
+
+```sh
+npm ci
+npm run dev
+```
+
+`npm ci` installs Electron, rebuilds `@hvir/rename-noreplace`, and rebuilds `node-pty` against Electron's ABI. Do not skip that postinstall step.
+
+Useful commands:
+
+| Command | What it does |
+| --- | --- |
+| `npm run dev` | Start the Electron app with electron-vite. |
+| `npm run typecheck` | Typecheck the main and renderer projects. |
+| `npm run lint` | Run ESLint. |
+| `npm test` | Run the Vitest suite. |
+| `npm run verify` | Run seam, ADR, architecture, lint, type, and unit checks. This is the CI verification job. |
+| `npm run smoke` | Build a smoke bundle and run the Linux Electron scenarios. |
+| `npm run smoke:macos` | Run the local macOS Electron scenarios. |
+| `npm run hooks:install` | Install the repo's pre-push hook. |
+
+The pre-push hook typechecks and then runs the local platform's Electron smoke test. On Linux without `DISPLAY`, that hook needs `xvfb-run`.
+
+`npm run verify` expects architecture records under `docs/`. Those checks are part of CI; a checkout without `docs/adr` and `docs/design.md` will fail them.
+
+## Package
+
+```sh
+npm run pack:mac:arm64
+npm run pack:linux:x64
+npm run pack:linux:arm64
+```
+
+Artifacts land in `dist/`. Signed macOS packaging and the native installer are release workflows, not day-to-day commands. After a package install, `hvir` on `PATH` launches the package-owned executable.
+
+## Layout
+
+```text
+src/main/       Electron main process: hosts, PTY, Git, IPC, windows
+src/preload/    The only ipcRenderer bridge
+src/renderer/   React workbench
+src/shared/     Contracts shared by main, preload, and renderer
+src/workers/    Utility-process workers (Git and a probe echo worker)
+packages/       @hvir/rename-noreplace, the atomic no-replace rename binding
+scripts/        Verification, smoke, release, and project-management tooling
+test/           Vitest tests and fixtures
+build/          Icons, entitlements, package scripts, and the hvir command
+```
+
+Main-process code owns the filesystem, processes, and PTY. The renderer talks to it only through the preload bridge. SSH and local directories are both `ProjectHost`s; terminal spawn goes through the PTY supervisor.
+
+## License
+
+[MIT](LICENSE). Copyright (c) 2026 hvir contributors.
+
+Bundled third-party notices, including the Ghostty terminal runtime and the rename binding, are in [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md). hvir is not affiliated with or endorsed by the authors of those components.

@@ -1,0 +1,154 @@
+# hvir
+
+hvir is a terminal-first desktop workbench for local and SSH projects. It brings
+terminals, Git worktrees, file editing and previews, and coding-agent sessions into
+one application.
+
+Built with Electron, React, and TypeScript, hvir uses Ghostty's web terminal runtime
+and native pseudo-terminals through `node-pty`.
+
+## Features
+
+- **Projects and workspaces:** open local folders or SSH projects, switch between
+  Git worktrees, and manage closed or missing workspaces.
+- **Terminals:** run shells and custom commands, split the terminal layout, move
+  terminals between workspaces, and manage session recovery.
+- **Coding-agent harnesses:** configure launch profiles for Claude Code, Codex,
+  plain shells, and custom commands; inspect sessions and send document-review
+  feedback to supported harnesses. Agent tools must be installed separately.
+- **Files and previews:** browse and search files, edit source, inspect diffs and
+  blame, and preview Markdown with Mermaid diagrams, HTML, images, JSON, YAML,
+  and CSV.
+- **Git and web panes:** inspect changes and commit history, work with branches
+  and worktrees, and open web content alongside the project.
+- **Customization:** adjust appearance, terminal themes, typography, Git settings,
+  and keybindings.
+
+## Platforms
+
+The repository provides native packaging commands for:
+
+| Platform | Architecture | Package |
+| --- | --- | --- |
+| macOS | Apple Silicon (`arm64`) | `.pkg` |
+| Linux | `x64`, `arm64` | `.deb` |
+
+Linux packages require glibc 2.35 or newer and the desktop libraries declared in
+[`electron-builder.yml`](electron-builder.yml). CI uses Ubuntu 24.04 and macOS 15.
+There is no Windows packaging command in this checkout.
+
+## Run from source
+
+### Prerequisites
+
+- Node.js **24 or newer** and npm.
+- Git for repository and worktree features.
+- Python and a native C/C++ build toolchain for the native modules: Xcode Command
+  Line Tools on macOS, or `make` and a C/C++ compiler on Linux.
+- A graphical desktop environment and Electron's system libraries on Linux.
+
+From the repository root:
+
+```sh
+npm ci
+npm run dev
+```
+
+Installation downloads Electron, builds the local `@hvir/rename-noreplace` addon,
+and rebuilds `node-pty` for Electron's ABI. Keep install scripts enabled.
+Development and production builds check that the installed Ghostty runtime matches
+the capabilities required by this checkout.
+
+On first launch, choose a project folder. To start with a specific local project,
+set `HVIR_PROJECT_ROOT`:
+
+```sh
+HVIR_PROJECT_ROOT=/absolute/path/to/project npm run dev
+```
+
+Use the project controls to add projects and switch workspaces, and Settings to
+configure terminals, keybindings, and harness profiles.
+
+### SSH projects
+
+hvir reads host aliases from SSH configuration and presents authentication and
+host-key trust prompts in the application. Do not assume every OpenSSH directive
+is supported; the configuration reader resolves aliases, hostnames, users, ports,
+and identity files.
+
+For macOS SSH acceptance testing, use the signed acceptance application rather
+than treating the development Electron process as equivalent to an installed app:
+
+```sh
+npm run acceptance:ssh:macos
+```
+
+This command requires macOS `arm64` and the environment variables
+`MACOS_APPLICATION_CERTIFICATE`, `MACOS_APPLICATION_CERTIFICATE_PASSWORD`, and
+`MACOS_TEAM_ID` for an Apple-issued Developer ID Application identity. It builds
+and launches a separate `hvir SSH Acceptance.app` with isolated application data.
+Use `npm run build:macos:ssh-acceptance` to build without launching.
+
+## Development commands
+
+| Command | Purpose |
+| --- | --- |
+| `npm run dev` | Start Electron with the Vite development server |
+| `npm run build` | Type-check and build into `out/` |
+| `npm run preview` | Launch the built application |
+| `npm run typecheck` | Check main/preload and renderer TypeScript |
+| `npm run lint` | Run ESLint |
+| `npm test` | Run the Vitest suite |
+| `npm run test:watch` | Run Vitest in watch mode |
+| `npm run format:check` | Check formatting with Prettier |
+| `npm run smoke` | Build and run Electron smoke scenarios |
+| `npm run smoke:macos` | Run the focused macOS smoke scenarios |
+| `npm run verify` | Run architecture and ADR checks, lint, types, and tests |
+
+Electron smoke tests need a display. On a headless Linux host with Xvfb installed,
+run `xvfb-run -a npm run smoke`, as CI does.
+
+The aggregate `verify` command also expects architecture documentation under
+`docs/`, including `docs/adr/` and `docs/design.md`. Those files are not present in
+this checkout; the individual lint, type-check, and test commands are available
+independently.
+
+## Build packages
+
+Run the command matching the target platform and architecture:
+
+```sh
+npm run pack:mac:arm64
+npm run pack:linux:x64
+npm run pack:linux:arm64
+```
+
+Package artifacts are written to `dist/`. For an unpacked application directory,
+use `npm run build:dir`. The signed macOS packaging command is
+`npm run pack:mac:arm64:signed`; signing requires the appropriate credentials.
+Packaging configuration and system dependencies live in
+[`electron-builder.yml`](electron-builder.yml).
+
+## Project layout
+
+| Path | Responsibility |
+| --- | --- |
+| `src/main/` | Electron lifecycle, project hosts, SSH, terminal supervision, and application services |
+| `src/preload/` | Renderer-facing bridge to main-process services |
+| `src/renderer/` | React workbench UI, terminal presentation, file viewers, and settings |
+| `src/shared/` | Shared types and protocols |
+| `src/workers/` | Utility-process workers |
+| `packages/rename-noreplace/` | Local native addon |
+| `test/` | Automated tests |
+| `scripts/` | Verification, smoke, packaging, and maintenance tooling |
+| `build/` | Icons, installer resources, and platform integration |
+
+Application-owned state is stored under Electron's `userData` directory, including
+`projects.json`, `terminal-sessions.json`, `harness-profiles.json`, and
+`known-hosts.json`. The signed SSH acceptance build uses the separate
+`hvir-ssh-acceptance` directory under the platform's application-data location.
+
+## License
+
+hvir is licensed under the [MIT License](LICENSE). See
+[THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md) for third-party notices and licenses.

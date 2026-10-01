@@ -1,0 +1,422 @@
+# hvir
+
+A desktop workbench for running terminal AI coding agents next to the files and Git state
+they change, on your own machine or on a remote host over SSH.
+
+hvir puts a project's file tree, a multi-format viewer, Git panels and real terminals in
+one window. Each terminal runs a plain login shell or an agent CLI such as Claude Code,
+Codex or GitHub Copilot CLI, and hvir tracks every session across projects, worktrees and
+hosts, so you can see which agents are working, which are waiting for you, and what they
+have changed.
+
+hvir does not bundle or replace any agent. It launches the CLIs you have already
+installed and authenticated.
+
+## Contents
+
+- [Features](#features)
+- [Install](#install)
+- [Using hvir](#using-hvir)
+- [Development](#development)
+- [Architecture](#architecture)
+- [CI and releases](#ci-and-releases)
+- [Contributing](#contributing)
+- [License](#license)
+
+## Features
+
+### Terminals and agents
+
+- **Real terminals.** PTY-backed terminals rendered by [ghostty-web][ghostty-web],
+  Ghostty's terminal core compiled to WebAssembly, with split panes, in-terminal search,
+  a built-in color-theme gallery, and cursor and ligature settings.
+- **Agent providers.** Start a terminal as a login shell, Claude Code, Codex, Pi, Gemini
+  CLI, GitHub Copilot CLI, Cursor CLI, or any custom command.
+- **Harness profiles.** For each provider, choose the executable (the provider default, a
+  command name or a path), extra arguments and environment bindings (literal values,
+  references or unsets). hvir previews the resulting command and probes the provider,
+  reporting a missing executable, an unsupported version or required authentication.
+- **Attention tracking.** Each terminal is marked as working, as having rung the bell, or
+  as ready once it goes idle after you submitted input. States roll up per workspace and
+  per project, and the app icon shows a badge count while hvir is not focused (where
+  the desktop supports badges).
+- **Restore, resume and fork.** hvir restores your terminals on start, either after asking
+  which ones or all at once. Claude Code and Codex sessions resume the exact conversation,
+  can be forked into a new terminal, and show a context-window meter. The other providers
+  start fresh.
+- **Move terminals.** Move a running terminal to another worktree.
+
+### Projects, worktrees and hosts
+
+- **Projects and worktrees.** Register any directory as a project. For a Git repository,
+  hvir discovers every worktree and shows each one as a workspace in the projects bar with
+  its changed-file count, highlights newly discovered worktrees, and can prune missing
+  ones. A directory that is not a Git repository is a single workspace.
+- **Local and SSH hosts.** A project can live on this machine or on any concrete `Host`
+  alias from `~/.ssh/config`. Remote projects get the same workbench: terminals in a
+  remote PTY, files over SFTP, Git on the remote host, and web panes through an SSH
+  tunnel. See [Remote hosts over SSH](#remote-hosts-over-ssh).
+
+### Files and viewer
+
+- **File tree.** Git status decorations, filename search, create, rename, move and delete
+  (to the system trash), reveal in your file manager, and path-copy menus.
+- **Rendered, source and diff modes.** Files open in the mode that fits: rendered for
+  previewable types, diff when opened from the Git panel, source otherwise. Cycle modes
+  with `Mod+Shift+M`, work in tabs, split the viewer into two panes, and open the Git
+  graph as a tab.
+- **Rendered previews.** Markdown (with task lists and Mermaid diagrams), standalone
+  Mermaid files, HTML in a sandboxed preview, JSON, YAML, CSV, and images including SVG.
+- **Source editing.** A CodeMirror 6 editor with Shiki syntax highlighting, a Git blame
+  gutter, find and go-to-line, and saving that detects when the file changed on disk.
+- **Diffs.** Compare a file's working copy against the index, `HEAD` or the branch point,
+  or view the diff a commit introduced.
+
+### Git
+
+hvir's Git support is deliberately read-heavy.
+
+- **Inspect.** Working-tree changes and changes since the branch point with added and
+  removed line counts, commit history, a graph of all refs, commit details, blame, and
+  branches with upstream and base ahead/behind counts.
+- **Change.** Switch branches, fetch (manually or on an auto-fetch interval), pull, and
+  prune stale worktree records. hvir has no UI for staging, committing or pushing; leave
+  those to your agent or a terminal.
+
+### Document review
+
+Select source lines, add a comment, and hand the review to an agent. Comments are anchored
+to line ranges and a content hash, so hvir can tell when a comment has moved or gone stale
+as the file changes. The handoff panel can copy the review as text, insert it into the
+agent's prompt as a single bracketed paste without submitting it, or send it right away.
+Insert and send are available for Claude Code and Codex; other terminals get copy only.
+Drafts are stored locally.
+
+### Sessions overview
+
+A cross-project dashboard of every terminal session. Each card shows the session's status,
+whether it needs attention or is working, the agent's turn state and model where the
+provider reports them, and a context-window meter. Filter by harnesses, shells, attention
+or working; group by project or workspace. **Open** jumps to the terminal, and
+**Interact** opens it in an overlay without leaving the dashboard.
+
+### Web panes
+
+View a dev server that you started in a terminal without leaving the workbench (see
+[Terminal links](#terminal-links)). Only loopback HTTP (`localhost`, `127.0.0.1` and
+`::1`) is supported. The pane is served through an authenticated proxy owned by the main
+process, and for a remote project the page is reached through the SSH connection.
+
+### Diagnostics and settings
+
+- **Diagnostics.** A workbench health indicator flags problems. "Review diagnostic
+  report" shows a local, size-bounded report, with an optional masked screenshot, before
+  anything leaves the app; it is shared only if you copy or save it yourself.
+- **Settings.** App theme, terminal colors and theme gallery, fonts, text size and
+  interface scale; cursor shape, blinking and ligatures; how agent messages are submitted
+  (Enter, or Ctrl/Cmd+Enter); the idle-after-output threshold; whether terminals are
+  restored automatically on start; the Git auto-fetch interval; keybinding overrides; and
+  harness profiles.
+
+## Install
+
+hvir ships as a native package:
+
+- **macOS** on Apple silicon: a Developer ID signed and notarized `.pkg`.
+- **Linux** on x64 and arm64: a `.deb` for Debian-based distributions with `apt` and glibc
+  2.35 or newer. Packages are built on Ubuntu 22.04 and tested on Ubuntu 22.04 and 24.04
+  and on Debian 13.
+
+Intel Macs and Windows are not supported.
+
+Download the installer script from the latest
+[release](https://github.com/jarmak-personal/hvir/releases), read it if you like, and run
+it:
+
+```sh
+curl -fsSL -o install.sh https://github.com/jarmak-personal/hvir/releases/latest/download/install.sh
+bash install.sh
+```
+
+The installer detects your platform, downloads the matching package from the same release,
+verifies its SHA-256 checksum, and installs it with `sudo` through `apt` on Linux or
+`installer` on macOS. On macOS it also checks the package signature, notarization and
+Gatekeeper assessment.
+
+hvir has no auto-updater. To update, download the newest `install.sh` and run it again.
+To remove hvir:
+
+```sh
+bash install.sh --uninstall          # keeps your settings and cache
+bash install.sh --uninstall --purge  # also deletes your hvir settings and cache
+```
+
+Each release also publishes `SHA256SUMS`, `release-manifest.json` and
+`THIRD_PARTY_NOTICES.md` next to the packages.
+
+## Using hvir
+
+### Open a project
+
+```sh
+hvir                  # reopen your previous projects, or choose a folder on first run
+hvir .                # open the current directory
+hvir ~/code/my-app    # open a specific directory
+```
+
+You can also start hvir from your desktop's application launcher. To add more projects,
+use **Register project** in the projects bar: pick a host (this machine or an SSH host),
+then a folder on it.
+
+### Terminal links
+
+Ctrl+click or Cmd+click a file path in terminal output, with an optional line and column,
+to open it in the viewer. The same gesture on a `localhost`, `127.0.0.1` or `[::1]` URL
+opens it in a web pane.
+
+### Keyboard shortcuts
+
+`Mod` is Command on macOS and Ctrl elsewhere.
+
+| Action                                     | Shortcut                    |
+| ------------------------------------------ | --------------------------- |
+| Find a file by name                        | `Mod+P`                     |
+| Find in the open file                      | `Mod+F`                     |
+| Go to line                                 | `Ctrl+G`                    |
+| Find in the terminal                       | `Mod+Shift+F`               |
+| Cycle viewer mode (rendered, source, diff) | `Mod+Shift+M`               |
+| Focus the terminal                         | `Mod+J`                     |
+| Focus the viewer                           | `Mod+1`                     |
+| Focus the file tree                        | `Mod+0`                     |
+| Maximize or restore the terminal panel     | `Mod+Shift+J`               |
+| Next or previous workspace                 | `Mod+Alt+]` and `Mod+Alt+[` |
+
+While a terminal has focus, `Mod+P`, `Mod+F`, `Ctrl+G` and `Mod+Shift+M` are left to the
+program running in it, and `Mod+Shift+F` searches the terminal.
+
+Override any of them in **Settings → Keybindings** with a JSON object that maps an action
+to a stroke. Actions you leave out keep their defaults:
+
+```json
+{ "findFile": "Mod+K", "focusTerminal": "Mod+Shift+T" }
+```
+
+The action names are `cycleViewMode`, `findFile`, `findInFile`, `findInTerminal`,
+`goToLine`, `focusTerminal`, `focusViewer`, `focusTree`, `toggleTerminalFocus`,
+`nextWorkspace` and `previousWorkspace`.
+
+### Remote hosts over SSH
+
+1. Add the host to `~/.ssh/config`. hvir lists every `Host` alias that has no wildcard
+   and reads only `HostName`, `User`, `Port` and `IdentityFile`; other options, such as
+   `ProxyJump`, are ignored.
+
+   ```sshconfig
+   Host devbox
+     HostName devbox.example.com
+     User me
+     IdentityFile ~/.ssh/id_ed25519
+   ```
+
+2. Choose **Register project**, pick the host, then pick a folder on it.
+3. On the first connection hvir shows the server's host-key fingerprint for you to
+   accept. Accepted keys are kept in hvir's own `known-hosts.json`, not in
+   `~/.ssh/known_hosts`.
+
+Authentication is tried in this order: ssh-agent (`SSH_AUTH_SOCK`), public keys (the
+`IdentityFile` entries, otherwise the default `~/.ssh/id_*` keys, with a prompt for
+passphrases), keyboard-interactive, then password.
+
+On the remote machine, terminals use `$SHELL` (falling back to `bash`, then `/bin/sh`)
+and Git commands run there, so `git` must be installed. Install `inotify-tools` on the
+remote host to get push-based change detection; without `inotifywait`, hvir polls.
+
+### Data and privacy
+
+hvir keeps its state (settings, projects, terminal-session records, trusted SSH host
+keys, harness profiles and review drafts) in Electron's per-user data directory, and its
+cache in the platform cache directory:
+
+|       | macOS                                | Linux                                |
+| ----- | ------------------------------------ | ------------------------------------ |
+| State | `~/Library/Application Support/hvir` | `${XDG_CONFIG_HOME:-~/.config}/hvir` |
+| Cache | `~/Library/Caches/hvir`              | `${XDG_CACHE_HOME:-~/.cache}/hvir`   |
+
+hvir's own code opens no network connections other than the SSH sessions you start and
+loopback connections for web panes: there is no telemetry, crash reporting or
+auto-update. The tools you run in terminals, and Git operations such as fetch and pull,
+use the network as they normally would.
+
+## Development
+
+You need:
+
+- Node.js 24 or newer, and `git`.
+- A C/C++ toolchain and Python 3. `npm ci` builds the private `@hvir/rename-noreplace`
+  addon and compiles the native `node-pty` module against Electron.
+- Network access during install, to download Electron and the ghostty-web build.
+- `xvfb` on Linux, if you run the Electron smoke tests without a display.
+
+```sh
+git clone https://github.com/jarmak-personal/hvir.git
+cd hvir
+npm ci
+npm run dev
+```
+
+Do not install with `--ignore-scripts`: the `postinstall` step downloads Electron and
+rebuilds the native modules. `npm run dev` and `npm run build` first check that the
+installed ghostty-web matches the expected build and tell you to run `npm ci` if not.
+
+To open a specific project in development, set `HVIR_PROJECT_ROOT`:
+
+```sh
+HVIR_PROJECT_ROOT=/path/to/project npm run dev
+```
+
+### Scripts
+
+Run and package:
+
+- `npm run dev`: start hvir with hot reload.
+- `npm run build`: type-check, then build the production bundles into `out/`.
+- `npm run preview`: preview the production build (run `npm run build` first).
+- `npm run build:dir`: build, then write an unpacked app into `dist/`.
+- `npm run pack:mac:arm64`: build the macOS Apple-silicon `.pkg` into `dist/`.
+  `pack:mac:arm64:signed` forces code signing.
+- `npm run pack:linux:x64` and `npm run pack:linux:arm64`: build the Linux `.deb` for that
+  architecture into `dist/`.
+- `npm run generate:terminal-themes`: regenerate the terminal theme catalog.
+
+Check and test:
+
+- `npm run typecheck`: type-check the main-process and renderer projects.
+- `npm run lint`: ESLint, including the architecture-seam rules.
+- `npm run format` and `npm run format:check`: format with Prettier, or check formatting.
+- `npm run check-seams`: grep-level backstop for the architecture seams.
+- `npm run architecture:report`: offline architecture hotspot report.
+- `npm test` and `npm run test:watch`: Vitest unit tests, once or in watch mode.
+- `npm run test:mutation`: Stryker mutation tests for the Git output parsers.
+- `npm run smoke` and `npm run smoke:macos`: Electron smoke tests for Linux or macOS.
+- `npm run smoke:scenario -- <name>...`: run chosen smoke scenarios.
+- `npm run verify`: the static and unit gate that CI runs (seams, ADRs, architecture,
+  lint, type-check and unit tests).
+- `npm run gauntlet`: `verify`, then the smoke tests, then the capacity performance gate.
+- `npm run hooks:install`: install the repository's git hooks.
+
+`npm run architecture:check`, which `verify` runs, queries GitHub and needs an
+`HVIR_REPO_TOKEN`; `npm run architecture:report` is the offline equivalent.
+
+### Testing
+
+Unit tests live in `test/` and run on Vitest in Node. Renderer component tests run in
+happy-dom.
+
+Smoke tests build the app with `--mode smoke`, then launch the real Electron app against
+a throwaway repository created from `git archive HEAD`, with an isolated user-data
+directory. A build plugin keeps smoke code out of production bundles. Run a subset by
+name:
+
+```sh
+npm run smoke:scenario -- viewer-content git-workflow
+```
+
+On a Linux machine without a display, wrap the command in `xvfb-run -a`.
+
+`npm run hooks:install` points `core.hooksPath` at `.githooks`. The pre-push hook then
+runs the type check and the smoke tests for your platform; bypass it with
+`git push --no-verify`.
+
+## Architecture
+
+```text
++----------------------------------------------------------------------------+
+| Renderer (React 19; sandboxed, no Node.js access)                          |
+| File tree, viewer, terminals, Git panels, settings, sessions overview      |
+| Web workers: Markdown, syntax highlighting, JSON, CSV                      |
++----------------------------------------------------------------------------+
+        ^
+        |  typed IPC through the preload bridge
+        v
++----------------------------------------------------------------------------+
+| Main process                                                               |
+| IPC authority router, project and workspace registry, PTY supervisor,      |
+| harness providers, sessions, diagnostics, document review, web-pane proxy  |
+|                                                                            |
+| ProjectHost seam                                                           |
+|   +-- LocalHost   fs, child_process, node-pty                              |
+|   +-- SshHost     ssh2: remote PTY, SFTP, tunnels                          |
++----------------------------------------------------------------------------+
+        ^
+        |  Git requests; host exec / read / stat port
+        v
++----------------------------------------------------------------------------+
+| Git worker (utility process): runs the Git engine off the main thread      |
++----------------------------------------------------------------------------+
+```
+
+| Path                         | Contents                                              |
+| ---------------------------- | ----------------------------------------------------- |
+| `src/main/`                  | Main process: IPC, projects, hosts, PTYs, Git, agents |
+| `src/preload/`               | Context-isolated bridge; the only `ipcRenderer` user  |
+| `src/renderer/`              | React UI: workbench, viewer, terminals, Git, settings |
+| `src/shared/`                | Serializable IPC contracts and pure shared helpers    |
+| `src/workers/`               | Utility-process entry points (the Git worker)         |
+| `packages/rename-noreplace/` | Private addon: atomic no-replace rename               |
+| `build/`                     | Packaging resources, including the `hvir` command     |
+| `scripts/`                   | Build, packaging, installer, smoke and repo scripts   |
+| `test/`                      | Vitest unit tests and fixtures                        |
+
+The renderer is sandboxed and context-isolated, with no Node.js access. The main process
+reaches project files, processes and terminals through the `ProjectHost` interface, so
+local and SSH projects share one code path, and paths are always qualified by host. ESLint
+rules and `npm run check-seams` enforce the boundaries that keep this true:
+
+- `ipcRenderer` is used only in the preload bridge, and `ipcMain` handlers are registered
+  only through the central authority router, which resolves the calling window and
+  canonical paths.
+- `fs`, `child_process`, `chokidar` and `node-pty` are used only in `LocalHost`, and
+  `ssh2` only in the SSH host adapter. Everything else depends on `ProjectHost`.
+- Terminals are spawned only by the PTY supervisor, and every Git command goes through
+  one shared command, cancellation and root-validation context.
+- Agent provider identities stay inside `src/main/harness/`, and raw loopback sockets are
+  used only by the web-pane proxy.
+
+## CI and releases
+
+Pull requests to `main` and `epic/**` branches run `npm run verify` on Linux, the Electron
+smoke tests on Linux (under Xvfb) and on macOS arm64 (a reduced set), CodeQL analysis, and
+a merge-acceptance gate. Dependabot and a daily ghostty-web update workflow keep
+dependencies current.
+
+Releases are cut by the manual **Release** workflow, whose `bump` input is `current`,
+`patch`, `minor` or `major`. It builds the Linux x64 and arm64 packages, signs and
+notarizes the macOS arm64 package, runs an install, update, launch and removal acceptance
+check on each package, and then publishes an immutable GitHub Release containing the
+packages, `install.sh`, `SHA256SUMS`, `release-manifest.json` and
+`THIRD_PARTY_NOTICES.md`.
+
+## Contributing
+
+Changes land through pull requests that target `main` (or an `epic/**` branch). CI runs
+the full verification and smoke suites on every pull request, so run the checks that
+cover your change first:
+
+```sh
+npm run typecheck
+npm run lint
+npm test
+npm run check-seams
+npm run smoke:scenario -- <scenario>   # if you change Electron, terminal or Git code
+```
+
+Keep code inside the architecture seams described above, and run `npm run hooks:install`
+to get the pre-push checks locally.
+
+## License
+
+hvir is released under the [MIT License](LICENSE). Third-party components, including
+ghostty-web, the iTerm2 Color Schemes collection and the Ghostty terminal core, are listed
+with their licenses in [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md).
+
+[ghostty-web]: https://github.com/coder/ghostty-web

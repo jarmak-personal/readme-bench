@@ -1,0 +1,89 @@
+{
+  "totalPremiumRequestCost": 1,
+  "totalUserRequests": 1,
+  "totalNanoAiu": 20594600000,
+  "tokenDetails": {
+    "input": {
+      "tokenCount": 76895
+    },
+    "cache_read": {
+      "tokenCount": 84608
+    },
+    "output": {
+      "tokenCount": 1642
+    }
+  },
+  "totalApiDurationMs": 60014,
+  "sessionStartTime": "2026-10-01T04:16:53.466Z",
+  "codeChanges": {
+    "linesAdded": 62,
+    "linesRemoved": 0,
+    "filesModifiedCount": 1,
+    "filesModified": [
+      "/private/var/tmp/ws/d38f75d1/hvir/README.md"
+    ]
+  },
+  "modelMetrics": {
+    "grok-4.7": {
+      "requests": {
+        "count": 8,
+        "cost": 1
+      },
+      "usage": {
+        "inputTokens": 161503,
+        "outputTokens": 1642,
+        "cacheReadTokens": 84608,
+        "cacheWriteTokens": 0,
+        "reasoningTokens": 310
+      },
+      "totalNanoAiu": 20594600000,
+      "tokenDetails": {
+        "input": {
+          "tokenCount": 76895
+        },
+        "cache_read": {
+          "tokenCount": 84608
+        },
+        "output": {
+          "tokenCount": 1642
+        }
+      }
+    }
+  },
+  "agentMetrics": {
+    "main": {
+      "totalApiDurationMs": 60014,
+      "totalNanoAiu": 20594600000,
+      "modelMetrics": {
+        "grok-4.7": {
+          "requests": {
+            "count": 8,
+            "cost": 1
+          },
+          "usage": {
+            "inputTokens": 161503,
+            "outputTokens": 1642,
+            "cacheReadTokens": 84608,
+            "cacheWriteTokens": 0,
+            "reasoningTokens": 310
+          },
+          "totalNanoAiu": 20594600000,
+          "tokenDetails": {
+            "input": {
+              "tokenCount": 76895
+            },
+            "cache_read": {
+              "tokenCount": 84608
+            },
+            "output": {
+              "tokenCount": 1642
+            }
+          }
+        }
+      }
+    }
+  },
+  "currentModel": "grok-4.7",
+  "lastCallInputTokens": 25183,
+  "lastCallOutputTokens": 65
+}

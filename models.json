@@ -3,6 +3,7 @@
 
   "claude-haiku-4.5":     { "vendor": "Anthropic",   "name": "Claude Haiku",  "version": "4.5",  "display": "Claude Haiku 4.5" },
   "claude-sonnet-5":      { "vendor": "Anthropic",   "name": "Claude Sonnet", "version": "5",    "display": "Claude Sonnet 5" },
+  "claude-sonnet-5.5":    { "vendor": "Anthropic",   "name": "Claude Sonnet", "version": "5.5",  "display": "Claude Sonnet 5.5" },
   "claude-opus-4.7":      { "vendor": "Anthropic",   "name": "Claude Opus",   "version": "4.7",  "display": "Claude Opus 4.7" },
   "claude-opus-4.8":      { "vendor": "Anthropic",   "name": "Claude Opus",   "version": "4.8",  "display": "Claude Opus 4.8" },
   "claude-opus-4.8-fast": { "vendor": "Anthropic",   "name": "Claude Opus",   "version": "4.8",  "display": "Claude Opus 4.8 (fast mode)", "variant": "fast" },
@@ -22,6 +23,7 @@
   "gpt-6-astra":          { "vendor": "OpenAI",      "name": "GPT",           "version": "6",    "display": "GPT-6 Astra",   "variant": "astra" },
   "gpt-6-luna":           { "vendor": "OpenAI",      "name": "GPT",           "version": "6",    "display": "GPT-6 Luna",    "variant": "luna" },
   "gpt-6-sol":            { "vendor": "OpenAI",      "name": "GPT",           "version": "6",    "display": "GPT-6 Sol",     "variant": "sol" },
+  "gpt-6.1-sol":          { "vendor": "OpenAI",      "name": "GPT",           "version": "6.1",  "display": "GPT-6.1 Sol",   "variant": "sol" },
 
   "gemini-3.5-flash":     { "vendor": "Google",      "name": "Gemini Flash",  "version": "3.5",  "display": "Gemini 3.5 Flash" },
   "gemini-3.6-flash":     { "vendor": "Google",      "name": "Gemini Flash",  "version": "3.6",  "display": "Gemini 3.6 Flash" },
@@ -30,6 +32,7 @@
 
   "grok-4.5":             { "vendor": "xAI",         "name": "Grok",          "version": "4.5",  "display": "Grok 4.5" },
   "grok-4.6":             { "vendor": "xAI",         "name": "Grok",          "version": "4.6",  "display": "Grok 4.6" },
+  "grok-4.7":             { "vendor": "xAI",         "name": "Grok",          "version": "4.7",  "display": "Grok 4.7" },
 
   "kimi-k2.7-code":       { "vendor": "Moonshot AI", "name": "Kimi Code",     "version": "2.7",  "display": "Kimi K2.7 Code" },
   "kimi-k3":              { "vendor": "Moonshot AI", "name": "Kimi",          "version": "3",    "display": "Kimi K3" },

@@ -1,0 +1,89 @@
+{
+  "totalPremiumRequestCost": 1,
+  "totalUserRequests": 1,
+  "totalNanoAiu": 64622600000,
+  "tokenDetails": {
+    "input": {
+      "tokenCount": 221075
+    },
+    "cache_read": {
+      "tokenCount": 357632
+    },
+    "output": {
+      "tokenCount": 4210
+    }
+  },
+  "totalApiDurationMs": 109256,
+  "sessionStartTime": "2026-10-01T04:13:33.689Z",
+  "codeChanges": {
+    "linesAdded": 90,
+    "linesRemoved": 0,
+    "filesModifiedCount": 1,
+    "filesModified": [
+      "/private/var/tmp/ws/060d9d62/hvir/README.md"
+    ]
+  },
+  "modelMetrics": {
+    "grok-4.7": {
+      "requests": {
+        "count": 16,
+        "cost": 1
+      },
+      "usage": {
+        "inputTokens": 578707,
+        "outputTokens": 4210,
+        "cacheReadTokens": 357632,
+        "cacheWriteTokens": 0,
+        "reasoningTokens": 1545
+      },
+      "totalNanoAiu": 64622600000,
+      "tokenDetails": {
+        "input": {
+          "tokenCount": 221075
+        },
+        "cache_read": {
+          "tokenCount": 357632
+        },
+        "output": {
+          "tokenCount": 4210
+        }
+      }
+    }
+  },
+  "agentMetrics": {
+    "main": {
+      "totalApiDurationMs": 109256,
+      "totalNanoAiu": 64622600000,
+      "modelMetrics": {
+        "grok-4.7": {
+          "requests": {
+            "count": 16,
+            "cost": 1
+          },
+          "usage": {
+            "inputTokens": 578707,
+            "outputTokens": 4210,
+            "cacheReadTokens": 357632,
+            "cacheWriteTokens": 0,
+            "reasoningTokens": 1545
+          },
+          "totalNanoAiu": 64622600000,
+          "tokenDetails": {
+            "input": {
+              "tokenCount": 221075
+            },
+            "cache_read": {
+              "tokenCount": 357632
+            },
+            "output": {
+              "tokenCount": 4210
+            }
+          }
+        }
+      }
+    }
+  },
+  "currentModel": "grok-4.7",
+  "lastCallInputTokens": 48227,
+  "lastCallOutputTokens": 78
+}
