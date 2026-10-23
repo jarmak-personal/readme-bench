@@ -1,0 +1,99 @@
+{
+  "totalPremiumRequestCost": 1,
+  "totalUserRequests": 1,
+  "totalNanoAiu": 847469500,
+  "tokenDetails": {
+    "input": {
+      "tokenCount": 18
+    },
+    "cache_read": {
+      "tokenCount": 186652
+    },
+    "cache_write": {
+      "tokenCount": 34319
+    },
+    "output": {
+      "tokenCount": 4633
+    }
+  },
+  "totalApiDurationMs": 26228,
+  "sessionStartTime": "2026-10-23T02:26:44.310Z",
+  "codeChanges": {
+    "linesAdded": 158,
+    "linesRemoved": 0,
+    "filesModifiedCount": 1,
+    "filesModified": [
+      "/private/var/tmp/ws/1608fcda/hvir/README.md"
+    ]
+  },
+  "modelMetrics": {
+    "claude-haiku-5.5": {
+      "requests": {
+        "count": 8,
+        "cost": 1
+      },
+      "usage": {
+        "inputTokens": 220989,
+        "outputTokens": 4633,
+        "cacheReadTokens": 186652,
+        "cacheWriteTokens": 34319,
+        "reasoningTokens": 607
+      },
+      "cacheExpiresAt": "2026-10-23T02:32:18.421Z",
+      "totalNanoAiu": 847469500,
+      "tokenDetails": {
+        "input": {
+          "tokenCount": 18
+        },
+        "cache_read": {
+          "tokenCount": 186652
+        },
+        "cache_write": {
+          "tokenCount": 34319
+        },
+        "output": {
+          "tokenCount": 4633
+        }
+      }
+    }
+  },
+  "agentMetrics": {
+    "main": {
+      "totalApiDurationMs": 26228,
+      "totalNanoAiu": 847469500,
+      "modelMetrics": {
+        "claude-haiku-5.5": {
+          "requests": {
+            "count": 8,
+            "cost": 1
+          },
+          "usage": {
+            "inputTokens": 220989,
+            "outputTokens": 4633,
+            "cacheReadTokens": 186652,
+            "cacheWriteTokens": 34319,
+            "reasoningTokens": 607
+          },
+          "totalNanoAiu": 847469500,
+          "tokenDetails": {
+            "input": {
+              "tokenCount": 18
+            },
+            "cache_read": {
+              "tokenCount": 186652
+            },
+            "cache_write": {
+              "tokenCount": 34319
+            },
+            "output": {
+              "tokenCount": 4633
+            }
+          }
+        }
+      }
+    }
+  },
+  "currentModel": "claude-haiku-5.5",
+  "lastCallInputTokens": 34321,
+  "lastCallOutputTokens": 131
+}

@@ -1,0 +1,166 @@
+{
+  "id": "gemini-4-argon__copilot-cli__20261023T024336Z",
+  "batch": "2026-10-22_r14_copilot-cli-1.0.86",
+  "target": {
+    "name": "hvir",
+    "url": "https://github.com/jarmak-personal/hvir",
+    "commit": "7acbf8883bc869a9987252833d90b0d250086122",
+    "snapshot_commit": "ca97b8a72d67da22d5da4705101f99fbc80bd9cf"
+  },
+  "model": {
+    "id": "gemini-4-argon",
+    "vendor": "Google",
+    "name": "Gemini",
+    "version": "4",
+    "variant": "argon",
+    "display": "Gemini 4 Argon"
+  },
+  "harness": {
+    "name": "GitHub Copilot CLI",
+    "id": "copilot-cli",
+    "version": "1.0.86"
+  },
+  "prompt": "Please create a README.md for this project.",
+  "started_at": "2026-10-23T02:43:49Z",
+  "finished_at": "2026-10-23T02:45:13Z",
+  "wall_clock_seconds": 84,
+  "exit_code": 0,
+  "setup_exit_code": 0,
+  "readme_produced": true,
+  "readme_bytes": 6215,
+  "readme_lines": 141,
+  "usage": {
+    "totalPremiumRequestCost": 1,
+    "totalUserRequests": 1,
+    "totalNanoAiu": 23026350000,
+    "tokenDetails": {
+      "input": {
+        "tokenCount": 85492
+      },
+      "cache_read": {
+        "tokenCount": 297695
+      },
+      "cache_write": {
+        "tokenCount": 0
+      },
+      "output": {
+        "tokenCount": 2951
+      }
+    },
+    "totalApiDurationMs": 78736,
+    "sessionStartTime": "2026-10-23T02:43:52.476Z",
+    "codeChanges": {
+      "linesAdded": 141,
+      "linesRemoved": 0,
+      "filesModifiedCount": 1,
+      "filesModified": [
+        "/private/var/tmp/ws/6c1a862d/hvir/README.md"
+      ]
+    },
+    "modelMetrics": {
+      "gemini-4-argon": {
+        "requests": {
+          "count": 11,
+          "cost": 1
+        },
+        "usage": {
+          "inputTokens": 383187,
+          "outputTokens": 2951,
+          "cacheReadTokens": 297695,
+          "cacheWriteTokens": 0,
+          "reasoningTokens": 0
+        },
+        "totalNanoAiu": 23026350000,
+        "tokenDetails": {
+          "input": {
+            "tokenCount": 85492
+          },
+          "cache_read": {
+            "tokenCount": 297695
+          },
+          "cache_write": {
+            "tokenCount": 0
+          },
+          "output": {
+            "tokenCount": 2951
+          }
+        }
+      }
+    },
+    "agentMetrics": {
+      "main": {
+        "totalApiDurationMs": 78736,
+        "totalNanoAiu": 23026350000,
+        "modelMetrics": {
+          "gemini-4-argon": {
+            "requests": {
+              "count": 11,
+              "cost": 1
+            },
+            "usage": {
+              "inputTokens": 383187,
+              "outputTokens": 2951,
+              "cacheReadTokens": 297695,
+              "cacheWriteTokens": 0,
+              "reasoningTokens": 0
+            },
+            "totalNanoAiu": 23026350000,
+            "tokenDetails": {
+              "input": {
+                "tokenCount": 85492
+              },
+              "cache_read": {
+                "tokenCount": 297695
+              },
+              "cache_write": {
+                "tokenCount": 0
+              },
+              "output": {
+                "tokenCount": 2951
+              }
+            }
+          }
+        }
+      }
+    },
+    "currentModel": "gemini-4-argon",
+    "lastCallInputTokens": 47285,
+    "lastCallOutputTokens": 186
+  },
+  "tool_calls": {
+    "glob": 3,
+    "view": 19,
+    "bash": 2,
+    "grep": 1,
+    "create": 1
+  },
+  "reasoning_effort_requested": null,
+  "reasoning_level": "medium",
+  "chat_calls": {
+    "gemini-4-argon": {
+      "medium": 11
+    }
+  },
+  "files_viewed": [
+    ".",
+    ".github/workflows/ci.yml",
+    ".github/workflows/release.yml",
+    "LICENSE",
+    "build/native/hvir-command",
+    "electron-builder.yml",
+    "electron.vite.config.ts",
+    "package.json",
+    "scripts/architecture-hotspots.mjs",
+    "scripts/check-adrs.mjs",
+    "scripts/check-seams.sh",
+    "scripts/native-installer.template.sh",
+    "src",
+    "src/main/harness/bundled-harness-providers.ts",
+    "src/main/index.ts",
+    "src/main/project-host/project-host.ts",
+    "src/renderer/src/App.tsx",
+    "src/renderer/src/settings/keybindings.ts"
+  ],
+  "compactions": [],
+  "truncations": 0
+}

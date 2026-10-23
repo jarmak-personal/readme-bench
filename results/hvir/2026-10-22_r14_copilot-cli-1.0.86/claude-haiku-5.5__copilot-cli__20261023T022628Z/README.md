@@ -1,0 +1,158 @@
+# hvir
+
+hvir is an Electron desktop workspace for working on local and SSH-hosted projects. It combines
+project-scoped terminals, Git and file tooling, a document viewer with review workflows, and
+integration with AI coding harnesses (such as Claude Code, Codex, GitHub Copilot, Gemini, Cursor,
+and Pi) in one window.
+
+> hvir is version `0.2.3` and is marked private in `package.json`. It is not published to npm.
+
+## Features
+
+- **Project workspaces** with local folders and SSH remote projects (SSH config parsing, key and
+  identity sources, and remote file watching).
+- **Terminals** backed by `node-pty` and `ghostty-web`, with terminal themes, splits, and
+  per-terminal lifecycle management.
+- **Harness integration** for AI coding CLIs: launch profiles, session discovery and resume,
+  context and usage telemetry, and clipboard/image paste support.
+- **Git** views and worker-backed Git operations.
+- **Viewer and document review**: Markdown rendering (`markdown-it`, task lists, Mermaid diagrams),
+  syntax highlighting (`shiki`), CodeMirror-based diffs and search, and a review flow that can send
+  annotated content to a harness.
+- **Filename search**, project file operations, and file watching (`chokidar`).
+- **Web pane** for previewing content, including a loopback HTTP proxy.
+- **Diagnostics and workbench health** reporting.
+
+## Requirements
+
+- Node.js 24 or newer (`engines.node` is `>=24`).
+- npm.
+- Platform toolchain for native modules (`node-pty`, the `@hvir/rename-noreplace` binding):
+  - macOS: Xcode Command Line Tools.
+  - Linux: a C/C++ toolchain, Python 3, and the libraries Electron needs (GTK 3, NSS, libsecret,
+    and so on).
+
+hvir targets macOS (arm64, `.pkg` installer) and Linux (x64/arm64, `.deb`). Windows is not a
+supported target.
+
+## Getting started
+
+```bash
+git clone <repository-url> hvir
+cd hvir
+npm ci          # also runs postinstall: Electron runtime + native module rebuilds
+npm run hooks:install   # optional: enable the local pre-push checks
+npm run dev     # start the app in development mode
+```
+
+`npm ci` runs `postinstall`, which downloads the Electron runtime, builds
+`@hvir/rename-noreplace`, and rebuilds `node-pty` against Electron's ABI. If you change Electron
+or `node-pty`, rerun `npm run install:runtime`.
+
+`predev` and `prebuild` run `scripts/check-terminal-runtime.mts` to confirm the terminal runtime is
+usable before starting.
+
+## Scripts
+
+### Development and build
+
+| Command | Purpose |
+| --- | --- |
+| `npm run dev` | Run the Electron app with electron-vite in dev mode. |
+| `npm run build` | Typecheck, then produce the bundles in `out/`. |
+| `npm run build:smoke` | Build with the `smoke` mode for end-to-end scenarios. |
+| `npm run build:dir` | Build and create an unpacked app with electron-builder. |
+| `npm run pack:mac:arm64` | Build a signed-capable macOS arm64 `.pkg` in `dist/`. |
+| `npm run pack:linux:x64` / `pack:linux:arm64` | Build a Linux `.deb` in `dist/`. |
+| `npm run preview` | Preview the production build with electron-vite. |
+
+### Quality checks
+
+| Command | Purpose |
+| --- | --- |
+| `npm run typecheck` | TypeScript checks for the node and web configs. |
+| `npm run lint` | ESLint across the repository. |
+| `npm run format` / `npm run format:check` | Prettier write/check. |
+| `npm test` | Vitest unit and integration tests (`test/`). |
+| `npm run test:watch` | Vitest in watch mode. |
+| `npm run test:mutation` | Stryker mutation testing. |
+| `npm run check-seams` | Verify architectural seam rules. |
+| `npm run check-adrs` | Validate architecture decision record lifecycles. |
+| `npm run architecture:check` | Enforce architecture hotspot limits. (`architecture:report` prints the report.) |
+| `npm run verify` | Runs seams, ADRs, architecture, lint, typecheck, and tests. This is what CI runs on Linux. |
+
+### Smoke tests
+
+End-to-end smoke scenarios drive the built app. On Linux, run them under `xvfb-run`.
+
+```bash
+npm run smoke                 # full scenario set
+npm run smoke:macos           # macOS subset
+npm run smoke:scenario        # run named scenarios via scripts/run-smoke-scenarios.mts
+npm run smoke:isolation       # interruption/isolation check
+npm run performance:capacity  # capacity benchmark with the controlled performance gate
+```
+
+The `pre-push` hook in `.githooks/` runs typecheck and the platform smoke test. Enable it with
+`npm run hooks:install`; bypass once with `git push --no-verify`.
+
+### Terminal themes and vendored terminal
+
+- `npm run generate:terminal-themes` regenerates the terminal theme catalog.
+- `npm run update:ghostty-web` updates the vendored `ghostty-web` runtime. It is pinned in
+  `package.json` to a release tarball.
+
+### Project management helpers
+
+Scripts under `scripts/project-management/` back the `project:*` and `issue:*` npm scripts
+(for example `project:status`, `issue:context`, `issue:start`). They expect GitHub access and are
+intended for maintainers.
+
+## Installed command
+
+Packaged builds install an `hvir` command (`build/native/hvir-command`):
+
+```bash
+hvir                 # open hvir
+hvir ./my-project    # open hvir rooted at a local directory
+```
+
+The command resolves the directory to an absolute path and passes it to the app as
+`--project-root`. It supports macOS (`/Applications/hvir.app`) and Linux (`/opt/hvir`).
+
+## Project layout
+
+```
+src/
+  main/        Electron main process: harness, terminal, git, sessions, viewer, SSH project host, IPC
+  preload/     Context-isolated preload bridge exposed to the renderer
+  renderer/    React renderer (UI), entry at src/renderer/index.html
+  shared/      Types and pure logic shared across process boundaries (IPC contracts, policies)
+  workers/     Worker threads for Git and other offloaded work
+packages/
+  rename-noreplace/   Private Node-API binding for atomic no-replace rename
+build/         App icons, entitlements, Linux packaging hooks, native command, macOS pkg scripts
+scripts/       Build, smoke, release, and architecture tooling
+test/          Vitest suites
+```
+
+Build configuration lives in `electron.vite.config.ts`, `electron-builder.yml`, `vitest.config.ts`,
+`stryker.config.json`, and the `tsconfig*.json` files.
+
+## Contributing
+
+1. Create a branch and make your change.
+2. Run `npm run verify` before opening a pull request; it matches the Linux CI job.
+3. Run `npm run format:check` if you touched formatting-sensitive files.
+4. For terminal, harness, or native-host changes, also run the relevant smoke scenarios.
+
+Pull requests target `main` (and `epic/**` branches). CI is defined in `.github/workflows/ci.yml`.
+
+## Third-party notices
+
+hvir redistributes some third-party code. See [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md)
+and the license files in `node_modules`.
+
+## License
+
+MIT. See [LICENSE](LICENSE).

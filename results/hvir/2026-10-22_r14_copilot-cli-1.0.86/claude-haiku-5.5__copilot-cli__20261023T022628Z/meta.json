@@ -1,0 +1,145 @@
+{
+  "id": "claude-haiku-5.5__copilot-cli__20261023T022628Z",
+  "batch": "2026-10-22_r14_copilot-cli-1.0.86",
+  "target": {
+    "name": "hvir",
+    "url": "https://github.com/jarmak-personal/hvir",
+    "commit": "7acbf8883bc869a9987252833d90b0d250086122",
+    "snapshot_commit": "ca97b8a72d67da22d5da4705101f99fbc80bd9cf"
+  },
+  "model": {
+    "id": "claude-haiku-5.5",
+    "vendor": "Anthropic",
+    "name": "Claude Haiku",
+    "version": "5.5",
+    "variant": null,
+    "display": "Claude Haiku 5.5"
+  },
+  "harness": {
+    "name": "GitHub Copilot CLI",
+    "id": "copilot-cli",
+    "version": "1.0.86"
+  },
+  "prompt": "Please create a README.md for this project.",
+  "started_at": "2026-10-23T02:26:41Z",
+  "finished_at": "2026-10-23T02:27:19Z",
+  "wall_clock_seconds": 38,
+  "exit_code": 0,
+  "setup_exit_code": 0,
+  "readme_produced": true,
+  "readme_bytes": 6762,
+  "readme_lines": 158,
+  "usage": {
+    "totalPremiumRequestCost": 1,
+    "totalUserRequests": 1,
+    "totalNanoAiu": 847469500,
+    "tokenDetails": {
+      "input": {
+        "tokenCount": 18
+      },
+      "cache_read": {
+        "tokenCount": 186652
+      },
+      "cache_write": {
+        "tokenCount": 34319
+      },
+      "output": {
+        "tokenCount": 4633
+      }
+    },
+    "totalApiDurationMs": 26228,
+    "sessionStartTime": "2026-10-23T02:26:44.310Z",
+    "codeChanges": {
+      "linesAdded": 158,
+      "linesRemoved": 0,
+      "filesModifiedCount": 1,
+      "filesModified": [
+        "/private/var/tmp/ws/1608fcda/hvir/README.md"
+      ]
+    },
+    "modelMetrics": {
+      "claude-haiku-5.5": {
+        "requests": {
+          "count": 8,
+          "cost": 1
+        },
+        "usage": {
+          "inputTokens": 220989,
+          "outputTokens": 4633,
+          "cacheReadTokens": 186652,
+          "cacheWriteTokens": 34319,
+          "reasoningTokens": 607
+        },
+        "cacheExpiresAt": "2026-10-23T02:32:18.421Z",
+        "totalNanoAiu": 847469500,
+        "tokenDetails": {
+          "input": {
+            "tokenCount": 18
+          },
+          "cache_read": {
+            "tokenCount": 186652
+          },
+          "cache_write": {
+            "tokenCount": 34319
+          },
+          "output": {
+            "tokenCount": 4633
+          }
+        }
+      }
+    },
+    "agentMetrics": {
+      "main": {
+        "totalApiDurationMs": 26228,
+        "totalNanoAiu": 847469500,
+        "modelMetrics": {
+          "claude-haiku-5.5": {
+            "requests": {
+              "count": 8,
+              "cost": 1
+            },
+            "usage": {
+              "inputTokens": 220989,
+              "outputTokens": 4633,
+              "cacheReadTokens": 186652,
+              "cacheWriteTokens": 34319,
+              "reasoningTokens": 607
+            },
+            "totalNanoAiu": 847469500,
+            "tokenDetails": {
+              "input": {
+                "tokenCount": 18
+              },
+              "cache_read": {
+                "tokenCount": 186652
+              },
+              "cache_write": {
+                "tokenCount": 34319
+              },
+              "output": {
+                "tokenCount": 4633
+              }
+            }
+          }
+        }
+      }
+    },
+    "currentModel": "claude-haiku-5.5",
+    "lastCallInputTokens": 34321,
+    "lastCallOutputTokens": 131
+  },
+  "tool_calls": {
+    "bash": 6,
+    "create": 1
+  },
+  "reasoning_effort_requested": null,
+  "reasoning_level": "medium",
+  "chat_calls": {
+    "claude-haiku-5.5": {
+      "medium": 8
+    }
+  },
+  "files_viewed": [],
+  "compactions": [],
+  "truncations": 0
+}

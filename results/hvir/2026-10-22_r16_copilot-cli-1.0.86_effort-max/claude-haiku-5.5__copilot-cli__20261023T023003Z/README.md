@@ -1,0 +1,188 @@
+# hvir
+
+hvir is a desktop workbench for git projects. It runs AI coding-agent CLIs (Claude Code, Codex, Pi, Gemini CLI, GitHub Copilot CLI, Cursor CLI) and plain shells in terminal panes, next to the files, diffs, and git state they work on. Projects can be local folders or folders on an SSH host.
+
+hvir is built with Electron 43, React 19, and TypeScript. It is version 0.2.3, is not published to npm (`"private": true`), and ships as native installers. The code is MIT licensed.
+
+## Features
+
+- **Projects and workspaces.** Register local or SSH folders. Each git worktree of a project is a workspace. Switch between workspaces with `Mod+Alt+]` and `Mod+Alt+[`.
+- **Terminal panes.** PTY-backed terminals (node-pty) rendered with ghostty-web. Panes report `working`, `bell`, or `idle` attention states. `Mod+Shift+F` searches terminal output.
+- **Agent harnesses.** Start Claude Code, Codex, Pi, Gemini CLI, GitHub Copilot CLI, Cursor CLI, a shell, or a custom command in a pane. Launches can be fresh, resumed, or forked. hvir does not bundle the agent CLIs. Install them yourself and make sure they are on `PATH`.
+- **Viewer.** Browse files in rendered, source, or diff mode. Markdown supports task lists and Mermaid diagrams, and code is highlighted with Shiki.
+- **Document review.** Collect review comments on documents in a workspace and deliver them to a harness as copy-only, insert, or send-now, depending on what the provider supports.
+- **Git.** Status, history, commit details, blame, diffs, branches, worktrees, and ignored entries. Git mutations are limited to fetch, pull, branch switch, and worktree prune. The git panel does not commit, stage, or push.
+- **Web pane.** View a web server running on this machine. Only loopback addresses (`localhost`, `127.0.0.1`, `::1`) are allowed, through an authenticated proxy.
+- **Settings.** Appearance, terminal (including a theme gallery), git, keybindings, and harness profiles.
+
+## Platform support
+
+| Platform | Release package | Notes |
+|---|---|---|
+| macOS, Apple silicon | `hvir-<version>-darwin-arm64.pkg` | The installer refuses Intel Macs. |
+| Linux, x64 | `hvir-<version>-linux-x64.deb` | Requires glibc 2.35+ and libstdc++ 12+. |
+| Linux, arm64 | `hvir-<version>-linux-arm64.deb` | Same requirements as x64. |
+| Windows | none | Not supported. |
+
+Release acceptance runs on Ubuntu 24.04 and Debian 13, on x64 and arm64.
+
+## Installing a release
+
+Each release publishes the package for each platform, plus `install.sh` and `SHA256SUMS`. The installer selects the right package, downloads it over HTTPS, checks its SHA-256 digest, and installs it with `sudo`.
+
+```sh
+bash install.sh                      # install or update
+bash install.sh --uninstall          # remove hvir; keep settings and cache
+bash install.sh --uninstall --purge  # also remove the current user's settings and cache
+```
+
+Start hvir from a terminal:
+
+```sh
+hvir                    # open hvir
+hvir /path/to/project   # open hvir on a local project folder
+```
+
+Installed locations:
+
+- **macOS:** the app is at `/Applications/hvir.app`, and the `hvir` command is at `/usr/local/bin/hvir`.
+- **Linux:** the app is under `/opt/hvir`, and the `hvir` command is at `/usr/bin/hvir`.
+
+## Development
+
+### Prerequisites
+
+- Node.js 24 or newer, and npm.
+- macOS or Linux.
+- A C/C++ toolchain, `make`, and Python 3 for native modules. On macOS, install the Xcode Command Line Tools.
+- GitHub access during `npm ci`. `ghostty-web` is installed from a release tarball on GitHub, and the Electron binary is downloaded during install.
+
+### Setup
+
+```sh
+npm ci
+npm run dev
+```
+
+`postinstall` runs `install:runtime`. That step fetches the Electron binary, then rebuilds `@hvir/rename-noreplace` and `node-pty` against Electron. `predev` and `prebuild` run `scripts/check-terminal-runtime.mts`. If it reports a problem, run `npm ci` again.
+
+### Scripts
+
+| Command | What it does |
+|---|---|
+| `npm run dev` | Start the app in development mode (electron-vite). |
+| `npm run build` | Typecheck, then build the main, preload, and renderer bundles into `out/`. |
+| `npm run build:dir` | Build, then create an unpacked app with electron-builder in `dist/`. |
+| `npm run typecheck` | `tsc --noEmit` for the Node and web configs. |
+| `npm run lint` | ESLint, including the architecture seam rules. |
+| `npm run format` / `format:check` | Prettier, write or check. |
+| `npm test` | Vitest suite (`test/`). |
+| `npm run test:watch` | Vitest in watch mode. |
+| `npm run test:mutation` | Stryker mutation tests, scoped to `src/main/git/git-parsers.ts`. |
+| `npm run check-seams` | Architecture seam checks (`scripts/check-seams.sh`). |
+| `npm run architecture:report` | Offline architecture hotspot report. |
+| `npm run architecture:check` | Enforcing architecture check. Requires `HVIR_REPO_TOKEN`. |
+| `npm run check-adrs` | Validates ADR files in `docs/adr/` (also reads `docs/design.md`). |
+| `npm run verify` | Full gate: seams, ADRs, architecture check, lint, typecheck, and tests. |
+| `npm run smoke` | Build the smoke variant and run the Electron smoke scenarios. |
+| `npm run smoke:macos` | macOS subset of the smoke scenarios. |
+| `npm run hooks:install` | Install the git pre-push hook. |
+
+The `issue:*` and `project:*` scripts are maintainer tooling for GitHub issues and Projects. They need `HVIR_REPO_TOKEN`, and some also need `HVIR_PROJECT_TOKEN`.
+
+### Git hooks
+
+`npm run hooks:install` installs `.githooks/pre-push`. The hook runs `npm run typecheck`, then the Electron smoke suite: `npm run smoke:macos` on macOS, or `npm run smoke` on Linux (under `xvfb-run` when there is no display). Skip it with `git push --no-verify`.
+
+### Code style
+
+Prettier is configured in `.prettierrc.json`: no semicolons, single quotes, trailing commas, two-space indentation, and a 90-column print width.
+
+## Testing
+
+- `npm test` runs the Vitest suite. Many tests use real git repositories, child processes, temporary directories, and loopback sockets.
+- `npm run verify` is the full gate that CI runs. Two of its steps need more than the source tree. `check-adrs` reads `docs/adr/` and `docs/design.md` and fails when they are missing. `architecture:check` requires `HVIR_REPO_TOKEN`. The repository does not currently include `docs/`, so `check-adrs` and `verify` fail until those files are restored. `npm run architecture:report` runs offline.
+- Smoke tests drive the real Electron app through scripted scenarios. On Linux they need a display, so run `xvfb-run -a npm run smoke`. On macOS, run `npm run smoke:macos`. `smoke:linux:installed` and `smoke:macos:installed` check an installed package.
+- Tests that bind loopback sockets, write to the OS temp directory, or inspect process groups with `ps` will fail in sandboxes that block those operations.
+
+## Packaging
+
+```sh
+npm run pack:mac:arm64         # macOS .pkg for Apple silicon
+npm run pack:mac:arm64:signed  # same, with code signing forced
+npm run pack:linux:x64         # Linux .deb for x64
+npm run pack:linux:arm64       # Linux .deb for arm64
+npm run build:dir              # unpacked app, for local checks
+```
+
+electron-builder writes to `dist/`. The release workflow uses `render:native-installer` to render `install.sh` from `scripts/native-installer.template.sh`, and `assemble:native-release` to build the full asset set, including `SHA256SUMS`.
+
+## Releases and CI
+
+The **Release** workflow (`.github/workflows/release.yml`) is started by hand with a bump choice: `current`, `patch`, `minor`, or `major`. Patch, minor, and major bumps open a validated release PR. The workflow builds the packages, runs install acceptance on Ubuntu 24.04 and Debian 13, uploads the full asset set to a draft GitHub release, verifies it, and publishes it.
+
+`.github/workflows/ci.yml` runs on pull requests to `main` and `epic/**`. It runs `npm run verify` (with `HVIR_REPO_TOKEN`), the Linux smoke suite under Xvfb, a reduced macOS smoke gate (`npm run smoke:macos:ci`), and CodeQL.
+
+## Architecture
+
+```
+renderer (React) ── window.hvir (preload bridge) ──▶ main process
+                                                      ├── windows and IPC authority
+                                                      ├── PTYs, git engine, project hosts
+                                                      ├── harness providers, sessions, document review
+                                                      └── utility processes: git-worker, echo-worker
+```
+
+| Path | Contents |
+|---|---|
+| `src/main` | Main process: windows, IPC handlers, PTY supervisor, git engine, project hosts, harness providers, document review, sessions, diagnostics. |
+| `src/preload` | The `window.hvir` bridge. The only module that uses `ipcRenderer`. |
+| `src/renderer` | React UI: terminals, viewer, git panel, settings, dashboards. |
+| `src/shared` | Serializable contracts and pure policies shared by more than one process. |
+| `src/workers` | Utility-process workers `git-worker.ts` and `echo-worker.ts`, forked by main. |
+| `packages/rename-noreplace` | Native addon for no-replace renames, used as the local package `@hvir/rename-noreplace`. |
+| `build/` | Packaging resources, including the installed launcher `build/native/hvir-command`. |
+| `scripts/` | Build, smoke, acceptance, release, and project-management scripts. |
+| `test/` | Vitest suite. |
+
+The seams are enforced by `scripts/check-seams.sh` and by ESLint rules in `eslint.config.mjs`:
+
+- Node file-system, child-process, file-watcher, and `ssh2` imports are confined to `src/main/project-host/`. The rest of the app reaches projects through the `ProjectHost` interface, which `LocalHost` and `SshHost` implement.
+- `host.spawnPty` may be called only from `src/main/pty/pty-supervisor.ts`.
+- Only the preload bridge may import `ipcRenderer`.
+- Git mutations are authorized in `src/main/git/mutation-authorization.ts`.
+
+## Configuration and security
+
+- Settings and app state live in Electron's `userData` directory: `~/Library/Application Support/hvir` on macOS and `~/.config/hvir` on Linux.
+- SSH projects use `~/.ssh/config` and the default keys in `~/.ssh`. hvir prompts for passwords, key passphrases, keyboard-interactive answers, and host-key decisions. Trusted host keys are remembered, and a changed host key raises its own prompt.
+- The web pane proxies only loopback addresses, and only for authenticated clients.
+- HTML previews run in a sandboxed `hvir-preview` scheme with only `allow-scripts` enabled.
+
+## Keyboard shortcuts
+
+These are the defaults from `src/shared/keybindings.ts`. Change them in Settings → Keybindings. `Mod` means Cmd on macOS and Ctrl elsewhere.
+
+| Action | Shortcut |
+|---|---|
+| Find file | `Mod+P` |
+| Find in file | `Mod+F` |
+| Find in terminal | `Mod+Shift+F` |
+| Go to line | `Ctrl+G` |
+| Focus terminal | `Mod+J` |
+| Toggle terminal focus | `Mod+Shift+J` |
+| Focus viewer | `Mod+1` |
+| Focus file tree | `Mod+0` |
+| Cycle view mode | `Mod+Shift+M` |
+| Next / previous workspace | `Mod+Alt+]` / `Mod+Alt+[` |
+
+## Known limitations
+
+- Windows is not supported.
+- Packages target Apple-silicon macOS. The installer refuses Intel Macs.
+- Agent CLIs are not bundled. Install and configure them yourself.
+- The git panel cannot commit, stage, or push. Use your terminal or the agent for those.
+
+## License
+
+MIT. See [LICENSE](LICENSE). Notices for bundled third-party code, including ghostty-web and the rename-noreplace binding derived from Skill Steward, are in [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md).
