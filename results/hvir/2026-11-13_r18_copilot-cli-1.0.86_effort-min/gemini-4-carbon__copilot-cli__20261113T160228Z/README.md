@@ -1,0 +1,146 @@
+# hvir
+
+**hvir** is a desktop developer workbench for agentic and terminal-centric software development. Built with Electron, React, TypeScript, and a WebAssembly build of Ghostty's terminal core (`ghostty-web`), it combines high-throughput PTY terminals, AI coding harness profiles, multi-worktree Git workflows, rich file inspection, inline document review, and local or SSH workspace access in a single native application.
+
+## Features
+
+- **Ghostty-Powered Terminal Workspaces** — Demand-driven terminal panes backed by `ghostty-web` and `node-pty`, supporting split layouts, terminal search, clickable file/URL links, clipboard image paste, semantic navigation, and a built-in iTerm2/Ghostty color theme catalog.
+- **Coding Harness Integration** — First-class launch profiles and environment probing for terminal coding agents:
+  - **Claude Code** & **Codex**: Exact session identity, session recovery/resume (plus native session fork where supported), live context-window pressure & token usage telemetry, and structured document-review delivery.
+  - **GitHub Copilot CLI**, **Gemini CLI**, **Cursor CLI**, **Pi**, **Plain Shell**, and **Custom Commands**: Configurable launch profiles with argument/environment management.
+- **Sessions Overview** — Application-wide view across active and recoverable terminal/agent sessions with live turn state (`working`, `waiting-for-user`, `waiting-for-approval`, `idle`), model info, context pressure, and cumulative usage projections.
+- **Projects & Git Worktrees** — Register multiple projects and automatically discover `git worktree` checkouts as switchable workspaces with independent terminal, viewer, and Git state.
+- **Local & Remote SSH Hosts** — Uniform `ProjectHost` abstraction supporting local filesystems/PTYs and remote workspaces over SSH (`ssh2` + `~/.ssh/config` resolution, host trust verification, interactive auth prompts, SFTP file operations, remote watchers, and loopback port forwarding).
+- **Multi-Mode File Viewer & Editor** — Inspect and edit workspace files with split tabs, file-tree navigation, fuzzy filename search, and smart view modes:
+  - **Rendered**: Markdown (with task lists and Mermaid diagrams), standalone Mermaid, sandboxed HTML previews (`hvir-preview:`), structured JSON/YAML/CSV views, and images.
+  - **Source**: CodeMirror 6 editor with Shiki syntax highlighting, inline `git blame`, find, and go-to-line.
+  - **Diff**: Side-by-side/unified CodeMirror merge diffs against working tree, `HEAD`, branch point, or historical commits.
+- **Inline Document Review** — Anchor line-range comments to SHA-256 document snapshots (tracking current, moved, and stale anchors across edits) and copy or deliver batched review feedback directly into active agent sessions.
+- **Integrated Git Panel & Graph** — Inspect working-tree changes, commit history, commit diffs, and interactive commit graphs; switch branches, fetch, pull, and prune stale worktrees via an isolated Git utility worker.
+- **Loopback Web Panes** — Preview local or SSH-forwarded HTTP servers (`localhost`, `127.0.0.1`, `::1`) inside the workbench through a main-owned loopback proxy.
+
+## Supported Platforms
+
+| Platform | Architecture | Native Package | CLI Path |
+| --- | --- | --- | --- |
+| **macOS** | Apple silicon (`arm64`) | `.pkg` (`/Applications/hvir.app`) | `/usr/local/bin/hvir` |
+| **Linux** | `x64`, `arm64` (glibc >= 2.35, `apt`/`dpkg`) | `.deb` (`/opt/hvir/hvir`) | `/usr/bin/hvir` |
+
+## Installation
+
+### Native Release Installer
+
+Published GitHub releases include a verified `install.sh` script along with `.deb` and `.pkg` artifacts and `SHA256SUMS`:
+
+```bash
+curl -fsSL https://github.com/jarmak-personal/hvir/releases/latest/download/install.sh | bash
+```
+
+Once installed, open any local directory as a project from your terminal:
+
+```bash
+hvir .
+```
+
+To uninstall (preserving user configuration, or `--purge` to remove settings and caches):
+
+```bash
+install.sh --uninstall
+install.sh --uninstall --purge
+```
+
+## Development
+
+### Prerequisites
+
+- **Node.js** `>= 24` and `npm`
+- **C/C++ build toolchain** and Python 3 (required by `node-gyp` and `@electron/rebuild` to compile `node-pty` and `@hvir/rename-noreplace` during `postinstall`)
+- **Git**
+
+### Setup & Running Locally
+
+```bash
+# Install dependencies and rebuild native addons for Electron
+npm install
+
+# Start the Electron workbench in development mode with HMR
+npm run dev
+```
+
+Optional: install repository Git hooks (`pre-push`):
+
+```bash
+npm run hooks:install
+```
+
+### Common Scripts
+
+| Command | Description |
+| --- | --- |
+| `npm run dev` | Launch `hvir` in development mode via `electron-vite` |
+| `npm run build` | Run TypeScript checks and build main, preload, renderer, and workers into `out/` |
+| `npm run preview` | Preview the production `electron-vite` build |
+| `npm test` | Run the Vitest unit and component test suite |
+| `npm run test:watch` | Run Vitest in interactive watch mode |
+| `npm run typecheck` | Typecheck Node (`main`, `preload`, `workers`, `scripts`) and Web (`renderer`) targets |
+| `npm run lint` | Lint all sources with ESLint (includes architectural boundary rules) |
+| `npm run format` | Format code with Prettier (`npm run format:check` to verify) |
+| `npm run check-seams` | Enforce process, host, PTY, SSH, and IPC architectural seam invariants |
+| `npm run architecture:report` | Report file-size budgets and module hotspot rules offline |
+| `npm run smoke` | Build in smoke mode and run end-to-end Electron smoke scenarios (use `xvfb-run -a` on headless Linux) |
+| `npm run smoke:macos` | Run the macOS Electron smoke scenario suite |
+| `npm run pack:mac:arm64` | Build an unsigned macOS `arm64` `.pkg` installer in `dist/` |
+| `npm run pack:linux:x64` | Build a Linux `x64` `.deb` package in `dist/` |
+| `npm run pack:linux:arm64` | Build a Linux `arm64` `.deb` package in `dist/` |
+
+## Default Keybindings
+
+Keybindings use `Mod` (`Cmd` on macOS, `Ctrl` on Linux) and can be customized in **Settings**:
+
+| Action | Shortcut |
+| --- | --- |
+| Find file | `Mod+P` |
+| Find in file | `Mod+F` |
+| Find in terminal | `Mod+Shift+F` |
+| Go to line | `Ctrl+G` |
+| Cycle file view mode (Rendered / Source / Diff) | `Mod+Shift+M` |
+| Focus file tree | `Mod+0` |
+| Focus viewer | `Mod+1` |
+| Focus terminal | `Mod+J` |
+| Toggle terminal maximize / focus | `Mod+Shift+J` |
+| Previous / Next workspace | `Mod+Alt+[` / `Mod+Alt+]` |
+
+## Architecture Overview
+
+`hvir` enforces strict process and module boundaries (checked via `eslint.config.mjs`, `scripts/check-seams.sh`, and `scripts/architecture-hotspots.mjs`):
+
+```text
+src/
+├── main/        # Authoritative Electron main process
+│   ├── project-host/    # LocalHost (fs/child_process/chokidar/node-pty) & SshHost (ssh2)
+│   ├── pty/             # Single PTY spawn & lifecycle supervisor
+│   ├── harness/         # Bundled agent providers, probes, session recovery & telemetry
+│   ├── git/             # Git command context, coordinators & worker broker
+│   ├── document-review/ # Snapshot-anchored review store, revalidation & agent delivery
+│   ├── sessions/        # Cross-workspace session state & usage projections
+│   ├── viewer/          # File read/write & external document authority
+│   ├── web-pane/        # Loopback HTTP proxy & webview route registry
+│   └── ipc/             # Single ipcMain authority router & feature registrars
+├── preload/     # Narrow contextBridge surface (sole user of ipcRenderer)
+├── renderer/    # React 19 UI (workspaces, Ghostty terminal panes, CodeMirror viewer, Git UI)
+├── shared/      # Pure serializable contracts, HostPath types & IPC schemas
+└── workers/     # Utility processes (e.g., isolated git-worker)
+packages/
+└── rename-noreplace/ # Private Node-API native addon for atomic no-replace file renames
+```
+
+Key architectural invariants:
+- **Centralized Host I/O**: Filesystem, child process, watcher, and `node-pty` primitives are imported only inside `LocalHost`; `ssh2` stays encapsulated inside `SshHost`. Consumers operate exclusively on `ProjectHost` and host-qualified `HostPath` values.
+- **Single Authority Choke Points**: `ipcRenderer` exists only in `src/preload/`, `ipcMain` is bound only in `src/main/ipc/authority-router.ts`, and PTYs are spawned only by `PtySupervisor`.
+- **Opaque Provider Catalog**: Specific harness provider IDs (`claude-code`, `codex`, etc.) are confined to `src/main/harness/`; shared IPC and renderer layers treat providers as data-driven descriptors.
+
+## License
+
+Licensed under the [MIT License](LICENSE).
+
+See [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md) for license notices covering redistributed and derived components, including `ghostty-web`, Ghostty terminal core, `iTerm2-Color-Schemes`, and `@hvir/rename-noreplace`.

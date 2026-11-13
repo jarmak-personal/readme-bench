@@ -1,0 +1,162 @@
+# hvir
+
+**hvir** is a native desktop workbench for agentic software development across local directories, Git worktrees, and remote SSH hosts.
+
+Built with Electron, React, TypeScript, and a WebAssembly terminal powered by Ghostty (`ghostty-web`), hvir brings coding-agent sessions, multi-representation file viewing and editing, anchored document review, Git workflows, and loopback web previews together in a single workspace-oriented interface.
+
+## Features
+
+### Projects, Worktrees, and Remote SSH Hosts
+- **Multi-project & Git worktree management**: Register multiple repositories or plain directories, automatically discover linked Git worktrees, prune stale worktree records, and switch between workspaces without losing state.
+- **Unified local and SSH host model**: Work against local directories or remote machines over SSH (`ssh2`) with OpenSSH config discovery, host-key trust verification, interactive authentication prompts, remote file watching, remote PTYs, and remote loopback port forwarding.
+
+### Terminal & Coding Agent Harnesses
+- **Ghostty VT terminal**: High-throughput WebAssembly terminal emulation (`ghostty-web`) backed by `node-pty` locally and SSH PTY channels remotely, with split panes, workspace moves, terminal search, clickable file paths and URLs, attention badges, and theme customization.
+- **Bundled harness providers & profiles**: Launch and manage interactive shells and coding agents with customizable profiles, environment bindings, and composer submit behavior:
+  - **Claude Code** & **Codex**: Exact session identity tracking, session recovery and forking, live context-window pressure meters, cumulative token-usage telemetry, and clipboard image paste support.
+  - **Additional CLI providers**: **GitHub Copilot CLI**, **Gemini CLI**, **Cursor CLI**, **Pi**, **Shell** (default login shell), and **Custom** commands.
+
+### Cross-Project Sessions Overview
+- **Live & retained session dashboard**: Switch to the **Sessions** destination to inspect terminal and agent sessions across all registered projects and worktrees—surfacing turn state (`working`, `waiting-for-user`, `waiting-for-approval`, `idle`), active model, context usage, attention state, and on-demand token consumption, with direct navigation back to any live terminal.
+
+### Multi-Mode File Viewer & Inline Document Review
+- **Rendered, Source, and Diff modes**: Open files in primary or split viewer panes with context-aware defaults:
+  - **Rendered**: Markdown (with task lists and repository images), Mermaid diagrams, sandboxed HTML previews, interactive JSON/YAML trees, CSV tables, and images (`svg`, `png`, `jpg`, `webp`, `avif`, `gif`, `bmp`, `ico`).
+  - **Source**: CodeMirror 6 editor with worker-offloaded Shiki syntax highlighting, inline Git blame gutter, find-in-file, and go-to-line.
+  - **Diff**: Side-by-side/unified CodeMirror merge diffs against `working-tree`, `head`, `branch-point`, or specific commit revisions.
+- **Anchored document review & terminal delivery**: Capture review comments anchored to SHA-256-verified source line ranges from either `rendered` or `source` views. Anchors track moved or stale ranges across file edits, and comments or review batches can be previewed, copied, inserted, or sent directly to live agent terminals.
+
+### Git Rail, Commit Graph, & Loopback Web Panes
+- **Isolated Git worker**: A dedicated Electron utility process (`git-worker`) executes Git operations off the main thread, powering working-tree change lists, commit history, lane-rendered commit graphs, branch switching, fetch/auto-fetch, and pull.
+- **Loopback web previews**: Opening `http://localhost`, `127.0.0.1`, or `[::1]` links from a terminal launches an embedded web pane backed by a main-process loopback HTTP proxy that works transparently across both local and SSH workspaces.
+
+## Supported Platforms & CLI Usage
+
+Native release packages target:
+
+- **macOS** (`arm64` / Apple silicon) — signed `.pkg` installer (`/Applications/hvir.app` and `/usr/local/bin/hvir`)
+- **Linux** (`x64` and `arm64`) — `.deb` package for Debian/Ubuntu distributions with `glibc >= 2.35` (`/opt/hvir/hvir` and `/usr/bin/hvir`, including an AppArmor profile for unprivileged user namespaces)
+
+Once installed, launch hvir from a terminal or your desktop launcher:
+
+```sh
+# Launch hvir
+hvir
+
+# Open hvir rooted at a specific local directory
+hvir .
+hvir /path/to/project
+```
+
+The release installer script (`install.sh` attached to GitHub Releases) verifies package SHA-256 digests—and Apple signature, notarization, and Gatekeeper checks on macOS—and supports clean removal:
+
+```sh
+./install.sh
+./install.sh --uninstall
+./install.sh --uninstall --purge
+```
+
+## Default Keyboard Shortcuts
+
+`Mod` maps to `Cmd` on macOS and `Ctrl` on Linux. All bindings can be customized in **Settings → Keybindings**.
+
+| Action | Default Binding |
+| --- | --- |
+| Find file | `Mod+P` |
+| Find in file | `Mod+F` |
+| Find in terminal | `Mod+Shift+F` |
+| Go to line | `Ctrl+G` |
+| Cycle view mode (`rendered` / `source` / `diff`) | `Mod+Shift+M` |
+| Focus project rail (file tree) | `Mod+0` |
+| Focus file viewer | `Mod+1` |
+| Focus terminal | `Mod+J` |
+| Toggle maximized terminal focus | `Mod+Shift+J` |
+| Next / previous workspace | `Mod+Alt+]` / `Mod+Alt+[` |
+
+## Development
+
+### Prerequisites
+
+- **Node.js `>= 24`** and **npm**
+- **C/C++ build toolchain & Python 3** (required by `node-gyp` and `@electron/rebuild` to compile `@hvir/rename-noreplace` and `node-pty` during `postinstall`)
+- **Git**
+- **`xvfb-run`** on headless Linux hosts when running Electron smoke suites
+
+### Getting Started
+
+```sh
+# Install dependencies and build Electron native runtime bindings
+npm install
+
+# Start hvir in development mode with hot reload
+npm run dev
+```
+
+Optional local Git pre-push hooks (runs TypeScript checks and local-platform Electron smoke tests before push):
+
+```sh
+npm run hooks:install
+```
+
+### Building & Packaging
+
+```sh
+# Typecheck and build production main, preload, worker, and renderer bundles into out/
+npm run build
+
+# Preview the production build
+npm run preview
+
+# Build unpacked Electron app directory in dist/
+npm run build:dir
+
+# Build native platform packages in dist/
+npm run pack:mac:arm64
+npm run pack:linux:x64
+npm run pack:linux:arm64
+```
+
+### Verification & Testing
+
+| Command | Description |
+| --- | --- |
+| `npm test` | Run the Vitest unit and component test suite (`npm run test:watch` for watch mode) |
+| `npm run typecheck` | Typecheck Node (`tsconfig.node.json`) and renderer (`tsconfig.web.json`) targets |
+| `npm run lint` | Run ESLint (including architectural import rules) |
+| `npm run format:check` | Check formatting with Prettier (`npm run format` to write) |
+| `npm run check-seams` | Verify grep-level architectural seam invariants |
+| `npm run architecture:report` | Inspect module line-count budgets and dependency directions offline (`npm run architecture:check` enforces provenance in CI with `HVIR_REPO_TOKEN`) |
+| `npm run verify` | Run full static, policy, and unit verification (`check-seams`, `check-adrs`, `architecture:check`, `lint`, `typecheck`, `test`) |
+| `npm run smoke` | Build smoke bundle and run the end-to-end Electron smoke scenarios (`npm run smoke:macos` on macOS) |
+| `npm run test:mutation` | Run Stryker mutation testing |
+
+## Architecture
+
+```text
+.
+├── src/
+│   ├── main/        # Electron main process: runtime lifecycle, IPC authority router,
+│   │                # ProjectHost (LocalHost & SshHost), PtySupervisor, harness providers,
+│   │                # sessions projection, document review store, loopback HTTP proxy
+│   ├── preload/     # Context-isolated ipcRenderer bridge exposed as window.hvir
+│   ├── renderer/    # React 19 workbench UI, CodeMirror/Shiki viewer, Ghostty terminal,
+│   │                # Git panel & commit graph, document review, Sessions view, workers
+│   ├── shared/      # Shared TypeScript contracts, IPC schemas, keybindings, HostPath types
+│   └── workers/     # Electron utility-process workers (git-worker, echo-worker)
+├── packages/
+│   └── rename-noreplace/ # Private Node-API addon for atomic no-replace file renames
+├── build/           # macOS entitlements/icons, Linux AppArmor & package scripts, hvir CLI wrapper
+├── scripts/         # Seam & architecture checks, Electron smoke runner, release & SSH tooling
+└── test/            # Vitest suites and fixtures
+```
+
+Key architectural seams are enforced continuously by `eslint.config.mjs`, `scripts/check-seams.sh`, and `scripts/architecture-hotspots.mjs`:
+
+- **Single preload bridge**: `ipcRenderer` is imported only inside `src/preload/`.
+- **Central IPC authority**: `ipcMain` is touched only in `src/main/ipc/authority-router.ts`; feature handlers receive scoped capabilities with central renderer-owner and canonical-path validation.
+- **Host isolation**: Direct Node host primitives (`fs`, `child_process`, `chokidar`, `node-pty`) live exclusively in `LocalHost`, and `ssh2` lives exclusively in `SshHost`. All higher-level main-process features operate against the `ProjectHost` interface and host-qualified `HostPath` values.
+- **Single PTY & loopback owners**: PTY processes are spawned only through `PtySupervisor`, and loopback sockets are opened only by the web-pane HTTP proxy.
+
+## License
+
+Released under the [MIT License](LICENSE). See [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md) for third-party software notices, including `@hvir/rename-noreplace` and `ghostty-web`.

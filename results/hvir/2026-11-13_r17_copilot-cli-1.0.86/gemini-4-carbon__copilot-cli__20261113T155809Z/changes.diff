@@ -1,0 +1,128 @@
+diff --git a/README.md b/README.md
+new file mode 100644
+index 0000000..7b05d88
+--- /dev/null
++++ b/README.md
+@@ -0,0 +1,122 @@
++# hvir
++
++**hvir** is a desktop workbench for terminal-first software development and coding-agent workflows across local repositories, Git worktrees, and remote SSH hosts. Built with Electron, React, TypeScript, and `ghostty-web`, it combines multiplexed terminal and AI harness sessions with a fast file viewer, inline document review, Git graph/staging tools, and loopback web previews.
++
++## Features
++
++- **Projects & Git Worktree Workspaces** — Register local folders or remote SSH directories as projects. Git repositories automatically surface their `git worktree` checkouts as independent workspaces with per-worktree change counts and lifecycle cleanup.
++- **Terminal & Coding-Agent Harnesses** — Terminal panes powered by `ghostty-web` (WebAssembly VT emulation) and `node-pty` with split layouts, terminal search, clickable file paths, attention badges, and customizable themes.
++  - Built-in harness support for **Claude Code** and **Codex** (including session discovery, exact resume/fork, context-window pressure & token usage telemetry, image paste, and review delivery), plus launch profiles for **GitHub Copilot CLI**, **Gemini CLI**, **Cursor CLI**, **Pi**, **Shell**, and **Custom** commands.
++  - **Sessions Dashboard** — Cross-workspace overview of live and recoverable agent sessions, context pressure, and cumulative usage.
++- **Remote SSH Hosts** — Unified host abstraction (`LocalHost` and `SshHost`) supporting `~/.ssh/config` resolution, interactive host-key and authentication prompts, remote PTYs, SFTP file operations, remote file watching, and clipboard image upload.
++- **File Viewer, Editor & Diffs** — Tabbed and split-pane viewer featuring Shiki syntax highlighting, CodeMirror editing and blame gutters, side-by-side/unified diffs, rendered Markdown (with task lists, repository images, and Mermaid diagrams), structured CSV/JSON views, HTML/image previews, and large-file handling.
++- **Document Review** — Attach SHA-256-anchored review comments to workspace files and batch-deliver structured feedback (`Copy`, `Insert`, or `Send Now`) directly to an active coding-agent terminal.
++- **Integrated Git Workflow** — Dedicated utility-process Git worker providing workspace status, staging/unstage/commit flows, branch switching, fetch/pull sync, and an interactive commit history lane graph.
++- **Loopback Web Pane** — Preview `localhost` / `127.0.0.1` / `::1` HTTP servers running locally or on a connected SSH host inside the workbench via a main-process loopback proxy with console and request diagnostics.
++
++## Supported Platforms
++
++| Platform | Architecture | Package Format | CLI Path |
++| --- | --- | --- | --- |
++| macOS | Apple silicon (`arm64`) | `.pkg` (`/Applications/hvir.app`) | `/usr/local/bin/hvir` |
++| Linux | `x64`, `arm64` (`glibc >= 2.35`) | Debian/Ubuntu `.deb` (`/opt/hvir`) | `/usr/bin/hvir` |
++
++Once installed, launch the workbench from the desktop entry or open a local project directory from your shell:
++
++```sh
++hvir /path/to/project
++```
++
++## Development
++
++### Prerequisites
++
++- **Node.js** `>= 24` and `npm`
++- **Git**
++- **Native build toolchain** (`python3`, `make`, and a C/C++ compiler) for building `node-pty` and the `@hvir/rename-noreplace` Node-API addon
++- **macOS** (`arm64`) or **Linux** (`x64` / `arm64`)
++
++### Getting Started
++
++Install dependencies (this also runs `postinstall` to install the Electron binary and compile native modules against the runtime ABI):
++
++```sh
++npm install
++```
++
++Start the workbench in development mode with hot reload:
++
++```sh
++npm run dev
++```
++
++Build and preview the production bundle locally:
++
++```sh
++npm run build
++npm run preview
++```
++
++### Testing & Verification
++
++| Command | Description |
++| --- | --- |
++| `npm test` | Run the Vitest test suite once |
++| `npm run test:watch` | Run Vitest in watch mode |
++| `npm run typecheck` | Type-check Node (`main`/`preload`/`workers`) and Web (`renderer`) targets |
++| `npm run lint` | Run ESLint across the repository |
++| `npm run format:check` | Check code formatting with Prettier |
++| `npm run check-seams` | Verify architectural module boundary invariants |
++| `npm run architecture:report` | Inspect module dependency & hotspot metrics |
++| `npm run smoke` | Build in smoke mode and run end-to-end Electron smoke scenarios |
++| `npm run test:mutation` | Run Stryker mutation tests |
++
++### Packaging
++
++Build native platform installers into `dist/`:
++
++```sh
++# macOS (Apple silicon .pkg)
++npm run pack:mac:arm64
++
++# Linux (.deb)
++npm run pack:linux:x64
++npm run pack:linux:arm64
++```
++
++## Default Keyboard Shortcuts
++
++`Mod` maps to `Cmd` on macOS and `Ctrl` on Linux. Keybindings can be customized in Settings.
++
++| Action | Default Binding |
++| --- | --- |
++| Find file in workspace | `Mod+P` |
++| Find in file | `Mod+F` |
++| Find in terminal | `Mod+Shift+F` |
++| Go to line | `Ctrl+G` |
++| Cycle viewer mode (Source / Rendered / Diff) | `Mod+Shift+M` |
++| Focus terminal | `Mod+J` |
++| Toggle terminal focus | `Mod+Shift+J` |
++| Focus viewer | `Mod+1` |
++| Focus file tree | `Mod+0` |
++| Next / Previous workspace | `Mod+Alt+]` / `Mod+Alt+[` |
++
++## Repository Structure
++
++```text
++├── build/                      # Icons, macOS entitlements, Linux AppArmor profile, CLI wrapper
++├── packages/
++│   └── rename-noreplace/       # Private Node-API addon for atomic no-replace file renames
++├── scripts/                    # Build, smoke-test, release assembly, and architecture checks
++├── src/
++│   ├── main/                   # Electron main process (hosts, PTYs, harnesses, IPC, review, proxy)
++│   ├── preload/                # Context-isolated IPC bridge
++│   ├── renderer/               # React UI, Ghostty terminal views, viewer, Git graph, web workers
++│   ├── shared/                 # Shared TypeScript contracts, IPC schemas, host paths, keybindings
++│   └── workers/                # Electron utility-process workers (Git & diagnostics)
++└── test/                       # Unit, contract, and integration tests + fixtures
++```
++
++## License
++
++Released under the [MIT License](./LICENSE). Third-party software notices are documented in [THIRD_PARTY_NOTICES.md](./THIRD_PARTY_NOTICES.md).

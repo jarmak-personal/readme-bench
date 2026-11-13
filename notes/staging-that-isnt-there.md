@@ -1,7 +1,7 @@
 ---
 title: The staging area that isn't there
 date: 2026-10-23
-summary: hvir's git panel can't stage or commit but seven READMEs say it can, six of them from Gemini.
+summary: hvir's git panel can't stage or commit but eight READMEs say it can, seven of them from Gemini.
 run: hvir/gemini-4-argon__copilot-cli__20261023T024336Z
 quote: Off-main-thread Git engine (`git-worker`) supporting working-tree status, staging/unstaging, commits, branch & worktree management
 kind: invented feature
@@ -18,12 +18,13 @@ export type GitMutationKind = 'worktree-prune' | 'branch-switch' | 'fetch' | 'pu
 
 No stage, commit, or push; in hvir I expect you'll have your agent do that.
 
-Seven READMEs give it a staging area anyway:
+Eight READMEs give it a staging area anyway:
 
 | run | tier | what it says |
 |---|---|---|
 | Gemini 4 Argon | default | "staging/unstaging, commits, branch & worktree management" |
 | Gemini 4 Argon | min | "staging/unstaging, branch switching, fetching, pulling, and worktree pruning" |
+| Gemini 4 Carbon | default | "workspace status, staging/unstage/commit flows, branch switching, fetch/pull sync" |
 | Gemini 3.5 Flash | max | "In-app file staging, commits, branch switching, remote fetches" |
 | Gemini 3.7 Flash | default | "Interactive Git panel for staging, committing, branch switching, fetching" |
 | Gemini 3.8 Flash | min | "Integrated Git status tracking, staging, changes inspector, commit log" |

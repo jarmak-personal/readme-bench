@@ -1,0 +1,201 @@
+{
+  "id": "gemini-4-carbon__copilot-cli__20261113T155809Z",
+  "batch": "2026-11-13_r17_copilot-cli-1.0.86",
+  "target": {
+    "name": "hvir",
+    "url": "https://github.com/jarmak-personal/hvir",
+    "commit": "7acbf8883bc869a9987252833d90b0d250086122",
+    "snapshot_commit": "ca97b8a72d67da22d5da4705101f99fbc80bd9cf"
+  },
+  "model": {
+    "id": "gemini-4-carbon",
+    "vendor": "Google",
+    "name": "Gemini",
+    "version": "4",
+    "variant": "carbon",
+    "display": "Gemini 4 Carbon"
+  },
+  "harness": {
+    "name": "GitHub Copilot CLI",
+    "id": "copilot-cli",
+    "version": "1.0.86"
+  },
+  "prompt": "Please create a README.md for this project.",
+  "started_at": "2026-11-13T15:58:44Z",
+  "finished_at": "2026-11-13T16:02:21Z",
+  "wall_clock_seconds": 217,
+  "exit_code": 0,
+  "setup_exit_code": 0,
+  "readme_produced": true,
+  "readme_bytes": 6160,
+  "readme_lines": 122,
+  "usage": {
+    "totalPremiumRequestCost": 1,
+    "totalUserRequests": 1,
+    "totalNanoAiu": 24516720000,
+    "tokenDetails": {
+      "input": {
+        "tokenCount": 61636
+      },
+      "cache_read": {
+        "tokenCount": 442052
+      },
+      "cache_write": {
+        "tokenCount": 0
+      },
+      "output": {
+        "tokenCount": 7769
+      }
+    },
+    "totalApiDurationMs": 205056,
+    "sessionStartTime": "2026-11-13T15:58:47.572Z",
+    "codeChanges": {
+      "linesAdded": 122,
+      "linesRemoved": 0,
+      "filesModifiedCount": 1,
+      "filesModified": [
+        "/private/var/tmp/ws/e45beb76/hvir/README.md"
+      ]
+    },
+    "modelMetrics": {
+      "gemini-4-carbon": {
+        "requests": {
+          "count": 13,
+          "cost": 1
+        },
+        "usage": {
+          "inputTokens": 503688,
+          "outputTokens": 7769,
+          "cacheReadTokens": 442052,
+          "cacheWriteTokens": 0,
+          "reasoningTokens": 3179
+        },
+        "totalNanoAiu": 24516720000,
+        "tokenDetails": {
+          "input": {
+            "tokenCount": 61636
+          },
+          "cache_read": {
+            "tokenCount": 442052
+          },
+          "cache_write": {
+            "tokenCount": 0
+          },
+          "output": {
+            "tokenCount": 7769
+          }
+        }
+      }
+    },
+    "agentMetrics": {
+      "main": {
+        "totalApiDurationMs": 205056,
+        "totalNanoAiu": 24516720000,
+        "modelMetrics": {
+          "gemini-4-carbon": {
+            "requests": {
+              "count": 13,
+              "cost": 1
+            },
+            "usage": {
+              "inputTokens": 503688,
+              "outputTokens": 7769,
+              "cacheReadTokens": 442052,
+              "cacheWriteTokens": 0,
+              "reasoningTokens": 3179
+            },
+            "totalNanoAiu": 24516720000,
+            "tokenDetails": {
+              "input": {
+                "tokenCount": 61636
+              },
+              "cache_read": {
+                "tokenCount": 442052
+              },
+              "cache_write": {
+                "tokenCount": 0
+              },
+              "output": {
+                "tokenCount": 7769
+              }
+            }
+          }
+        }
+      }
+    },
+    "currentModel": "gemini-4-carbon",
+    "lastCallInputTokens": 56194,
+    "lastCallOutputTokens": 258
+  },
+  "tool_calls": {
+    "view": 55,
+    "glob": 3,
+    "bash": 2,
+    "grep": 2,
+    "create": 1
+  },
+  "reasoning_effort_requested": null,
+  "reasoning_level": "medium",
+  "chat_calls": {
+    "gemini-4-carbon": {
+      "medium": 13
+    }
+  },
+  "files_viewed": [
+    ".",
+    ".github",
+    ".github/workflows",
+    ".github/workflows/ci.yml",
+    ".github/workflows/release.yml",
+    ".gitignore",
+    ".prettierignore",
+    ".prettierrc.json",
+    "LICENSE",
+    "build",
+    "build/native",
+    "build/native/hvir-command",
+    "electron-builder.yml",
+    "package.json",
+    "packages",
+    "packages/rename-noreplace/package.json",
+    "scripts",
+    "scripts/assemble-native-release.mjs",
+    "scripts/check-adrs.mjs",
+    "scripts/check-seams.sh",
+    "scripts/native-installer.template.sh",
+    "src",
+    "src/main",
+    "src/main/application-runtime.ts",
+    "src/main/document-review",
+    "src/main/harness",
+    "src/main/harness/bundled-harness-providers.ts",
+    "src/main/harness/providers",
+    "src/main/harness/providers/claude-code.ts",
+    "src/main/harness/providers/codex.ts",
+    "src/main/harness/providers/cursor.ts",
+    "src/main/harness/providers/gemini.ts",
+    "src/main/harness/providers/github-copilot.ts",
+    "src/main/harness/providers/pi.ts",
+    "src/main/harness/providers/shell.ts",
+    "src/main/index.ts",
+    "src/main/project-host",
+    "src/main/sessions",
+    "src/main/viewer",
+    "src/renderer",
+    "src/renderer/src",
+    "src/renderer/src/App.tsx",
+    "src/renderer/src/git",
+    "src/renderer/src/viewer",
+    "src/renderer/src/workbench",
+    "src/shared",
+    "src/shared/document-review.ts",
+    "src/shared/harness-provider.ts",
+    "src/shared/keybindings.ts",
+    "src/shared/sessions-projection.ts",
+    "src/shared/web-pane.ts",
+    "src/shared/workspace-types.ts",
+    "src/workers"
+  ],
+  "compactions": [],
+  "truncations": 0
+}

@@ -1,0 +1,98 @@
+{
+  "totalPremiumRequestCost": 1,
+  "totalUserRequests": 1,
+  "totalNanoAiu": 42918930000,
+  "tokenDetails": {
+    "input": {
+      "tokenCount": 105896
+    },
+    "cache_read": {
+      "tokenCount": 1023073
+    },
+    "cache_write": {
+      "tokenCount": 0
+    },
+    "output": {
+      "tokenCount": 11509
+    }
+  },
+  "totalApiDurationMs": 378257,
+  "sessionStartTime": "2026-11-13T16:09:03.710Z",
+  "codeChanges": {
+    "linesAdded": 163,
+    "linesRemoved": 1,
+    "filesModifiedCount": 1,
+    "filesModified": [
+      "/private/var/tmp/ws/3adb3756/hvir/README.md"
+    ]
+  },
+  "modelMetrics": {
+    "gemini-4-carbon": {
+      "requests": {
+        "count": 17,
+        "cost": 1
+      },
+      "usage": {
+        "inputTokens": 1128969,
+        "outputTokens": 11509,
+        "cacheReadTokens": 1023073,
+        "cacheWriteTokens": 0,
+        "reasoningTokens": 5466
+      },
+      "totalNanoAiu": 42918930000,
+      "tokenDetails": {
+        "input": {
+          "tokenCount": 105896
+        },
+        "cache_read": {
+          "tokenCount": 1023073
+        },
+        "cache_write": {
+          "tokenCount": 0
+        },
+        "output": {
+          "tokenCount": 11509
+        }
+      }
+    }
+  },
+  "agentMetrics": {
+    "main": {
+      "totalApiDurationMs": 378257,
+      "totalNanoAiu": 42918930000,
+      "modelMetrics": {
+        "gemini-4-carbon": {
+          "requests": {
+            "count": 17,
+            "cost": 1
+          },
+          "usage": {
+            "inputTokens": 1128969,
+            "outputTokens": 11509,
+            "cacheReadTokens": 1023073,
+            "cacheWriteTokens": 0,
+            "reasoningTokens": 5466
+          },
+          "totalNanoAiu": 42918930000,
+          "tokenDetails": {
+            "input": {
+              "tokenCount": 105896
+            },
+            "cache_read": {
+              "tokenCount": 1023073
+            },
+            "cache_write": {
+              "tokenCount": 0
+            },
+            "output": {
+              "tokenCount": 11509
+            }
+          }
+        }
+      }
+    }
+  },
+  "currentModel": "gemini-4-carbon",
+  "lastCallInputTokens": 95662,
+  "lastCallOutputTokens": 268
+}
