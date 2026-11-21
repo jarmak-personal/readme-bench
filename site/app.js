@@ -98,7 +98,7 @@
     const t = targetOf(target);
     const runs = runsOf(target);
     const models = new Set(runs.map(r => r.model.display)), harnesses = new Set(runs.map(r => r.harness.name));
-    const pinned = DB.notes.filter(n => n.pin && (!n.run || runs.some(r => r.id === n.run)));
+    const pinned = DB.notes.filter(n => n.pin && (!n.run || runs.some(r => r.id === n.run))).slice(0, 4);
     let held = null;
 
     // Looked vs wrote: input tokens (log) against README lines. A run with no README sits on the baseline.

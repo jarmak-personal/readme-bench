@@ -1,0 +1,161 @@
+{
+  "id": "gemini-4-neon__copilot-cli__20261120T170345Z",
+  "batch": "2026-11-20_r21_copilot-cli-1.0.86_effort-min",
+  "target": {
+    "name": "hvir",
+    "url": "https://github.com/jarmak-personal/hvir",
+    "commit": "7acbf8883bc869a9987252833d90b0d250086122",
+    "snapshot_commit": "ca97b8a72d67da22d5da4705101f99fbc80bd9cf"
+  },
+  "model": {
+    "id": "gemini-4-neon",
+    "vendor": "Google",
+    "name": "Gemini",
+    "version": "4",
+    "variant": "neon",
+    "display": "Gemini 4 Neon"
+  },
+  "harness": {
+    "name": "GitHub Copilot CLI",
+    "id": "copilot-cli",
+    "version": "1.0.86"
+  },
+  "prompt": "Please create a README.md for this project.",
+  "started_at": "2026-11-20T17:03:59Z",
+  "finished_at": "2026-11-20T17:04:48Z",
+  "wall_clock_seconds": 49,
+  "exit_code": 0,
+  "setup_exit_code": 0,
+  "readme_produced": true,
+  "readme_bytes": 4196,
+  "readme_lines": 90,
+  "usage": {
+    "totalPremiumRequestCost": 1,
+    "totalUserRequests": 1,
+    "totalNanoAiu": 17101290000,
+    "tokenDetails": {
+      "input": {
+        "tokenCount": 36047
+      },
+      "cache_read": {
+        "tokenCount": 117046
+      },
+      "cache_write": {
+        "tokenCount": 0
+      },
+      "output": {
+        "tokenCount": 3021
+      }
+    },
+    "totalApiDurationMs": 44822,
+    "sessionStartTime": "2026-11-20T17:04:02.138Z",
+    "codeChanges": {
+      "linesAdded": 90,
+      "linesRemoved": 0,
+      "filesModifiedCount": 1,
+      "filesModified": [
+        "/private/var/tmp/ws/a675b1cf/hvir/README.md"
+      ]
+    },
+    "modelMetrics": {
+      "gemini-4-neon": {
+        "requests": {
+          "count": 6,
+          "cost": 1
+        },
+        "usage": {
+          "inputTokens": 153093,
+          "outputTokens": 3021,
+          "cacheReadTokens": 117046,
+          "cacheWriteTokens": 0,
+          "reasoningTokens": 1032
+        },
+        "totalNanoAiu": 17101290000,
+        "tokenDetails": {
+          "input": {
+            "tokenCount": 36047
+          },
+          "cache_read": {
+            "tokenCount": 117046
+          },
+          "cache_write": {
+            "tokenCount": 0
+          },
+          "output": {
+            "tokenCount": 3021
+          }
+        }
+      }
+    },
+    "agentMetrics": {
+      "main": {
+        "totalApiDurationMs": 44822,
+        "totalNanoAiu": 17101290000,
+        "modelMetrics": {
+          "gemini-4-neon": {
+            "requests": {
+              "count": 6,
+              "cost": 1
+            },
+            "usage": {
+              "inputTokens": 153093,
+              "outputTokens": 3021,
+              "cacheReadTokens": 117046,
+              "cacheWriteTokens": 0,
+              "reasoningTokens": 1032
+            },
+            "totalNanoAiu": 17101290000,
+            "tokenDetails": {
+              "input": {
+                "tokenCount": 36047
+              },
+              "cache_read": {
+                "tokenCount": 117046
+              },
+              "cache_write": {
+                "tokenCount": 0
+              },
+              "output": {
+                "tokenCount": 3021
+              }
+            }
+          }
+        }
+      }
+    },
+    "currentModel": "gemini-4-neon",
+    "lastCallInputTokens": 31707,
+    "lastCallOutputTokens": 169
+  },
+  "tool_calls": {
+    "view": 15,
+    "glob": 1,
+    "create": 1
+  },
+  "reasoning_effort_requested": "low",
+  "reasoning_level": "low",
+  "chat_calls": {
+    "gemini-4-neon": {
+      "low": 6
+    }
+  },
+  "files_viewed": [
+    ".",
+    "LICENSE",
+    "electron-builder.yml",
+    "package.json",
+    "packages",
+    "packages/rename-noreplace/package.json",
+    "scripts",
+    "src",
+    "src/main",
+    "src/renderer",
+    "src/renderer/index.html",
+    "src/renderer/src",
+    "src/shared",
+    "src/workers",
+    "test"
+  ],
+  "compactions": [],
+  "truncations": 0
+}

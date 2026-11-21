@@ -1,0 +1,131 @@
+diff --git a/README.md b/README.md
+new file mode 100644
+index 0000000..4b257af
+--- /dev/null
++++ b/README.md
+@@ -0,0 +1,125 @@
++# hvir
++
++hvir is a desktop workbench for software projects. It combines a project file tree, source and document viewers, Git controls, native terminals, SSH workspaces, and coding-harness sessions in one Electron application.
++
++## Features
++
++- **Local and remote workspaces:** open folders on the local machine or connect to project hosts over SSH.
++- **Terminal workbench:** create, split, move, search, and recover terminal sessions powered by a native PTY.
++- **Coding harness integration:** launch shell or custom commands and work with Claude Code, Codex, Pi, Gemini CLI, GitHub Copilot CLI, and Cursor CLI profiles.
++- **Session management:** track terminal and harness activity, usage context, and supported session recovery paths.
++- **Project file tools:** browse, create, rename, move, copy, and delete project files with path authorization and conflict checks.
++- **Source and document viewing:** inspect diffs and source files, preview Markdown and Mermaid diagrams, and open rendered or image content in tabs.
++- **Git workbench:** review working-tree changes, branches, commit history, commit details, diffs, and bounded repository operations.
++- **Embedded web panes:** open web content alongside project and terminal work; SSH panes use compatibility and browser-handoff fallbacks where required.
++- **Document review:** collect feedback for document delivery and send review context back into a terminal workflow.
++
++## Technology
++
++- Electron and electron-vite
++- React and TypeScript
++- native `node-pty` terminal sessions
++- SSH through `ssh2`
++- Ghostty-backed terminal rendering
++- CodeMirror for source and diff editing
++- Shiki, Markdown-it, and Mermaid for document rendering
++- Vitest, ESLint, and TypeScript
++
++## Requirements
++
++- Node.js 24 or newer
++- npm
++- macOS or Linux
++- Git for Git and worktree features
++- Platform-native build tools required by Electron and native npm dependencies
++
++The app is packaged for macOS and Linux. Native terminal dependencies are rebuilt for the Electron runtime during installation.
++
++## Getting started
++
++```bash
++npm install
++npm run dev
++```
++
++`npm install` runs the project postinstall step, rebuilding the required Electron-native modules. If native modules become out of sync after changing Node or Electron versions, run:
++
++```bash
++npm run install:runtime
++```
++
++## Development commands
++
++| Command | Description |
++| --- | --- |
++| `npm run dev` | Start Electron in development mode |
++| `npm run build` | Type-check and create a production build |
++| `npm run preview` | Preview the production build |
++| `npm run typecheck` | Run Node and renderer TypeScript checks |
++| `npm run lint` | Run ESLint |
++| `npm run format:check` | Check formatting |
++| `npm run format` | Format the repository with Prettier |
++| `npm test` | Run the Vitest suite |
++| `npm run verify` | Run architecture checks, lint, type-checking, and tests |
++| `npm run smoke` | Run the full automated Electron smoke scenarios |
++
++## Building packages
++
++Create a directory build for the current platform:
++
++```bash
++npm run build:dir
++```
++
++Platform package targets:
++
++```bash
++npm run pack:mac:arm64
++npm run pack:linux:x64
++npm run pack:linux:arm64
++```
++
++Build artifacts are written to `dist/`.
++
++## Project layout
++
++```text
++src/main/       Electron main process, project hosts, PTY, Git, and harness logic
++src/preload/    Typed, capability-narrowed renderer-to-main bridge
++src/renderer/   React workbench interface
++src/shared/     Types and contracts shared across processes
++src/workers/    Main-process utility workers
++packages/       Private native and support packages
++scripts/        Build, verification, smoke, and project-management tools
++test/           Vitest integration and renderer interaction tests
++build/          Electron packaging resources and icons
++```
++
++## Testing and verification
++
++Run the smallest relevant test suite while iterating:
++
++```bash
++npm test
++npm run test:watch
++```
++
++Before submitting changes, run:
++
++```bash
++npm run verify
++```
++
++For Electron-level behavior, use the relevant smoke command:
++
++```bash
++npm run smoke:scenario -- <scenario-name>
++```
++
++The smoke runner is also capable of macOS and Linux installed-package checks; see the scripts in `package.json` for available variants.
++
++## License
++
++hvir is licensed under the MIT License. See [LICENSE](LICENSE).
++
++Third-party notices and bundled component licenses are documented in [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md).

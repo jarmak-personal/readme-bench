@@ -1,0 +1,51 @@
+diff --git a/README.md b/README.md
+new file mode 100644
+index 0000000..371f0f2
+--- /dev/null
++++ b/README.md
+@@ -0,0 +1,45 @@
++# hvir
++
++hvir is a desktop workbench for software development on your machine or over SSH. It brings terminals, project files, and Git into the same window so you can inspect changes without leaving your shell or coding-agent session.
++
++- **Workspaces:** Open local or remote project folders and keep terminals and files organized by project.
++- **Terminals:** Split and search Ghostty-powered terminal panes, or launch installed tools such as Claude Code and Codex with configurable profiles.
++- **Git:** Inspect working-tree changes, diffs, and commit history, and manage Git worktrees.
++- **File review:** Browse source files, preview rendered Markdown, and leave review comments on documents.
++
++## Install
++
++Download the package for your platform from [GitHub Releases](https://github.com/jarmak-personal/hvir/releases):
++
++| Platform | Release asset |
++| --- | --- |
++| macOS (Apple silicon) | `hvir-<version>-darwin-arm64.pkg` |
++| Debian-based Linux (x86-64) | `hvir-<version>-linux-x64.deb` |
++| Debian-based Linux (ARM64) | `hvir-<version>-linux-arm64.deb` |
++
++Open the `.pkg` on macOS, or install the `.deb` with your Linux package manager. Then launch hvir and choose a local project folder, or connect to an SSH host and choose a folder there.
++
++## Run from source
++
++You’ll need Git, Node.js 24 or newer, and native build tools for the terminal and filesystem modules: Python 3 and the Xcode Command Line Tools on macOS, or Python 3, Make, and a C/C++ toolchain on Linux. Run these commands from the repository root:
++
++```sh
++npm ci
++npm run dev
++```
++
++| Command | What it does |
++| --- | --- |
++| `npm test` | Run the Vitest suite. |
++| `npm run verify` | Run architecture checks, linting, type checks, and tests. |
++| `npm run build` | Type-check and build the Electron app into `out/`. |
++| `npm run pack:mac:arm64` | Build an Apple silicon `.pkg` in `dist/`. |
++| `npm run pack:linux:x64` or `npm run pack:linux:arm64` | Build the corresponding `.deb` in `dist/`. |
++
++## Project layout
++
++hvir is built with Electron, React, and TypeScript. [`src/main`](src/main) owns desktop services such as SSH, Git, and terminal processes. [`src/preload`](src/preload) exposes the app API to the React workbench in [`src/renderer`](src/renderer). Shared contracts live in [`src/shared`](src/shared), and tests live in [`test`](test).
++
++## License
++
++hvir is licensed under the [MIT License](LICENSE). See [Third-Party Notices](THIRD_PARTY_NOTICES.md) for bundled components.

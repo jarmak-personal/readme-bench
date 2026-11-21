@@ -1,0 +1,99 @@
+{
+  "totalPremiumRequestCost": 1,
+  "totalUserRequests": 1,
+  "totalNanoAiu": 31236320000,
+  "tokenDetails": {
+    "input": {
+      "tokenCount": 23340
+    },
+    "cache_read": {
+      "tokenCount": 20258
+    },
+    "cache_write": {
+      "tokenCount": 9158
+    },
+    "output": {
+      "tokenCount": 649
+    }
+  },
+  "totalApiDurationMs": 15268,
+  "sessionStartTime": "2026-11-20T17:01:37.835Z",
+  "codeChanges": {
+    "linesAdded": 36,
+    "linesRemoved": 0,
+    "filesModifiedCount": 1,
+    "filesModified": [
+      "/private/var/tmp/ws/a6d05ed5/hvir/README.md"
+    ]
+  },
+  "modelMetrics": {
+    "gpt-6.2-astra": {
+      "requests": {
+        "count": 4,
+        "cost": 1
+      },
+      "usage": {
+        "inputTokens": 52756,
+        "outputTokens": 649,
+        "cacheReadTokens": 20258,
+        "cacheWriteTokens": 9158,
+        "reasoningTokens": 0
+      },
+      "cacheExpiresAt": "2026-11-20T17:31:50.873Z",
+      "totalNanoAiu": 31236320000,
+      "tokenDetails": {
+        "input": {
+          "tokenCount": 23340
+        },
+        "cache_read": {
+          "tokenCount": 20258
+        },
+        "cache_write": {
+          "tokenCount": 9158
+        },
+        "output": {
+          "tokenCount": 649
+        }
+      }
+    }
+  },
+  "agentMetrics": {
+    "main": {
+      "totalApiDurationMs": 15268,
+      "totalNanoAiu": 31236320000,
+      "modelMetrics": {
+        "gpt-6.2-astra": {
+          "requests": {
+            "count": 4,
+            "cost": 1
+          },
+          "usage": {
+            "inputTokens": 52756,
+            "outputTokens": 649,
+            "cacheReadTokens": 20258,
+            "cacheWriteTokens": 9158,
+            "reasoningTokens": 0
+          },
+          "totalNanoAiu": 31236320000,
+          "tokenDetails": {
+            "input": {
+              "tokenCount": 23340
+            },
+            "cache_read": {
+              "tokenCount": 20258
+            },
+            "cache_write": {
+              "tokenCount": 9158
+            },
+            "output": {
+              "tokenCount": 649
+            }
+          }
+        }
+      }
+    }
+  },
+  "currentModel": "gpt-6.2-astra",
+  "lastCallInputTokens": 14993,
+  "lastCallOutputTokens": 50
+}

@@ -1,0 +1,50 @@
+diff --git a/README.md b/README.md
+new file mode 100644
+index 0000000..8e68170
+--- /dev/null
++++ b/README.md
+@@ -0,0 +1,44 @@
++# hvir
++
++hvir is a terminal-first desktop workbench for local and SSH workspaces. It brings shell sessions, repository navigation, and document review into one window.
++
++- Arrange terminal sessions in split panes and customize their appearance with terminal themes.
++- Browse workspace files, preview Markdown, and review Git changes alongside the terminal.
++- Work with local repositories or connect to a remote workspace over SSH.
++
++## Run from source
++
++Use Node.js 24 or newer, npm, Git, and a native build toolchain. The install step builds native modules and rebuilds `node-pty` for Electron. For `node-gyp`, install Python 3 and Xcode Command Line Tools on macOS, or Python 3, `make`, and a C/C++ compiler on Linux.
++
++From the repository root:
++
++```sh
++npm ci
++npm run dev
++```
++
++In the app, open a local workspace or connect to an SSH workspace, then use the terminal and file tree to work in that workspace.
++
++## Build and package
++
++`npm run build` type-checks and builds the app. To create a native installer, use the script for your target:
++
++| Target | Command | Package |
++| --- | --- | --- |
++| macOS (Apple silicon) | `npm run pack:mac:arm64` | `.pkg` |
++| Debian-based Linux (x64) | `npm run pack:linux:x64` | `.deb` |
++| Debian-based Linux (ARM64) | `npm run pack:linux:arm64` | `.deb` |
++
++Installer artifacts are written to `dist/`.
++
++## Development
++
++- `npm test` runs the Vitest suite.
++- `npm run verify` runs architecture checks, lint, type checking, and tests.
++- `npm run smoke:macos` runs desktop smoke scenarios on macOS. On Linux, use `npm run smoke` with a graphical session, or `xvfb-run -a npm run smoke` on a headless machine with Xvfb installed.
++
++The Electron main process lives in [`src/main`](src/main), the preload bridge in [`src/preload`](src/preload), and the React UI in [`src/renderer`](src/renderer). Shared code and worker entry points live in [`src/shared`](src/shared) and [`src/workers`](src/workers).
++
++## License
++
++hvir is licensed under the [MIT License](LICENSE). See [Third-party notices](THIRD_PARTY_NOTICES.md) for bundled dependencies.

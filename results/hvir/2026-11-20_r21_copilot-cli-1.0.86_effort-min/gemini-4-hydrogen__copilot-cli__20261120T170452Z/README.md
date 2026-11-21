@@ -1,0 +1,68 @@
+# hvir
+
+An Electron-based developer workbench combining a GPU-accelerated terminal, code and document viewer, Git workflow integration, and remote SSH workspaces.
+
+## Features
+
+- **Integrated Terminal**: Powered by `ghostty-web` and `node-pty` with split panes, customizable themes, and session lifecycle management.
+- **Code & Document Viewer**: Syntax highlighting via `shiki`, editing and diff/merge views via CodeMirror 6 (`@codemirror/merge`, `@codemirror/search`), and rich Markdown rendering with `markdown-it` and `mermaid` diagrams.
+- **Git Workflow**: Dedicated `git-worker` utility process for repository status, diffs, and version control operations.
+- **Remote Workspaces**: SSH workspace support via `ssh2` and `ssh-config`.
+- **Web Pane**: Embedded web views alongside terminal and editor panes.
+
+## Prerequisites
+
+- **Node.js** `>= 24`
+- **npm** (included with Node.js)
+- Native build toolchain for `node-pty` and `@hvir/rename-noreplace` (Xcode Command Line Tools on macOS; `build-essential` / `python3` on Linux)
+
+## Getting Started
+
+```bash
+# Install dependencies and rebuild native modules for Electron
+npm install
+
+# Start the application in development mode
+npm run dev
+```
+
+## Scripts
+
+| Command | Description |
+| --- | --- |
+| `npm run dev` | Start `electron-vite` in development mode |
+| `npm run build` | Type-check and build main, preload, and renderer targets |
+| `npm test` | Run unit tests with Vitest |
+| `npm run typecheck` | Run TypeScript type-checking (`tsconfig.node.json` & `tsconfig.web.json`) |
+| `npm run lint` | Run ESLint across the repository |
+| `npm run format:check` | Check formatting with Prettier |
+| `npm run verify` | Run architecture checks, lint, type-check, and tests |
+| `npm run smoke` | Build smoke target and run smoke scenarios |
+
+## Packaging
+
+```bash
+# macOS (arm64 .pkg)
+npm run pack:mac:arm64
+
+# Linux (.deb)
+npm run pack:linux:x64
+npm run pack:linux:arm64
+```
+
+## Project Structure
+
+```text
+src/
+├── main/       # Electron main process
+├── preload/    # Preload scripts
+├── renderer/   # React 19 + Vite renderer UI
+├── shared/     # Shared types and contracts
+└── workers/    # Electron utility-process workers (echo-worker, git-worker)
+packages/
+└── rename-noreplace/  # Native filesystem helper
+```
+
+## License
+
+[MIT](LICENSE)

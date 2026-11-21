@@ -1,0 +1,90 @@
+# hvir
+
+**hvir** is a desktop developer workbench built with Electron, React, and TypeScript. It brings together multi-project workspaces (local and remote over SSH), integrated terminals, AI coding harness integration, Git workflows, file viewing, and document review in a single application.
+
+## Features
+
+- **Projects & Workspaces**: Manage local and remote SSH projects (`ssh2`, `ssh-config`) with live file watching (`chokidar`), filename search, file tree with Git status, and atomic no-replace file renames (`@hvir/rename-noreplace`).
+- **Integrated Terminals**: Terminal panes powered by `ghostty-web` and `node-pty` with split layouts, theme catalog, search, hyperlink activation, clipboard/image paste, attention indicators, and session recovery.
+- **AI Harness Integration**: Launch profiles, session discovery/recovery, context telemetry, and usage tracking for coding harnesses (such as Claude and Codex).
+- **File Viewer & Document Review**: Syntax-highlighted source viewing (`shiki`), side-by-side diffs (`@codemirror/merge`), Markdown with task lists and `mermaid` diagrams, structured data/CSV viewing, sandboxed HTML previews, and an integrated document review workflow.
+- **Git Workflow**: Off-thread Git operations (`src/workers/git-worker.ts`), commit graph visualization, blame, diff inspection, and sync status.
+- **Sessions, Web Panes & Diagnostics**: Unified sessions overview, embedded web panes, workbench health monitoring, and diagnostic report generation.
+
+## Prerequisites
+
+- **Node.js** `>= 24`
+- **Operating System**: macOS (`arm64`) or Linux (`x64` / `arm64`)
+- Native build toolchain (Xcode Command Line Tools on macOS, or C/C++ build essentials on Linux) for compiling native Node modules (`node-pty` and `@hvir/rename-noreplace`).
+
+## Getting Started
+
+1. **Install dependencies** (this automatically runs `install:runtime` to install Electron and build native modules):
+
+   ```bash
+   npm install
+   ```
+
+2. **Start the app in development mode**:
+
+   ```bash
+   npm run dev
+   ```
+
+3. **(Optional) Install repository Git hooks**:
+
+   ```bash
+   npm run hooks:install
+   ```
+
+## Common Commands
+
+| Command | Description |
+| --- | --- |
+| `npm run dev` | Start Electron in development mode (`electron-vite dev`) |
+| `npm run build` | Typecheck and build the application |
+| `npm run preview` | Preview the production build |
+| `npm test` | Run unit and component tests with Vitest |
+| `npm run test:watch` | Run Vitest in watch mode |
+| `npm run test:mutation` | Run mutation tests with Stryker |
+| `npm run typecheck` | Run TypeScript typechecking for Node and Web targets |
+| `npm run lint` | Lint the codebase with ESLint |
+| `npm run format` | Format files with Prettier |
+| `npm run format:check` | Check formatting with Prettier |
+| `npm run verify` | Run seam checks, ADR checks, architecture checks, lint, typecheck, and tests |
+| `npm run smoke` | Build and run Electron smoke test scenarios |
+
+## Packaging
+
+Native installers are built with `electron-builder`:
+
+- **macOS (Apple Silicon `.pkg`)**:
+  ```bash
+  npm run pack:mac:arm64
+  ```
+- **Linux (`.deb`)**:
+  ```bash
+  npm run pack:linux:x64
+  npm run pack:linux:arm64
+  ```
+
+## Project Structure
+
+```text
+.
+├── src/
+│   ├── main/        # Electron main process (IPC, PTY, SSH, Git, sessions, window/workspace management)
+│   ├── preload/     # Preload bridge exposing typed IPC APIs to the renderer
+│   ├── renderer/    # React 19 UI (terminals, file tree, viewer, Git, document review, settings)
+│   ├── shared/      # Shared types, IPC contracts, and policies
+│   └── workers/     # Background worker processes (e.g., Git worker)
+├── packages/
+│   └── rename-noreplace/  # Private Node-API native addon for atomic no-replace renames
+├── scripts/         # Build, smoke-test, release, and architecture verification scripts
+├── test/            # Vitest unit, component, and integration tests
+└── build/           # App icons, entitlements, and platform packaging assets
+```
+
+## License
+
+Licensed under the [MIT License](LICENSE). See [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md) for third-party license notices.

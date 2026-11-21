@@ -1,0 +1,44 @@
+# hvir
+
+hvir is a desktop workbench for local and SSH projects. Keep a coding agent or shell running in one terminal pane while you browse files, review a diff, or check Git history in the same window.
+
+## Open a project
+
+From the repository's GitHub Releases page, choose the `.pkg` for an Apple silicon Mac or the `.deb` matching your Linux system (x64 or arm64). After installing the package, open a terminal in your project directory and run:
+
+```sh
+hvir .
+```
+
+You can also pass a directory path, such as `hvir ~/projects/my-app`, or run `hvir` without a path to launch the app.
+
+## In the workbench
+
+- Split terminals to keep an interactive shell beside a running command or coding session.
+- Browse the file tree, preview Markdown, and anchor review comments to the text they describe.
+- Inspect working-tree changes, compare diffs, and browse branches and commit history.
+- Connect to an SSH workspace to work with a remote project's files and terminals.
+
+## Run from source
+
+Use Node.js 24 or newer, npm, Python 3, and a native build toolchain (Xcode Command Line Tools on macOS, or `make` and a C++ compiler on Linux). From the repository root:
+
+```sh
+npm ci
+npm run dev
+```
+
+The install step downloads Electron and builds native modules, including `node-pty` for terminal sessions. Leave npm install scripts enabled.
+
+| Command          | Purpose                                                           |
+| ---------------- | ----------------------------------------------------------------- |
+| `npm test`       | Run the Vitest suite.                                             |
+| `npm run verify` | Run architecture checks, lint, type checks, and tests.            |
+| `npm run smoke`  | Build and exercise the desktop app; requires a graphical session. |
+| `npm run build`  | Type-check and compile the app into `out/`.                       |
+
+To build an installer, run `npm run pack:mac:arm64`, `npm run pack:linux:x64`, or `npm run pack:linux:arm64` on the matching platform and architecture. Packages are written to `dist/`.
+
+## License
+
+hvir is distributed under the [MIT License](LICENSE). See [third-party notices](THIRD_PARTY_NOTICES.md) for bundled components.

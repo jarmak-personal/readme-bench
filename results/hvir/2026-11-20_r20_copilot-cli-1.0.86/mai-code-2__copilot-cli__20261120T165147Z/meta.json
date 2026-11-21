@@ -1,0 +1,161 @@
+{
+  "id": "mai-code-2__copilot-cli__20261120T165147Z",
+  "batch": "2026-11-20_r20_copilot-cli-1.0.86",
+  "target": {
+    "name": "hvir",
+    "url": "https://github.com/jarmak-personal/hvir",
+    "commit": "7acbf8883bc869a9987252833d90b0d250086122",
+    "snapshot_commit": "ca97b8a72d67da22d5da4705101f99fbc80bd9cf"
+  },
+  "model": {
+    "id": "mai-code-2",
+    "vendor": "Microsoft",
+    "name": "MAI-Code",
+    "version": "2",
+    "variant": null,
+    "display": "MAI Code 2"
+  },
+  "harness": {
+    "name": "GitHub Copilot CLI",
+    "id": "copilot-cli",
+    "version": "1.0.86"
+  },
+  "prompt": "Please create a README.md for this project.",
+  "started_at": "2026-11-20T16:52:02Z",
+  "finished_at": "2026-11-20T16:53:11Z",
+  "wall_clock_seconds": 69,
+  "exit_code": 0,
+  "setup_exit_code": 0,
+  "readme_produced": true,
+  "readme_bytes": 4767,
+  "readme_lines": 100,
+  "usage": {
+    "totalPremiumRequestCost": 1,
+    "totalUserRequests": 1,
+    "totalNanoAiu": 5539080000,
+    "tokenDetails": {
+      "input": {
+        "tokenCount": 85933
+      },
+      "cache_read": {
+        "tokenCount": 207872
+      },
+      "cache_write": {
+        "tokenCount": 0
+      },
+      "output": {
+        "tokenCount": 2891
+      }
+    },
+    "totalApiDurationMs": 63721,
+    "sessionStartTime": "2026-11-20T16:52:04.960Z",
+    "codeChanges": {
+      "linesAdded": 100,
+      "linesRemoved": 0,
+      "filesModifiedCount": 1,
+      "filesModified": [
+        "/private/var/tmp/ws/6848555e/hvir/README.md"
+      ]
+    },
+    "modelMetrics": {
+      "mai-code-2": {
+        "requests": {
+          "count": 9,
+          "cost": 1
+        },
+        "usage": {
+          "inputTokens": 293805,
+          "outputTokens": 2891,
+          "cacheReadTokens": 207872,
+          "cacheWriteTokens": 0,
+          "reasoningTokens": 558
+        },
+        "cacheExpiresAt": "2026-11-20T17:23:07.120Z",
+        "totalNanoAiu": 5539080000,
+        "tokenDetails": {
+          "input": {
+            "tokenCount": 85933
+          },
+          "cache_read": {
+            "tokenCount": 207872
+          },
+          "cache_write": {
+            "tokenCount": 0
+          },
+          "output": {
+            "tokenCount": 2891
+          }
+        }
+      }
+    },
+    "agentMetrics": {
+      "main": {
+        "totalApiDurationMs": 63721,
+        "totalNanoAiu": 5539080000,
+        "modelMetrics": {
+          "mai-code-2": {
+            "requests": {
+              "count": 9,
+              "cost": 1
+            },
+            "usage": {
+              "inputTokens": 293805,
+              "outputTokens": 2891,
+              "cacheReadTokens": 207872,
+              "cacheWriteTokens": 0,
+              "reasoningTokens": 558
+            },
+            "totalNanoAiu": 5539080000,
+            "tokenDetails": {
+              "input": {
+                "tokenCount": 85933
+              },
+              "cache_read": {
+                "tokenCount": 207872
+              },
+              "cache_write": {
+                "tokenCount": 0
+              },
+              "output": {
+                "tokenCount": 2891
+              }
+            }
+          }
+        }
+      }
+    },
+    "currentModel": "mai-code-2",
+    "lastCallInputTokens": 43181,
+    "lastCallOutputTokens": 91
+  },
+  "tool_calls": {
+    "bash": 9,
+    "glob": 2,
+    "view": 12,
+    "grep": 2,
+    "create": 1
+  },
+  "reasoning_effort_requested": null,
+  "reasoning_level": "medium",
+  "chat_calls": {
+    "mai-code-2": {
+      "medium": 9
+    }
+  },
+  "files_viewed": [
+    ".github/workflows/ci.yml",
+    ".gitignore",
+    "LICENSE",
+    "build/native/hvir-command",
+    "electron-builder.yml",
+    "package.json",
+    "src/main/harness/bundled-harness-providers.ts",
+    "src/main/harness/providers/github-copilot.ts",
+    "src/main/harness/providers/shell.ts",
+    "src/renderer/index.html",
+    "src/renderer/src/App.tsx",
+    "src/renderer/src/workspaces/ProjectsBar.tsx"
+  ],
+  "compactions": [],
+  "truncations": 0
+}

@@ -1,0 +1,56 @@
+{
+  "id": "mai-code-2-flash__copilot-cli__20261120T171233Z",
+  "batch": "2026-11-20_r22_copilot-cli-1.0.86_effort-max_rejected-unsupported",
+  "target": {
+    "name": "hvir",
+    "url": "https://github.com/jarmak-personal/hvir",
+    "commit": "7acbf8883bc869a9987252833d90b0d250086122",
+    "snapshot_commit": "ca97b8a72d67da22d5da4705101f99fbc80bd9cf"
+  },
+  "model": {
+    "id": "mai-code-2-flash",
+    "vendor": "Microsoft",
+    "name": "MAI-Code Flash",
+    "version": "2",
+    "variant": null,
+    "display": "MAI Code 2 Flash"
+  },
+  "harness": {
+    "name": "GitHub Copilot CLI",
+    "id": "copilot-cli",
+    "version": "1.0.86"
+  },
+  "prompt": "Please create a README.md for this project.",
+  "started_at": "2026-11-20T17:12:46Z",
+  "finished_at": "2026-11-20T17:12:49Z",
+  "wall_clock_seconds": 3,
+  "exit_code": 1,
+  "setup_exit_code": 0,
+  "readme_produced": false,
+  "readme_bytes": null,
+  "readme_lines": null,
+  "usage": {
+    "totalPremiumRequestCost": 0,
+    "totalUserRequests": 0,
+    "totalNanoAiu": 0,
+    "totalApiDurationMs": 0,
+    "sessionStartTime": "2026-11-20T17:12:49.180Z",
+    "codeChanges": {
+      "linesAdded": 0,
+      "linesRemoved": 0,
+      "filesModifiedCount": 0,
+      "filesModified": []
+    },
+    "modelMetrics": {},
+    "agentMetrics": {},
+    "lastCallInputTokens": 0,
+    "lastCallOutputTokens": 0
+  },
+  "tool_calls": {},
+  "reasoning_effort_requested": "max",
+  "reasoning_level": null,
+  "chat_calls": {},
+  "files_viewed": [],
+  "compactions": [],
+  "truncations": 0
+}

@@ -1,0 +1,95 @@
+# hvir
+
+hvir is a desktop workbench for running terminal-based coding agents alongside the
+project they are working on. It is an Electron application for macOS and Linux that
+combines native terminals, a file tree and viewer, Git tooling, and document review in
+one window per project.
+
+## Features
+
+- **Agent harnesses** – launch profiles for Claude Code, Codex, Cursor CLI, Gemini CLI,
+  GitHub Copilot CLI, Pi, or a plain shell, with session resume and context-usage
+  telemetry where the provider supports it.
+- **Terminals** – PTY-backed terminals rendered with
+  [ghostty-web](https://github.com/coder/ghostty-web), with splits, search, and a
+  theme gallery.
+- **File viewer** – syntax-highlighted source, rendered Markdown (including Mermaid
+  diagrams and task lists), CSV, JSON, HTML preview, and diffs.
+- **Document review** – annotate files and deliver the comments to an agent's terminal.
+- **Git** – changes, history, commit graph, and branch controls.
+- **Remote projects** – open projects on other machines over SSH, using your existing
+  SSH configuration.
+- **Web panes** – embed local dev servers and dashboards next to your terminals.
+- **Workspaces** – multiple workspaces per project with persisted layouts and
+  configurable keybindings.
+
+## Requirements
+
+- Node.js 24 or later
+- macOS (arm64) or Linux (x64 or arm64, glibc 2.35+)
+- A C/C++ toolchain for the native modules (`node-pty` and the bundled
+  `@hvir/rename-noreplace` package) built during install
+
+## Getting started
+
+```sh
+npm ci
+npm run dev
+```
+
+`npm ci` also downloads Electron and rebuilds the native modules against its ABI. If
+`npm run dev` or `npm run build` reports a terminal runtime problem, run `npm ci` again.
+
+## Common scripts
+
+| Command                   | Description                                                    |
+| ------------------------- | -------------------------------------------------------------- |
+| `npm run dev`             | Start the app in development mode with hot reload              |
+| `npm run build`           | Type-check and build into `out/`                               |
+| `npm test`                | Run the unit tests with Vitest                                 |
+| `npm run lint`            | Run ESLint                                                     |
+| `npm run format`          | Format the code with Prettier                                  |
+| `npm run typecheck`       | Type-check the main and renderer projects                      |
+| `npm run verify`          | Architecture checks, lint, type-check, and unit tests          |
+| `npm run smoke`           | Build and run the Electron smoke scenarios (Linux)             |
+| `npm run smoke:macos`     | Build and run the Electron smoke scenarios (macOS)             |
+| `npm run smoke:scenario`  | Build and run the smoke scenarios named as arguments           |
+| `npm run hooks:install`   | Install the pre-push hook (type-check and local smoke test)    |
+
+Run `npm run verify` before opening a pull request. On Linux without a display, run the
+smoke tests under `xvfb-run -a`.
+
+## Packaging
+
+| Command                      | Output                           |
+| ---------------------------- | -------------------------------- |
+| `npm run pack:mac:arm64`     | macOS `.pkg` installer (arm64)   |
+| `npm run pack:linux:x64`     | Debian `.deb` package (x64)      |
+| `npm run pack:linux:arm64`   | Debian `.deb` package (arm64)    |
+| `npm run build:dir`          | Unpacked application directory   |
+
+Packages are written to `dist/`. Installed packages provide an `hvir` command; pass a
+directory to open it as a project:
+
+```sh
+hvir path/to/project
+```
+
+## Project layout
+
+| Path                          | Contents                                                     |
+| ----------------------------- | ------------------------------------------------------------ |
+| `src/main`                    | Electron main process: PTYs, harnesses, Git, SSH hosts, IPC  |
+| `src/preload`                 | Preload bridge between main and renderer                     |
+| `src/renderer`                | React user interface                                         |
+| `src/shared`                  | Types and contracts shared across processes                  |
+| `src/workers`                 | Worker entry points                                          |
+| `packages/rename-noreplace`   | Native module for atomic no-replace rename                   |
+| `scripts`                     | Build, release, smoke-test, and architecture tooling         |
+| `test`                        | Vitest tests and fixtures                                    |
+| `build`                       | Icons, entitlements, and installer resources                 |
+
+## License
+
+hvir is released under the [MIT License](LICENSE). Third-party notices are in
+[THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md).

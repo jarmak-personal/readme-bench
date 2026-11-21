@@ -1,0 +1,153 @@
+# hvir
+
+hvir is a desktop workbench for coding projects and terminal-based AI agents. It brings
+project files, Git, terminals, and local or SSH workspaces together in an Electron app.
+
+## Features
+
+- Work with multiple projects and Git worktrees on your machine or over SSH.
+- Run shell and agent sessions in split terminals, and see sessions across workspaces.
+  Harness integrations include Claude Code, Codex, Gemini CLI, GitHub Copilot CLI,
+  Cursor CLI, and Pi; custom commands are also supported.
+- Browse and edit files, view Git diffs, and render formats including Markdown, Mermaid,
+  HTML, JSON, YAML, CSV, and images.
+- Inspect Git changes, history, and graphs; switch branches, fetch, and pull.
+- Add document-review comments and copy or deliver feedback to supported terminals.
+  Open local development servers in web panes.
+- Customize appearance, terminal behavior, harness profiles, and keyboard shortcuts.
+
+Agent CLIs are separate software: install and authenticate them on the host where the
+workspace runs. Available capabilities and session recovery depend on the provider.
+
+## Install
+
+Native releases support **Apple-silicon macOS** and **APT-based Linux** on x64 or arm64
+with glibc 2.35 or newer. Download `install.sh` from
+[GitHub Releases](https://github.com/jarmak-personal/hvir/releases), review it, and run:
+
+```sh
+bash ./install.sh
+```
+
+The installer selects and verifies the appropriate package and requests administrator
+access to install or update it. Releases also contain the individual `.pkg` and `.deb`
+packages and a `SHA256SUMS` file. The macOS package installs hvir in `/Applications`.
+
+Launch hvir from your application menu, or open a local directory with the installed
+command:
+
+```sh
+hvir .
+```
+
+To remove the application, run `bash ./install.sh --uninstall`. This preserves user
+settings and cache; adding `--purge` removes the current user's hvir state as well.
+
+## Getting started
+
+1. On first launch, choose a local project folder if you did not supply one on the
+   command line. Use **+** in the project bar (**Register project**) to add more local or
+   SSH projects.
+2. Use **+** in the terminal area to start a shell. Choose **Add a harness...** or open
+   **Settings > Harnesses** to configure an agent or custom command.
+3. Use the file tree and Git panel to inspect your project, and the **Sessions** view to
+   navigate terminal sessions across projects and workspaces.
+
+### SSH projects
+
+hvir discovers named `Host` entries from `~/.ssh/config` at startup. For example:
+
+```sshconfig
+Host dev-box
+  HostName dev.example.com
+  User developer
+  Port 22
+  IdentityFile ~/.ssh/id_ed25519
+```
+
+Restart hvir after changing the file, then register a project and select the host. hvir
+uses `HostName`, `User`, `Port`, and `IdentityFile`; it does not implement every OpenSSH
+directive, such as `Include` or `ProxyJump`. It can use the SSH agent through
+`SSH_AUTH_SOCK`, identity files, or interactive authentication. Host-key trust is stored
+separately from OpenSSH's `known_hosts`; verify the displayed fingerprint before
+accepting it. Git operations require Git to be installed on the selected host.
+
+### Keyboard shortcuts
+
+`Mod` means Command on macOS and Ctrl on Linux. Shortcuts can be changed in
+**Settings > Keybindings**.
+
+| Action | Default |
+| --- | --- |
+| Find a file (outside the terminal) | `Mod+P` |
+| Find in the viewer | `Mod+F` |
+| Find in the focused terminal | `Mod+Shift+F` |
+| Focus the terminal | `Mod+J` |
+| Toggle terminal focus | `Mod+Shift+J` |
+| Next / previous workspace | `Mod+Alt+]` / `Mod+Alt+[` |
+
+## Development
+
+Requirements:
+
+- Node.js 24 or newer and npm.
+- Git, Python 3, `make`, and a C/C++ toolchain for native modules. On macOS, install the
+  Xcode Command Line Tools.
+- A graphical desktop session and the system libraries needed by Electron. The Linux
+  package dependencies are listed in [`electron-builder.yml`](electron-builder.yml).
+
+```sh
+git clone https://github.com/jarmak-personal/hvir.git
+cd hvir
+npm ci
+npm run dev
+```
+
+`npm ci` downloads Electron and rebuilds the native terminal and filesystem modules.
+Do not skip installation scripts. If the terminal runtime does not match the checkout,
+run `npm ci` again.
+
+Build the application with `npm run build`; the output is written to `out/`.
+`npm run preview` launches the built application. To create native packages in `dist/`,
+run the appropriate command on the matching platform:
+
+```sh
+npm run pack:mac:arm64
+npm run pack:linux:x64
+npm run pack:linux:arm64
+```
+
+### Checks
+
+```sh
+npm test                 # Vitest suite
+npm run test:watch       # Vitest in watch mode
+npm run lint             # ESLint
+npm run typecheck        # Node and renderer TypeScript checks
+npm run format:check     # Prettier
+npm run smoke:macos      # Electron smoke scenarios on macOS
+```
+
+On Linux, the Electron smoke suite needs a display; for example, use
+`xvfb-run -a npm run smoke` in a headless environment.
+
+CI uses `npm run verify` for the combined seam, ADR, architecture, lint, type, and test
+checks. In this checkout its ADR step cannot complete because `docs/adr/` and
+`docs/design.md` are absent. Architecture enforcement also requires the canonical
+repository and an `HVIR_REPO_TOKEN` GitHub token.
+
+## Project layout
+
+- `src/main/` — Electron main process, project hosts, terminals, Git, and application
+  services.
+- `src/preload/` — the bridge between the renderer and main process.
+- `src/renderer/` — the React workbench.
+- `src/shared/` — shared types and IPC contracts.
+- `src/workers/` — utility-process workers.
+- `packages/` — local native packages.
+- `scripts/`, `test/`, and `build/` — development tooling, tests, and packaging resources.
+
+## License
+
+hvir is licensed under the [MIT License](LICENSE). See
+[THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md) for bundled software notices.

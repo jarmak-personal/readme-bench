@@ -1,0 +1,64 @@
+# hvir
+
+hvir is a desktop workbench for working with projects, Git worktrees, terminals,
+and files. It brings local and SSH-hosted projects into an Electron application,
+with tools for navigating code and managing development sessions.
+
+## Features
+
+- Open project folders on the local machine or an SSH host, and navigate their
+  Git worktrees.
+- Run terminals, split and move them between worktrees, and configure terminal
+  appearance and behavior.
+- Browse and search project files, view source and rendered content, and inspect
+  changes and Git history.
+- Track sessions and use integrations for supported coding-agent harnesses,
+  including Claude and Codex.
+
+## Develop
+
+You need Node.js 24 or newer, npm, Git, and the platform build tools required by
+Node's native addons (including Python and a C/C++ toolchain). Dependency
+installation downloads Electron and builds native modules.
+
+```sh
+npm ci
+npm run dev
+```
+
+In the app, choose a local or SSH host and open a project folder. Git-related
+features are available when the folder is a Git repository.
+
+## Checks and builds
+
+```sh
+npm test                 # Run the Vitest suite
+npm run typecheck        # Check main and renderer TypeScript
+npm run lint             # Run ESLint
+npm run verify           # Run policy, architecture, lint, type, and test checks
+npm run build            # Type-check and build the Electron application
+npm run build:dir        # Build an unpacked application
+```
+
+`npm run smoke` builds and runs the Electron smoke scenarios. On a headless
+Linux machine, run it under a display server, for example
+`xvfb-run -a npm run smoke`.
+
+Native packaging scripts include `npm run pack:mac:arm64`,
+`npm run pack:linux:x64`, and `npm run pack:linux:arm64`. Their output goes to
+`dist/`; signing and platform-specific packaging requirements depend on the
+build environment.
+
+## Project layout
+
+- `src/main/` — Electron main process and application services.
+- `src/preload/` — the bridge between the main process and renderer.
+- `src/renderer/` — React workbench UI.
+- `src/shared/` — shared types and IPC contracts.
+- `src/workers/` — worker code.
+- `test/` — automated tests; `scripts/` contains build and maintenance tools.
+
+## License
+
+hvir is licensed under the [MIT License](LICENSE). See
+[THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md) for third-party notices.

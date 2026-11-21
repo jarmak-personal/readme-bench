@@ -1,0 +1,165 @@
+{
+  "id": "claude-fable-5.2__copilot-cli__20261120T171944Z",
+  "batch": "2026-11-20_r22_copilot-cli-1.0.86_effort-max",
+  "target": {
+    "name": "hvir",
+    "url": "https://github.com/jarmak-personal/hvir",
+    "commit": "7acbf8883bc869a9987252833d90b0d250086122",
+    "snapshot_commit": "ca97b8a72d67da22d5da4705101f99fbc80bd9cf"
+  },
+  "model": {
+    "id": "claude-fable-5.2",
+    "vendor": "Anthropic",
+    "name": "Claude Fable",
+    "version": "5.2",
+    "variant": null,
+    "display": "Claude Fable 5.2"
+  },
+  "harness": {
+    "name": "GitHub Copilot CLI",
+    "id": "copilot-cli",
+    "version": "1.0.86"
+  },
+  "prompt": "Please create a README.md for this project.",
+  "started_at": "2026-11-20T17:19:57Z",
+  "finished_at": "2026-11-20T17:41:21Z",
+  "wall_clock_seconds": 1284,
+  "exit_code": 0,
+  "setup_exit_code": 0,
+  "readme_produced": true,
+  "readme_bytes": 12846,
+  "readme_lines": 278,
+  "usage": {
+    "totalPremiumRequestCost": 1,
+    "totalUserRequests": 1,
+    "totalNanoAiu": 1277072160000,
+    "tokenDetails": {
+      "input": {
+        "tokenCount": 192
+      },
+      "cache_read": {
+        "tokenCount": 23785678
+      },
+      "cache_write": {
+        "tokenCount": 391497
+      },
+      "output": {
+        "tokenCount": 102427
+      }
+    },
+    "totalApiDurationMs": 1174465,
+    "sessionStartTime": "2026-11-20T17:20:00.820Z",
+    "codeChanges": {
+      "linesAdded": 286,
+      "linesRemoved": 8,
+      "filesModifiedCount": 1,
+      "filesModified": [
+        "/private/var/tmp/ws/f7354e9d/hvir/README.md"
+      ]
+    },
+    "modelMetrics": {
+      "claude-fable-5.2": {
+        "requests": {
+          "count": 94,
+          "cost": 1
+        },
+        "usage": {
+          "inputTokens": 24177367,
+          "outputTokens": 102427,
+          "cacheReadTokens": 23785678,
+          "cacheWriteTokens": 391497,
+          "reasoningTokens": 62594
+        },
+        "cacheExpiresAt": "2026-11-20T17:46:03.167Z",
+        "totalNanoAiu": 1277072160000,
+        "tokenDetails": {
+          "input": {
+            "tokenCount": 192
+          },
+          "cache_read": {
+            "tokenCount": 23785678
+          },
+          "cache_write": {
+            "tokenCount": 391497
+          },
+          "output": {
+            "tokenCount": 102427
+          }
+        }
+      }
+    },
+    "agentMetrics": {
+      "main": {
+        "totalApiDurationMs": 1174465,
+        "totalNanoAiu": 1277072160000,
+        "modelMetrics": {
+          "claude-fable-5.2": {
+            "requests": {
+              "count": 94,
+              "cost": 1
+            },
+            "usage": {
+              "inputTokens": 24177367,
+              "outputTokens": 102427,
+              "cacheReadTokens": 23785678,
+              "cacheWriteTokens": 391497,
+              "reasoningTokens": 62594
+            },
+            "totalNanoAiu": 1277072160000,
+            "tokenDetails": {
+              "input": {
+                "tokenCount": 192
+              },
+              "cache_read": {
+                "tokenCount": 23785678
+              },
+              "cache_write": {
+                "tokenCount": 391497
+              },
+              "output": {
+                "tokenCount": 102427
+              }
+            }
+          }
+        }
+      }
+    },
+    "currentModel": "claude-fable-5.2",
+    "lastCallInputTokens": 391499,
+    "lastCallOutputTokens": 1644
+  },
+  "tool_calls": {
+    "view": 22,
+    "bash": 142,
+    "grep": 7,
+    "read_bash": 2,
+    "create": 1,
+    "edit": 6
+  },
+  "reasoning_effort_requested": "max",
+  "reasoning_level": "max",
+  "chat_calls": {
+    "claude-fable-5.2": {
+      "max": 94
+    }
+  },
+  "files_viewed": [
+    ".",
+    ".github/workflows/ci.yml",
+    ".github/workflows/release.yml",
+    "LICENSE",
+    "README.md",
+    "THIRD_PARTY_NOTICES.md",
+    "build/icons-linux/128x128.png",
+    "electron-builder.ssh-acceptance.yml",
+    "electron-builder.yml",
+    "electron.vite.config.ts",
+    "package.json",
+    "src/main/index.ts",
+    "src/renderer/src/App.tsx",
+    "src/shared/keybindings.ts",
+    "src/shared/workspace-types.ts"
+  ],
+  "compactions": [],
+  "truncations": 0
+}

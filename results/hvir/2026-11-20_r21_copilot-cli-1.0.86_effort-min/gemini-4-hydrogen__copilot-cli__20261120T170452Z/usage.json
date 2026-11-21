@@ -1,0 +1,98 @@
+{
+  "totalPremiumRequestCost": 1,
+  "totalUserRequests": 1,
+  "totalNanoAiu": 6718987500,
+  "tokenDetails": {
+    "input": {
+      "tokenCount": 31948
+    },
+    "cache_read": {
+      "tokenCount": 80105
+    },
+    "cache_write": {
+      "tokenCount": 0
+    },
+    "output": {
+      "tokenCount": 1768
+    }
+  },
+  "totalApiDurationMs": 20698,
+  "sessionStartTime": "2026-11-20T17:05:09.403Z",
+  "codeChanges": {
+    "linesAdded": 68,
+    "linesRemoved": 0,
+    "filesModifiedCount": 1,
+    "filesModified": [
+      "/private/var/tmp/ws/191a603e/hvir/README.md"
+    ]
+  },
+  "modelMetrics": {
+    "gemini-4-hydrogen": {
+      "requests": {
+        "count": 5,
+        "cost": 1
+      },
+      "usage": {
+        "inputTokens": 112053,
+        "outputTokens": 1768,
+        "cacheReadTokens": 80105,
+        "cacheWriteTokens": 0,
+        "reasoningTokens": 676
+      },
+      "totalNanoAiu": 6718987500,
+      "tokenDetails": {
+        "input": {
+          "tokenCount": 31948
+        },
+        "cache_read": {
+          "tokenCount": 80105
+        },
+        "cache_write": {
+          "tokenCount": 0
+        },
+        "output": {
+          "tokenCount": 1768
+        }
+      }
+    }
+  },
+  "agentMetrics": {
+    "main": {
+      "totalApiDurationMs": 20698,
+      "totalNanoAiu": 6718987500,
+      "modelMetrics": {
+        "gemini-4-hydrogen": {
+          "requests": {
+            "count": 5,
+            "cost": 1
+          },
+          "usage": {
+            "inputTokens": 112053,
+            "outputTokens": 1768,
+            "cacheReadTokens": 80105,
+            "cacheWriteTokens": 0,
+            "reasoningTokens": 676
+          },
+          "totalNanoAiu": 6718987500,
+          "tokenDetails": {
+            "input": {
+              "tokenCount": 31948
+            },
+            "cache_read": {
+              "tokenCount": 80105
+            },
+            "cache_write": {
+              "tokenCount": 0
+            },
+            "output": {
+              "tokenCount": 1768
+            }
+          }
+        }
+      }
+    }
+  },
+  "currentModel": "gemini-4-hydrogen",
+  "lastCallInputTokens": 26385,
+  "lastCallOutputTokens": 164
+}

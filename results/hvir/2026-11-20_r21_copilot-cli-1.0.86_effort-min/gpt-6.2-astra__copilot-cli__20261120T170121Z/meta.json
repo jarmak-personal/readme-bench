@@ -1,0 +1,151 @@
+{
+  "id": "gpt-6.2-astra__copilot-cli__20261120T170121Z",
+  "batch": "2026-11-20_r21_copilot-cli-1.0.86_effort-min",
+  "target": {
+    "name": "hvir",
+    "url": "https://github.com/jarmak-personal/hvir",
+    "commit": "7acbf8883bc869a9987252833d90b0d250086122",
+    "snapshot_commit": "ca97b8a72d67da22d5da4705101f99fbc80bd9cf"
+  },
+  "model": {
+    "id": "gpt-6.2-astra",
+    "vendor": "OpenAI",
+    "name": "GPT",
+    "version": "6.2",
+    "variant": "astra",
+    "display": "GPT-6.2 Astra"
+  },
+  "harness": {
+    "name": "GitHub Copilot CLI",
+    "id": "copilot-cli",
+    "version": "1.0.86"
+  },
+  "prompt": "Please create a README.md for this project.",
+  "started_at": "2026-11-20T17:01:34Z",
+  "finished_at": "2026-11-20T17:01:53Z",
+  "wall_clock_seconds": 19,
+  "exit_code": 0,
+  "setup_exit_code": 0,
+  "readme_produced": true,
+  "readme_bytes": 1542,
+  "readme_lines": 35,
+  "usage": {
+    "totalPremiumRequestCost": 1,
+    "totalUserRequests": 1,
+    "totalNanoAiu": 31236320000,
+    "tokenDetails": {
+      "input": {
+        "tokenCount": 23340
+      },
+      "cache_read": {
+        "tokenCount": 20258
+      },
+      "cache_write": {
+        "tokenCount": 9158
+      },
+      "output": {
+        "tokenCount": 649
+      }
+    },
+    "totalApiDurationMs": 15268,
+    "sessionStartTime": "2026-11-20T17:01:37.835Z",
+    "codeChanges": {
+      "linesAdded": 36,
+      "linesRemoved": 0,
+      "filesModifiedCount": 1,
+      "filesModified": [
+        "/private/var/tmp/ws/a6d05ed5/hvir/README.md"
+      ]
+    },
+    "modelMetrics": {
+      "gpt-6.2-astra": {
+        "requests": {
+          "count": 4,
+          "cost": 1
+        },
+        "usage": {
+          "inputTokens": 52756,
+          "outputTokens": 649,
+          "cacheReadTokens": 20258,
+          "cacheWriteTokens": 9158,
+          "reasoningTokens": 0
+        },
+        "cacheExpiresAt": "2026-11-20T17:31:50.873Z",
+        "totalNanoAiu": 31236320000,
+        "tokenDetails": {
+          "input": {
+            "tokenCount": 23340
+          },
+          "cache_read": {
+            "tokenCount": 20258
+          },
+          "cache_write": {
+            "tokenCount": 9158
+          },
+          "output": {
+            "tokenCount": 649
+          }
+        }
+      }
+    },
+    "agentMetrics": {
+      "main": {
+        "totalApiDurationMs": 15268,
+        "totalNanoAiu": 31236320000,
+        "modelMetrics": {
+          "gpt-6.2-astra": {
+            "requests": {
+              "count": 4,
+              "cost": 1
+            },
+            "usage": {
+              "inputTokens": 52756,
+              "outputTokens": 649,
+              "cacheReadTokens": 20258,
+              "cacheWriteTokens": 9158,
+              "reasoningTokens": 0
+            },
+            "totalNanoAiu": 31236320000,
+            "tokenDetails": {
+              "input": {
+                "tokenCount": 23340
+              },
+              "cache_read": {
+                "tokenCount": 20258
+              },
+              "cache_write": {
+                "tokenCount": 9158
+              },
+              "output": {
+                "tokenCount": 649
+              }
+            }
+          }
+        }
+      }
+    },
+    "currentModel": "gpt-6.2-astra",
+    "lastCallInputTokens": 14993,
+    "lastCallOutputTokens": 50
+  },
+  "tool_calls": {
+    "view": 5,
+    "apply_patch": 1
+  },
+  "reasoning_effort_requested": "low",
+  "reasoning_level": "low",
+  "chat_calls": {
+    "gpt-6.2-astra": {
+      "low": 4
+    }
+  },
+  "files_viewed": [
+    ".",
+    ".github/workflows",
+    "electron-builder.yml",
+    "package.json",
+    "packages"
+  ],
+  "compactions": [],
+  "truncations": 0
+}

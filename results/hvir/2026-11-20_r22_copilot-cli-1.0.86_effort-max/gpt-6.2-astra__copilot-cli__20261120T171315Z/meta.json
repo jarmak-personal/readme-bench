@@ -1,0 +1,261 @@
+{
+  "id": "gpt-6.2-astra__copilot-cli__20261120T171315Z",
+  "batch": "2026-11-20_r22_copilot-cli-1.0.86_effort-max",
+  "target": {
+    "name": "hvir",
+    "url": "https://github.com/jarmak-personal/hvir",
+    "commit": "7acbf8883bc869a9987252833d90b0d250086122",
+    "snapshot_commit": "ca97b8a72d67da22d5da4705101f99fbc80bd9cf"
+  },
+  "model": {
+    "id": "gpt-6.2-astra",
+    "vendor": "OpenAI",
+    "name": "GPT",
+    "version": "6.2",
+    "variant": "astra",
+    "display": "GPT-6.2 Astra"
+  },
+  "harness": {
+    "name": "GitHub Copilot CLI",
+    "id": "copilot-cli",
+    "version": "1.0.86"
+  },
+  "prompt": "Please create a README.md for this project.",
+  "started_at": "2026-11-20T17:13:28Z",
+  "finished_at": "2026-11-20T17:16:02Z",
+  "wall_clock_seconds": 154,
+  "exit_code": 0,
+  "setup_exit_code": 0,
+  "readme_produced": true,
+  "readme_bytes": 3151,
+  "readme_lines": 68,
+  "usage": {
+    "totalPremiumRequestCost": 1,
+    "totalUserRequests": 1,
+    "totalNanoAiu": 140500200000,
+    "tokenDetails": {
+      "input": {
+        "tokenCount": 77774
+      },
+      "cache_read": {
+        "tokenCount": 299570
+      },
+      "cache_write": {
+        "tokenCount": 49904
+      },
+      "output": {
+        "tokenCount": 8046
+      }
+    },
+    "totalApiDurationMs": 149287,
+    "sessionStartTime": "2026-11-20T17:13:31.326Z",
+    "codeChanges": {
+      "linesAdded": 69,
+      "linesRemoved": 0,
+      "filesModifiedCount": 1,
+      "filesModified": [
+        "/private/var/tmp/ws/a9024228/hvir/README.md"
+      ]
+    },
+    "modelMetrics": {
+      "gpt-6.2-astra": {
+        "requests": {
+          "count": 11,
+          "cost": 1
+        },
+        "usage": {
+          "inputTokens": 392975,
+          "outputTokens": 7042,
+          "cacheReadTokens": 278985,
+          "cacheWriteTokens": 49904,
+          "reasoningTokens": 3214
+        },
+        "cacheExpiresAt": "2026-11-20T17:45:58.192Z",
+        "totalNanoAiu": 140500200000,
+        "tokenDetails": {
+          "input": {
+            "tokenCount": 64086
+          },
+          "cache_read": {
+            "tokenCount": 278985
+          },
+          "cache_write": {
+            "tokenCount": 49904
+          },
+          "output": {
+            "tokenCount": 7042
+          }
+        }
+      },
+      "copilot-search-a": {
+        "requests": {
+          "count": 4,
+          "cost": 0
+        },
+        "usage": {
+          "inputTokens": 34273,
+          "outputTokens": 1004,
+          "cacheReadTokens": 20585,
+          "cacheWriteTokens": 0,
+          "reasoningTokens": 0
+        },
+        "totalNanoAiu": 0,
+        "tokenDetails": {
+          "input": {
+            "tokenCount": 13688
+          },
+          "cache_read": {
+            "tokenCount": 20585
+          },
+          "cache_write": {
+            "tokenCount": 0
+          },
+          "output": {
+            "tokenCount": 1004
+          }
+        }
+      }
+    },
+    "agentMetrics": {
+      "main": {
+        "totalApiDurationMs": 144485,
+        "totalNanoAiu": 140500200000,
+        "modelMetrics": {
+          "gpt-6.2-astra": {
+            "requests": {
+              "count": 11,
+              "cost": 1
+            },
+            "usage": {
+              "inputTokens": 392975,
+              "outputTokens": 7042,
+              "cacheReadTokens": 278985,
+              "cacheWriteTokens": 49904,
+              "reasoningTokens": 3214
+            },
+            "totalNanoAiu": 140500200000,
+            "tokenDetails": {
+              "input": {
+                "tokenCount": 64086
+              },
+              "cache_read": {
+                "tokenCount": 278985
+              },
+              "cache_write": {
+                "tokenCount": 49904
+              },
+              "output": {
+                "tokenCount": 7042
+              }
+            }
+          }
+        }
+      },
+      "call_313d859b88224338bb6669f3f2711d3d": {
+        "agentName": "search-subagent",
+        "agentDisplayName": "Search Subagent",
+        "totalApiDurationMs": 4802,
+        "totalNanoAiu": 0,
+        "modelMetrics": {
+          "copilot-search-a": {
+            "requests": {
+              "count": 4,
+              "cost": 0
+            },
+            "usage": {
+              "inputTokens": 34273,
+              "outputTokens": 1004,
+              "cacheReadTokens": 20585,
+              "cacheWriteTokens": 0,
+              "reasoningTokens": 0
+            },
+            "totalNanoAiu": 0,
+            "tokenDetails": {
+              "input": {
+                "tokenCount": 13688
+              },
+              "cache_read": {
+                "tokenCount": 20585
+              },
+              "cache_write": {
+                "tokenCount": 0
+              },
+              "output": {
+                "tokenCount": 1004
+              }
+            }
+          }
+        }
+      }
+    },
+    "currentModel": "gpt-6.2-astra",
+    "lastCallInputTokens": 55730,
+    "lastCallOutputTokens": 210
+  },
+  "tool_calls": {
+    "view": 42,
+    "bash": 3,
+    "glob": 2,
+    "rg": 13,
+    "file_search": 16,
+    "grep_search": 6,
+    "read_file": 2,
+    "search_code_subagent": 1,
+    "apply_patch": 1
+  },
+  "reasoning_effort_requested": "max",
+  "reasoning_level": "max",
+  "chat_calls": {
+    "gpt-6.2-astra": {
+      "max": 4
+    },
+    "copilot-search-a": {
+      "max": 1,
+      "none": 7
+    }
+  },
+  "files_viewed": [
+    ".",
+    ".github",
+    ".github/workflows",
+    ".github/workflows/release.yml",
+    ".gitignore",
+    ".prettierrc.json",
+    "LICENSE",
+    "THIRD_PARTY_NOTICES.md",
+    "build/native/hvir-command",
+    "electron-builder.yml",
+    "electron.vite.config.ts",
+    "package.json",
+    "packages",
+    "scripts",
+    "scripts/assemble-native-release.mjs",
+    "scripts/check-adrs.mjs",
+    "scripts/check-seams.sh",
+    "scripts/check-terminal-runtime.mts",
+    "scripts/native-installer.template.sh",
+    "scripts/render-native-installer.mjs",
+    "src",
+    "src/main",
+    "src/main/harness/bundled-harness-providers.ts",
+    "src/main/project-host",
+    "src/main/project-registry.ts",
+    "src/main/smoke/harness-profile-workflow.ts",
+    "src/renderer/src",
+    "src/renderer/src/dashboards",
+    "src/renderer/src/dashboards/web-pane-url.ts",
+    "src/renderer/src/document-review",
+    "src/renderer/src/document-review/document-review-eligibility.ts",
+    "src/renderer/src/git",
+    "src/renderer/src/git/GitChangesView.tsx",
+    "src/renderer/src/settings/settings-navigation.ts",
+    "src/renderer/src/viewer",
+    "src/renderer/src/workspaces/ProjectsBar.tsx",
+    "src/renderer/src/workspaces/SessionDialog.tsx",
+    "src/renderer/src/workspaces/WorkspaceCatalogDialogs.tsx",
+    "src/shared/workspace-types.ts",
+    "test"
+  ],
+  "compactions": [],
+  "truncations": 0
+}

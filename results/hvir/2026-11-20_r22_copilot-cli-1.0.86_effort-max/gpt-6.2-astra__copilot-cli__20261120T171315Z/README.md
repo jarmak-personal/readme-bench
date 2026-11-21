@@ -1,0 +1,68 @@
+# hvir
+
+hvir is a desktop workbench for running shells and coding agents alongside the files
+they change. Each Git worktree gets its own workspace, so you can switch checkouts
+without losing track of which terminal, diff, or review belongs to which branch.
+Projects can live on your machine or on an SSH host.
+
+## Install and open a project
+
+Download `install.sh` from the [latest release](https://github.com/jarmak-personal/hvir/releases/latest).
+From the download directory, run `bash ./install.sh`. The installer selects the native
+package for your machine and verifies its SHA-256 checksum. You do not need Node.js to
+run the packaged app.
+
+| Platform | Release package |
+| --- | --- |
+| macOS on Apple silicon | `.pkg` |
+| APT-based Linux on x64 or arm64, with glibc 2.35 or newer | `.deb` |
+
+Launch hvir from your desktop, or run `hvir .` in the directory you want to open.
+On first launch without a path, hvir asks you to choose a folder. A plain folder works
+as a single workspace; in a Git repository, hvir also discovers linked worktrees.
+
+## Working in hvir
+
+- **Add a project.** Select **+ (Register project)** and choose **Local** or a host
+  alias from `~/.ssh/config`, then pick a folder. For an SSH project, terminals and
+  Git commands run on the remote host.
+- **Start a terminal.** Use **New terminal** for a plain shell. To launch a coding
+  CLI such as Claude Code or Codex, install it on the project host and add its profile
+  under **Settings > Harnesses**. The **Sessions** view shows which terminals are
+  working and which need attention across projects.
+- **Review changes.** Open a file from the tree to edit its source or preview rendered
+  Markdown. Use the Git panel to inspect working-tree diffs and commit history. When
+  reviewing a saved document, you can attach comments to lines, preview the feedback,
+  and send it to a terminal in the same workspace.
+
+## Develop from source
+
+Use Node.js 24 or newer, npm, Git, Python 3, and a native build toolchain (Xcode
+Command Line Tools on macOS, or `make` and a C++ compiler on Linux). From the
+repository root:
+
+```sh
+npm ci
+npm run dev
+```
+
+Leave npm install scripts enabled: `postinstall` installs Electron, builds the local
+rename binding, and rebuilds `node-pty` for Electron.
+
+| Command | Purpose |
+| --- | --- |
+| `npm test` | Run the Vitest suite. Use `npm run test:watch` while iterating. |
+| `npm run lint` / `npm run typecheck` | Check lint rules and TypeScript types. |
+| `npm run smoke` | Exercise the Electron app. On headless Linux, use `xvfb-run -a npm run smoke`. |
+| `npm run build` | Type-check and build production bundles in `out/`. |
+| `npm run build:dir` | Build an unpacked desktop app in `dist/`. |
+
+The Electron [main process](src/main/) owns host connections and terminals. The
+[React UI](src/renderer/) calls it through the [preload bridge](src/preload/) using
+[shared TypeScript contracts](src/shared/). See [package.json](package.json) for the
+platform-specific packaging scripts.
+
+## License
+
+hvir is released under the [MIT License](LICENSE). Bundled components retain their
+own licenses; see [third-party notices](THIRD_PARTY_NOTICES.md).

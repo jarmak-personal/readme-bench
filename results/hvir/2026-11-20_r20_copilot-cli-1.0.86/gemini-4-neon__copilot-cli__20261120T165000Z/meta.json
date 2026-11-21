@@ -1,0 +1,188 @@
+{
+  "id": "gemini-4-neon__copilot-cli__20261120T165000Z",
+  "batch": "2026-11-20_r20_copilot-cli-1.0.86",
+  "target": {
+    "name": "hvir",
+    "url": "https://github.com/jarmak-personal/hvir",
+    "commit": "7acbf8883bc869a9987252833d90b0d250086122",
+    "snapshot_commit": "ca97b8a72d67da22d5da4705101f99fbc80bd9cf"
+  },
+  "model": {
+    "id": "gemini-4-neon",
+    "vendor": "Google",
+    "name": "Gemini",
+    "version": "4",
+    "variant": "neon",
+    "display": "Gemini 4 Neon"
+  },
+  "harness": {
+    "name": "GitHub Copilot CLI",
+    "id": "copilot-cli",
+    "version": "1.0.86"
+  },
+  "prompt": "Please create a README.md for this project.",
+  "started_at": "2026-11-20T16:50:17Z",
+  "finished_at": "2026-11-20T16:51:42Z",
+  "wall_clock_seconds": 85,
+  "exit_code": 0,
+  "setup_exit_code": 0,
+  "readme_produced": true,
+  "readme_bytes": 5149,
+  "readme_lines": 127,
+  "usage": {
+    "totalPremiumRequestCost": 1,
+    "totalUserRequests": 1,
+    "totalNanoAiu": 32897370000,
+    "tokenDetails": {
+      "input": {
+        "tokenCount": 60536
+      },
+      "cache_read": {
+        "tokenCount": 398638
+      },
+      "cache_write": {
+        "tokenCount": 0
+      },
+      "output": {
+        "tokenCount": 5838
+      }
+    },
+    "totalApiDurationMs": 79730,
+    "sessionStartTime": "2026-11-20T16:50:20.969Z",
+    "codeChanges": {
+      "linesAdded": 127,
+      "linesRemoved": 0,
+      "filesModifiedCount": 1,
+      "filesModified": [
+        "/private/var/tmp/ws/6ba89000/hvir/README.md"
+      ]
+    },
+    "modelMetrics": {
+      "gemini-4-neon": {
+        "requests": {
+          "count": 12,
+          "cost": 1
+        },
+        "usage": {
+          "inputTokens": 459174,
+          "outputTokens": 5838,
+          "cacheReadTokens": 398638,
+          "cacheWriteTokens": 0,
+          "reasoningTokens": 2137
+        },
+        "totalNanoAiu": 32897370000,
+        "tokenDetails": {
+          "input": {
+            "tokenCount": 60536
+          },
+          "cache_read": {
+            "tokenCount": 398638
+          },
+          "cache_write": {
+            "tokenCount": 0
+          },
+          "output": {
+            "tokenCount": 5838
+          }
+        }
+      }
+    },
+    "agentMetrics": {
+      "main": {
+        "totalApiDurationMs": 79730,
+        "totalNanoAiu": 32897370000,
+        "modelMetrics": {
+          "gemini-4-neon": {
+            "requests": {
+              "count": 12,
+              "cost": 1
+            },
+            "usage": {
+              "inputTokens": 459174,
+              "outputTokens": 5838,
+              "cacheReadTokens": 398638,
+              "cacheWriteTokens": 0,
+              "reasoningTokens": 2137
+            },
+            "totalNanoAiu": 32897370000,
+            "tokenDetails": {
+              "input": {
+                "tokenCount": 60536
+              },
+              "cache_read": {
+                "tokenCount": 398638
+              },
+              "cache_write": {
+                "tokenCount": 0
+              },
+              "output": {
+                "tokenCount": 5838
+              }
+            }
+          }
+        }
+      }
+    },
+    "currentModel": "gemini-4-neon",
+    "lastCallInputTokens": 50419,
+    "lastCallOutputTokens": 289
+  },
+  "tool_calls": {
+    "view": 40,
+    "glob": 1,
+    "bash": 2,
+    "grep": 2,
+    "create": 1
+  },
+  "reasoning_effort_requested": null,
+  "reasoning_level": "medium",
+  "chat_calls": {
+    "gemini-4-neon": {
+      "medium": 12
+    }
+  },
+  "files_viewed": [
+    ".",
+    ".github",
+    ".github/workflows",
+    ".github/workflows/ci.yml",
+    ".prettierignore",
+    ".prettierrc.json",
+    "LICENSE",
+    "build",
+    "build/native",
+    "build/native/hvir-command",
+    "electron-builder.yml",
+    "package.json",
+    "packages",
+    "packages/rename-noreplace/package.json",
+    "scripts",
+    "scripts/check-seams.sh",
+    "scripts/native-installer.template.sh",
+    "src",
+    "src/main",
+    "src/main/harness",
+    "src/main/harness/bundled-harness-providers.ts",
+    "src/main/harness/providers",
+    "src/main/project-host",
+    "src/main/web-pane",
+    "src/renderer",
+    "src/renderer/index.html",
+    "src/renderer/src",
+    "src/renderer/src/document-review",
+    "src/renderer/src/git",
+    "src/renderer/src/sessions",
+    "src/renderer/src/settings",
+    "src/renderer/src/settings/sections",
+    "src/renderer/src/terminal",
+    "src/renderer/src/viewer",
+    "src/renderer/src/workbench",
+    "src/shared",
+    "src/shared/harness-provider.ts",
+    "src/shared/keybindings.ts",
+    "src/workers",
+    "test"
+  ],
+  "compactions": [],
+  "truncations": 0
+}

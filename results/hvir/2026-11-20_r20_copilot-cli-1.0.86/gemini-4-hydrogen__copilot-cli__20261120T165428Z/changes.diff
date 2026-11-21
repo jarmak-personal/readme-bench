@@ -1,0 +1,112 @@
+diff --git a/README.md b/README.md
+new file mode 100644
+index 0000000..ff59fb7
+--- /dev/null
++++ b/README.md
+@@ -0,0 +1,106 @@
++# hvir
++
++An Electron desktop workbench for terminal-first development and AI coding harnesses, built with React, TypeScript, `ghostty-web`, and CodeMirror 6.
++
++## Features
++
++- **Terminal & AI Harness Workspaces**: Multi-pane `ghostty-web` + `node-pty` terminals with split layouts, search, attention badges, session recovery/resume/fork, and context/usage telemetry. Includes built-in support for:
++  - Plain Shell & Custom Commands
++  - Claude Code
++  - Codex
++  - Pi
++  - Gemini
++  - GitHub Copilot
++  - Cursor
++- **File Explorer & Multi-Mode Viewer**: Switch between `rendered`, `source` (CodeMirror 6 + Shiki), and `diff` (`@codemirror/merge`) views. Supports rendered Markdown, Mermaid diagrams, sandboxed HTML previews, JSON, YAML, CSV, and images, plus split viewer panes.
++- **Document Review**: Annotate files and deliver review feedback directly into active terminal or harness sessions.
++- **Git Integration**: Working-tree and commit diffs, commit history graph, branch switching, worktree management, and sync operations backed by an isolated utility worker process.
++- **Remote SSH Workspaces**: Connect to remote repositories over `ssh2` with SSH config support, host trust verification, interactive authentication prompts, file watching, and remote PTY sessions.
++- **Web Pane**: Built-in web pane with a main-process loopback HTTP proxy for inspecting local development servers.
++- **Sessions Overview**: Unified view of active and recoverable terminal/harness sessions across workspaces.
++
++## Prerequisites
++
++- **Node.js**: `>= 24`
++- **Operating System**: macOS (arm64) or Linux (x64 / arm64)
++- **Native Build Toolchain**: Python and a C/C++ compiler (`xcode-select` on macOS, `build-essential` on Debian/Ubuntu) for building `node-pty` and `@hvir/rename-noreplace`.
++
++## Getting Started
++
++```bash
++# Install dependencies and rebuild native modules for Electron
++npm install
++
++# Start the application in development mode
++npm run dev
++```
++
++## Scripts
++
++### Development & Build
++
++| Command | Description |
++| --- | --- |
++| `npm run dev` | Start `electron-vite` in development mode |
++| `npm run build` | Run TypeScript checks and build main, preload, worker, and renderer bundles |
++| `npm run preview` | Preview the built Electron application |
++| `npm run install:runtime` | Install Electron binary and rebuild native modules (`@hvir/rename-noreplace`, `node-pty`) |
++
++### Verification & Testing
++
++| Command | Description |
++| --- | --- |
++| `npm run verify` | Run all checks: seam boundaries, ADRs, architecture hotspots, ESLint, TypeScript, and Vitest |
++| `npm test` | Run the Vitest unit/component test suite |
++| `npm run test:watch` | Run Vitest in watch mode |
++| `npm run test:mutation` | Run Stryker mutation tests |
++| `npm run typecheck` | Typecheck Node (`tsconfig.node.json`) and Web (`tsconfig.web.json`) targets |
++| `npm run lint` | Run ESLint across the repository |
++| `npm run format:check` | Check formatting with Prettier |
++| `npm run smoke` | Build the smoke target and run end-to-end Electron smoke scenarios (use `xvfb-run -a` on headless Linux) |
++
++### Packaging
++
++| Command | Description |
++| --- | --- |
++| `npm run pack:mac:arm64` | Build a macOS arm64 `.pkg` installer |
++| `npm run pack:linux:x64` | Build a Linux x64 `.deb` package |
++| `npm run pack:linux:arm64` | Build a Linux arm64 `.deb` package |
++
++## Default Keybindings
++
++`Mod` maps to `Cmd` on macOS and `Ctrl` on Linux.
++
++| Action | Default |
++| --- | --- |
++| Quick Open File | `Mod+P` |
++| Find in File | `Mod+F` |
++| Find in Terminal | `Mod+Shift+F` |
++| Go to Line | `Ctrl+G` |
++| Cycle View Mode | `Mod+Shift+M` |
++| Focus Terminal | `Mod+J` |
++| Toggle Terminal Focus | `Mod+Shift+J` |
++| Focus Viewer | `Mod+1` |
++| Focus File Tree | `Mod+0` |
++| Next / Previous Workspace | `Mod+Alt+]` / `Mod+Alt+[` |
++
++## Architecture
++
++```text
++src/
++├── main/        # Electron main process: IPC authority router, ProjectHost (local & SSH),
++│                # PtySupervisor, harness providers/telemetry, document review, window lifecycle
++├── preload/     # Context-isolated preload bridge (sole ipcRenderer boundary)
++├── renderer/    # React 19 UI, ghostty-web terminals, CodeMirror 6 viewer/diff, git & workspace views
++├── shared/      # Shared IPC contracts, domain types, keybindings, and host-path utilities
++└── workers/     # Electron utility processes (git-worker, echo-worker)
++
++packages/
++└── rename-noreplace/  # Private Node-API native addon for atomic no-replace file renames
++```
++
++Architectural boundaries are enforced by `npm run check-seams`, `npm run check-adrs`, and `npm run architecture:check` (all included in `npm run verify`).
++
++## License
++
++[MIT](LICENSE)
